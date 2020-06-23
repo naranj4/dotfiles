@@ -15,7 +15,7 @@ set nocompatible
 inoremap kj <esc>
 
 " Tab can switch between windows
-map <Tab> <C-w>w
+nmap <Tab> <C-w>w
 
 " Show matching braces when cursor is over them
 set showmatch
