@@ -11,17 +11,39 @@
 " `vim -u foo`).
 set nocompatible
 
+" Setting background to dark
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
+
 " ESC alternative in insert mode
 inoremap kj <esc>
 
+" Switching ; and :
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
 " Tab can switch between windows
-nmap <Tab> <C-w>w
+" nmap <Tab> <C-w>w
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" move to preview window
+nnoremap gp :wincmd<Space>P<CR>
 
 " Show matching braces when cursor is over them
 set showmatch
 
 " Highlight search
 set hls
+
+" Detect filetype
+filetype plugin indent on
 
 " Turn on syntax highlighting.
 syntax on
@@ -38,8 +60,14 @@ set showcmd
 " Lines wrap instead of continuing off screen
 set linebreak
 
+" Set scroll off to always leave lines at the bottom
+set scrolloff=999
+
 " Setting ruler
 set ruler
+
+" Show a bar at the 100 char mark
+set colorcolumn=100
 
 " Disable the default Vim startup message.
 set shortmess+=I
@@ -47,13 +75,32 @@ set shortmess+=I
 " Show line numbers.
 set number
 
+" Lightline status bar
+let g:lightline = {
+    \ 'colorscheme': 'solarized',
+    \ 'active': {
+    \   'left': [
+    \       [ 'mode', 'paste' ],
+    \       [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+    \   ],
+    \   'right': [
+    \       [ 'lineinfo' ],
+    \       [ 'percent' ],
+    \       [ 'fileformat', 'fileencoding', 'filetype' ]
+    \   ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead'
+    \ },
+    \ }
+
 " This enables relative line numbering mode. With both number and
 " relativenumber enabled, the current line shows the true line number, while
 " all other lines (above and below) are numbered relative to the current line.
 " This is useful because you can tell, at a glance, what count is needed to
 " jump up or down to a particular line, by {count}k to go up or {count}j to go
 " down.
-set relativenumber
+" set relativenumber
 
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
@@ -88,7 +135,7 @@ set noerrorbells visualbell t_vb=
 
 " Enable mouse support. You should avoid relying on this too much, but it can
 " sometimes be convenient.
-set mouse+=a
+" set mouse+=a
 
 " Try to prevent bad habits like using the arrow keys for movement. This is
 " not the only possible bad habit. For example, holding down the h/j/k/l keys
@@ -129,11 +176,11 @@ map H ^
 map L $
 
 " (Shift)Tab (de)indents code
-vnoremap <Tab> >
-vnoremap <S-Tab> <
+" vnoremap <Tab> >
+" vnoremap <S-Tab> <
 
 " Open NERDTree automatically on startup
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -160,17 +207,34 @@ omap / <Plug>(easymotion-tn)
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
 " different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
 
 " Jump to anywhere with 2 chars?
 nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+" nmap t <Plug>(easymotion-t2)
 
 " Ack / Ag
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 command -nargs=+ Gag Gcd | Ack! <args>
-nnoremap K :Gag "\b<C-R><C-W>\b"<CR>:cw<CR>
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
     let g:ackprg = 'ag --vimgrep'
 endif
+
+let g:ack_mappings = {
+              \  'v':  '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
+              \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J' }
+
+" Fugitive key bindings
+nnoremap <Leader>g :G<Space>
+
+" GitGutter key bindings
+set signcolumn=yes
+" Fix sign highlighting
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=darkgreen guifg=darkgreen
+highlight GitGutterChange ctermfg=yellow guifg=darkyellow
+highlight GitGutterDelete ctermfg=red guifg=darkred
+highlight GitGutterChangeDelete ctermfg=yellow guifg=darkyellow
