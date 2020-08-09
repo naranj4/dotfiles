@@ -67,6 +67,10 @@ colorscheme solarized
 
 " ESC alternative in insert mode
 inoremap kj <esc>
+if has('nvim')
+    " ESC switches back to normal mode for nvim :terminal
+    tnoremap <Esc> <C-\><C-n>
+endif
 
 " Switching ; and :
 nnoremap ; :
