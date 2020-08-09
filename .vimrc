@@ -1,3 +1,52 @@
+" vim-plug setup
+" install vim-plug automatically
+let plugin_folder = '~/.vim'
+let vim_config = '~/.vimrc'
+
+" set neovim path
+if has('nvim')
+    let plugin_folder = '~/.config/nvim'
+    let vim_config = '~/.config/nvim/init.vim'
+endif
+
+if empty(glob(plugin_folder . '/autoload/plug.vim'))
+    let path = plugin_folder . '/autoload/plug.vim'
+    silent execute '!curl -fLo ' . path . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | silent execute 'source ' . vim_config
+endif
+
+" manage all vim plugins here
+call plug#begin(plugin_folder . '/dev-plug')
+
+" color schemes and aesthetics
+Plug 'altercation/vim-colors-solarized'
+Plug 'cocopon/iceberg.vim'
+Plug 'itchyny/lightline.vim'
+
+" File/Directory navigation
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'mileszs/ack.vim'
+
+" Comment blocks of code with ease
+Plug 'preservim/nerdcommenter'
+
+" Parenthesis surrounding magic
+Plug 'machakann/vim-sandwich'
+Plug 'jiangmiao/auto-pairs'
+
+" Moving around the screen
+Plug 'easymotion/vim-easymotion'
+
+" Git help
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+call plug#end()
+
 " Comments in Vimscript start with a `"`.
 
 " If you open this file in Vim, it'll be syntax highlighted for you.
@@ -25,13 +74,24 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-" Tab can switch between windows
-" nmap <Tab> <C-w>w
+" Window switching/creating magic
+function! WinMove(key)
+    let t:curwin = winnr()
+    exec "wincmd ".a:key
+    if (t:curwin == winnr())
+        if (match(a:key,'[jk]'))
+            wincmd v
+        else
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
+endfunction
 
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <silent> <C-J> :call WinMove('j')<CR>
+nnoremap <silent> <C-K> :call WinMove('k')<CR>
+nnoremap <silent> <C-L> :call WinMove('l')<CR>
+nnoremap <silent> <C-H> :call WinMove('h')<CR>
 
 " move to preview window
 nnoremap gp :wincmd<Space>P<CR>
@@ -153,17 +213,20 @@ inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
-" Ctrl-P settings:
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+" " Ctrl-P settings:
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
+"
+" " r - the nearest ancestor of current file that contains .git, .hg, etc
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_root_markers = ['pom.xml', '.p4ignore']
+"
+" let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+"
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-" r - the nearest ancestor of current file that contains .git, .hg, etc
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_root_markers = ['pom.xml', '.p4ignore']
-
-let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
-
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" Fzf settings
+nnoremap <silent> <c-p> :call fzf#run(fzf#wrap({'source': 'ag --hidden --ignore .git -g ""'}))<CR>
 
 " Space and Tab configuration
 set tabstop=4
@@ -190,6 +253,53 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let mapleader = " "
 
 
+" vim-sandwich settings
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+let g:sandwich#recipes += [
+    \   {
+    \       'buns'        : ['{', '}'],
+    \       'motionwise'  : ['line'],
+    \       'kind'        : ['add'],
+    \       'linewise'    : 1,
+    \       'command'     : ["'[+1,']-1normal! >>"],
+    \   },
+    \   {
+    \       'buns'        : ['{', '}'],
+    \       'motionwise'  : ['line'],
+    \       'kind'        : ['delete'],
+    \       'linewise'    : 1,
+    \       'command'     : ["'[,']normal! <<"],
+    \   },
+    \   {
+    \       'buns'        : ['(', ')'],
+    \       'motionwise'  : ['line'],
+    \       'kind'        : ['add'],
+    \       'linewise'    : 1,
+    \       'command'     : ["'[+1,']-1normal! >>"],
+    \   },
+    \   {
+    \       'buns'        : ['(', ')'],
+    \       'motionwise'  : ['line'],
+    \       'kind'        : ['delete'],
+    \       'linewise'    : 1,
+    \       'command'     : ["'[,']normal! <<"],
+    \   },
+    \   {
+    \       'buns'        : ['[', ']'],
+    \       'motionwise'  : ['line'],
+    \       'kind'        : ['add'],
+    \       'linewise'    : 1,
+    \       'command'     : ["'[+1,']-1normal! >>"],
+    \   },
+    \   {
+    \       'buns'        : ['[', ']'],
+    \       'motionwise'  : ['line'],
+    \       'kind'        : ['delete'],
+    \       'linewise'    : 1,
+    \       'command'     : ["'[,']normal! <<"],
+    \   },
+    \ ]
+
 " Easymotion settings
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
@@ -211,15 +321,14 @@ omap / <Plug>(easymotion-tn)
 " map  N <Plug>(easymotion-prev)
 
 " Jump to anywhere with 2 chars?
-nmap s <Plug>(easymotion-s2)
-" nmap t <Plug>(easymotion-t2)
+nmap <Leader>s <Plug>(easymotion-s2)
 
 " Ack / Ag
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 command -nargs=+ Gag Gcd | Ack! <args>
 if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+    " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
     let g:ackprg = 'ag --vimgrep'
 endif
 
@@ -238,3 +347,11 @@ highlight GitGutterAdd ctermfg=darkgreen guifg=darkgreen
 highlight GitGutterChange ctermfg=yellow guifg=darkyellow
 highlight GitGutterDelete ctermfg=red guifg=darkred
 highlight GitGutterChangeDelete ctermfg=yellow guifg=darkyellow
+
+" NERDCommenter settings
+let g:NERDSpaceDelims = 1  " add a space after comment delims
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
