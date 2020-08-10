@@ -7,6 +7,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Setting up MacOS environment"
     echo "============================"
 
+    echo "[========INSTALLING DEPENDENCIES========]"
+
     # install homebrew
     which -s brew
     if [[ $? != 0 ]]; then
@@ -23,9 +25,19 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install python@3.8
     brew install the_silver_searcher
     brew install neovim
+    brew install tmux
 
     # guis
     brew cask install iterm2
+
+    brew upgrade
+
+    which -s zplug
+    if [[ $? != 0 ]]; then
+        echo "Installing zplug"
+        curl -sL --proto-redir \
+            -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    fi
 
     echo "[========SYM LINKING DOTFILES========]"
     # vim and neovim dotfiles
@@ -33,7 +45,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     mkdir -p ~/.config/nvim
     ln -sfn ~/dotfiles/.vimrc ~/.config/nvim/init.vim
     echo "\tLinked vim and neovim configs"
-    # TODO: sym link the dotfiles over
+
+    # tmux config
+    ln -sfn ~/dotfiles/.tmux.conf ~/.tmux.conf
+    echo "\tLinked tmux config"
+
+    # tmux config
+    ln -sfn ~/dotfiles/.zshrc ~/.zshrc
+    echo "\tLinked zsh config"
 
 else
     echo "Unsupported OS ${OSTYPE}. Manual installation required."
