@@ -60,7 +60,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "\tLinked git config"
 
 else
-    echo "Unsupported OS ${OSTYPE}. Manual installation required."
+    echo "Unsupported OS [${OSTYPE}]. Manual installation required."
 fi
 
 echo "======================================"
