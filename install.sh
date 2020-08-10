@@ -52,7 +52,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # zsh config
     ln -sfn ~/dotfiles/.zshrc ~/.zshrc
-    echo "\tLinked zsh config"
+    ln -sfn ~/dotfiles/.p10k.zsh ~/.p10k.zsh
+    echo "\tLinked zsh and p10k config"
 
     # git config
     ln -sfn ~/dotfiles/.gitconfig ~/.gitconfig
