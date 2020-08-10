@@ -1,5 +1,8 @@
 source ~/.zplug/init.zsh
 
+# zplug manages itself
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
 # git support
 zplug "plugins/git", from:oh-my-zsh
 
@@ -24,8 +27,9 @@ zplug load --verbose
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # autosuggestions settings
-ZSH_AUTOSUGGEST_HISTORY_IGNORE = "?(#c50,)"
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE = 20
+source ~/.zplug/repos/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)"
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^ ' autosuggest-accept
 

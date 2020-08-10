@@ -50,9 +50,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     ln -sfn ~/dotfiles/.tmux.conf ~/.tmux.conf
     echo "\tLinked tmux config"
 
-    # tmux config
+    # zsh config
     ln -sfn ~/dotfiles/.zshrc ~/.zshrc
     echo "\tLinked zsh config"
+
+    # git config
+    ln -sfn ~/dotfiles/.gitconfig ~/.gitconfig
+    echo "\tLinked git config"
 
 else
     echo "Unsupported OS ${OSTYPE}. Manual installation required."
