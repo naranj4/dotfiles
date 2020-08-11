@@ -26,6 +26,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install the_silver_searcher
     brew install neovim
     brew install tmux
+    brew install node
+    brew install yarn
 
     # guis
     brew cask install iterm2
@@ -39,12 +41,18 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
             -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
     fi
 
+    echo "Install/upgrading pip"
+    pip3 install -U pip
+    echo "Install/upgrading jedi-language-server"
+    pip3 install -U jedi-language-server
+
     echo "[========SYM LINKING DOTFILES========]"
     # vim and neovim dotfiles
     ln -sfn ~/dotfiles/.vimrc ~/.vimrc
     mkdir -p ~/.config/nvim
     ln -sfn ~/dotfiles/.vimrc ~/.config/nvim/init.vim
-    echo "\tLinked vim and neovim configs"
+    ln -sfn ~/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json
+    echo "\tLinked vim, neovim and coc configs"
 
     # tmux config
     ln -sfn ~/dotfiles/.tmux.conf ~/.tmux.conf
