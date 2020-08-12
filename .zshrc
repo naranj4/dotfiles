@@ -1,3 +1,7 @@
+# add Homebrew to path if linux-gnu system
+if [[ "$OSTYPE" = "linux-gnu" ]]; then
+    eval $($HOME/.linuxbrew/bin/brew shellenv)
+fi
 source ~/.zplug/init.zsh
 
 # zplug manages itself

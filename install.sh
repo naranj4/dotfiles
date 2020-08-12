@@ -1,13 +1,28 @@
-#!/bin/zsh
+#!/bin/bash
+
+# TODO: add wrappers around each install to doublecheck whether they have already been installed.
+# Prompt user whether they desire to install the packages if so.
 
 # Install all necessary dependencies for dev environment
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Mac OS
-    echo "============================"
-    echo "Setting up MacOS environment"
-    echo "============================"
+if [[ "$OSTYPE" == "darwin"* ]] || \
+    [[ "$OSTYPE" == "linux-gnu" ]]
+then
+    echo "========================================================"
+    echo "Setting up development environment for $OSTYPE"
+    echo "========================================================"
 
     echo "[========INSTALLING DEPENDENCIES========]"
+
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        # Linux system
+        if [ -f /etc/debian_version ]; then
+            echo "Debian-based Linux system"
+            sudo apt-get install build-essential curl file git
+        else
+            echo "RPM-based Linux system"
+            sudo yum groupinstall 'Development Tools' && sudo yum install curl file git
+        fi
+    fi
 
     # install homebrew
     which -s brew
@@ -15,6 +30,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Installing homebrew"
         /bin/bash -c \
             "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        # add Homebrew to path if linux-gnu system
+        if [[ "$OSTYPE" = "linux-gnu" ]]; then
+            echo "Detected Linux env. Running the following commands"
+            $HOME/.linuxbrew/bin/brew shellenv
+            echo ""
+            eval $($HOME/.linuxbrew/bin/brew shellenv)
+        fi
     else
         echo "Updating homebrew"
         brew update
@@ -28,6 +50,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install tmux
     brew install node
     brew install yarn
+
+    # install zsh and make default shell
+    which -s zsh
+    if [[ $? != 0 ]]; then
+        brew install zsh
+        chsh -s $(which zsh)
+    fi
 
     # guis
     brew cask install iterm2
@@ -46,31 +75,32 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Install/upgrading jedi-language-server"
     pip3 install -U jedi-language-server
 
+    echo ""
     echo "[========SYM LINKING DOTFILES========]"
     # vim and neovim dotfiles
     ln -sfn ~/dotfiles/.vimrc ~/.vimrc
     mkdir -p ~/.config/nvim
     ln -sfn ~/dotfiles/.vimrc ~/.config/nvim/init.vim
     ln -sfn ~/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json
-    echo "\tLinked vim, neovim and coc configs"
+    echo "Linked vim, neovim and coc configs"
 
     # tmux config
     ln -sfn ~/dotfiles/.tmux.conf ~/.tmux.conf
-    echo "\tLinked tmux config"
+    echo "Linked tmux config"
 
     # zsh config
     ln -sfn ~/dotfiles/.zshrc ~/.zshrc
     ln -sfn ~/dotfiles/.p10k.zsh ~/.p10k.zsh
-    echo "\tLinked zsh and p10k config"
+    echo "Linked zsh and p10k config"
 
     # git config
     ln -sfn ~/dotfiles/.gitconfig ~/.gitconfig
-    echo "\tLinked git config"
+    echo "Linked git config"
+
+    echo "======================================"
+    echo "Finished development environment setup"
+    echo "======================================"
 
 else
     echo "Unsupported OS [${OSTYPE}]. Manual installation required."
 fi
-
-echo "======================================"
-echo "Finished development environment setup"
-echo "======================================"
