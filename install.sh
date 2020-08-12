@@ -48,7 +48,9 @@ then
     fi
 
     # guis
-    brew cask install iterm2
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        brew cask install iterm2
+    fi
 
     brew upgrade
 
