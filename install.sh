@@ -14,7 +14,7 @@ then
     echo "[========INSTALLING DEPENDENCIES========]"
 
     # install homebrew
-    which -s brew
+    which brew
     if [[ $? != 0 ]]; then
         echo "Installing homebrew"
         /bin/bash -c \
@@ -41,7 +41,7 @@ then
     brew install yarn
 
     # install zsh and make default shell
-    which -s zsh
+    which zsh
     if [[ $? != 0 ]]; then
         brew install zsh
         chsh -s $(which zsh)
@@ -52,7 +52,7 @@ then
 
     brew upgrade
 
-    which -s zplug
+    which zplug
     if [[ $? != 0 ]]; then
         echo "Installing zplug"
         curl -sL --proto-redir \
