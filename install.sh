@@ -40,11 +40,10 @@ then
     brew install node
     brew install yarn
 
-    # install zsh and make default shell
+    # install zsh
     which zsh
     if [[ $? != 0 ]]; then
         brew install zsh
-        chsh -s $(which zsh)
     fi
 
     # guis
