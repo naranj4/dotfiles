@@ -49,8 +49,9 @@ alias gb="git branch"
 alias gc="git commit"
 alias gd="git diff"
 alias gco="git checkout"
-alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias ghst="git log --graph --full-history --all --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias glg="git log --oneline"
+alias ggr="git graph"
+alias ghst="git hist"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
