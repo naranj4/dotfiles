@@ -12,5 +12,6 @@
     "jedi.diagnostics.enable": true,
     "jedi.diagnostics.didOpen": true,
     "jedi.diagnostics.didChange": true,
-    "jedi.diagnostics.didSave": true
+    "jedi.diagnostics.didSave": true,
+    "html.autoClosingTags": true
 }

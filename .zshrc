@@ -37,6 +37,10 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^ ' autosuggest-accept
 
+# case insensitive tab completion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+autoload -Uz compinit && compinit
+
 # make nvim the default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
