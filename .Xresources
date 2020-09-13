@@ -1,0 +1,16 @@
+! terminal colors and stuff
+xterm*background: Black
+xterm*foreground: Gray
+xterm*highlightSelection: true
+
+! change fonts
+xterm*renderFont: true
+xterm*utf8: 1
+xterm*faceName: MesloLGS NF
+xterm*faceSize: 14
+
+! Make every shell a login shell (to include all necessary environment variables)
+xterm*loginshell: true
+
+! Scrollback limit
+xterm*savelines: 2048
