@@ -498,3 +498,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 nnoremap <silent><nowait> <space>e :<C-u>CocList extensions<cr>
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
+
+" Prevent linters from triggering on EasyMotion
+autocmd User EasyMotionPromptBegin silent! CocDisable
+autocmd User EasyMotionPromptEnd silent! CocEnable

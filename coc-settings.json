@@ -6,12 +6,13 @@
     "jedi.markupKindPreferred": "plaintext",
     "jedi.trace.server": "verbose",
     "jedi.jediSettings.autoImportModules": [],
-    "jedi.executable.command": "jedi-language-server",
+    "jedi.executable.command": "/usr/local/bin/jedi-language-server",
     "jedi.executable.args": [],
     "jedi.completion.disableSnippets": false,
     "jedi.diagnostics.enable": true,
     "jedi.diagnostics.didOpen": true,
     "jedi.diagnostics.didChange": true,
     "jedi.diagnostics.didSave": true,
-    "html.autoClosingTags": false
+    "html.autoClosingTags": false,
+    "clangd.path": "/Users/niranjansankar/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd"
 }

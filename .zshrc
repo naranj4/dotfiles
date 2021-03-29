@@ -59,5 +59,13 @@ alias glg="git log --oneline"
 alias ggr="git graph"
 alias ghst="git hist"
 
+# load local zshrc file
+if [ -f ~/.zshrc_local ]; then
+    echo "Loaded local zsh config"
+    source ~/.zshrc_local
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source /Users/niranjansankar/.config/broot/launcher/bash/br

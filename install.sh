@@ -33,12 +33,13 @@ then
     
     # install brew formulae
     brew install git
-    brew install python@3.8
+    brew install python@3.9
     brew install the_silver_searcher
     brew install neovim
     brew install tmux
     brew install node
     brew install yarn
+    brew install broot
 
     # install zsh
     which zsh
