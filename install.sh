@@ -40,6 +40,7 @@ then
     brew install node
     brew install yarn
     brew install broot
+    brew install fzf
 
     # install zsh
     which zsh
