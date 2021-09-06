@@ -23,7 +23,8 @@ call plug#begin(plugin_folder . '/dev-plug')
 " color schemes and aesthetics
 Plug 'altercation/vim-colors-solarized'
 Plug 'cocopon/iceberg.vim'
-Plug 'joshdick/onedark.vim'
+Plug 'whatyouhide/vim-gotham'
+
 Plug 'itchyny/lightline.vim'
 
 " File/Directory navigation
@@ -67,9 +68,11 @@ call plug#end()
 set nocompatible
 
 " Setting background to dark
-let g:solarized_termcolors=256
-set background=dark
-colorscheme solarized
+" let g:solarized_termcolors=256
+" set background=dark
+" colorscheme solarized
+set termguicolors
+colorscheme gotham
 
 " ESC alternative in insert mode
 inoremap kj <esc>
@@ -151,7 +154,7 @@ function! CocCurrentFunction()
 endfunction
 
 let g:lightline = {
-    \ 'colorscheme': 'solarized',
+    \ 'colorscheme': 'gotham',
     \ 'active': {
     \   'left': [
     \       [ 'mode', 'paste' ],
