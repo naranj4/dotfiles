@@ -114,6 +114,7 @@ set showmatch
 
 " Highlight search
 set hls
+nnoremap <silent> <ESC> :noh<CR><ESC>
 
 " Detect filetype
 filetype plugin indent on
@@ -245,6 +246,7 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 " let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Fzf settings
+" Opens a floating buffer to fuzzy search active directory for files
 nnoremap <silent> <c-f> :call fzf#run(fzf#wrap({'source': 'ag --hidden --ignore .git -g ""'}))<CR>
 
 " Space and Tab configuration
@@ -343,6 +345,7 @@ map <Leader>k <Plug>(easymotion-k)
 nmap <Leader>s <Plug>(easymotion-s2)
 
 " Ack / Ag
+" Search for something within a file in the directory
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 command! -nargs=+ Gag Gcd | Ack! <args>
