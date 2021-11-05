@@ -265,7 +265,7 @@ map L $
 
 " Open NERDTree automatically on startup
 " autocmd vimenter * NERDTree
-nnoremap <C-b> :NERDTreeToggle<CR>
+nnoremap <C-a> :NERDTreeToggle<CR>
 " nnoremap <C-f> :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
