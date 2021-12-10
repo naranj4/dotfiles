@@ -233,21 +233,12 @@ set noerrorbells visualbell t_vb=
 " inoremap <Up>    <ESC>:echoe "Use k"<CR>
 " inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
-" " Ctrl-P settings:
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlP'
-"
-" " r - the nearest ancestor of current file that contains .git, .hg, etc
-" let g:ctrlp_working_path_mode = 'ra'
-" let g:ctrlp_root_markers = ['pom.xml', '.p4ignore']
-"
-" let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
-"
-" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
 " Fzf settings
 " Opens a floating buffer to fuzzy search active directory for files
-nnoremap <silent> <c-f> :call fzf#run(fzf#wrap({'source': 'ag --hidden --ignore .git -g ""'}))<CR>
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'ag --hidden --ignore .git -g ""'}), <bang>0)
+" nnoremap <silent> <c-f> :call fzf#run(fzf#wrap({'source': 'ag --hidden --ignore .git -g ""'}))<CR>
+nnoremap <silent> <c-f> :Files<CR>
 
 " Space and Tab configuration
 set tabstop=4
@@ -263,6 +254,11 @@ map L $
 " vnoremap <Tab> >
 " vnoremap <S-Tab> <
 
+
+" Leader Key
+let mapleader = " "
+
+
 " Open NERDTree automatically on startup
 " autocmd vimenter * NERDTree
 " nnoremap <C-a> :NERDTreeToggle<CR>
@@ -277,10 +273,6 @@ function! NERDTreeToggleFind()
 endfunction
 nnoremap <C-a> :call NERDTreeToggleFind()<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-" Leader Key
-let mapleader = " "
 
 
 " vim-sandwich settings
@@ -339,16 +331,6 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
-
-" Easymotion search override
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)
 
 " Jump to anywhere with 2 chars?
 nmap <Leader>s <Plug>(easymotion-s2)
