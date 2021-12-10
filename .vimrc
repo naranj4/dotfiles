@@ -223,15 +223,15 @@ set noerrorbells visualbell t_vb=
 " bad habit. The former is enforceable through a .vimrc, while we don't know
 " how to prevent the latter.
 " Do this in normal mode...
-nnoremap <Left>  :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up>    :echoe "Use k"<CR>
-nnoremap <Down>  :echoe "Use j"<CR>
+" nnoremap <Left>  :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up>    :echoe "Use k"<CR>
+" nnoremap <Down>  :echoe "Use j"<CR>
 " ...and in insert mode
-inoremap <Left>  <ESC>:echoe "Use h"<CR>
-inoremap <Right> <ESC>:echoe "Use l"<CR>
-inoremap <Up>    <ESC>:echoe "Use k"<CR>
-inoremap <Down>  <ESC>:echoe "Use j"<CR>
+" inoremap <Left>  <ESC>:echoe "Use h"<CR>
+" inoremap <Right> <ESC>:echoe "Use l"<CR>
+" inoremap <Up>    <ESC>:echoe "Use k"<CR>
+" inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
 " " Ctrl-P settings:
 " let g:ctrlp_map = '<c-p>'
@@ -265,8 +265,17 @@ map L $
 
 " Open NERDTree automatically on startup
 " autocmd vimenter * NERDTree
-nnoremap <C-a> :NERDTreeToggle<CR>
-" nnoremap <C-f> :NERDTreeFind<CR>
+" nnoremap <C-a> :NERDTreeToggle<CR>
+function! NERDTreeToggleFind()
+    if exists("g:NERDTree") && g:NERDTree.IsOpen()
+        NERDTreeClose
+    elseif filereadable(expand('%'))
+        NERDTreeFind
+    else
+        NERDTree
+    endif
+endfunction
+nnoremap <C-a> :call NERDTreeToggleFind()<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 

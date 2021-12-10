@@ -1,4 +1,5 @@
 {
+    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "json.enable": true,
     "json.format.enable": true,
     "jedi.enable": true,
