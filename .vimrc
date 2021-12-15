@@ -339,6 +339,8 @@ nmap <Leader>s <Plug>(easymotion-s2)
 " Search for something within a file in the directory
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
+nnoremap <Leader>A :Ack!<CR>
+xnoremap <Leader>a y:Ack! <C-r>=fnameescape(@")<CR><CR>
 command! -nargs=+ Gag Gcd | Ack! <args>
 if executable('ag')
     " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
