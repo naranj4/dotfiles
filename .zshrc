@@ -53,9 +53,12 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # set quality of life aliases
+alias reload="source ~/.zshrc"
+
 alias ls="ls -GF"
 alias ll="ls -l"
 alias la="ls -la"
+
 alias gs="git status"
 alias ga="git add"
 alias gb="git branch"
