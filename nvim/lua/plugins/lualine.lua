@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- Lualine Config
 --------------------------------------------------------------------------------
-local colors = require('material.colors')
+local colors = require('tokyonight.colors').setup({})
 
 local function search_result()
     if vim.v.hlsearch == 0 then return '' end
@@ -18,8 +18,8 @@ local config = {
         icons_enabled = true,
         theme = 'auto',
         component_separators = {
-            left = ' ',
-            right = ' ',
+            left = '╲',
+            right = '╱',
         },
         section_separators = {
             left = '',
@@ -31,19 +31,32 @@ local config = {
     sections = {
         lualine_a = {'mode'},
         lualine_b = {
-            'branch',
-            'b:gitsigns_status',
             {
-                'diagnostics',
-                source = { 'nvim' },
-                sections = { 'error' },
-                diagnostics_color = { error = { bg = colors.red, fg = colors.white } }
+                'branch',
+                separator = ' ',
+            },
+            {
+                'diff',
+                source = function () return vim.b.gitsigns_status_dict end,
+                separator = '',
+                diff_color = {
+                    -- Same values like general color option can be used here.
+                    added    = 'GitSignsAdd',    -- changes diff's added color
+                    modified = 'GitSignsChange', -- changes diff's modified color
+                    removed  = 'GitSignsDelete', -- changes diff's removed color you
+                },
             },
             {
                 'diagnostics',
                 source = { 'nvim' },
-                sections = { 'warn' },
-                diagnostics_color = { warn = { bg = colors.orange, fg = colors.white } }
+                sections = { 'error', 'warn', 'info', 'hint' },
+                separator = ' ',
+                diagnostics_color = {
+                    error = 'DiagnosticError',
+                    warn = 'DiagnosticWarn',
+                    info = 'DiagnosticInfo',
+                    hint = 'DiagnosticHint',
+                },
             },
         },
         lualine_c = {
@@ -77,7 +90,31 @@ local config = {
         lualine_y = {},
         lualine_z = {},
     },
-    tabline = {},
-    extensions = {'quickfix'},
+    tabline = {
+        lualine_a = {
+            {
+                'tabs',
+                mode = 2,
+                tabs_color = {
+                    active = 'lualine_a_normal',
+                    inactive = 'lualine_a_inactive',
+                },
+                component_separators = {
+                    left = '╱',
+                    right = '╲',
+                },
+                section_separators = {
+                    left = '',
+                    right = '',
+                },
+            },
+        },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    },
+    extensions = {'quickfix', 'nvim-tree'},
 }
 require('lualine').setup(config)

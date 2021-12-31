@@ -28,7 +28,7 @@ map('n', ':', ';')
 map('v', ';', ':')
 map('v', ':', ';')
 
-map('n', '<ESC>', ':noh<CR><ESC>', {silent = true})  -- remove highlighting
+map('n', '<ESC>', ':noh<CR><ESC>')  -- remove highlighting
 
 map('', 'H', '^')
 map('', 'L', '$')
@@ -61,9 +61,61 @@ function common.win_move(direction)
     end
 end
 
-map('n', '<C-H>', '<CMD>lua require("common").win_move("h")<CR>', {silent = true})
-map('n', '<C-J>', '<CMD>lua require("common").win_move("j")<CR>', {silent = true})
-map('n', '<C-K>', '<CMD>lua require("common").win_move("k")<CR>', {silent = true})
-map('n', '<C-L>', '<CMD>lua require("common").win_move("l")<CR>', {silent = true})
+map('n', '<C-H>', '<CMD>lua require("common").win_move("h")<CR>')
+map('n', '<C-J>', '<CMD>lua require("common").win_move("j")<CR>')
+map('n', '<C-K>', '<CMD>lua require("common").win_move("k")<CR>')
+map('n', '<C-L>', '<CMD>lua require("common").win_move("l")<CR>')
 
-map('n', 'gp', ':wincmd P<CR>')
+--------------------------------------------------------------------------------
+-- Quickfix Shortcuts
+--------------------------------------------------------------------------------
+common.is_qf_list_open = false
+common.is_loc_list_open = false
+function common.toggle_qf_list(is_qf)
+    if is_qf then
+        if common.is_qf_list_open then
+            cmd('cclose')
+        else
+            cmd('copen')
+        end
+    else
+        if common.is_loc_list_open then
+            cmd('lclose')
+        else
+            cmd('lopen')
+        end
+    end
+end
+
+function common.set_qf_control_var()
+    exec([[
+        if getwininfo(win_getid())[0]['loclist'] == 1
+            lua require('common').is_loc_list_open = true
+        else
+            lua require('common').is_qf_list_open = true
+        end
+    ]], false)
+end
+
+function common.unset_qf_control_var()
+    exec([[
+        if getwininfo(win_getid())[0]['loclist'] == 1
+            lua require('common').is_loc_list_open = false
+        else
+            lua require('common').is_qf_list_open = false
+        end
+    ]], false)
+end
+
+exec([[
+    augroup fixlist
+        autocmd!
+        autocmd BufWinEnter quickfix lua require('common').set_qf_control_var()
+        autocmd BufWinLeave * lua require('common').unset_qf_control_var()
+    augroup END
+]], false)
+
+-- global list
+map('n', '<c-q>', '<CMD>lua require("common").toggle_qf_list(true)<CR>')
+map('n', '<m-j>', '<CMD>cnext<CR>')
+map('n', '<m-k>', '<CMD>cprev<CR>')

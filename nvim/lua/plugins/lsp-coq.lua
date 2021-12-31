@@ -16,8 +16,8 @@ vim.g.coq_settings = {
 
         manual_complete = '<c-space>',
         bigger_preview = '<c-k>',
-        jump_to_mark = '<c-m>',
-        eval_snips = '<leader>se'
+        jump_to_mark = '<c-f>',
+        eval_snips = '<leader>se',
     },
     clients = {
         lsp = {
@@ -56,7 +56,6 @@ vim.g.coq_settings = {
 --------------------------------------------------------------------------------
 -- LSPConfig
 --------------------------------------------------------------------------------
-local lspconfig = require('lspconfig')
 local coq = require('coq')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -69,11 +68,6 @@ local function on_attach(client, bufnr)
     map('n', '<leader>rn', '<CMD>lua vim.lsp.buf.rename()<CR>')
     map('n', '[d', '<CMD>lua vim.lsp.diagnostic.goto_prev()<CR>')
     map('n', ']d', '<CMD>lua vim.lsp.diagnostic.goto_next()<CR>')
-
-    map('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true })
-    map('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true })
-    map('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true })
-    map('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true })
 end
 
 local servers = {'pyright', 'solargraph', 'yamlls'}
@@ -104,3 +98,11 @@ require('coq_3p') {
         unsafe = {'rm', 'poweroff', 'mv', 'sudo', 'touch', 'cp'},
     },
 }
+
+--------------------------------------------------------------------------------
+-- Coq_nvim Keymaps
+--------------------------------------------------------------------------------
+map('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true })
+map('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true })
+map('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true })
+map('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true })

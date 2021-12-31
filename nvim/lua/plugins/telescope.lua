@@ -65,24 +65,34 @@ telescope.load_extension('fzf')
 local common = require('common')
 local map = common.map
 
+local exec = vim.api.nvim_exec
+
 -- Use git_files until it doesn't work, then run find_files
 common.project_files = function()
     local ok = pcall(require('telescope.builtin').git_files)
     if not ok then require('telescope.builtin').find_files() end
 end
 
+common.search_string = function(search_str)
+    require('telescope.builtin').grep_string({ search = search_str, use_regex = true })
+end
+exec([[
+    command! -nargs=1 TelescopeRG lua require('common').search_string(<f-args>)
+]], false)
+
 map('n', '<leader>ff', '<CMD>lua require("common").project_files()<CR>')
-map('n', '<leader>fg', '<CMD>lua require("telescope.builtin").live_grep()<CR>')
-map('n', '<leader>fw', '<CMD>lua require("telescope.builtin").grep_string()<CR>')
+map('n', '<leader>fs', ':TelescopeRG<space>')
+map('n', '<leader>fS', '<CMD>lua require("telescope.builtin").grep_string()<CR>')
+map('n', '<leader>fl', '<CMD>lua require("telescope.builtin").live_grep()<CR>')
 map('n', '<leader>fb', '<CMD>lua require("telescope.builtin").buffers()<CR>')
 map('n', '<leader>fh', '<CMD>lua require("telescope.builtin").help_tags()<CR>')
+map('n', '<leader>fd', '<CMD>lua require("telescope.builtin").diagnostics()<CR>')
+
+map('n', '<leader>fm', '<CMD>lua require("telescope.builtin").treesitter()<CR>')
 
 map('n', 'gd', '<CMD>lua require("telescope.builtin").lsp_definitions()<CR>')
 map('n', 'gy', '<CMD>lua require("telescope.builtin").lsp_type_definitions()<CR>')
 map('n', 'gi', '<CMD>lua require("telescope.builtin").lsp_implementations()<CR>')
 map('n', 'gr', '<CMD>lua require("telescope.builtin").lsp_references()<CR>')
 
-map('n', '<leader>fm', '<CMD>lua require("telescope.builtin").treesitter()<CR>')
-
 map('n', '<leader>t', '<CMD>lua require("telescope.builtin").file_browser()<CR>')
-map('n', '<leader>d', '<CMD>lua require("telescope.builtin").diagnostics()<CR>')

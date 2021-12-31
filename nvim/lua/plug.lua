@@ -22,9 +22,13 @@ return require('packer').startup(function(use)
 
     -- colorschemes
     use {'whatyouhide/vim-gotham'}  -- not treesitter compatible, but awesome
-    use {'folke/tokyonight.nvim'}
-    use {'marko-cerovac/material.nvim'}  -- pretty nice, a tad bright
-    use {'Yagua/nebulous.nvim'}
+    use {'folke/tokyonight.nvim'}  -- night is good
+    use {'EdenEast/nightfox.nvim'}  -- tbf, nightfox isn't that bad, nordfox meh, dayfox alright, duskfox is nice
+    use {'rose-pine/neovim'}  -- main, moon good, dawn okay
+
+    -- testing colorschemes
+    use {'tomasiser/vim-code-dark'}  -- pretty nice and visible
+    use {'sainnhe/edge'}  -- light theme is nice
 
     use {
         'nvim-lualine/lualine.nvim',
@@ -45,11 +49,12 @@ return require('packer').startup(function(use)
     use {'machakann/vim-sandwich'}
     use {'windwp/nvim-autopairs'}
 
-    use {'terrortylor/nvim-comment'}
+    use {'numToStr/Comment.nvim'}
 
     use {'phaazon/hop.nvim', branch = 'v1'}
 
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {'nvim-treesitter/nvim-treesitter-textobjects'}
     use {
         'nvim-telescope/telescope.nvim',
         requires = {
@@ -72,15 +77,15 @@ return require('packer').startup(function(use)
     }
 
     -- Autocompletion (nvim-cmp)
-    -- use {'hrsh7th/cmp-nvim-lsp'}
-    -- use {'hrsh7th/cmp-buffer'}
-    -- use {'hrsh7th/cmp-path'}
-    -- use {'hrsh7th/cmp-cmdline'}
-    -- use {'hrsh7th/nvim-cmp'}
+    use {'hrsh7th/cmp-nvim-lsp'}
+    use {'hrsh7th/cmp-buffer'}
+    use {'hrsh7th/cmp-path'}
+    use {'hrsh7th/cmp-cmdline'}
+    use {'hrsh7th/nvim-cmp'}
 
     -- Snippets
-    -- use {'L3MON4D3/LuaSnip'}
-    -- use {'saadparwaiz1/cmp_luasnip'}
+    use {'L3MON4D3/LuaSnip'}
+    use {'saadparwaiz1/cmp_luasnip'}
 
     if packer_bootstrap then
         require('packer').sync()

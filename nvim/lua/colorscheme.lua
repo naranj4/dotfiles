@@ -3,10 +3,10 @@
 --------------------------------------------------------------------------------
 require('colorschemes.gotham')
 require('colorschemes.tokyonight')
-require('colorschemes.material')
-require('colorschemes.nebulous')
+require('colorschemes.nightfox')
+require('colorschemes.rose-pine')
 
 --------------------------------------------------------------------------------
 -- Colorscheme
 --------------------------------------------------------------------------------
-vim.cmd('colorscheme material')
+vim.cmd('colorscheme tokyonight')
