@@ -22,6 +22,8 @@ opt.visualbell = false
 opt.shortmess:append('I')
 opt.confirm = true
 
+opt.directory = vim.fn.stdpath('config') .. '/.swap//'
+
 g.mapleader = ' '  -- use space as leader
 
 --------------------------------------------------------------------------------
