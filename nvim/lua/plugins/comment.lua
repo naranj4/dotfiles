@@ -69,3 +69,14 @@ require('Comment').setup({
     ---@type fun(ctx: Ctx)
     post_hook = nil,
 })
+
+--------------------------------------------------------------------------------
+-- Comment Keymap Documentation
+--------------------------------------------------------------------------------
+local wk = require('which-key')
+
+wk.register({
+    ['<leader>co'] = 'Comment Below',
+    ['<leader>cO'] = 'Comment Above',
+    ['<leader>cA'] = 'Comment EOL',
+}, { mode = 'n' })

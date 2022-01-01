@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- Telescope Config
+-- GitSigns Config
 --------------------------------------------------------------------------------
 require('gitsigns').setup({
     signs = {
@@ -66,3 +66,30 @@ require('gitsigns').setup({
         enable = false
     },
 })
+
+--------------------------------------------------------------------------------
+-- GitSigns Keymap Documentation
+--------------------------------------------------------------------------------
+local wk = require('which-key')
+
+wk.register({
+    [']c'] = 'Next Hunk',
+    ['[c'] = 'Prev Hunk',
+
+    ['<leader>h'] = {
+        name = 'git-signs-actions',
+        s = 'Stage Hunk',
+        u = 'Undo Stage Hunk',
+        r = 'Reset Hunk',
+        S = 'Stage Buffer',
+        U = 'Undo Buffer Index',
+        R = 'Reset Buffer',
+        p = 'Preview Hunk',
+        b = 'Blame Line',
+    }
+}, { mode = 'n' })
+
+wk.register({
+    ['<leader>hs'] = 'Stage Hunk (Visual)',
+    ['<leader>hr'] = 'Reset Hunk (Visual)',
+}, { mode = 'v' })

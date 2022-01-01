@@ -134,9 +134,13 @@ require'nvim-tree'.setup {
 --------------------------------------------------------------------------------
 -- Nvim-Tree Keymap
 --------------------------------------------------------------------------------
-local common = require('common')
-local map = common.map
+local wk = require('which-key')
 
-map('n', '<leader>nn', '<CMD>NvimTreeToggle<CR>')
-map('n', '<leader>nr', '<CMD>NvimTreeRefresh<CR>')
-map('n', '<leader>nf', '<CMD>NvimTreeFindFileToggle<CR>')
+wk.register({
+    ['<leader>n'] = {
+        name = 'nvim-tree',
+        n = { '<CMD>NvimTreeToggle<CR>', 'Toggle' },
+        r = { '<CMD>NvimTreeRefresh<CR>', 'Refresh' },
+        f = { '<CMD>NvimTreeFindFileToggle<CR>', 'Find File' },
+    }
+}, { mode = 'n' })

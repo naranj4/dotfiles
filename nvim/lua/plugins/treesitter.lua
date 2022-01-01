@@ -67,3 +67,28 @@ require('nvim-treesitter.configs').setup({
     },
 })
 require('nvim-treesitter.install').prefer_git = true
+
+--------------------------------------------------------------------------------
+-- Treesitter Keymap Documentation
+--------------------------------------------------------------------------------
+local wk = require('which-key')
+
+-- Incremental Selection
+wk.register({ ['gnn'] = 'TreeSitter Init Selection' }, { mode = 'n' })
+wk.register({
+    ['grn'] = 'TreeSitter Node Inc.',
+    ['grm'] = 'TreeSitter Node Dec.',
+    ['grc'] = 'TreeSitter Scope Inc.',
+}, { mode = 'x' })
+
+-- Movement
+wk.register({
+    [']m'] = 'Next Method Start',
+    ['[m'] = 'Prev Method Start',
+    [']]'] = 'Next Class Start',
+    ['[['] = 'Prev Class Start',
+    [']M'] = 'Next Method End',
+    ['[M'] = 'Prev Method End',
+    [']['] = 'Next Class End',
+    ['[]'] = 'Prev Class End',
+}, { mode = '' })

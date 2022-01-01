@@ -20,6 +20,8 @@ return require('packer').startup(function(use)
     -- let packer manager itself
     use {'wbthomason/packer.nvim'}
 
+    use {'folke/which-key.nvim'}
+
     -- colorschemes
     use {'whatyouhide/vim-gotham'}  -- not treesitter compatible, but awesome
     use {'folke/tokyonight.nvim'}  -- night is good
@@ -29,6 +31,9 @@ return require('packer').startup(function(use)
     -- testing colorschemes
     use {'tomasiser/vim-code-dark'}  -- pretty nice and visible
     use {'sainnhe/edge'}  -- light theme is nice
+
+    use {'sunjon/Shade.nvim'}  -- currently there is a bug with floating windows being unable to close
+    use {'karb94/neoscroll.nvim'}  -- a bit slow for my liking
 
     use {
         'nvim-lualine/lualine.nvim',
@@ -52,6 +57,7 @@ return require('packer').startup(function(use)
     use {'numToStr/Comment.nvim'}
 
     use {'phaazon/hop.nvim', branch = 'v1'}
+    -- use {'ggandor/lightspeed.nvim'}
 
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use {'nvim-treesitter/nvim-treesitter-textobjects'}
@@ -81,6 +87,7 @@ return require('packer').startup(function(use)
     use {'hrsh7th/cmp-buffer'}
     use {'hrsh7th/cmp-path'}
     use {'hrsh7th/cmp-cmdline'}
+    use {'hrsh7th/cmp-nvim-lua'}
     use {'hrsh7th/nvim-cmp'}
 
     -- Snippets

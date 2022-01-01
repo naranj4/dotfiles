@@ -8,42 +8,60 @@ local exec = vim.api.nvim_exec      -- execute vimscript
 local common = require('common')
 local map = common.map
 
+local wk = require('which-key')
+
 --------------------------------------------------------------------------------
 -- Config
 --------------------------------------------------------------------------------
-map('n', '<leader>ve', '<CMD>edit ~/.config/nvim/init.lua<CR>')
+-- document <leader> key
+wk.register({ ['<leader>'] = { name = 'userspace'} }, { mode = '' })
+
+wk.register({
+    v = {
+        name = 'config',
+        e = { '<CMD>edit ~/.config/nvim/init.lua<CR>', 'Edit Neovim Config' },
+    },
+}, { mode = 'n', prefix = '<leader>' })
 
 --------------------------------------------------------------------------------
 -- Quality of Life
 --------------------------------------------------------------------------------
-map('n', 'Q', '')  -- Q enters Ex mode, don't need
+wk.register({
+    Q = { '', '' }, -- Q enters Ex mode, don't need
 
-map('n', '<leader>Q', ':bufdo bdelete')
-map('n', 'gf', ':edit <cfile><CR>')  -- allow gf to open nonexistent files
+    ['<leader>Q'] = { '<CMD>bufdo bdelete<CR>', 'Delete All Buffers'},
+    ['gf'] = { '<CMD>edit <cfile><CR>', 'Go To File' }, -- allow gf to open nonexistent files
+    ['<ESC>'] = { ':nohlsearch<CR><ESC>', '<ESC>' }, -- remove highlighting
 
-map('i', 'kj', '<ESC>')
+    [';'] = { ':', 'Command' },
+    [':'] = { ';', 'f/F/t/T Repeat' },
+}, { mode = 'n'})
 
-map('n', ';', ':')
-map('n', ':', ';')
-map('v', ';', ':')
-map('v', ':', ';')
+wk.register({
+    [';'] = { ':', 'Command' },
+    [':'] = { ';', 'f/F/t/T Repeat' },
+}, { mode = 'v' })
 
-map('n', '<ESC>', ':noh<CR><ESC>')  -- remove highlighting
+wk.register({
+    H = { '^', 'Home' },
+    L = { '$', 'End' },
+}, { mode = '' })
 
-map('', 'H', '^')
-map('', 'L', '$')
+wk.register({ ['kj'] = { '<ESC>', '<ESC>' }}, { mode = 'i' })
 
 --------------------------------------------------------------------------------
 -- Yank and Visual Selection
 --------------------------------------------------------------------------------
--- reselect visual selection after indenting
-map('v', '<', '<gv')
-map('v', '>', '>gv')
+wk.register({
+    -- reselect visual selection after indenting
+    ['<'] = { '<gv', 'Dedent' },
+    ['>'] = { '>gv', 'Indent' },
 
--- paste replace visual selection without copying it
-map('v', '<leader>p', '"_dP')
+    -- paste replace visual selection without copying it
+    ['<leader>p'] = { '"_dp', 'Paste (w/o Copy)' },
+}, { mode = 'v' })
 
-map('n', 'Y', 'y$')  -- make Y behave like other capitals
+wk.register({ Y = { 'y$', 'Yank to EOL' }}, { mode = 'n'}) -- make Y behave like other capitals
 
 --------------------------------------------------------------------------------
 -- Quick Window Commands
@@ -61,10 +79,12 @@ function common.win_move(direction)
     end
 end
 
-map('n', '<C-H>', '<CMD>lua require("common").win_move("h")<CR>')
-map('n', '<C-J>', '<CMD>lua require("common").win_move("j")<CR>')
-map('n', '<C-K>', '<CMD>lua require("common").win_move("k")<CR>')
-map('n', '<C-L>', '<CMD>lua require("common").win_move("l")<CR>')
+wk.register({
+    ['<C-H>'] = { '<CMD>lua require("common").win_move("h")<CR>', 'W-Move/Create Left' },
+    ['<C-J>'] = { '<CMD>lua require("common").win_move("j")<CR>', 'W-Move/Create Down' },
+    ['<C-K>'] = { '<CMD>lua require("common").win_move("k")<CR>', 'W-Move/Create Up' },
+    ['<C-L>'] = { '<CMD>lua require("common").win_move("l")<CR>', 'W-Move/Create Right' },
+}, { mode = 'n' })
 
 --------------------------------------------------------------------------------
 -- Quickfix Shortcuts
@@ -116,6 +136,8 @@ exec([[
 ]], false)
 
 -- global list
-map('n', '<c-q>', '<CMD>lua require("common").toggle_qf_list(true)<CR>')
-map('n', '<m-j>', '<CMD>cnext<CR>')
-map('n', '<m-k>', '<CMD>cprev<CR>')
+wk.register({
+    ['<c-q>'] = { '<CMD>lua require("common").toggle_qf_list(true)<CR>', 'Toggle QF List' },
+    ['<m-j>'] = { '<CMD>cnext<CR>', 'QF Next' },
+    ['<m-k>'] = { '<CMD>cprev<CR>', 'QF Prev' },
+}, { mode = 'n' })

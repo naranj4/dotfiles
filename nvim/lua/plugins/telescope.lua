@@ -63,7 +63,7 @@ telescope.load_extension('fzf')
 -- Telescope Keymap
 --------------------------------------------------------------------------------
 local common = require('common')
-local map = common.map
+local wk = require('which-key')
 
 local exec = vim.api.nvim_exec
 
@@ -80,19 +80,22 @@ exec([[
     command! -nargs=1 TelescopeRG lua require('common').search_string(<f-args>)
 ]], false)
 
-map('n', '<leader>ff', '<CMD>lua require("common").project_files()<CR>')
-map('n', '<leader>fs', ':TelescopeRG<space>')
-map('n', '<leader>fS', '<CMD>lua require("telescope.builtin").grep_string()<CR>')
-map('n', '<leader>fl', '<CMD>lua require("telescope.builtin").live_grep()<CR>')
-map('n', '<leader>fb', '<CMD>lua require("telescope.builtin").buffers()<CR>')
-map('n', '<leader>fh', '<CMD>lua require("telescope.builtin").help_tags()<CR>')
-map('n', '<leader>fd', '<CMD>lua require("telescope.builtin").diagnostics()<CR>')
-
-map('n', '<leader>fm', '<CMD>lua require("telescope.builtin").treesitter()<CR>')
-
-map('n', 'gd', '<CMD>lua require("telescope.builtin").lsp_definitions()<CR>')
-map('n', 'gy', '<CMD>lua require("telescope.builtin").lsp_type_definitions()<CR>')
-map('n', 'gi', '<CMD>lua require("telescope.builtin").lsp_implementations()<CR>')
-map('n', 'gr', '<CMD>lua require("telescope.builtin").lsp_references()<CR>')
-
-map('n', '<leader>t', '<CMD>lua require("telescope.builtin").file_browser()<CR>')
+wk.register({
+    ['<leader>f'] = {
+        name = 'telescope-find',
+        f = { '<CMD>lua require"common".project_files()<CR>', 'Find Files' },
+        s = { ':TelescopeRG<space>', 'Find String' },
+        S = { '<CMD>lua require"telescope.builtin".grep_string()<CR>', 'Find String (Cursor)' },
+        l = { '<CMD>lua require"telescope.builtin".live_grep()<CR>', 'Live Grep' },
+        b = { '<CMD>lua require"telescope.builtin".buffers()<CR>', 'Find Buffers' },
+        h = { '<CMD>lua require"telescope.builtin".help_tags()<CR>', 'Find Help Tags' },
+        d = { '<CMD>lua require"telescope.builtin".diagnostics()<CR>', 'Find Diagnostics' },
+        m = { '<CMD>lua require"telescope.builtin".treesitter()<CR>', 'Find Diagnostics' },
+    },
+    g = {
+        d = { '<CMD>lua require"telescope.builtin".lsp_definitions()<CR>', 'Get Def.' },
+        y = { '<CMD>lua require"telescope.builtin".lsp_type_definitions()<CR>', 'Get Type Def.' },
+        i = { '<CMD>lua require"telescope.builtin".lsp_implementations()<CR>', 'Get Impl.' },
+        r = { '<CMD>lua require"telescope.builtin".lsp_references()<CR>', 'Get Ref.' },
+    },
+}, { mode = 'n' })
