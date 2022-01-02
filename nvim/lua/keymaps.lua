@@ -47,7 +47,22 @@ wk.register({
     L = { '$', 'End' },
 }, { mode = '' })
 
+-- quick escape in insert mode
 wk.register({ ['kj'] = { '<ESC>', '<ESC>' }}, { mode = 'i' })
+
+-- set undo breakpoints
+wk.register({
+    [','] = { ',<C-g>u', 'Undo Breakpoint' },
+    ['.'] = { '.<C-g>u', 'Undo Breakpoint' },
+    ['!'] = { '!<C-g>u', 'Undo Breakpoint' },
+    ['?'] = { '?<C-g>u', 'Undo Breakpoint' },
+}, { mode = 'i' })
+
+-- move selected region
+wk.register({
+    ['J'] = { ":m '>+1<CR>gv=gv", 'Move Region Down' },
+    ['K'] = { ":m '<-2<CR>gv=gv", 'Move Region Up' },
+}, { mode = 'v' })
 
 --------------------------------------------------------------------------------
 -- Yank and Visual Selection
