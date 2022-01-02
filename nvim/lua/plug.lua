@@ -57,6 +57,7 @@ return require('packer').startup(function(use)
     use {'numToStr/Comment.nvim'}
 
     use {'phaazon/hop.nvim', branch = 'v1'}
+    use {'unblevable/quick-scope'}
     -- use {'ggandor/lightspeed.nvim'}
 
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
