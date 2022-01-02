@@ -23,8 +23,6 @@ require('which-key').setup({
         ['<leader>c'] = 'Comment',
         ['<leader>b'] = 'Comment Block',
         ['<leader>sa'] = 'Sandwich Add',
-        ['<leader>sd'] = 'Sandwich Delete',
-        ['<leader>sr'] = 'Sandwich Replace',
     },
     key_labels = {},
     icons = {
