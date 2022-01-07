@@ -82,23 +82,58 @@ return require('packer').startup(function(use)
         'kyazdani42/nvim-tree.lua',
         requires = { {'kyazdani42/nvim-web-devicons'} },
         cmd = {'NvimTreeToggle', 'NvimTreeFindFileToggle'},
-        config = function () LOAD_CONFIG('nvim-tree') end,
+        config = function ()
+            LOAD_CONFIG('nvim-tree')
+            LOAD_MAPPING('nvim-tree')
+        end,
     }
     use {
         'lewis6991/gitsigns.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
-        after = 'nvim-web-devicons',
-        config = function () LOAD_CONFIG('gitsigns') end,
+        event = {'BufRead', 'BufEnter'},
+        config = function ()
+            LOAD_CONFIG('gitsigns')
+            LOAD_MAPPING('gitsigns')
+        end,
     }
 
-    -- -- Parentheses & Comment Magic
-    -- use {'machakann/vim-sandwich', after = 'nvim-web-devicons'}
-    -- use {'windwp/nvim-autopairs', after = 'nvim-web-devicons'}
+    -- Parentheses & Comment Magic
+    use {
+        'windwp/nvim-autopairs',
+        after = 'nvim-web-devicons',
+        config = function ()
+            LOAD_CONFIG('nvim-autopairs')
+            LOAD_MAPPING('nvim-autopairs')
+        end,
+    }
+    use {
+        'machakann/vim-sandwich',
+        after = 'nvim-web-devicons',
+        config = function ()
+            LOAD_CONFIG('sandwich')
+            LOAD_MAPPING('sandwich')
+        end,
+    }
 
-    -- use {'numToStr/Comment.nvim', after = 'nvim-web-devicons'}
+    -- use {
+    --     'numToStr/Comment.nvim',
+    --     after = 'nvim-web-devicons',
+    --     config = function ()
+    --         LOAD_CONFIG('comment')
+    --         LOAD_MAPPING('comment')
+    --     end,
+    -- }
 
     -- -- Movement & File Navigation
-    -- use {'phaazon/hop.nvim', branch = 'v1', after = 'nvim-web-devicons'}
+    -- use {
+    --     'phaazon/hop.nvim',
+    --     branch = 'v1',
+    --     after = 'nvim-web-devicons',
+    --     config = function ()
+    --         LOAD_CONFIG('hop')
+    --         LOAD_MAPPING('hop')
+    --     end,
+    -- }
     -- use {'unblevable/quick-scope', after = 'nvim-web-devicons'}
     -- -- use {'ggandor/lightspeed.nvim', after = 'nvim-web-devicons'}
 

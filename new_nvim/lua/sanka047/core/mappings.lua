@@ -71,3 +71,15 @@ map('n', '<c-l>', 'W-Move/Create Right', '<CMD>lua require("sanka047.core.utils"
 map('n', '<c-q>', 'Toggle QF List', '<CMD>lua require("sanka047.core.utils").toggle_qf_list(true)<CR>')
 map('n', '<m-j>', 'QF Next', '<CMD>cnext<CR>')
 map('n', '<m-k>', 'QF Prev', '<CMD>cprev<CR>')
+
+--------------------------------------------------------------------------------
+-- Plugin Specific (mappings that have to be loaded prior to init)
+--------------------------------------------------------------------------------
+local plugins = {
+    'nvim-tree',
+    -- 'hop',
+}
+
+for _, plugin in pairs(plugins) do
+    LOAD_MAPPING(plugin)
+end
