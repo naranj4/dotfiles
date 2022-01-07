@@ -62,34 +62,34 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('colors.edge') end,
     } -- light theme is nice
 
-    -- -- Aesthetics & UI
-    -- use {
-    --     'kyazdani42/nvim-web-devicons',
-    --     after = 'which-key.nvim',
-    --     config = function () LOAD_CONFIG('nvim-web-devicons') end,
-    -- }
-    --
-    -- -- use {'sunjon/Shade.nvim'}  -- currently there is a bug with floating windows being unable to close
-    -- -- use {'karb94/neoscroll.nvim'}  -- a bit slow for my liking
-    --
-    -- use {
-    --     'nvim-lualine/lualine.nvim',
-    --     requires = { {'kyazdani42/nvim-web-devicons'} },
-    --     after = 'nvim-web-devicons',
-    --     config = function () LOAD_CONFIG('lualine') end,
-    -- }
-    -- use {
-    --     'kyazdani42/nvim-tree.lua',
-    --     requires = { {'kyazdani42/nvim-web-devicons'} },
-    --     cmd = {'NvimTreeToggle', 'NvimTreeFindFileToggle'},
-    --     config = function () LOAD_CONFIG('nvim-tree') end,
-    -- }
-    -- use {
-    --     'lewis6991/gitsigns.nvim',
-    --     requires = { {'nvim-lua/plenary.nvim'} },
-    --     after = 'nvim-web-devicons',
-    --     config = function () LOAD_CONFIG('gitsigns') end,
-    -- }
+    -- Aesthetics & UI
+    use {
+        'kyazdani42/nvim-web-devicons',
+        after = 'which-key.nvim',
+        config = function () LOAD_CONFIG('nvim-web-devicons') end,
+    }
+
+    -- use {'sunjon/Shade.nvim'}  -- currently there is a bug with floating windows being unable to close
+    -- use {'karb94/neoscroll.nvim'}  -- a bit slow for my liking
+
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { {'kyazdani42/nvim-web-devicons'} },
+        after = 'nvim-web-devicons',
+        config = function () LOAD_CONFIG('lualine') end,
+    }
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = { {'kyazdani42/nvim-web-devicons'} },
+        cmd = {'NvimTreeToggle', 'NvimTreeFindFileToggle'},
+        config = function () LOAD_CONFIG('nvim-tree') end,
+    }
+    use {
+        'lewis6991/gitsigns.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} },
+        after = 'nvim-web-devicons',
+        config = function () LOAD_CONFIG('gitsigns') end,
+    }
 
     -- -- Parentheses & Comment Magic
     -- use {'machakann/vim-sandwich', after = 'nvim-web-devicons'}

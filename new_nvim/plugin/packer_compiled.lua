@@ -75,11 +75,45 @@ _G.packer_plugins = {
     path = "/Users/niranjansankar/.local/share/nvim/site/pack/packer/start/edge",
     url = "https://github.com/sainnhe/edge"
   },
+  ["gitsigns.nvim"] = {
+    config = { "\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\rgitsigns\16LOAD_CONFIG\0" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/Users/niranjansankar/.local/share/nvim/site/pack/packer/opt/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["lualine.nvim"] = {
+    config = { "\27LJ\2\n+\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\flualine\16LOAD_CONFIG\0" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/Users/niranjansankar/.local/share/nvim/site/pack/packer/opt/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
   ["nightfox.nvim"] = {
     config = { "\27LJ\2\n3\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20colors.nightfox\16LOAD_CONFIG\0" },
     loaded = true,
     path = "/Users/niranjansankar/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
     url = "https://github.com/EdenEast/nightfox.nvim"
+  },
+  ["nvim-tree.lua"] = {
+    commands = { "NvimTreeToggle", "NvimTreeFindFileToggle" },
+    config = { "\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\14nvim-tree\16LOAD_CONFIG\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/niranjansankar/.local/share/nvim/site/pack/packer/opt/nvim-tree.lua",
+    url = "https://github.com/kyazdani42/nvim-tree.lua"
+  },
+  ["nvim-web-devicons"] = {
+    after = { "gitsigns.nvim", "lualine.nvim" },
+    config = { "\27LJ\2\n5\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22nvim-web-devicons\16LOAD_CONFIG\0" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/Users/niranjansankar/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -116,30 +150,13 @@ _G.packer_plugins = {
     url = "https://github.com/whatyouhide/vim-gotham"
   },
   ["which-key.nvim"] = {
-    config = { "\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\14which-key\16LOAD_CONFIG\0" },
+    after = { "nvim-web-devicons" },
     loaded = true,
-    path = "/Users/niranjansankar/.local/share/nvim/site/pack/packer/start/which-key.nvim",
-    url = "https://github.com/folke/which-key.nvim"
+    only_config = true
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: vim-gotham
-time([[Config for vim-gotham]], true)
-try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18colors.gotham\16LOAD_CONFIG\0", "config", "vim-gotham")
-time([[Config for vim-gotham]], false)
--- Config for: which-key.nvim
-time([[Config for which-key.nvim]], true)
-try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\14which-key\16LOAD_CONFIG\0", "config", "which-key.nvim")
-time([[Config for which-key.nvim]], false)
--- Config for: nightfox.nvim
-time([[Config for nightfox.nvim]], true)
-try_loadstring("\27LJ\2\n3\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20colors.nightfox\16LOAD_CONFIG\0", "config", "nightfox.nvim")
-time([[Config for nightfox.nvim]], false)
--- Config for: edge
-time([[Config for edge]], true)
-try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\16colors.edge\16LOAD_CONFIG\0", "config", "edge")
-time([[Config for edge]], false)
 -- Config for: vim-code-dark
 time([[Config for vim-code-dark]], true)
 try_loadstring("\27LJ\2\n4\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\21colors.code-dark\16LOAD_CONFIG\0", "config", "vim-code-dark")
@@ -148,10 +165,51 @@ time([[Config for vim-code-dark]], false)
 time([[Config for tokyonight.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22colors.tokyonight\16LOAD_CONFIG\0", "config", "tokyonight.nvim")
 time([[Config for tokyonight.nvim]], false)
+-- Config for: nightfox.nvim
+time([[Config for nightfox.nvim]], true)
+try_loadstring("\27LJ\2\n3\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20colors.nightfox\16LOAD_CONFIG\0", "config", "nightfox.nvim")
+time([[Config for nightfox.nvim]], false)
+-- Config for: vim-gotham
+time([[Config for vim-gotham]], true)
+try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18colors.gotham\16LOAD_CONFIG\0", "config", "vim-gotham")
+time([[Config for vim-gotham]], false)
 -- Config for: rose-pine
 time([[Config for rose-pine]], true)
 try_loadstring("\27LJ\2\n4\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\21colors.rose-pine\16LOAD_CONFIG\0", "config", "rose-pine")
 time([[Config for rose-pine]], false)
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\14which-key\16LOAD_CONFIG\0", "config", "which-key.nvim")
+time([[Config for which-key.nvim]], false)
+-- Config for: edge
+time([[Config for edge]], true)
+try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\16colors.edge\16LOAD_CONFIG\0", "config", "edge")
+time([[Config for edge]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd nvim-web-devicons ]]
+
+-- Config for: nvim-web-devicons
+try_loadstring("\27LJ\2\n5\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22nvim-web-devicons\16LOAD_CONFIG\0", "config", "nvim-web-devicons")
+
+vim.cmd [[ packadd lualine.nvim ]]
+
+-- Config for: lualine.nvim
+try_loadstring("\27LJ\2\n+\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\flualine\16LOAD_CONFIG\0", "config", "lualine.nvim")
+
+vim.cmd [[ packadd gitsigns.nvim ]]
+
+-- Config for: gitsigns.nvim
+try_loadstring("\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\rgitsigns\16LOAD_CONFIG\0", "config", "gitsigns.nvim")
+
+time([[Sequenced loading]], false)
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeFindFileToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeFindFileToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+time([[Defining lazy-load commands]], false)
+
 if should_profile then save_profiles() end
 
 end)
