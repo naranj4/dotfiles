@@ -77,7 +77,8 @@ map('n', '<m-k>', 'QF Prev', '<CMD>cprev<CR>')
 --------------------------------------------------------------------------------
 local plugins = {
     'nvim-tree',
-    -- 'hop',
+    'hop',
+    'telescope',
 }
 
 for _, plugin in pairs(plugins) do

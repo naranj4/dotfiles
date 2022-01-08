@@ -75,3 +75,14 @@ opt.shiftwidth = 4
 opt.expandtab = true
 
 opt.joinspaces = false
+
+--------------------------------------------------------------------------------
+-- Plugin Specific Config (must be specified at startup)
+--------------------------------------------------------------------------------
+local plugins = {
+    'quick-scope',
+}
+
+for _, plugin in pairs(plugins) do
+    LOAD_CONFIG(plugin)
+end

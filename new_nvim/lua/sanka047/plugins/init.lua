@@ -115,37 +115,35 @@ return require('packer').startup(function(use)
         end,
     }
 
-    -- use {
-    --     'numToStr/Comment.nvim',
-    --     after = 'nvim-web-devicons',
-    --     config = function ()
-    --         LOAD_CONFIG('comment')
-    --         LOAD_MAPPING('comment')
-    --     end,
-    -- }
+    use {
+        'numToStr/Comment.nvim',
+        after = 'nvim-web-devicons',
+        config = function ()
+            LOAD_CONFIG('comment')
+            LOAD_MAPPING('comment')
+        end,
+    }
 
-    -- -- Movement & File Navigation
-    -- use {
-    --     'phaazon/hop.nvim',
-    --     branch = 'v1',
-    --     after = 'nvim-web-devicons',
-    --     config = function ()
-    --         LOAD_CONFIG('hop')
-    --         LOAD_MAPPING('hop')
-    --     end,
-    -- }
-    -- use {'unblevable/quick-scope', after = 'nvim-web-devicons'}
-    -- -- use {'ggandor/lightspeed.nvim', after = 'nvim-web-devicons'}
+    -- Movement & File Navigation
+    use {
+        'phaazon/hop.nvim',
+        branch = 'v1',
+        event = 'VimEnter',
+        config = function () LOAD_CONFIG('hop') end,
+    }
+    use {'unblevable/quick-scope'}
+    -- use {'ggandor/lightspeed.nvim', after = 'nvim-web-devicons'}
 
-    -- use {
-    --     'nvim-telescope/telescope.nvim',
-    --     cmd = 'Telescope',
-    --     requires = {
-    --         {'nvim-lua/plenary.nvim'},
-    --         {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
-    --         {'kyazdani42/nvim-web-devicons'},
-    --     }
-    -- }
+    use {
+        'nvim-telescope/telescope.nvim',
+        event = 'VimEnter',
+        requires = {
+            {'nvim-lua/plenary.nvim'},
+            {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
+            {'kyazdani42/nvim-web-devicons'},
+        },
+        config = function () LOAD_CONFIG('telescope') end,
+    }
 
     -- -- Text Parsing
     -- use {
