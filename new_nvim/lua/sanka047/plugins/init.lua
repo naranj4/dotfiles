@@ -100,7 +100,7 @@ return require('packer').startup(function(use)
     -- Parentheses & Comment Magic
     use {
         'windwp/nvim-autopairs',
-        after = 'nvim-web-devicons',
+        after = 'which-key.nvim',
         config = function ()
             LOAD_CONFIG('nvim-autopairs')
             LOAD_MAPPING('nvim-autopairs')
@@ -108,7 +108,7 @@ return require('packer').startup(function(use)
     }
     use {
         'machakann/vim-sandwich',
-        after = 'nvim-web-devicons',
+        after = 'which-key.nvim',
         config = function ()
             LOAD_CONFIG('sandwich')
             LOAD_MAPPING('sandwich')
@@ -117,7 +117,7 @@ return require('packer').startup(function(use)
 
     use {
         'numToStr/Comment.nvim',
-        after = 'nvim-web-devicons',
+        after = 'which-key.nvim',
         config = function ()
             LOAD_CONFIG('comment')
             LOAD_MAPPING('comment')
@@ -145,13 +145,19 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('telescope') end,
     }
 
-    -- -- Text Parsing
-    -- use {
-    --     'nvim-treesitter/nvim-treesitter',
-    --     run = ':TSUpdate',
-    --     event = 'BufRead',
-    -- }
-    -- use {'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-web-devicons'}
+    -- Text Parsing
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        event = 'BufRead',
+        requires = {
+            {'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter'},
+        },
+        config = function ()
+            LOAD_CONFIG('treesitter')
+            LOAD_MAPPING('treesitter')
+        end,
+    }
 
     -- -- LSP
     -- use {'neovim/nvim-lspconfig', after = 'nvim-web-devicons'}
