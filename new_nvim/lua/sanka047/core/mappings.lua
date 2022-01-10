@@ -24,8 +24,8 @@ map('n', '<leader>Q', 'Delete All Buffers', '<CMD>bufdo bdelete<CR>')
 map('n', 'gf', 'Go To File', '<CMD>edit <cfile><CR>') -- allow gf to open nonexistent files
 map('n', '<ESC>', '<ESC>', ':nohlsearch<CR><ESC>') -- remove highlighting
 
-map('n', ';', '<CMD>', ':')
-map('n', ':', 'f/F/t/T Repeat', ';')
+map('nv', ';', '<CMD>', ':')
+map('nv', ':', 'f/F/t/T Repeat', ';')
 
 map('', 'H', 'Home', '^')
 map('', 'L', 'End', '$')
