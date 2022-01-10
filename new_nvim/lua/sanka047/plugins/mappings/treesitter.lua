@@ -1,7 +1,6 @@
 --------------------------------------------------------------------------------
 -- Treesitter Keymap Documentation
 --------------------------------------------------------------------------------
-local wk = require('which-key')
 local map = require('sanka047.core.utils').map
 
 -- Incremental Selection
@@ -11,10 +10,10 @@ map('x', 'grm', 'Treesitter Node Dec.')
 map('x', 'grc', 'Treesitter Scope Inc.')
 
 -- Text Objects (Select)
-map('v', 'af', 'outer function')
-map('v', 'if', 'inner function')
-map('v', 'ac', 'outer class')
-map('v', 'ic', 'inner class')
+map('vo', 'af', 'outer function')
+map('vo', 'if', 'inner function')
+map('vo', 'ac', 'outer class')
+map('vo', 'ic', 'inner class')
 
 -- Text Objects (Movement)
 map('', ']m', 'Next Method Start')

@@ -1,7 +1,13 @@
 --------------------------------------------------------------------------------
 -- Comment Config
 --------------------------------------------------------------------------------
-require('Comment').setup({
+local ok, Comment = pcall(require, 'Comment')
+if not ok then
+    print('Comment not available')
+    return false
+end
+
+Comment.setup({
     ---Add a space b/w comment and the line
     ---@type boolean
     padding = true,

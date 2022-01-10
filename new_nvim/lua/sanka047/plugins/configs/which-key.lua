@@ -1,7 +1,13 @@
 --------------------------------------------------------------------------------
 -- Which Key Config
 --------------------------------------------------------------------------------
-require('which-key').setup({
+local ok, which_key = pcall(require, 'which-key')
+if not ok then
+    print('which-key not available')
+    return false
+end
+
+which_key.setup({
     plugins = {
         marks = true,
         registers = true,

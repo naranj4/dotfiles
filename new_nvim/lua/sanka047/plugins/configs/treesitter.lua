@@ -1,7 +1,15 @@
 --------------------------------------------------------------------------------
 -- Treesitter Config
 --------------------------------------------------------------------------------
-require('nvim-treesitter.configs').setup({
+local ok, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
+if not ok then
+    print('nvim-treesitter not available')
+    return false
+end
+
+local treesitter_install = require('nvim-treesitter.install')
+
+treesitter_configs.setup({
     ensure_installed = {
         "json",
         "lua",
@@ -66,4 +74,4 @@ require('nvim-treesitter.configs').setup({
         }
     },
 })
-require('nvim-treesitter.install').prefer_git = true
+treesitter_install.prefer_git = true

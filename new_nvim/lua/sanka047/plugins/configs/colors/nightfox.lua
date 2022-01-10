@@ -1,7 +1,13 @@
 --------------------------------------------------------------------------------
 -- Nightfox Config
 --------------------------------------------------------------------------------
-require('nightfox').setup({
+local ok, nightfox = pcall(require, 'nightfox')
+if not ok then
+    print('nightfox not available')
+    return false
+end
+
+nightfox.setup({
     fox = "nightfox", -- Which fox style should be applied
     transparent = false, -- Disable setting the background color
     alt_nc = true, -- Non current window bg to alt color see `hl-NormalNC`

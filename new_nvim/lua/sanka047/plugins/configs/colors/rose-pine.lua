@@ -12,7 +12,7 @@ vim.g.rose_pine_disable_background = false
 vim.g.rose_pine_disable_float_background = false
 vim.g.rose_pine_disable_italics = true
 
-local p = require('rose-pine.palette')
+-- local p = require('rose-pine.palette')
 -- vim.g.rose_pine_colors = {
 --     punctuation = p.subtle,
 --     comment = p.subtle,

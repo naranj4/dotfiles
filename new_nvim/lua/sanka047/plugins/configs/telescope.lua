@@ -1,8 +1,13 @@
 --------------------------------------------------------------------------------
 -- Telescope Config
 --------------------------------------------------------------------------------
+local ok, telescope = pcall(require, 'telescope')
+if not ok then
+    print('telescope not available')
+    return false
+end
+
 local actions = require('telescope.actions')
-local telescope = require('telescope')
 telescope.setup({
     defaults = {
         -- Default configuration for telescope goes here:

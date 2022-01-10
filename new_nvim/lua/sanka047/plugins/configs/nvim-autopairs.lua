@@ -1,7 +1,11 @@
 --------------------------------------------------------------------------------
 -- Nvim-Autopairs Config
 --------------------------------------------------------------------------------
-local npairs = require('nvim-autopairs')
+local ok, npairs = pcall(require, 'nvim-autopairs')
+if not ok then
+    print('nvim-autopairs not available')
+    return false
+end
 
 -- coq_nvim
 -- npairs.setup({

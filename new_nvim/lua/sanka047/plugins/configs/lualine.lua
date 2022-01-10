@@ -1,6 +1,12 @@
 --------------------------------------------------------------------------------
 -- Lualine Config
 --------------------------------------------------------------------------------
+local ok, lualine = pcall(require, 'lualine')
+if not ok then
+    print('lualine not available')
+    return false
+end
+
 local function search_result()
     if vim.v.hlsearch == 0 then return '' end
 
@@ -115,4 +121,4 @@ local config = {
     },
     extensions = {'quickfix', 'nvim-tree'},
 }
-require('lualine').setup(config)
+lualine.setup(config)
