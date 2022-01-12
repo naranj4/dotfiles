@@ -21,6 +21,10 @@ packer.init {
     },
     auto_clean = true,
     compile_on_sync = true,
+    profile = {
+        enable = true,
+        threshold = 1,
+    },
 }
 
 return require('packer').startup(function(use)
@@ -65,7 +69,6 @@ return require('packer').startup(function(use)
     -- Aesthetics & UI
     use {
         'kyazdani42/nvim-web-devicons',
-        after = 'which-key.nvim',
         config = function () LOAD_CONFIG('nvim-web-devicons') end,
     }
 
@@ -100,7 +103,6 @@ return require('packer').startup(function(use)
     -- Parentheses & Comment Magic
     use {
         'windwp/nvim-autopairs',
-        after = 'which-key.nvim',
         config = function ()
             LOAD_CONFIG('nvim-autopairs')
             LOAD_MAPPING('nvim-autopairs')
@@ -108,7 +110,6 @@ return require('packer').startup(function(use)
     }
     use {
         'machakann/vim-sandwich',
-        after = 'which-key.nvim',
         config = function ()
             LOAD_CONFIG('sandwich')
             LOAD_MAPPING('sandwich')
@@ -117,7 +118,6 @@ return require('packer').startup(function(use)
 
     use {
         'numToStr/Comment.nvim',
-        after = 'which-key.nvim',
         config = function ()
             LOAD_CONFIG('comment')
             LOAD_MAPPING('comment')
@@ -159,8 +159,40 @@ return require('packer').startup(function(use)
         end,
     }
 
-    -- -- LSP
-    -- use {'neovim/nvim-lspconfig', after = 'nvim-web-devicons'}
+    -- Snippets
+    use {
+        'L3MON4D3/LuaSnip',
+        event = 'BufRead',
+        requires = {
+            {'rafamadriz/friendly-snippets'}
+        },
+        config = function () LOAD_CONFIG('luasnip') end,
+    }
+
+    -- LSP and Autocompletion
+    use {
+        'neovim/nvim-lspconfig',
+        event = 'BufRead',
+        config = function () LOAD_CONFIG('lspconfig') end,
+    }
+
+    -- Autocompletion (nvim-cmp)
+    use {
+        'hrsh7th/nvim-cmp',
+        event = 'InsertEnter',
+        requires = {
+            {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'},
+            {'hrsh7th/cmp-buffer', after = 'nvim-cmp'},
+            {'hrsh7th/cmp-path', after = 'nvim-cmp'},
+            {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'},
+            {'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp'},
+            {'saadparwaiz1/cmp_luasnip', after = {'nvim-cmp', 'LuaSnip'}},
+        },
+        config = function ()
+            LOAD_CONFIG('nvim-cmp')
+            LOAD_MAPPING('nvim-cmp')
+        end,
+    }
 
     -- -- Autocompletion (coq_nvim)
     -- use {
@@ -169,21 +201,6 @@ return require('packer').startup(function(use)
     --     requires = {
     --         {'ms-jpq/coq.artifacts', branch = 'artifacts'},  -- snippets
     --         {'ms-jpq/coq.thirdparty', branch = '3p'},
-    --     },
-    -- }
-
-    -- -- Autocompletion (nvim-cmp)
-    -- use {
-    --     'hrsh7th/nvim-cmp',
-    --     event = 'InsertEnter',
-    --     requires = {
-    --         {'hrsh7th/cmp-nvim-lsp'},
-    --         {'hrsh7th/cmp-buffer'},
-    --         {'hrsh7th/cmp-path'},
-    --         {'hrsh7th/cmp-cmdline'},
-    --         {'hrsh7th/cmp-nvim-lua'},
-    --         {'L3MON4D3/LuaSnip'},
-    --         {'saadparwaiz1/cmp_luasnip'},
     --     },
     -- }
 end)
