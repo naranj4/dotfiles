@@ -12,7 +12,7 @@ local packer = require('packer')
 packer.init {
     display = {
         open_fn = function()
-            return require("packer.util").float { border = "single" }
+            return require("packer.util").float { border = "double" }
         end,
         prompt_border = "single",
     },
@@ -52,6 +52,10 @@ return require('packer').startup(function(use)
         'EdenEast/nightfox.nvim',
         config = function () LOAD_CONFIG('colors.nightfox') end,
     } -- tbf, nightfox isn't that bad, nordfox meh, dayfox alright, duskfox is nice
+    use {
+        'marko-cerovac/material.nvim',
+        config = function () LOAD_CONFIG('colors.material') end,
+    }
     use {
         'rose-pine/neovim',
         as = 'rose-pine',
