@@ -20,7 +20,8 @@ end
 npairs.setup({
     disable_filetype = {'TelescopePrompt'},
     map_bs = true,
-    map_cr = false,
+    map_cr = true,
 
     fast_wrap = {},
+    check_ts = true,
 })

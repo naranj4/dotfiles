@@ -1,7 +1,6 @@
 --------------------------------------------------------------------------------
 -- Nvim-Cmp Config
 --------------------------------------------------------------------------------
--- TODO: Shit is broken
 local has_cmp, cmp = pcall(require, 'cmp')
 if not has_cmp then
     print('nvim-cmp not available')
@@ -16,6 +15,9 @@ end
 
 vim.o.completeopt = 'menu,menuone,noselect'
 
+--------------------------------------------------------------------------------
+-- Nvim-Cmp Setup
+--------------------------------------------------------------------------------
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -31,6 +33,7 @@ cmp.setup({
         ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<C-e>'] = cmp.mapping(cmp.mapping.close(), { 'i', 'c' }),
+
         ['<CR>'] = cmp.mapping(cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = false, -- false will not auto-select?
