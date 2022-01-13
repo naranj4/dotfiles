@@ -11,12 +11,16 @@ utils.project_files = function()
     if not ok then require('telescope.builtin').find_files() end
 end
 
-utils.search_string = function(search_str)
-    require('telescope.builtin').grep_string({ search = search_str, use_regex = true })
+utils.search_string = function(search_str, directory)
+    local opts = { search = search_str, use_regex = true }
+    if directory ~= nil and directory ~= '' then
+        opts.search_dirs = { directory }
+    end
+    require('telescope.builtin').grep_string(opts)
 end
 
 vim.cmd([[
-    command! -nargs=1 TelescopeRG lua require('sanka047.core.utils').search_string(<f-args>)
+    command! -nargs=+ TelescopeRG lua require('sanka047.core.utils').search_string(<f-args>)
 ]])
 
 map_group('n', '<leader>f', 'telescope-find')
