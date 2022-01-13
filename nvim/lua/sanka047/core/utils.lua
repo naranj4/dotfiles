@@ -57,18 +57,18 @@ end
 --------------------------------------------------------------------------------
 -- Quickfix Functions
 --------------------------------------------------------------------------------
-local is_qf_list_open = false
-local is_loc_list_open = false
+M.is_qf_list_open = false
+M.is_loc_list_open = false
 
 function M.toggle_qf_list(is_qf)
     if is_qf then
-        if is_qf_list_open then
+        if M.is_qf_list_open then
             vim.cmd('cclose')
         else
             vim.cmd('copen')
         end
     else
-        if is_loc_list_open then
+        if M.is_loc_list_open then
             vim.cmd('lclose')
         else
             vim.cmd('lopen')
