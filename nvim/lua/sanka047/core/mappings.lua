@@ -58,8 +58,11 @@ map('v', '<leader>P', 'Paste (w/o Copy)', '"_dP')
 map('n', 'Y', 'Yank to EOL', 'y$') -- make Y behave like other capitals
 
 --------------------------------------------------------------------------------
--- Quick Window Commands
+-- Quick Tab/Window Commands
 --------------------------------------------------------------------------------
+map('n', '<Right>', 'Next Tab', '<CMD>tabnext<CR>')
+map('n', '<Left>', 'Prev Tab', '<CMD>tabprevious<CR>')
+
 map('n', '<c-h>', 'W-Move/Create Left', '<CMD>lua require("sanka047.core.utils").win_move("h")<CR>')
 map('n', '<c-j>', 'W-Move/Create Down', '<CMD>lua require("sanka047.core.utils").win_move("j")<CR>')
 map('n', '<c-k>', 'W-Move/Create Up', '<CMD>lua require("sanka047.core.utils").win_move("k")<CR>')
