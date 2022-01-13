@@ -10,10 +10,11 @@ local unmap = require('sanka047.core.utils').unmap
 --------------------------------------------------------------------------------
 -- document <leader> key
 map_group('nv', '<leader>', 'userspace')
-
 map_group('nv', '<leader><leader>', 'second')
+
 map_group('n', '<leader><leader>v', 'config')
 map('n', '<leader><leader>ve', 'Edit Neovim Config', '<CMD>edit ~/.config/nvim/init.lua<CR>')
+map('n', '<leader><leader>vr', 'Reload Neovim Config', '<CMD>lua require("sanka047.core.utils").reload_config()<CR>')
 
 --------------------------------------------------------------------------------
 -- Quality of Life

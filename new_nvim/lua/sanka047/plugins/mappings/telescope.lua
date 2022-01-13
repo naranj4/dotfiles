@@ -11,10 +11,18 @@ utils.project_files = function()
     if not ok then require('telescope.builtin').find_files() end
 end
 
+utils.search_dotfiles = function ()
+    require('telescope.builtin').find_files({
+        prompt_title = '< Config >',
+        cwd = '~/dotfiles/nvim',
+        hidden = true,
+    })
+end
+
 utils.search_string = function(search_str, directory)
     local opts = { search = search_str, use_regex = true }
     if directory ~= nil and directory ~= '' then
-        opts.search_dirs = { directory }
+        opts.cwd = directory
     end
     require('telescope.builtin').grep_string(opts)
 end
@@ -41,3 +49,5 @@ map('n', 'gd', 'Get Def.', '<CMD>lua require("telescope.builtin").lsp_definition
 map('n', 'gy', 'Get Type Def.', '<CMD>lua require("telescope.builtin").lsp_type_definitions()<CR>')
 map('n', 'gi', 'Get Impl.', '<CMD>lua require("telescope.builtin").lsp_implementations()<CR>')
 map('n', 'gr', 'Get Ref.', '<CMD>lua require("telescope.builtin").lsp_references()<CR>')
+
+map('n', '<leader><leader>vf', 'Find Neovim Config File', '<CMD>lua require("sanka047.core.utils").search_dotfiles()<CR>')

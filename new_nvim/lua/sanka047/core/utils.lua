@@ -8,6 +8,14 @@ local M = {}
 --------------------------------------------------------------------------------
 -- Mapping Functions
 --------------------------------------------------------------------------------
+function M.reload_config()
+    RELOAD('sanka047')
+    vim.cmd([[luafile ~/.config/nvim/init.lua]])
+end
+
+--------------------------------------------------------------------------------
+-- Mapping Functions
+--------------------------------------------------------------------------------
 -- map keybind for all specified modes
 function M.map(modes, keys, docstring, mapping, override_opts)
     if modes == '' then
