@@ -99,6 +99,7 @@ local config = {
             {
                 'tabs',
                 mode = 2,
+                max_length = vim.o.columns,
                 tabs_color = {
                     active = 'lualine_a_normal',
                     inactive = 'lualine_a_inactive',
