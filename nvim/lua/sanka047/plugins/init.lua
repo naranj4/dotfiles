@@ -137,6 +137,12 @@ return require('packer').startup(function(use)
     }
     use {'unblevable/quick-scope'}
     -- use {'ggandor/lightspeed.nvim', after = 'nvim-web-devicons'}
+    use {
+        'abecodes/tabout.nvim',
+        after = {'nvim-cmp', 'nvim-treesitter'},
+        requires = {'nvim-treesitter'},
+        config = function () LOAD_CONFIG('tabout') end,
+    }
 
     use {
         'nvim-telescope/telescope.nvim',
