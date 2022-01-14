@@ -78,6 +78,11 @@ return require('packer').startup(function(use)
 
     -- use {'sunjon/Shade.nvim'}  -- currently there is a bug with floating windows being unable to close
     -- use {'karb94/neoscroll.nvim'}  -- a bit slow for my liking
+    use {
+        'edluffy/specs.nvim',
+        event = 'VimEnter',
+        config = function () LOAD_CONFIG('specs') end,
+    }
 
     use {
         'nvim-lualine/lualine.nvim',

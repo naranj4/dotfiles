@@ -6,7 +6,7 @@ local wk = require('which-key')
 local M = {}
 
 --------------------------------------------------------------------------------
--- Mapping Functions
+-- Config Functions
 --------------------------------------------------------------------------------
 function M.reload_config()
     RELOAD('sanka047')
