@@ -9,7 +9,7 @@ end
 
 specs.setup({
     show_jumps = true,
-    min_jump = 30,
+    min_jump = 2,
     popup = {
         delay_ms = 0,
         inc_ms = 10,
