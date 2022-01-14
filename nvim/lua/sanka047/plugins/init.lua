@@ -140,7 +140,7 @@ return require('packer').startup(function(use)
     use {
         'abecodes/tabout.nvim',
         after = {'nvim-cmp', 'nvim-treesitter'},
-        requires = {'nvim-treesitter'},
+        requires = {'nvim-treesitter/nvim-treesitter'},
         config = function () LOAD_CONFIG('tabout') end,
     }
 
@@ -167,6 +167,12 @@ return require('packer').startup(function(use)
             LOAD_CONFIG('treesitter')
             LOAD_MAPPING('treesitter')
         end,
+    }
+    use {
+        'romgrk/nvim-treesitter-context',
+        after = 'nvim-treesitter',
+        requires = {'nvim-treesitter/nvim-treesitter'},
+        config = function () LOAD_CONFIG('treesitter-context') end,
     }
 
     -- Snippets
