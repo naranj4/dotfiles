@@ -85,6 +85,11 @@ return require('packer').startup(function(use)
     }
 
     use {
+        'lukas-reineke/indent-blankline.nvim',
+        event = 'BufRead',
+        config = function () LOAD_CONFIG('indent-blankline') end,
+    }
+    use {
         'nvim-lualine/lualine.nvim',
         requires = { {'kyazdani42/nvim-web-devicons'} },
         after = 'nvim-web-devicons',
