@@ -101,6 +101,10 @@ return require('packer').startup(function(use)
         event = 'VimEnter',
         config = function () LOAD_CONFIG('specs') end,
     }
+    use {
+        'RRethy/vim-illuminate',
+        config = function () LOAD_CONFIG('illuminate') end,
+    }
 
     use {
         'lukas-reineke/indent-blankline.nvim',

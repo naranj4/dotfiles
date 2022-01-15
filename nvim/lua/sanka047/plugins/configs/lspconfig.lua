@@ -48,6 +48,12 @@ local function on_attach(client, bufnr)
     map('n', '<leader>wa', 'Add Folder', '<CMD>lua vim.lsp.buf.add_workspace_folder()<CR>')
     map('n', '<leader>wr', 'Remove Folder', '<CMD>lua vim.lsp.buf.remove_workspace_folder()<CR>')
     map('n', '<leader>wl', 'List Folders', '<CMD>lua P(vim.lsp.buf.list_workspace_folders())<CR>')
+
+    -- illuminate
+    local has_illuminate, illuminate = pcall(require, 'illuminate')
+    if has_illuminate then
+        illuminate.on_attach(client)
+    end
 end
 
 local servers = {'pyright', 'solargraph', 'yamlls'}
