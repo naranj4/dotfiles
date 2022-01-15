@@ -203,6 +203,7 @@ return require('packer').startup(function(use)
         event = 'BufRead',
         requires = {
             {'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter'},
+            {'nvim-treesitter/playground', after = 'nvim-treesitter'},
         },
         config = function ()
             LOAD_CONFIG('treesitter')
