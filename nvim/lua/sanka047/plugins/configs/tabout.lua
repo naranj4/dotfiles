@@ -16,7 +16,7 @@ tabout.setup({
     completion = false,
     tabouts = {
         {open = '"', close = '"'},
-        {open = '"', close = '"'},
+        {open = "'", close = "'"},
         {open = '`', close = '`'},
         {open = '(', close = ')'},
         {open = '[', close = ']'},
