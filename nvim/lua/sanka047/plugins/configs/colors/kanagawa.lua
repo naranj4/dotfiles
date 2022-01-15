@@ -20,7 +20,9 @@ kanagawa.setup({
     specialReturn = true,
     specialException = true,
     transparent = false,
-    dimInactive = false,
+    dimInactive = true, -- while shade is broken
     colors = {},
     overrides = {},
 })
+
+vim.cmd('colorscheme kanagawa')
