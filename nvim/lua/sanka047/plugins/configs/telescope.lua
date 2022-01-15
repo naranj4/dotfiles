@@ -29,6 +29,13 @@ telescope.setup({
                 -- e.g. git_{create, delete, ...}_branch for the git_branches picker
                 ["<C-h>"] = actions.which_key,
                 ["<ESC>"] = actions.close,
+                ["<C-Space>"] = function(prompt_bufnr)
+                    local opts = {
+                        callback = actions.toggle_selection,
+                        loop_callback = actions.send_selected_to_qflist,
+                    }
+                    require('telescope').extensions.hop._hop_loop(prompt_bufnr, opts)
+                end,
             },
         },
     },
@@ -60,6 +67,20 @@ telescope.setup({
             override_file_sorter = true,
             case_mode = 'smart_case',
         },
+        hop = {
+            keys = {
+                "a", "s", "d", "f", "g", "h", "j", "k", "l", ";",
+                "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+                "A", "S", "D", "F", "G", "H", "J", "K", "L", ":",
+                "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+            },
+            sign_hl = { 'Title', 'Title' },
+            line_hl = { 'Normal', 'Normal' },
+            clear_selection_hl = false,
+            trace_entry = true,
+            reset_selection = true,
+        },
     },
 })
 telescope.load_extension('fzf')
+telescope.load_extension('hop')

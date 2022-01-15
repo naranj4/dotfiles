@@ -178,6 +178,7 @@ return require('packer').startup(function(use)
         requires = {
             {'nvim-lua/plenary.nvim'},
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
+            {'nvim-telescope/telescope-hop.nvim'},
             {'kyazdani42/nvim-web-devicons'},
         },
         config = function () LOAD_CONFIG('telescope') end,
