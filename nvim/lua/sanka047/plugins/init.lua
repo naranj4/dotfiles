@@ -39,15 +39,18 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('which-key') end,
     }
 
+    -- Color Visualization
+    use {
+        'norcalli/nvim-colorizer.lua',
+        event = 'BufRead',
+        config = function () LOAD_CONFIG('colorizer') end,
+    }
+
     -- Colorschemes
     use {
         'folke/tokyonight.nvim',
         config = function () LOAD_CONFIG('colors.tokyonight') end,
     } -- night is good
-    use {
-        'whatyouhide/vim-gotham',
-        config = function () LOAD_CONFIG('colors.gotham') end,
-    } -- not treesitter compatible, but awesome
     use {
         'EdenEast/nightfox.nvim',
         config = function () LOAD_CONFIG('colors.nightfox') end,
@@ -60,15 +63,23 @@ return require('packer').startup(function(use)
         'rose-pine/neovim',
         as = 'rose-pine',
         config = function () LOAD_CONFIG('colors.rose-pine') end,
-    } -- main, moon good, dawn okay
+    } -- main, moon good, dawn okay, colorcolumn is bad
     use {
         'tomasiser/vim-code-dark',
         config = function () LOAD_CONFIG('colors.code-dark') end,
     } -- pretty nice and visible
     use {
-        'sainnhe/edge',
-        config = function () LOAD_CONFIG('colors.edge') end,
-    } -- light theme is nice
+        'yashguptaz/calvera-dark.nvim',
+        config = function () LOAD_CONFIG('colors.calvera-dark') end,
+    } -- pretty great, incsearch is the same as search highlighting tho, and not obvious visual selection
+    use {
+        'rebelot/kanagawa.nvim',
+        config = function () LOAD_CONFIG('colors.kanagawa') end,
+    } -- nice, nice highlighting, no real complaints off the top of my head, nice completion menu
+    use {
+        'navarasu/onedark.nvim',
+        config = function () LOAD_CONFIG('colors.onedark') end,
+    } -- fixes most of my problem with onedarkpro, pleasant to look at
 
     -- Aesthetics & UI
     use {
