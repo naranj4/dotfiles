@@ -44,7 +44,7 @@ opt.laststatus = 2
 opt.showmatch = true
 
 opt.list = true
-opt.listchars = {tab = '▶ ', trail = '•'}
+opt.listchars = {tab = '‒‒▶', trail = '•'}
 
 -- highlight on yank
 cmd([[
