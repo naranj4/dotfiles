@@ -118,6 +118,14 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('lualine') end,
     }
     use {
+        'glepnir/dashboard-nvim',
+        requires = { {'telescope.nvim'} },
+        config = function ()
+            LOAD_CONFIG('dashboard')
+            LOAD_MAPPING('dashboard')
+        end,
+    }
+    use {
         'kyazdani42/nvim-tree.lua',
         requires = { {'kyazdani42/nvim-web-devicons'} },
         cmd = {'NvimTreeToggle', 'NvimTreeFindFileToggle'},

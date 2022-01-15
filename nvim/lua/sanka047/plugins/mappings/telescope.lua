@@ -33,13 +33,17 @@ vim.cmd([[
 
 map_group('n', '<leader>f', 'telescope-find')
 map('n', '<leader>ff', 'Find Files', '<CMD>lua require("sanka047.core.utils").project_files()<CR>')
-map('n', '<leader>fb', 'Find Buffers', '<CMD>lua require("telescope.builtin").buffers()<CR>')
+map('n', '<leader>fbb', 'Find Buffers', '<CMD>lua require("telescope.builtin").buffers()<CR>')
+map('n', '<leader>fhs', 'Find History', '<CMD>lua require("telescope.builtin").oldfiles()<CR>')
+
+map('n', '<leader>fbm', 'Find Bookmarks', '<CMD>lua require("telescope.builtin").marks()<CR>')
+map('n', '<leader>fcs', 'Find Colorscheme', '<CMD>lua require("telescope.builtin").colorscheme()<CR>')
 
 map('n', '<leader>fs', 'Find String', ':TelescopeRG<space>')
 map('n', '<leader>fS', 'Find String (Cursor)', '<CMD>lua require("telescope.builtin").grep_string()<CR>')
 map('n', '<leader>fl', 'Live Grep', '<CMD>lua require("telescope.builtin").live_grep()<CR>')
 
-map('n', '<leader>fh', 'Find Help Tags', '<CMD>lua require("telescope.builtin").help_tags()<CR>')
+map('n', '<leader>fht', 'Find Help Tags', '<CMD>lua require("telescope.builtin").help_tags()<CR>')
 
 map('n', '<leader>fd', 'Find Diagnostics', '<CMD>lua require("telescope.builtin").diagnostics()<CR>')
 
