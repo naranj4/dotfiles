@@ -87,7 +87,14 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('nvim-web-devicons') end,
     }
 
-    -- use {'sunjon/Shade.nvim'}  -- currently there is a bug with floating windows being unable to close
+    -- use {
+    --     'sunjon/Shade.nvim',
+    --     config = function ()
+    --         LOAD_CONFIG('shade')
+    --         LOAD_MAPPING('shade')
+    --     end,
+    -- }  -- currently there is a bug with floating windows being unable to close
+
     -- use {'karb94/neoscroll.nvim'}  -- a bit slow for my liking
     use {
         'edluffy/specs.nvim',
