@@ -26,7 +26,9 @@ g.mapleader = ' '  -- use space as leader
 --------------------------------------------------------------------------------
 -- UI
 --------------------------------------------------------------------------------
-opt.linebreak = true
+opt.wrap = false
+opt.linebreak = false
+opt.sidescroll = 5
 opt.scrolloff = 999
 opt.ruler = true
 opt.cursorline = true
