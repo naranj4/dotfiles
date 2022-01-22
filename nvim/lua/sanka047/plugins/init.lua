@@ -231,7 +231,15 @@ return require('packer').startup(function(use)
     use {
         'neovim/nvim-lspconfig',
         event = 'BufRead',
-        config = function () LOAD_CONFIG('lspconfig') end,
+        -- config = function () LOAD_CONFIG('lspconfig') end,
+    }
+    use {
+        'williamboman/nvim-lsp-installer',
+        after = 'nvim-lspconfig',
+        requires = {
+            {'neovim/nvim-lspconfig'}
+        },
+        config = function () LOAD_CONFIG('lsp-installer') end,
     }
 
     -- Autocompletion (nvim-cmp)
