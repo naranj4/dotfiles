@@ -264,7 +264,10 @@ return require('packer').startup(function(use)
         end,
     }
 
-    -- -- Autocompletion (coq_nvim)
+    -- Autocompletion (coq_nvim)
+    -- TODO: To avoid the problems with mapping, drop the snippets from coq and instead use null-ls to
+    -- inject luasnip as an LSP source. Then use Luasnip for flexible mappings and the rest of coq's
+    -- defaults should work fine.
     -- use {
     --     'ms-jpq/coq_nvim',
     --     branch = 'coq', after = 'nvim-web-devicons',
