@@ -3,10 +3,10 @@
 --------------------------------------------------------------------------------
 -- disable unused builtins
 local builtins = {
-    'netrw',
-    'netrwPlugin',
-    'netrwSettings',
-    'netrwFileHandlers',
+    -- 'netrw',
+    -- 'netrwPlugin',
+    -- 'netrwSettings',
+    -- 'netrwFileHandlers',
 }
 
 for _, plugin in pairs(builtins) do
