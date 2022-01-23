@@ -99,5 +99,9 @@ treesitter_configs.setup({
         use_virtual_text = true,
         lint_events = { 'BufWrite', 'CursorHold' },
     },
+
+    context_commentstring = {
+        enable = true,
+    },
 })
 treesitter_install.prefer_git = true
