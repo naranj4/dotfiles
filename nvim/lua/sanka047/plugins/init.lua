@@ -239,7 +239,10 @@ return require('packer').startup(function(use)
         requires = {
             {'neovim/nvim-lspconfig'}
         },
-        config = function () LOAD_CONFIG('lsp-installer') end,
+        config = function ()
+            LOAD_MAPPING('lsp-installer')
+            LOAD_CONFIG('lsp-installer')
+        end,
     }
 
     -- Autocompletion (nvim-cmp)

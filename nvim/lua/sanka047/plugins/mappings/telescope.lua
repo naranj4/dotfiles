@@ -45,14 +45,6 @@ map('n', '<leader>fl', 'Live Grep', '<CMD>lua require("telescope.builtin").live_
 
 map('n', '<leader>fht', 'Find Help Tags', '<CMD>lua require("telescope.builtin").help_tags()<CR>')
 
-map('n', '<leader>fd', 'Find Diagnostics', '<CMD>lua require("telescope.builtin").diagnostics()<CR>')
-
 map('n', '<leader>fm', 'Find Treesitter', '<CMD>lua require("telescope.builtin").treesitter()<CR>')
-
-map_group('n', '<leader>g', 'goto')
-map('n', '<leader>gd', 'Get Def.', '<CMD>lua require("telescope.builtin").lsp_definitions()<CR>')
-map('n', '<leader>gy', 'Get Type Def.', '<CMD>lua require("telescope.builtin").lsp_type_definitions()<CR>')
-map('n', '<leader>gi', 'Get Impl.', '<CMD>lua require("telescope.builtin").lsp_implementations()<CR>')
-map('n', '<leader>gr', 'Get Ref.', '<CMD>lua require("telescope.builtin").lsp_references()<CR>')
 
 map('n', '<leader><leader>vf', 'Find Neovim Config File', '<CMD>lua require("sanka047.core.utils").search_dotfiles()<CR>')

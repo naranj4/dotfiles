@@ -54,6 +54,43 @@ function M.unmap(modes, keys)
     end
 end
 
+function M.buf_map(bufnr, modes, keys, docstring, mapping, override_opts)
+    if modes == '' then
+        modes = 'nvo'
+    end
+
+    override_opts = override_opts or {}
+    local opts = { noremap = true, silent = true }
+    for i, v in pairs(override_opts) do
+        opts[i] = v
+    end
+
+    for m in modes:gmatch('.') do
+        if mapping ~= nil then
+            vim.api.nvim_buf_set_keymap(bufnr, m, keys, mapping, opts)
+        end
+
+        -- Document the keymap using which keys immediately after mapping.
+        -- wk has seemingly been pretty buggy with mapping for me, so checking to
+        -- see if it will still work for documenting keymaps.
+        wk.register({ [keys] = docstring }, { mode = m, buffer = bufnr })
+    end
+end
+
+-- document mapping groups
+function M.buf_map_group(bufnr, modes, keys, group_name)
+    for m in modes:gmatch('.') do
+        wk.register({ [keys] = { name = group_name } }, { mode = m, buffer = bufnr })
+    end
+end
+
+-- unmap all bindings
+function M.buf_unmap(bufnr, modes, keys)
+    for m in modes:gmatch('.') do
+        vim.api.nvim_buf_set_keymap(bufnr, m, keys, '', {})
+    end
+end
+
 --------------------------------------------------------------------------------
 -- Quickfix Functions
 --------------------------------------------------------------------------------
