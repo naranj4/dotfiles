@@ -38,6 +38,14 @@ local config = {
             {
                 'branch',
                 separator = ' ',
+                fmt = function(str)
+                    local limit = 30 -- branch name size limit
+                    if str:len() > limit then
+                        return str:sub(1, limit - 3) .. '...'
+                    else
+                        return str
+                    end
+                end,
             },
             {
                 'diff',
@@ -47,7 +55,7 @@ local config = {
                     -- Same values like general color option can be used here.
                     added    = 'GitSignsAdd',    -- changes diff's added color
                     modified = 'GitSignsChange', -- changes diff's modified color
-                    removed  = 'GitSignsDelete', -- changes diff's removed color you
+                    removed  = 'GitSignsDelete', -- changes diff's removed color
                 },
             },
             {
