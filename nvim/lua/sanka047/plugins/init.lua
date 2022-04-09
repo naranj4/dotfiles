@@ -134,6 +134,8 @@ return require('packer').startup(function(use)
             LOAD_MAPPING('nvim-tree')
         end,
     }
+
+    -- Git
     use {
         'lewis6991/gitsigns.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
@@ -142,6 +144,10 @@ return require('packer').startup(function(use)
             LOAD_CONFIG('gitsigns')
             LOAD_MAPPING('gitsigns')
         end,
+    }
+    use {
+        'tpope/vim-fugitive',
+        config = function () LOAD_MAPPING('fugitive') end,
     }
 
     -- Parentheses & Comment Magic
