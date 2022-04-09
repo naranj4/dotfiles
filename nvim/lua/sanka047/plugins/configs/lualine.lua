@@ -50,24 +50,12 @@ local config = {
             {
                 'diff',
                 source = function () return vim.b.gitsigns_status_dict end,
-                separator = '',
+                separator = { left = '', right = ''},
                 diff_color = {
                     -- Same values like general color option can be used here.
                     added    = 'GitSignsAdd',    -- changes diff's added color
                     modified = 'GitSignsChange', -- changes diff's modified color
                     removed  = 'GitSignsDelete', -- changes diff's removed color
-                },
-            },
-            {
-                'diagnostics',
-                source = { 'nvim' },
-                sections = { 'error', 'warn', 'info', 'hint' },
-                separator = ' ',
-                diagnostics_color = {
-                    error = 'DiagnosticError',
-                    warn = 'DiagnosticWarn',
-                    info = 'DiagnosticInfo',
-                    hint = 'DiagnosticHint',
                 },
             },
         },
@@ -126,7 +114,21 @@ local config = {
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = {
+            {
+                'diagnostics',
+                source = { 'nvim_diagnostic' },
+                sections = { 'error', 'warn', 'info', 'hint' },
+                separator = { left = '', right = ''},
+                always_visible = true,
+                diagnostics_color = {
+                    error = 'DiagnosticError',
+                    warn = 'DiagnosticWarn',
+                    info = 'DiagnosticInfo',
+                    hint = 'DiagnosticHint',
+                },
+            },
+        },
     },
     extensions = {'quickfix', 'nvim-tree'},
 }
