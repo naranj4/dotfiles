@@ -56,6 +56,7 @@ local servers = {
     'solargraph', -- ruby
     'yamlls', -- yaml
     'sumneko_lua', -- lua
+    'tsserver', -- typescript
 }
 lsp_installer.on_server_ready(function (server)
     local opts = {
