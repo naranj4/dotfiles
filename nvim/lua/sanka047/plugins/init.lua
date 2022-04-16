@@ -91,6 +91,10 @@ return require('packer').startup(function(use)
         'stevearc/dressing.nvim',
         config = function () LOAD_CONFIG('dressing') end,
     }
+    use {
+        'rcarriga/nvim-notify',
+        config = function () LOAD_CONFIG('notify') end,
+    }
 
     -- use {
     --     'sunjon/Shade.nvim',
