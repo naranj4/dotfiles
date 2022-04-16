@@ -103,5 +103,9 @@ treesitter_configs.setup({
     context_commentstring = {
         enable = true,
     },
+
+    autotag = {
+        enable = true,
+    },
 })
 treesitter_install.prefer_git = true
