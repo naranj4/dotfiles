@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, numb = pcall(require, 'numb')
 if not ok then
-    print('numb not available')
+    vim.notify('numb not available', 'error')
     return false
 end
 

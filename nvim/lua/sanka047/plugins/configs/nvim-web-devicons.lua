@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, web_devicons = pcall(require, 'nvim-web-devicons')
 if not ok then
-    print('nvim-web-devicons not available')
+    vim.notify('nvim-web-devicons not available', 'error')
     return false
 end
 

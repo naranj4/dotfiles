@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
 if not ok then
-    print('nvim-lsp-installer not available')
+    vim.notify('nvim-lsp-installer not available', 'error')
     return false
 end
 

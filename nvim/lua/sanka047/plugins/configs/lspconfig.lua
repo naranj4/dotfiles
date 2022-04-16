@@ -3,13 +3,13 @@
 --------------------------------------------------------------------------------
 local ok, lspconfig = pcall(require, 'lspconfig')
 if not ok then
-    print('lspconfig not available')
+    vim.notify('lspconfig not available', 'error')
     return false
 end
 
 -- local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 -- if not ok then
---     print('cmp_nvim_lsp not available')
+--     vim.notify('cmp_nvim_lsp not available', 'error')
 --     return false
 -- end
 

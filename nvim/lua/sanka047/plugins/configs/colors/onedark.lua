@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, onedark = pcall(require, 'onedark')
 if not ok then
-    print('onedark not available')
+    vim.notify('onedark not available', 'error')
     return false
 end
 

@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, shade = pcall(require, 'shade')
 if not ok then
-    print('shade not available')
+    vim.notify('shade not available', 'error')
     return false
 end
 

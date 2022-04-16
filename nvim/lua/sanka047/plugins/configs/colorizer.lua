@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, colorizer = pcall(require, 'colorizer')
 if not ok then
-    print('colorizer not available')
+    vim.notify('colorizer not available', 'error')
     return false
 end
 

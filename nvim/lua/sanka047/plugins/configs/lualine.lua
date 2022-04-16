@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, lualine = pcall(require, 'lualine')
 if not ok then
-    print('lualine not available')
+    vim.notify('lualine not available', 'error')
     return false
 end
 

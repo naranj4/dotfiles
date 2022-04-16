@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, nightfox = pcall(require, 'nightfox')
 if not ok then
-    print('nightfox not available')
+    vim.notify('nightfox not available', 'error')
     return false
 end
 

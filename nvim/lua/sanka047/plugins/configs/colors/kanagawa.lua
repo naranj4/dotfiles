@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, kanagawa = pcall(require, 'kanagawa')
 if not ok then
-    print('kanagawa not available')
+    vim.notify('kanagawa not available', 'error')
     return false
 end
 

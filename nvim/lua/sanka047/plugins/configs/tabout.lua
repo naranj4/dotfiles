@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, tabout = pcall(require, 'tabout')
 if not ok then
-    print('tabout not available')
+    vim.notify('tabout not available', 'error')
     return false
 end
 

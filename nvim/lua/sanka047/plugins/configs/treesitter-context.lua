@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, treesitter_context = pcall(require, 'treesitter-context')
 if not ok then
-    print('nvim-treesitter-context not available')
+    vim.notify('nvim-treesitter-context not available', 'error')
     return false
 end
 

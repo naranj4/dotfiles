@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, telescope = pcall(require, 'telescope')
 if not ok then
-    print('telescope not available')
+    vim.notify('telescope not available', 'error')
     return false
 end
 

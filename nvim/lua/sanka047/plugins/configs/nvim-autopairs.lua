@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, npairs = pcall(require, 'nvim-autopairs')
 if not ok then
-    print('nvim-autopairs not available')
+    vim.notify('nvim-autopairs not available', 'error')
     return false
 end
 

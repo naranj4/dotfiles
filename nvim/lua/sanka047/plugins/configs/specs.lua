@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, specs = pcall(require, 'specs')
 if not ok then
-    print('specs not available')
+    vim.notify('specs not available', 'error')
     return false
 end
 

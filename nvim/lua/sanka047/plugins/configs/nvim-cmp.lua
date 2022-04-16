@@ -3,13 +3,13 @@
 --------------------------------------------------------------------------------
 local has_cmp, cmp = pcall(require, 'cmp')
 if not has_cmp then
-    print('nvim-cmp not available')
+    vim.notify('nvim-cmp not available', 'error')
     return false
 end
 
 local has_luasnip, luasnip = pcall(require, 'luasnip')
 if not has_luasnip then
-    print('luasnip not available (cmp)')
+    vim.notify('luasnip not available (cmp)', 'error')
     return false
 end
 

@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, Comment = pcall(require, 'Comment')
 if not ok then
-    print('Comment not available')
+    vim.notify('Comment not available', 'error')
     return false
 end
 

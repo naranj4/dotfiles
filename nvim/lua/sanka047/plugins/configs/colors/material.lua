@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, material = pcall(require, 'material')
 if not ok then
-    print('material not available')
+    vim.notify('material not available', 'error')
     return false
 end
 

@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, dressing = pcall(require, 'dressing')
 if not ok then
-    print('dressing not available')
+    vim.notify('dressing not available', 'error')
     return false
 end
 

@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, gitsigns = pcall(require, 'gitsigns')
 if not ok then
-    print('gitsigns not available')
+    vim.notify('gitsigns not available', 'error')
     return false
 end
 

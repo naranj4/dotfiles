@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, nvim_tree = pcall(require, 'nvim-tree')
 if not ok then
-    print('nvim-tree not available')
+    vim.notify('nvim-tree not available', 'error')
     return false
 end
 

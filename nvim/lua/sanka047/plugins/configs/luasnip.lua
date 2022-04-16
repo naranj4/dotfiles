@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, luasnip = pcall(require, 'luasnip')
 if not ok then
-    print('luasnip not available')
+    vim.notify('luasnip not available', 'error')
     return false
 end
 

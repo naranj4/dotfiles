@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, hop = pcall(require, 'hop')
 if not ok then
-    print('hop not available')
+    vim.notify('hop not available', 'error')
     return false
 end
 

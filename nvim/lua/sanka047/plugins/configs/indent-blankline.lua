@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, indent_blankline = pcall(require, 'indent_blankline')
 if not ok then
-    print('indent-blankline not available')
+    vim.notify('indent-blankline not available', 'error')
     return false
 end
 

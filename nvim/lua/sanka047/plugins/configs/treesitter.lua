@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
 if not ok then
-    print('nvim-treesitter not available')
+    vim.notify('nvim-treesitter not available', 'error')
     return false
 end
 

@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ok, which_key = pcall(require, 'which-key')
 if not ok then
-    print('which-key not available')
+    vim.notify('which-key not available', 'error')
     return false
 end
 
