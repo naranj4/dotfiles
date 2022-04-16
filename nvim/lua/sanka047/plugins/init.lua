@@ -181,6 +181,10 @@ return require('packer').startup(function(use)
 
     -- Movement & File Navigation
     use {
+        'nacro90/numb.nvim',
+        config = function () LOAD_CONFIG('numb') end,
+    }
+    use {
         'phaazon/hop.nvim',
         branch = 'v1',
         event = 'VimEnter',
