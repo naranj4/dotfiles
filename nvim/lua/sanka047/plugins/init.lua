@@ -87,6 +87,11 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('nvim-web-devicons') end,
     }
 
+    use {
+        'stevearc/dressing.nvim',
+        config = function () LOAD_CONFIG('dressing') end,
+    }
+
     -- use {
     --     'sunjon/Shade.nvim',
     --     config = function ()
