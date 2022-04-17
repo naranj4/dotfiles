@@ -4,7 +4,6 @@ echo "[========SYM LINKING DOTFILES========]"
 ln -sfn ~/dotfiles/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim
 ln -sfn ~/dotfiles/.vimrc ~/.config/nvim/init.vim
-ln -sfn ~/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json
 echo "Linked vim, neovim and coc configs"
 
 # tmux config
