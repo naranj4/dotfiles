@@ -2,9 +2,8 @@ echo ""
 echo "[========SYM LINKING DOTFILES========]"
 # vim and neovim dotfiles
 ln -sfn ~/dotfiles/.vimrc ~/.vimrc
-mkdir -p ~/.config/nvim
-ln -sfn ~/dotfiles/.vimrc ~/.config/nvim/init.vim
-echo "Linked vim, neovim and coc configs"
+ln -sfn ~/dotfiles/nvim ~/.config/nvim
+echo "Linked vim and neovim configs"
 
 # tmux config
 ln -sfn ~/dotfiles/.tmux.conf ~/.tmux.conf
@@ -13,6 +12,7 @@ echo "Linked tmux config"
 # zsh config
 ln -sfn ~/dotfiles/.zshrc ~/.zshrc
 ln -sfn ~/dotfiles/.p10k.zsh ~/.p10k.zsh
+ln -sfn ~/dotfiles/zsh ~/.config/zsh
 echo "Linked zsh and p10k config"
 
 # git config
