@@ -177,6 +177,7 @@ return require('packer').startup(function(use)
 
     use {
         'numToStr/Comment.nvim',
+        tag = 'v0.6',
         config = function ()
             LOAD_CONFIG('comment')
             LOAD_MAPPING('comment')
@@ -232,7 +233,8 @@ return require('packer').startup(function(use)
         end,
     }
     use {
-        'romgrk/nvim-treesitter-context',
+        'lewis6991/nvim-treesitter-context',
+        tag = 'compat/0.6',
         after = 'nvim-treesitter',
         requires = {'nvim-treesitter/nvim-treesitter'},
         config = function () LOAD_CONFIG('treesitter-context') end,
