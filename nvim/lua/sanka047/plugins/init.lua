@@ -159,6 +159,16 @@ return require('packer').startup(function(use)
         config = function () LOAD_MAPPING('fugitive') end,
     }
 
+    -- Floating terminal (for ease of use with git)
+    use {
+        'numToStr/FTerm.nvim',
+        event = {'VimEnter'},
+        config = function ()
+            LOAD_CONFIG('fterm')
+            LOAD_MAPPING('fterm')
+        end,
+    }
+
     -- Parentheses & Comment Magic
     use {
         'windwp/nvim-autopairs',
