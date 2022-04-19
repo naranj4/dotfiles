@@ -9,7 +9,7 @@ end
 
 fterm.setup({
     border = 'rounded',
-    blend = 20,
+    blend = 0,
     dimensions = {
         height = 0.9,
         width = 0.9,
