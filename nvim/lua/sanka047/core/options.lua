@@ -43,6 +43,8 @@ opt.colorcolumn = '100'
 opt.number = true
 opt.signcolumn = 'yes:1'
 
+opt.termguicolors = true
+
 opt.cmdheight = 2
 opt.showcmd = true
 opt.laststatus = 2
