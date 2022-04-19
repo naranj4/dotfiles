@@ -17,26 +17,26 @@ end
 -- Mapping Functions
 --------------------------------------------------------------------------------
 -- map keybind for all specified modes
-function M.map(modes, keys, docstring, mapping, override_opts)
+function M.map(modes, keys, desc, mapping, override_opts)
     if modes == '' then
         modes = 'nvo'
     end
 
     override_opts = override_opts or {}
-    local opts = { noremap = true, silent = true }
+    local opts = { silent = true, desc = desc }
     for i, v in pairs(override_opts) do
         opts[i] = v
     end
 
     for m in modes:gmatch('.') do
         if mapping ~= nil then
-            vim.api.nvim_set_keymap(m, keys, mapping, opts)
+            vim.keymap.set(m, keys, mapping, opts)
         end
 
         -- Document the keymap using which keys immediately after mapping.
         -- wk has seemingly been pretty buggy with mapping for me, so checking to
         -- see if it will still work for documenting keymaps.
-        wk.register({ [keys] = docstring }, { mode = m })
+        wk.register({ [keys] = desc }, { mode = m })
     end
 end
 
