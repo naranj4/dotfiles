@@ -3,7 +3,6 @@
 --------------------------------------------------------------------------------
 local map = require('sanka047.core.utils').map
 local map_group = require('sanka047.core.utils').map_group
-local unmap = require('sanka047.core.utils').unmap
 
 --------------------------------------------------------------------------------
 -- Config
@@ -19,8 +18,6 @@ map('n', '<leader><leader>vr', 'Reload Neovim Config', '<CMD>lua require("sanka0
 --------------------------------------------------------------------------------
 -- Quality of Life
 --------------------------------------------------------------------------------
-unmap('n', 'Q') -- Q enters Ex mode, don't need
-
 map('n', '<leader>Q', 'Delete All Buffers', '<CMD>bufdo bdelete<CR>')
 map('n', 'gf', 'Go To File', '<CMD>edit <cfile><CR>') -- allow gf to open nonexistent files
 map('n', '<ESC>', '<ESC>', ':nohlsearch<CR><ESC>') -- remove highlighting

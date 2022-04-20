@@ -28,15 +28,17 @@ function M.map(modes, keys, desc, mapping, override_opts)
         opts[i] = v
     end
 
+    local m_list = {}
     for m in modes:gmatch('.') do
-        if mapping ~= nil then
-            vim.keymap.set(m, keys, mapping, opts)
-        end
+        table.insert(m_list, m)
 
-        -- Document the keymap using which keys immediately after mapping.
-        -- wk has seemingly been pretty buggy with mapping for me, so checking to
-        -- see if it will still work for documenting keymaps.
+        -- Document the keymap using which keys immediately after mapping. wk has seemingly been
+        -- pretty buggy with mapping for me, so checking to see if it will still work for
+        -- documenting keymaps.
         wk.register({ [keys] = desc }, { mode = m })
+    end
+    if mapping ~= nil then
+        vim.keymap.set(m_list, keys, mapping, opts)
     end
 end
 
@@ -50,6 +52,8 @@ end
 -- unmap all bindings
 function M.unmap(modes, keys)
     for m in modes:gmatch('.') do
+        -- TODO: migrate to vim.keymap.del(m, keys)
+        -- Blocker: doesn't quietly exit if keymap doesn't exist
         vim.api.nvim_set_keymap(m, keys, '', {})
     end
 end
