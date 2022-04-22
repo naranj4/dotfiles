@@ -18,6 +18,8 @@ map('n', '<leader><leader>vr', 'Reload Neovim Config', '<CMD>lua require("sanka0
 --------------------------------------------------------------------------------
 -- Quality of Life
 --------------------------------------------------------------------------------
+map('nv', 'Q', 'gq', 'Format')
+
 map('n', '<leader>Q', 'Delete All Buffers', '<CMD>bufdo bdelete<CR>')
 map('n', 'gf', 'Go To File', '<CMD>edit <cfile><CR>') -- allow gf to open nonexistent files
 map('n', '<ESC>', '<ESC>', ':nohlsearch<CR><ESC>') -- remove highlighting
