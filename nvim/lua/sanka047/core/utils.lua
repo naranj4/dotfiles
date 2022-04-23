@@ -5,6 +5,14 @@ local wk = require('which-key')
 
 local M = {}
 
+local function merge_opts(opts, override)
+    override = override or {}
+    for i, v in pairs(override) do
+        opts[i] = v
+    end
+    return opts
+end
+
 --------------------------------------------------------------------------------
 -- Config Functions
 --------------------------------------------------------------------------------
@@ -16,18 +24,17 @@ end
 --------------------------------------------------------------------------------
 -- Mapping Functions
 --------------------------------------------------------------------------------
+
 -- map keybind for all specified modes
-function M.map(modes, keys, desc, mapping, override_opts)
+function M.map(modes, keys, desc, mapping, override_opts, which_key_opts)
     if modes == '' then
         modes = 'nvo'
     end
 
-    override_opts = override_opts or {}
-    local opts = { silent = true, desc = desc }
-    for i, v in pairs(override_opts) do
-        opts[i] = v
-    end
+    local opts = merge_opts({ silent = true, desc = desc }, override_opts)
+    local w_opts = merge_opts({}, which_key_opts)
 
+    -- convert modes string to a list
     local m_list = {}
     for m in modes:gmatch('.') do
         table.insert(m_list, m)
@@ -35,7 +42,8 @@ function M.map(modes, keys, desc, mapping, override_opts)
         -- Document the keymap using which keys immediately after mapping. wk has seemingly been
         -- pretty buggy with mapping for me, so checking to see if it will still work for
         -- documenting keymaps.
-        wk.register({ [keys] = desc }, { mode = m })
+        w_opts['mode'] = m
+        wk.register({ [keys] = desc }, w_opts)
     end
     if mapping ~= nil then
         vim.keymap.set(m_list, keys, mapping, opts)
@@ -58,27 +66,11 @@ function M.unmap(modes, keys)
     end
 end
 
-function M.buf_map(bufnr, modes, keys, docstring, mapping, override_opts)
-    if modes == '' then
-        modes = 'nvo'
-    end
-
-    override_opts = override_opts or {}
-    local opts = { noremap = true, silent = true }
-    for i, v in pairs(override_opts) do
-        opts[i] = v
-    end
-
-    for m in modes:gmatch('.') do
-        if mapping ~= nil then
-            vim.api.nvim_buf_set_keymap(bufnr, m, keys, mapping, opts)
-        end
-
-        -- Document the keymap using which keys immediately after mapping.
-        -- wk has seemingly been pretty buggy with mapping for me, so checking to
-        -- see if it will still work for documenting keymaps.
-        wk.register({ [keys] = docstring }, { mode = m, buffer = bufnr })
-    end
+-- buffer specific mapping
+function M.buf_map(bufnr, modes, keys, desc, mapping, override_opts, which_key_opts)
+    local opts = merge_opts({ buffer = bufnr }, override_opts)
+    local w_opts = merge_opts({ buffer = bufnr }, which_key_opts)
+    M.map(modes, keys, desc, mapping, opts, w_opts)
 end
 
 -- document mapping groups
@@ -97,11 +89,7 @@ end
 
 -- create user command
 function M.create_command(name, cmd, desc, override_opts)
-    override_opts = override_opts or {}
-    local opts = { desc = desc }
-    for i, v in pairs(override_opts) do
-        opts[i] = v
-    end
+    local opts = merge_opts({ desc = desc }, override_opts)
 
     vim.api.nvim_create_user_command(name, cmd, opts)
 end
