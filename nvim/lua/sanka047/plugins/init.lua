@@ -28,6 +28,10 @@ packer.init {
 }
 
 return require('packer').startup(function(use)
+    use {
+        'lewis6991/impatient.nvim',
+        config = function () require('impatient').enable_profile() end,
+    }
     use {'nvim-lua/plenary.nvim'}
 
     -- let packer manager itself
