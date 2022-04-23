@@ -95,6 +95,17 @@ function M.buf_unmap(bufnr, modes, keys)
     end
 end
 
+-- create user command
+function M.create_command(name, cmd, desc, override_opts)
+    override_opts = override_opts or {}
+    local opts = { desc = desc }
+    for i, v in pairs(override_opts) do
+        opts[i] = v
+    end
+
+    vim.api.nvim_create_user_command(name, cmd, opts)
+end
+
 --------------------------------------------------------------------------------
 -- Quickfix Functions
 --------------------------------------------------------------------------------

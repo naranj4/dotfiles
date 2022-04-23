@@ -46,7 +46,7 @@ return require('packer').startup(function(use)
     -- Color Visualization
     use {
         'norcalli/nvim-colorizer.lua',
-        event = 'BufRead',
+        cmd = 'ColorizerToggle',
         config = function () LOAD_CONFIG('colorizer') end,
     }
 
@@ -100,15 +100,6 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('notify') end,
     }
 
-    -- use {
-    --     'sunjon/Shade.nvim',
-    --     config = function ()
-    --         LOAD_CONFIG('shade')
-    --         LOAD_MAPPING('shade')
-    --     end,
-    -- }  -- currently there is a bug with floating windows being unable to close
-
-    -- use {'karb94/neoscroll.nvim'}  -- a bit slow for my liking
     use {
         'edluffy/specs.nvim',
         event = 'VimEnter',
@@ -152,7 +143,7 @@ return require('packer').startup(function(use)
     use {
         'lewis6991/gitsigns.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
-        event = {'BufRead', 'BufEnter'},
+        event = 'CursorHold',
         config = function ()
             LOAD_CONFIG('gitsigns')
             LOAD_MAPPING('gitsigns')
@@ -166,16 +157,14 @@ return require('packer').startup(function(use)
     -- Floating terminal (for ease of use with git)
     use {
         'numToStr/FTerm.nvim',
-        event = {'VimEnter'},
-        config = function ()
-            LOAD_CONFIG('fterm')
-            LOAD_MAPPING('fterm')
-        end,
+        module = 'FTerm',
+        config = function () LOAD_CONFIG('fterm') end,
     }
 
     -- Parentheses & Comment Magic
     use {
         'windwp/nvim-autopairs',
+        event = 'InsertEnter',
         config = function ()
             LOAD_CONFIG('nvim-autopairs')
             LOAD_MAPPING('nvim-autopairs')
@@ -191,6 +180,7 @@ return require('packer').startup(function(use)
 
     use {
         'numToStr/Comment.nvim',
+        event = 'CursorHold',
         config = function ()
             LOAD_CONFIG('comment')
             LOAD_MAPPING('comment')
@@ -200,16 +190,16 @@ return require('packer').startup(function(use)
     -- Movement & File Navigation
     use {
         'nacro90/numb.nvim',
+        event = 'CmdlineEnter',
         config = function () LOAD_CONFIG('numb') end,
     }
     use {
         'phaazon/hop.nvim',
         branch = 'v1',
-        event = 'VimEnter',
+        module = 'hop',
         config = function () LOAD_CONFIG('hop') end,
     }
     use {'unblevable/quick-scope'}
-    -- use {'ggandor/lightspeed.nvim', after = 'nvim-web-devicons'}
     use {
         'abecodes/tabout.nvim',
         after = {'nvim-cmp', 'nvim-treesitter'},
@@ -219,7 +209,7 @@ return require('packer').startup(function(use)
 
     use {
         'nvim-telescope/telescope.nvim',
-        event = 'VimEnter',
+        module = 'telescope',
         requires = {
             {'nvim-lua/plenary.nvim'},
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
@@ -255,7 +245,7 @@ return require('packer').startup(function(use)
     -- Snippets
     use {
         'L3MON4D3/LuaSnip',
-        event = 'BufRead',
+        event = 'InsertEnter',
         requires = {
             {'rafamadriz/friendly-snippets'}
         },
@@ -283,7 +273,7 @@ return require('packer').startup(function(use)
     -- Autocompletion (nvim-cmp)
     use {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
+        after = 'LuaSnip',
         requires = {
             {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'},
             {'hrsh7th/cmp-buffer', after = 'nvim-cmp'},
