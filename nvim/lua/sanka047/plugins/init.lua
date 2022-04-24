@@ -180,7 +180,7 @@ return require('packer').startup(function(use)
 
     use {
         'numToStr/Comment.nvim',
-        event = 'CursorHold',
+        event = 'BufRead',
         config = function ()
             LOAD_CONFIG('comment')
             LOAD_MAPPING('comment')
