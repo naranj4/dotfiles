@@ -223,12 +223,28 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        event = 'BufRead',
+        event = 'VimEnter',
         requires = {
-            {'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter'},
-            {'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter'},
-            {'windwp/nvim-ts-autotag', after = 'nvim-treesitter'},
-            {'nvim-treesitter/playground', after = 'nvim-treesitter'},
+            {
+                'nvim-treesitter/nvim-treesitter-textobjects',
+                event = 'BufRead',
+            },
+            {
+                'RRethy/nvim-treesitter-textsubjects',
+                event = 'BufRead',
+            },
+            {
+                'JoosepAlviste/nvim-ts-context-commentstring',
+                event = 'BufRead',
+            },
+            {
+                'windwp/nvim-ts-autotag',
+                event = 'InsertEnter',
+            },
+            {
+                'nvim-treesitter/playground',
+                cmd = 'TSPlaygroundToggle',
+            },
         },
         config = function ()
             LOAD_CONFIG('treesitter')
@@ -237,7 +253,7 @@ return require('packer').startup(function(use)
     }
     use {
         'lewis6991/nvim-treesitter-context',
-        after = 'nvim-treesitter',
+        event = 'BufRead',
         requires = {'nvim-treesitter/nvim-treesitter'},
         config = function () LOAD_CONFIG('treesitter-context') end,
     }
@@ -245,7 +261,7 @@ return require('packer').startup(function(use)
     -- Snippets
     use {
         'L3MON4D3/LuaSnip',
-        event = 'InsertEnter',
+        module = 'luasnip',
         requires = {
             {'rafamadriz/friendly-snippets'}
         },
@@ -273,7 +289,7 @@ return require('packer').startup(function(use)
     -- Autocompletion (nvim-cmp)
     use {
         'hrsh7th/nvim-cmp',
-        after = 'LuaSnip',
+        event = 'InsertEnter',
         requires = {
             {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'},
             {'hrsh7th/cmp-buffer', after = 'nvim-cmp'},

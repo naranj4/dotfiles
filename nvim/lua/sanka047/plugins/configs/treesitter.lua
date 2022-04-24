@@ -28,16 +28,6 @@ treesitter_configs.setup({
         additional_vim_regex_highlighting = false,
     },
 
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-        }
-    },
-
     indent = {
         enable = true,
     },
@@ -72,6 +62,16 @@ treesitter_configs.setup({
                 ['[M'] = '@function.outer',
                 ['[]'] = '@class.outer',
             },
+        },
+    },
+
+    textsubjects = {
+        enable = true,
+        prev_selection = ',',
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer',
+            ['i;'] = 'textsubjects-container-inner',
         },
     },
 
