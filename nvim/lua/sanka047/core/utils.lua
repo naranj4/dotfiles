@@ -58,12 +58,14 @@ function M.map_group(modes, keys, group_name)
 end
 
 -- unmap all bindings
-function M.unmap(modes, keys)
+function M.unmap(modes, keys, override_opts)
+    local opts = merge_opts({}, override_opts)
+
+    local m_list = {}
     for m in modes:gmatch('.') do
-        -- TODO: migrate to vim.keymap.del(m, keys)
-        -- Blocker: doesn't quietly exit if keymap doesn't exist
-        vim.api.nvim_set_keymap(m, keys, '', {})
+        table.insert(m_list, m)
     end
+    vim.keymap.del(m_list, keys, opts)
 end
 
 -- buffer specific mapping
@@ -81,10 +83,9 @@ function M.buf_map_group(bufnr, modes, keys, group_name)
 end
 
 -- unmap all bindings
-function M.buf_unmap(bufnr, modes, keys)
-    for m in modes:gmatch('.') do
-        vim.api.nvim_buf_set_keymap(bufnr, m, keys, '', {})
-    end
+function M.buf_unmap(bufnr, modes, keys, override_opts)
+    local opts = merge_opts({ buffer = bufnr }, override_opts)
+    M.unmap(modes, keys, opts)
 end
 
 -- create user command
