@@ -31,13 +31,31 @@ vim.cmd([[
     command! -nargs=+ TelescopeRG lua require('sanka047.core.utils').search_string(<f-args>)
 ]])
 
+utils.find_files_containing = function (args)
+    local opts = {
+        find_command = {
+            "rg",
+            "--ignore",
+            "--hidden",
+            "--color=never",
+            "--files-with-matches",
+            args,
+        },
+    }
+    require('telescope.builtin').find_files(opts)
+end
+
+vim.cmd([[
+    command! -nargs=1 TelescopeFindContaining lua require('sanka047.core.utils').find_files_containing(<q-args>)
+]])
+
 map_group('n', '<leader>f', 'telescope-find')
 map('n', '<leader>ff', 'Find Files', '<CMD>lua require("sanka047.core.utils").project_files()<CR>')
 map('n', '<leader>fbb', 'Find Buffers', '<CMD>lua require("telescope.builtin").buffers()<CR>')
 map('n', '<leader>fhs', 'Find History', '<CMD>lua require("telescope.builtin").oldfiles()<CR>')
 
 map('n', '<leader>fbm', 'Find Bookmarks', '<CMD>lua require("telescope.builtin").marks()<CR>')
-map('n', '<leader>fcs', 'Find Colorscheme', '<CMD>lua require("telescope.builtin").colorscheme()<CR>')
+map('n', '<leader>fc', 'Find Colorscheme', '<CMD>TelescopeFindContaining<space>')
 
 map('n', '<leader>fs', 'Find String', ':TelescopeRG<space>')
 map('n', '<leader>fS', 'Find String (Cursor)', '<CMD>lua require("telescope.builtin").grep_string()<CR>')
