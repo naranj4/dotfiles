@@ -67,11 +67,11 @@ treesitter_configs.setup({
 
     textsubjects = {
         enable = true,
-        prev_selection = ',',
+        prev_selection = '<M-,>',
         keymaps = {
             ['.'] = 'textsubjects-smart',
-            [';'] = 'textsubjects-container-outer',
-            ['i;'] = 'textsubjects-container-inner',
+            ['<M-;>'] = 'textsubjects-container-outer',
+            ['i<M-;>'] = 'textsubjects-container-inner',
         },
     },
 
