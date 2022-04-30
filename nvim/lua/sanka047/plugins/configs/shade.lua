@@ -8,7 +8,7 @@ if not ok then
 end
 
 shade.setup({
-    overlay_opacity = 40,
+    overlay_opacity = 55,
     opacity_step = 5,
     keys = {
         brightness_up = '<leader><leader>sbu',
