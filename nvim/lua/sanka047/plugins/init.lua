@@ -101,6 +101,14 @@ return require('packer').startup(function(use)
     }
 
     use {
+        'dapc11/Shade.nvim',
+        config = function ()
+            LOAD_CONFIG('shade')
+            LOAD_MAPPING('shade')
+        end,
+    }
+
+    use {
         'edluffy/specs.nvim',
         event = 'VimEnter',
         config = function () LOAD_CONFIG('specs') end,
