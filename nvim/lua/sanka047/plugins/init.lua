@@ -228,6 +228,14 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('telescope') end,
     }
 
+    -- Text Substitution/Processing
+    use {'tpope/vim-abolish'}
+    use {
+        'gbprod/substitute.nvim',
+        module = 'substitute',
+        config = function () LOAD_CONFIG('substitute') end,
+    }
+
     -- Text Parsing
     use {
         'nvim-treesitter/nvim-treesitter',

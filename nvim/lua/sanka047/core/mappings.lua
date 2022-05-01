@@ -89,6 +89,7 @@ local plugins = {
     'hop',
     'fterm',
     'telescope',
+    'substitute',
 }
 
 for _, plugin in pairs(plugins) do
