@@ -100,6 +100,10 @@ return require('packer').startup(function(use)
         'rcarriga/nvim-notify',
         config = function () LOAD_CONFIG('notify') end,
     }
+    use {
+        'j-hui/fidget.nvim',
+        config = function () LOAD_CONFIG('fidget') end,
+    }
 
     use {
         'dapc11/Shade.nvim',
