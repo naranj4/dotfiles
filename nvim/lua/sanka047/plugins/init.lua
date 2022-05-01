@@ -169,9 +169,11 @@ return require('packer').startup(function(use)
 
     -- Floating terminal (for ease of use with git)
     use {
-        'numToStr/FTerm.nvim',
-        module = 'FTerm',
-        config = function () LOAD_CONFIG('fterm') end,
+        'akinsho/toggleterm.nvim',
+        config = function ()
+            LOAD_CONFIG('toggleterm')
+            LOAD_MAPPING('toggleterm')
+        end,
     }
 
     -- Parentheses & Comment Magic

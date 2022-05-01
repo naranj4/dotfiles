@@ -148,6 +148,6 @@ local config = {
             },
         },
     },
-    extensions = {'quickfix', 'nvim-tree'},
+    extensions = {'quickfix', 'nvim-tree', 'toggleterm'},
 }
 lualine.setup(config)

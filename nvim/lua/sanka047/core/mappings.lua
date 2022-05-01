@@ -87,7 +87,6 @@ map('t', '<C-v><ESC>', '<ESC>', '<ESC>')
 local plugins = {
     'nvim-tree',
     'hop',
-    'fterm',
     'telescope',
     'substitute',
 }

@@ -21,6 +21,7 @@ kanagawa.setup({
     specialException = true,
     transparent = false,
     dimInactive = false, -- while shade is broken
+    globalStatus = true,
     colors = {},
     overrides = {},
 })
