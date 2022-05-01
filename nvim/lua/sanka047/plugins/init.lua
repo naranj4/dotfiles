@@ -84,6 +84,7 @@ return require('packer').startup(function(use)
         'navarasu/onedark.nvim',
         config = function () LOAD_CONFIG('colors.onedark') end,
     } -- fixes most of my problem with onedarkpro, pleasant to look at
+    use {'savq/melange'}
 
     -- Aesthetics & UI
     use {

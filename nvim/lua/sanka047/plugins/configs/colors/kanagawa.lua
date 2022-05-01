@@ -10,7 +10,7 @@ end
 vim.g.kanagawa_lualine_bold = true
 
 kanagawa.setup({
-    undercurl = false,
+    undercurl = true,
     commentStyle = 'italic',
     functionStyle = 'bold',
     keywordStyle = 'italic',
