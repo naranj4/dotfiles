@@ -71,8 +71,8 @@ local config = {
                 cond = function() return vim.bo.buftype == 'quickfix' end,
             },
         },
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
-        lualine_y = {search_result, 'progress'},
+        lualine_x = {'encoding', 'filetype'},
+        lualine_y = {'progress'},
         lualine_z = {'location'},
     },
     inactive_sections = {
@@ -88,7 +88,7 @@ local config = {
             {
                 'tabs',
                 mode = 2,
-                max_length = vim.o.columns,
+                max_length = vim.o.columns * 2 / 3,
                 tabs_color = {
                     active = 'lualine_a_normal',
                     inactive = 'lualine_a_inactive',
@@ -98,27 +98,52 @@ local config = {
                     right = '╲',
                 },
                 section_separators = {
-                    left = '',
-                    right = '',
+                    left = '',
+                    right = '',
                 },
             },
         },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
-        lualine_y = {},
-        lualine_z = {
+        lualine_y = {
+            {
+                search_result,
+                component_separators = {
+                    left = '╱',
+                    right = '╲',
+                },
+                section_separators = {
+                    left = '',
+                    right = '',
+                },
+            },
             {
                 'diagnostics',
                 source = { 'nvim_diagnostic' },
                 sections = { 'error', 'warn', 'info', 'hint' },
-                separator = { left = '', right = ''},
                 always_visible = true,
-                diagnostics_color = {
-                    error = 'DiagnosticError',
-                    warn = 'DiagnosticWarn',
-                    info = 'DiagnosticInfo',
-                    hint = 'DiagnosticHint',
+                colored = true,
+                component_separators = {
+                    left = '╱',
+                    right = '╲',
+                },
+                section_separators = {
+                    left = '',
+                    right = '',
+                },
+            },
+        },
+        lualine_z = {
+            {
+                'fileformat',
+                component_separators = {
+                    left = '╱',
+                    right = '╲',
+                },
+                section_separators = {
+                    left = '',
+                    right = '',
                 },
             },
         },
