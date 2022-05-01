@@ -261,6 +261,10 @@ return require('packer').startup(function(use)
                 event = 'BufRead',
             },
             {
+                'RRethy/nvim-treesitter-endwise',
+                event = 'InsertEnter',
+            },
+            {
                 'windwp/nvim-ts-autotag',
                 event = 'InsertEnter',
             },

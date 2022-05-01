@@ -107,5 +107,9 @@ treesitter_configs.setup({
     autotag = {
         enable = true,
     },
+
+    endwise = {
+        enable = true,
+    },
 })
 treesitter_install.prefer_git = true
