@@ -50,13 +50,6 @@ local config = {
             {
                 'diff',
                 source = function () return vim.b.gitsigns_status_dict end,
-                separator = { left = '', right = ''},
-                diff_color = {
-                    -- Same values like general color option can be used here.
-                    added    = 'GitSignsAdd',    -- changes diff's added color
-                    modified = 'GitSignsChange', -- changes diff's modified color
-                    removed  = 'GitSignsDelete', -- changes diff's removed color
-                },
             },
         },
         lualine_c = {
