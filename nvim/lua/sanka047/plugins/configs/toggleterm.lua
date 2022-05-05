@@ -36,8 +36,8 @@ toggleterm.setup({
         -- the 'curved' border is a custom border type
         -- not natively supported but implemented in this plugin.
         border = 'curved',
-        width = function () math.ceil(0.8 * vim.o.columns) end,
-        height = function () math.ceil(0.8 * vim.o.lines) end,
+        width = function () return math.ceil(0.8 * vim.o.columns) end,
+        height = function () return math.ceil(0.8 * vim.o.lines) end,
         winblend = 0,
     }
 })
