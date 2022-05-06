@@ -14,8 +14,12 @@ alias gd="git diff"
 alias gp="git pull"
 
 alias ga="git add"
-alias gc="git commit"
+
+alias gc="git commit -m"
+alias gca="git commit --amend"
+alias gcan="git commit --amend --no-edit"
 alias gcf="git commit --fixup"
+
 alias gr="git rebase"
 alias grf="git rebase --autosquash"
 
