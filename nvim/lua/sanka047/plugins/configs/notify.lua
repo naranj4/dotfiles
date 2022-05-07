@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Notify Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, notify = pcall(require, 'notify')
 if not ok then
-    vim.notify('notify not available', 'error')
+    log.error('notify not available', 'Config')
     return false
 end
 

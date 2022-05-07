@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Comment Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, Comment = pcall(require, 'Comment')
 if not ok then
-    vim.notify('Comment not available', 'error')
+    log.error('Comment not available', 'Config')
     return false
 end
 

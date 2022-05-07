@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Hop Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, hop = pcall(require, 'hop')
 if not ok then
-    vim.notify('hop not available', 'error')
+    log.error('hop not available', 'Config')
     return false
 end
 

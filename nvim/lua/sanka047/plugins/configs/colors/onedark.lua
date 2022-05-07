@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Onedark Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, onedark = pcall(require, 'onedark')
 if not ok then
-    vim.notify('onedark not available', 'error')
+    log.error('onedark not available', 'Config')
     return false
 end
 

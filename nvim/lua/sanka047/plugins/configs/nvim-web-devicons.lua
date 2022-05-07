@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Web Devicons Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, web_devicons = pcall(require, 'nvim-web-devicons')
 if not ok then
-    vim.notify('nvim-web-devicons not available', 'error')
+    log.error('nvim-web-devicons not available', 'Config')
     return false
 end
 

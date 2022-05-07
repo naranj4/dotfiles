@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Nightfox Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, nightfox = pcall(require, 'nightfox')
 if not ok then
-    vim.notify('nightfox not available', 'error')
+    log.error('nightfox not available', 'Config')
     return false
 end
 

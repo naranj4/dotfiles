@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Nvim-Autopairs Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, npairs = pcall(require, 'nvim-autopairs')
 if not ok then
-    vim.notify('nvim-autopairs not available', 'error')
+    log.error('nvim-autopairs not available', 'Config')
     return false
 end
 

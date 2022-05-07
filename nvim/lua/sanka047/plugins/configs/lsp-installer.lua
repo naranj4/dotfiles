@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- LSP Installer Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
 if not ok then
-    vim.notify('nvim-lsp-installer not available', 'error')
+    log.error('nvim-lsp-installer not available', 'Config')
     return false
 end
 

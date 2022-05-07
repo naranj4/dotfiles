@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Nvim-Tree Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, nvim_tree = pcall(require, 'nvim-tree')
 if not ok then
-    vim.notify('nvim-tree not available', 'error')
+    log.error('nvim-tree not available', 'Config')
     return false
 end
 

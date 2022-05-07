@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Shade Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, shade = pcall(require, 'shade')
 if not ok then
-    vim.notify('shade not available', 'error')
+    log.error('shade not available', 'Config')
     return false
 end
 

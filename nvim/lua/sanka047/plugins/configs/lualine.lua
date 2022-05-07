@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Lualine Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, lualine = pcall(require, 'lualine')
 if not ok then
-    vim.notify('lualine not available', 'error')
+    log.error('lualine not available', 'Config')
     return false
 end
 

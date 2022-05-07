@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- FTerm Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, fterm = pcall(require, 'FTerm')
 if not ok then
-    vim.notify('FTerm not available', 'error')
+    log.error('FTerm not available', 'Config')
     return false
 end
 

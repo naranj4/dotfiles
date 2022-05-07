@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Dressing Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, dressing = pcall(require, 'dressing')
 if not ok then
-    vim.notify('dressing not available', 'error')
+    log.error('dressing not available', 'Config')
     return false
 end
 

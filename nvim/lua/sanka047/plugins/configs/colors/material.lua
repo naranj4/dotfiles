@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Material Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, material = pcall(require, 'material')
 if not ok then
-    vim.notify('material not available', 'error')
+    log.error('material not available', 'Config')
     return false
 end
 

@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Treesitter-Context Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, treesitter_context = pcall(require, 'treesitter-context')
 if not ok then
-    vim.notify('nvim-treesitter-context not available', 'error')
+    log.error('nvim-treesitter-context not available', 'Config')
     return false
 end
 

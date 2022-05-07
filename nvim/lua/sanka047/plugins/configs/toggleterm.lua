@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Toggleterm Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, toggleterm = pcall(require, 'toggleterm')
 if not ok then
-    vim.notify('toggleterm not available', 'error')
+    log.error('toggleterm not available', 'Config')
     return false
 end
 

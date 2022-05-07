@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Kanagawa Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, kanagawa = pcall(require, 'kanagawa')
 if not ok then
-    vim.notify('kanagawa not available', 'error')
+    log.error('kanagawa not available', 'Config')
     return false
 end
 

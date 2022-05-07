@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Colorizer Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, colorizer = pcall(require, 'colorizer')
 if not ok then
-    vim.notify('colorizer not available', 'error')
+    log.error('colorizer not available', 'Config')
     return false
 end
 

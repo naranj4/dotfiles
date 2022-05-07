@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Nvim-Cmp Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local has_cmp, cmp = pcall(require, 'cmp')
 if not has_cmp then
-    vim.notify('nvim-cmp not available', 'error')
+    log.error('nvim-cmp not available', 'Config')
     return false
 end
 

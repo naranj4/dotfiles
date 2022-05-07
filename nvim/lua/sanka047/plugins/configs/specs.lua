@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Specs Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, specs = pcall(require, 'specs')
 if not ok then
-    vim.notify('specs not available', 'error')
+    log.error('specs not available', 'Config')
     return false
 end
 

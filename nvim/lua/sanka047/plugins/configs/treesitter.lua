@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Treesitter Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
 if not ok then
-    vim.notify('nvim-treesitter not available', 'error')
+    log.error('nvim-treesitter not available', 'Config')
     return false
 end
 

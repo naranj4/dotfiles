@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- GitSigns Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, gitsigns = pcall(require, 'gitsigns')
 if not ok then
-    vim.notify('gitsigns not available', 'error')
+    log.error('gitsigns not available', 'Config')
     return false
 end
 

@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Fidget Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, fidget = pcall(require, 'fidget')
 if not ok then
-    vim.fidget('fidget not available', 'error')
+    log.error('fidget not available', 'Config')
     return false
 end
 

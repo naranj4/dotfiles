@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Tabout Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, tabout = pcall(require, 'tabout')
 if not ok then
-    vim.notify('tabout not available', 'error')
+    log.error('tabout not available', 'Config')
     return false
 end
 

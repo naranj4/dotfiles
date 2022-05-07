@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Numb Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, numb = pcall(require, 'numb')
 if not ok then
-    vim.notify('numb not available', 'error')
+    log.error('numb not available', 'Config')
     return false
 end
 

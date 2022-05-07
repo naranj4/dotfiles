@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Indent-Blankline Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, indent_blankline = pcall(require, 'indent_blankline')
 if not ok then
-    vim.notify('indent-blankline not available', 'error')
+    log.error('indent-blankline not available', 'Config')
     return false
 end
 

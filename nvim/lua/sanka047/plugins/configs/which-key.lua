@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Which Key Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, which_key = pcall(require, 'which-key')
 if not ok then
-    vim.notify('which-key not available', 'error')
+    log.error('which-key not available', 'Config')
     return false
 end
 

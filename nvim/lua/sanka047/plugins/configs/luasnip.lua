@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- LuaSnip Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, luasnip = pcall(require, 'luasnip')
 if not ok then
-    vim.notify('luasnip not available', 'error')
+    log.error('luasnip not available', 'Config')
     return false
 end
 

@@ -1,9 +1,11 @@
 --------------------------------------------------------------------------------
 -- Telescope Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local ok, telescope = pcall(require, 'telescope')
 if not ok then
-    vim.notify('telescope not available', 'error')
+    log.error('telescope not available', 'Config')
     return false
 end
 

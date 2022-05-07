@@ -1,7 +1,11 @@
 --------------------------------------------------------------------------------
 -- First Load Actions
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local function download_packer()
+    log.warn('Packer is not installed', 'Plugins')
+
     if vim.fn.input('Download Packer? (y for yes)') ~= 'y' then
         return
     end
@@ -19,9 +23,9 @@ local function download_packer()
         packer_path .. '/packer.nvim',
     })
 
-    print(out)
-    print('Downloading packer.nvim...')
-    print("( You'll need to restart now )")
+    log.info(out, 'Plugins')
+    log.info('Downloading packer.nvim...', 'Plugins')
+    log.warn("( You'll need to restart now )", 'Plugins')
 end
 
 if not pcall(require, 'packer') then
