@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
--- Lualine Config
+-- Nvim-Cmp Config
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
+local map = require('sanka047.utils.map').map
 
 map('ic', '<C-p>', 'Select Prev')
 map('ic', '<C-n>', 'Select Next')

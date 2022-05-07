@@ -6,7 +6,7 @@ vim.g.dashboard_default_executive = 'telescope'
 vim.g.dashboard_custom_section = {
     find_file = {
         description = {' Find Files                             <L> f f'},
-        command = 'lua require("sanka047.core.utils").project_files()',
+        command = 'lua require("sanka047.utils.finder").project_files()',
     },
     find_history = {
         description = {'ﭯ Recently Opened Files                <L> f h s'},

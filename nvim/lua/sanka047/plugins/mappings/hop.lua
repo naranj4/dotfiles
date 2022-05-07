@@ -1,23 +1,21 @@
 --------------------------------------------------------------------------------
 -- Hop Keymap
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
-local create_command = require('sanka047.core.utils').create_command
+local map = require('sanka047.utils.map').map
 
-create_command(
-    'HopDown',
+map(
+    '',
+    '<leader>j',
+    'Hop Down',
     function ()
         require('hop').hint_lines({ direction = require('hop.hint').HintDirection.AFTER_CURSOR })
-    end,
-    'Hop Down'
+    end
 )
-create_command(
-    'HopUp',
+map(
+    '',
+    '<leader>k',
+    'Hop Up',
     function ()
         require('hop').hint_lines({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR })
-    end,
-    'Hop Up'
+    end
 )
-
-map('', '<leader>j', 'Hop Down', "<CMD>HopDown<CR>")
-map('', '<leader>k', 'Hop Up', "<CMD>HopUp<CR>")

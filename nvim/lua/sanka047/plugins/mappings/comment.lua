@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- Comment Keymap Documentation
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
+local map = require('sanka047.utils.map').map
 
 map('nx', '<leader>c', 'Line Comment')
 map('n', '<leader>cc', 'Toggle Line Comment')

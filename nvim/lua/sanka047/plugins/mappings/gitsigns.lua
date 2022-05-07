@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
 -- GitSigns Keymap Documentation
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
-local map_group = require('sanka047.core.utils').map_group
+local map = require('sanka047.utils.map').map
+local map_group = require('sanka047.utils.map').map_group
 
 map('', ']c', 'Next Hunk')
 map('', '[c', 'Prev Hunk')

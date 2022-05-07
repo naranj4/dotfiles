@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- Treesitter Keymap Documentation
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
+local map = require('sanka047.utils.map').map
 
 -- Incremental Selection
 map('n', 'gnn', 'Treesitter Init Selection')

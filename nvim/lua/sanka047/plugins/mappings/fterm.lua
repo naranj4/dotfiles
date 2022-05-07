@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
 -- FTerm Keymap
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
-local create_command = require('sanka047.core.utils').create_command
+local map = require('sanka047.utils.map').map
+local create_command = require('sanka047.utils.map').create_command
 
 create_command(
     'FTermToggle',

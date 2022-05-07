@@ -1,34 +1,34 @@
 --------------------------------------------------------------------------------
 -- LSP Installer Keymap
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
-local map_group = require('sanka047.core.utils').map_group
+local map = require('sanka047.utils.map').map
+local map_group = require('sanka047.utils.map').map_group
 
 map_group('n', '<leader>g', 'lsp-get')
 
-map('n', '<leader>rn', 'Rename', '<CMD>lua vim.lsp.buf.rename()<CR>')
+map('n', '<leader>rn', 'Rename', vim.lsp.buf.rename)
 
-map('n', '<leader>gd', 'Get Def.', '<CMD>lua require("telescope.builtin").lsp_definitions()<CR>')
-map('n', '<leader>gD', 'Get Decl.', '<CMD>lua vim.lsp.buf.declaration()<CR>')
-map('n', '<leader>gy', 'Get Type Def.', '<CMD>lua require("telescope.builtin").lsp_type_definitions()<CR>')
-map('n', '<leader>gi', 'Get Impl.', '<CMD>lua require("telescope.builtin").lsp_implementations()<CR>')
-map('n', '<leader>gr', 'Get Ref.', '<CMD>lua require("telescope.builtin").lsp_references()<CR>')
+map('n', '<leader>gd', 'Get Def.', function () require("telescope.builtin").lsp_definitions() end)
+map('n', '<leader>gD', 'Get Decl.', vim.lsp.buf.declaration)
+map('n', '<leader>gy', 'Get Type Def.', function () require("telescope.builtin").lsp_type_definitions() end)
+map('n', '<leader>gi', 'Get Impl.', function () require("telescope.builtin").lsp_implementations() end)
+map('n', '<leader>gr', 'Get Ref.', function () require("telescope.builtin").lsp_references() end)
 
 map_group('n', '<leader>l', 'lsp')
 
 -- diagnostic information
-map('n', '<leader>ld', 'Find Diagnostics', '<CMD>lua require("telescope.builtin").diagnostics()<CR>')
-map('n', '[d', 'Prev Diagnostic', '<CMD>lua vim.diagnostic.goto_prev()<CR>')
-map('n', ']d', 'Next Diagnostic', '<CMD>lua vim.diagnostic.goto_next()<CR>')
-map('n', '<leader>q', 'Diagnostic (Loc)List', '<CMD>lua vim.diagnostic.setloclist()<CR>')
+map('n', '<leader>ld', 'Find Diagnostics', function () require("telescope.builtin").diagnostics() end)
+map('n', '[d', 'Prev Diagnostic', vim.diagnostic.goto_prev)
+map('n', ']d', 'Next Diagnostic', vim.diagnostic.goto_next)
+map('n', '<leader>q', 'Diagnostic (Loc)List', vim.diagnostic.setloclist)
 
 -- workspace operations
 map_group('n', '<leader>w', 'workspace')
-map('n', '<leader>wa', 'Add Folder', '<CMD>lua vim.lsp.buf.add_workspace_folder()<CR>')
-map('n', '<leader>wr', 'Remove Folder', '<CMD>lua vim.lsp.buf.remove_workspace_folder()<CR>')
-map('n', '<leader>wl', 'List Folders', '<CMD>lua P(vim.lsp.buf.list_workspace_folders())<CR>')
+map('n', '<leader>wa', 'Add Folder', vim.lsp.buf.add_workspace_folder)
+map('n', '<leader>wr', 'Remove Folder', vim.lsp.buf.remove_workspace_folder)
+map('n', '<leader>wl', 'List Folders', function () P(vim.lsp.buf.list_workspace_folders()) end)
 
-map('n', '<leader>lf', 'Format', '<CMD>lua vim.lsp.buf.formatting()<CR>')
+map('n', '<leader>lf', 'Format', vim.lsp.buf.formatting)
 
-map('n', '<leader>lca', 'Code Actions', '<CMD>lua require("telescope.builtin").lsp_code_actions()<CR>')
-map('v', '<leader>lca', 'Code Actions', '<CMD>lua require("telescope.builtin").lsp_range_code_actions()<CR>')
+map('n', '<leader>lca', 'Code Actions', function () require("telescope.builtin").lsp_code_actions() end)
+map('v', '<leader>lca', 'Code Actions', function () require("telescope.builtin").lsp_range_code_actions() end)

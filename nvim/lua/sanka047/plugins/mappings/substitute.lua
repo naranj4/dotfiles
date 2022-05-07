@@ -1,16 +1,16 @@
 --------------------------------------------------------------------------------
--- Telescope Keymap
+-- Substitute Keymap
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
+local map = require('sanka047.utils.map').map
 
 -- Substitute Mappings
-map('n', 's', 'substitute', "<CMD>lua require('substitute').operator()<CR>")
-map('n', 'ss', 'substitute (line)', "<CMD>lua require('substitute').line()<CR>")
-map('n', 'S', 'substitute (eol)', "<CMD>lua require('substitute').eol()<CR>")
-map('x', 's', 'substitute', "<CMD>lua require('substitute').visual()<CR>")
+map('n', 's', 'substitute', function () require('substitute').operator() end)
+map('n', 'ss', 'substitute (line)', function () require('substitute').line() end)
+map('n', 'S', 'substitute (eol)', function () require('substitute').eol() end)
+map('x', 's', 'substitute', function () require('substitute').visual() end)
 
 -- Exchange Mappings
-map('n', 'sx', 'exchange', "<CMD>lua require('substitute.exchange').operator()<CR>")
-map('n', 'sxx', 'exchange (line)', "<CMD>lua require('substitute.exchange').line()<CR>")
-map('x', 'X', 'exchange', "<CMD>lua require('substitute.exchange').visual()<CR>")
-map('n', 'sxc', 'exchange (cancel)', "<CMD>lua require('substitute.exchange').cancel()<CR>")
+map('n', 'sx', 'exchange', function () require('substitute.exchange').operator() end)
+map('n', 'sxx', 'exchange (line)', function () require('substitute.exchange').line() end)
+map('x', 'X', 'exchange', function () require('substitute.exchange').visual() end)
+map('n', 'sxc', 'exchange (cancel)', function () require('substitute.exchange').cancel() end)

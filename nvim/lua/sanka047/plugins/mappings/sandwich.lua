@@ -1,8 +1,7 @@
 --------------------------------------------------------------------------------
 -- Vim-Sandwich Keymap
 --------------------------------------------------------------------------------
-local wk = require('which-key')
-local map = require('sanka047.core.utils').map
+local map = require('sanka047.utils.map').map
 
 local opts = { noremap = false }
 

@@ -18,6 +18,6 @@ local zsh = Terminal:new({
 --------------------------------------------------------------------------------
 -- Toggleterm Keymap
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
+local map = require('sanka047.utils.map').map
 
 map('nt', '<M-i>', 'Toggle ZSH', function () zsh:toggle() end)

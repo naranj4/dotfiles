@@ -1,68 +1,38 @@
 --------------------------------------------------------------------------------
 -- Telescope Keymap
 --------------------------------------------------------------------------------
-local utils = require('sanka047.core.utils')
-local map = utils.map
-local map_group = utils.map_group
+local finder = require('sanka047.utils.finder')
+local map = require('sanka047.utils.map').map
+local map_group = require('sanka047.utils.map').map_group
+local create_command = require('sanka047.utils.map').create_command
 
--- Use git_files until it doesn't work, then run find_files
-utils.project_files = function()
-    local ok = pcall(require('telescope.builtin').git_files)
-    if not ok then require('telescope.builtin').find_files() end
-end
-
-utils.search_dotfiles = function ()
-    require('telescope.builtin').find_files({
-        prompt_title = '< Config >',
-        cwd = '~/.config/nvim',
-        hidden = true,
-    })
-end
-
-utils.search_string = function(search_str, directory)
-    local opts = { search = search_str, use_regex = true }
-    if directory ~= nil and directory ~= '' then
-        opts.cwd = directory
-    end
-    require('telescope.builtin').grep_string(opts)
-end
-
-vim.cmd([[
-    command! -nargs=+ TelescopeRG lua require('sanka047.core.utils').search_string(<f-args>)
-]])
-
-utils.find_files_containing = function (args)
-    local opts = {
-        find_command = {
-            "rg",
-            "--ignore",
-            "--hidden",
-            "--color=never",
-            "--files-with-matches",
-            args,
-        },
-    }
-    require('telescope.builtin').find_files(opts)
-end
-
-vim.cmd([[
-    command! -nargs=1 TelescopeFindContaining lua require('sanka047.core.utils').find_files_containing(<q-args>)
-]])
+create_command(
+    'TelescopeRG',
+    function (args) finder.search_string(unpack(args.fargs)) end,
+    'Ripgrep for string in directory and pipe results to Telescope',
+    { nargs = '+' }
+)
+create_command(
+    'FindContaining',
+    function (args) finder.find_files_containing(args.args) end,
+    'Find files containing string',
+    { nargs = 1 }
+)
 
 map_group('n', '<leader>f', 'telescope-find')
-map('n', '<leader>ff', 'Find Files', '<CMD>lua require("sanka047.core.utils").project_files()<CR>')
-map('n', '<leader>fbb', 'Find Buffers', '<CMD>lua require("telescope.builtin").buffers()<CR>')
-map('n', '<leader>fhs', 'Find History', '<CMD>lua require("telescope.builtin").oldfiles()<CR>')
+map('n', '<leader>ff', 'Find Files', finder.project_files)
+map('n', '<leader>fbb', 'Find Buffers', function () require('telescope.builtin').buffers() end)
+map('n', '<leader>fhs', 'Find History', function () require('telescope.builtin').oldfiles() end)
 
-map('n', '<leader>fbm', 'Find Bookmarks', '<CMD>lua require("telescope.builtin").marks()<CR>')
-map('n', '<leader>fc', 'Find Colorscheme', '<CMD>TelescopeFindContaining<space>')
+map('n', '<leader>fbm', 'Find Bookmarks', function () require('telescope.builtin').marks() end)
+map('n', '<leader>fc', 'Find Colorscheme', ':FindContaining<space>')
 
 map('n', '<leader>fs', 'Find String', ':TelescopeRG<space>')
-map('n', '<leader>fS', 'Find String (Cursor)', '<CMD>lua require("telescope.builtin").grep_string()<CR>')
-map('n', '<leader>fl', 'Live Grep', '<CMD>lua require("telescope.builtin").live_grep()<CR>')
+map('n', '<leader>fS', 'Find String (Cursor)', function () require("telescope.builtin").grep_string() end)
+map('n', '<leader>fl', 'Live Grep', function () require("telescope.builtin").live_grep() end)
 
-map('n', '<leader>fht', 'Find Help Tags', '<CMD>lua require("telescope.builtin").help_tags()<CR>')
+map('n', '<leader>fht', 'Find Help Tags', function () require("telescope.builtin").help_tags() end)
 
-map('n', '<leader>fm', 'Find Treesitter', '<CMD>lua require("telescope.builtin").treesitter()<CR>')
+map('n', '<leader>fm', 'Find Treesitter', function () require("telescope.builtin").treesitter() end)
 
-map('n', '<leader><leader>vf', 'Find Neovim Config File', '<CMD>lua require("sanka047.core.utils").search_dotfiles()<CR>')
+map('n', '<leader><leader>vf', 'Find Neovim Config File', finder.search_dotfiles)

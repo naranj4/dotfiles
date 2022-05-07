@@ -39,7 +39,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 local function on_attach(client, bufnr)
-    local buf_map = require('sanka047.core.utils').buf_map
+    local buf_map = require('sanka047.utils.map').buf_map
 
     buf_map(bufnr, 'n', 'K', 'Doc', '<CMD>lua vim.lsp.buf.hover()<CR>')
 

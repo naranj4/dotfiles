@@ -1,8 +1,10 @@
 --------------------------------------------------------------------------------
 -- Neovim Keymaps
 --------------------------------------------------------------------------------
-local map = require('sanka047.core.utils').map
-local map_group = require('sanka047.core.utils').map_group
+local utils = require('sanka047.utils')
+local window = require('sanka047.utils.window')
+local map = require('sanka047.utils.map').map
+local map_group = require('sanka047.utils.map').map_group
 
 --------------------------------------------------------------------------------
 -- Config
@@ -13,7 +15,7 @@ map_group('nv', '<leader><leader>', 'second')
 
 map_group('n', '<leader><leader>v', 'config')
 map('n', '<leader><leader>ve', 'Edit Neovim Config', '<CMD>edit ~/.config/nvim/init.lua<CR>')
-map('n', '<leader><leader>vr', 'Reload Neovim Config', '<CMD>lua require("sanka047.core.utils").reload_config()<CR>')
+map('n', '<leader><leader>vr', 'Reload Neovim Config', utils.reload_config)
 
 --------------------------------------------------------------------------------
 -- Quality of Life
@@ -62,16 +64,16 @@ map('n', 'Y', 'Yank to EOL', 'y$') -- make Y behave like other capitals
 map('n', '<Right>', 'Next Tab', '<CMD>tabnext<CR>')
 map('n', '<Left>', 'Prev Tab', '<CMD>tabprevious<CR>')
 
-map('n', '<c-h>', 'W-Move/Create Left', '<CMD>lua require("sanka047.core.utils").win_move("h")<CR>')
-map('n', '<c-j>', 'W-Move/Create Down', '<CMD>lua require("sanka047.core.utils").win_move("j")<CR>')
-map('n', '<c-k>', 'W-Move/Create Up', '<CMD>lua require("sanka047.core.utils").win_move("k")<CR>')
-map('n', '<c-l>', 'W-Move/Create Right', '<CMD>lua require("sanka047.core.utils").win_move("l")<CR>')
+map('n', '<c-h>', 'W-Move/Create Left', function () window.win_move('h') end)
+map('n', '<c-j>', 'W-Move/Create Down', function () window.win_move('j') end)
+map('n', '<c-k>', 'W-Move/Create Up', function () window.win_move('k') end)
+map('n', '<c-l>', 'W-Move/Create Right', function () window.win_move('l') end)
 
 --------------------------------------------------------------------------------
 -- Quickfix Shortcuts
 --------------------------------------------------------------------------------
 -- global list
-map('n', '<c-q>', 'Toggle QF List', '<CMD>lua require("sanka047.core.utils").toggle_qf_list(true)<CR>')
+map('n', '<c-q>', 'Toggle QF List', function () window.toggle_qf_list(true) end)
 map('n', '<m-j>', 'QF Next', '<CMD>cnext<CR>')
 map('n', '<m-k>', 'QF Prev', '<CMD>cprev<CR>')
 
