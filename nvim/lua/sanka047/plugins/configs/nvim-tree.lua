@@ -127,7 +127,7 @@ nvim_tree.setup({
         open_file = {
             quit_on_open = true,
             window_picker = {
-                enable = 1,
+                enable = true,
                 exclude = {
                     filetype = {
                         'notify',
