@@ -3,10 +3,16 @@
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
 
-local ok, colorizer = pcall(require, 'colorizer')
-if not ok then
-    log.error('colorizer not available', 'Config')
-    return false
+local M = {}
+
+function M.setup()
+    local ok, colorizer = pcall(require, 'colorizer')
+    if not ok then
+        log.error('colorizer not available', 'Config')
+        return false
+    end
+
+    colorizer.setup({}, { mode = 'background' })
 end
 
-colorizer.setup({}, { mode = 'background' })
+return M

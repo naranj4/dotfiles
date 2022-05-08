@@ -3,4 +3,10 @@
 --------------------------------------------------------------------------------
 local map = require('sanka047.utils.map').map
 
-map('n', '<leader><leader>g', 'git', ":G")
+local M = {}
+
+function M.keymap()
+    map('n', '<leader><leader>g', 'git', ":G")
+end
+
+return M

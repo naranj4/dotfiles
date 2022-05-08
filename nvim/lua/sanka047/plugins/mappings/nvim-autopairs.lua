@@ -3,6 +3,9 @@
 --------------------------------------------------------------------------------
 -- local wk = require('which-key')
 
+local M = {}
+
+function M.keymap()
 -- function _G.MUtils.CR()
 --     if vim.fn.pumvisible() ~= 0 then
 --         if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
@@ -27,3 +30,6 @@
 --     ['<CR>'] = { 'v:lua.MUtils.CR()', '<CR>' },
 --     ['<BS>'] = { 'v:lua.MUtils.BS()', '<BS>' },
 -- }, { mode = 'i' })
+end
+
+return M

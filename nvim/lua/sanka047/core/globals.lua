@@ -1,6 +1,8 @@
 --------------------------------------------------------------------------------
 -- Define Useful Global Functions
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 P = function(v)
   print(vim.inspect(v))
   return v
@@ -26,9 +28,33 @@ MATCH_LOADED_PACKAGES = function (pattern)
 end
 
 LOAD_CONFIG = function(plugin)
-    pcall(require, 'sanka047.plugins.configs.' .. plugin)
+    local load_success, config = pcall(require, 'sanka047.plugins.configs.' .. plugin)
+    if not load_success then
+        log.error(plugin .. ' config failed to load.', 'Config')
+        return false
+    end
+
+    local ok = pcall(config.setup)
+    if not ok then
+        log.error(plugin .. ' setup failed/does not exist.', 'Config')
+        return false
+    end
+
+    return true
 end
 
 LOAD_MAPPING = function(plugin)
-    pcall(require, 'sanka047.plugins.mappings.' .. plugin)
+    local load_success, mapping = pcall(require, 'sanka047.plugins.mappings.' .. plugin)
+    if not load_success then
+        require('sanka047.utils.log').error(plugin .. ' config failed to load.', 'Config')
+        return false
+    end
+
+    local ok = pcall(mapping.keymap)
+    if not ok then
+        log.error(plugin .. ' keymap failed/does not exist.', 'Keymap')
+        return false
+    end
+
+    return true
 end

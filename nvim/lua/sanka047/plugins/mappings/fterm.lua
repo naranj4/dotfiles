@@ -4,13 +4,19 @@
 local map = require('sanka047.utils.map').map
 local create_command = require('sanka047.utils.map').create_command
 
-create_command(
-    'FTermToggle',
-    function ()
-        require('FTerm').toggle()
-    end,
-    'Toggle FTerm'
-)
+local M = {}
 
-map('n', '<A-i>', 'Toggle FTerm', "<CMD>FTermToggle<CR>")
-map('t', '<A-i>', 'Toggle FTerm', "<C-\\><C-n><CMD>FTermToggle<CR>")
+function M.keymap()
+    create_command(
+        'FTermToggle',
+        function ()
+            require('FTerm').toggle()
+        end,
+        'Toggle FTerm'
+    )
+
+    map('n', '<A-i>', 'Toggle FTerm', "<CMD>FTermToggle<CR>")
+    map('t', '<A-i>', 'Toggle FTerm', "<C-\\><C-n><CMD>FTermToggle<CR>")
+end
+
+return M
