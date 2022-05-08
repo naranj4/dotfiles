@@ -24,16 +24,20 @@ M.is_loc_list_open = false
 
 function M.toggle_qf_list(is_qf)
     if is_qf then
-        if M.is_qf_list_open then
+        if vim.bo.filetype == 'qf' or M.is_qf_list_open then
             vim.cmd('cclose')
+            M.is_qf_list_open = false
         else
             vim.cmd('copen')
+            M.is_qf_list_open = true
         end
     else
-        if M.is_loc_list_open then
+        if vim.bo.filetype == 'qf' or M.is_qf_list_open then
             vim.cmd('lclose')
+            M.is_qf_list_open = false
         else
             vim.cmd('lopen')
+            M.is_qf_list_open = true
         end
     end
 end
@@ -62,7 +66,6 @@ vim.cmd([[
     augroup fixlist
         autocmd!
         autocmd BufWinEnter quickfix lua require('sanka047.utils.window').set_qf_control_var()
-        autocmd BufWinLeave * lua require('sanka047.utils.window').unset_qf_control_var()
     augroup END
 ]])
 
