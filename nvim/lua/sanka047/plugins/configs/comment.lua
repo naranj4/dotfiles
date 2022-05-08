@@ -74,7 +74,34 @@ function M.setup()
 
         ---Pre-hook, called before commenting the line
         ---@type fun(ctx: Ctx):string
-        pre_hook = nil,
+        pre_hook = function (ctx)
+            local utils = require('Comment.utils')
+
+            local has_ctx_utils, ts_ctx_utils = pcall(require, 'ts_context_commentstring.utils')
+            if not has_ctx_utils then
+                require('sanka047.utils.log').warn(
+                    'ts_context_commentstring is unavailable to provide commentstring',
+                    'Config [Comment]'
+                )
+                return
+            end
+
+            -- Determine whether to use linewise or blockwise commentstring
+            local type = ctx.ctype == utils.ctype.line and '__default' or '__multiline'
+
+            -- Determine the location where to calculate commentstring from
+            local location = nil
+            if ctx.ctype == utils.ctype.block then
+                location = ts_ctx_utils.get_cursor_location()
+            elseif ctx.cmotion == utils.cmotion.v or ctx.cmotion == utils.cmotion.V then
+                location = ts_ctx_utils.get_visual_start_location()
+            end
+
+            return require('ts_context_commentstring.internal').calculate_commentstring({
+                key = type,
+                location = location,
+            })
+        end,
 
         ---Post-hook, called after commenting is done
         ---@type fun(ctx: Ctx)
