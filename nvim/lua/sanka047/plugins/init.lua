@@ -174,6 +174,12 @@ return require('packer').startup(function(use)
             LOAD_MAPPING('diffview')
         end,
     }
+    use {
+        'TimUntersberger/neogit',
+        requires = { {'sindrets/diffview.nvim'} },
+        module = 'neogit',
+        config = function () LOAD_CONFIG('neogit') end,
+    }
 
     -- Floating terminal (for ease of use with git)
     use {

@@ -86,6 +86,7 @@ map('t', '<C-v><ESC>', '<ESC>', '<C-\\><C-n>')
 -- Plugin Specific (mappings that have to be loaded prior to init)
 --------------------------------------------------------------------------------
 local plugins = {
+    'neogit',
     'nvim-tree',
     'hop',
     'telescope',
