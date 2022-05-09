@@ -166,6 +166,14 @@ return require('packer').startup(function(use)
         'tpope/vim-fugitive',
         config = function () LOAD_MAPPING('fugitive') end,
     }
+    use {
+        'sindrets/diffview.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} },
+        config = function ()
+            LOAD_CONFIG('diffview')
+            LOAD_MAPPING('diffview')
+        end,
+    }
 
     -- Floating terminal (for ease of use with git)
     use {
