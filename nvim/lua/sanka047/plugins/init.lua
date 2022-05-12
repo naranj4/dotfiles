@@ -32,6 +32,10 @@ return require('packer').startup(function(use)
         'lewis6991/impatient.nvim',
         config = function () require('impatient').enable_profile() end,
     }
+    use {
+        'antoinemadec/FixCursorHold.nvim',
+        config = function () vim.g.cursorhold_updatetime = 100 end,
+    }
     use {'nvim-lua/plenary.nvim'}
 
     -- let packer manager itself
