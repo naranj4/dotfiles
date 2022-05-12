@@ -293,7 +293,7 @@ return require('packer').startup(function(use)
         end,
     }
     use {
-        'lewis6991/nvim-treesitter-context',
+        'romgrk/nvim-treesitter-context',
         event = 'BufRead',
         requires = {'nvim-treesitter/nvim-treesitter'},
         config = function () LOAD_CONFIG('treesitter-context') end,
