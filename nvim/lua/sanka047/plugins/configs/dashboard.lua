@@ -33,7 +33,7 @@ function M.setup()
         },
         packer_sync = {
             description = {' Sync Plugins                                  '},
-            command = 'PackerSync',
+            command = 'lua require("sanka047.utils.packer").packer_sync()',
         },
     }
 
