@@ -195,7 +195,7 @@ return require('packer').startup(function(use)
         end,
     }
 
-    -- Parentheses & Comment Magic
+    -- Editing Magic
     use {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
@@ -219,6 +219,15 @@ return require('packer').startup(function(use)
             LOAD_CONFIG('comment')
             LOAD_MAPPING('comment')
         end,
+    }
+    use {
+        'ThePrimeagen/refactoring.nvim',
+        module = 'sanka047.utils.refactor',
+        requires = {
+            {'nvim-lua/plenary.nvim'},
+            {'nvim-treesitter/nvim-treesitter'},
+        },
+        config = function () LOAD_CONFIG('refactoring') end,
     }
 
     -- Movement & File Navigation
