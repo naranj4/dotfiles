@@ -9,12 +9,12 @@ end
 
 local packer = require('packer')
 
-packer.init {
+packer.init({
     display = {
         open_fn = function()
-            return require("packer.util").float { border = "double" }
+            return require('packer.util').float { border = 'rounded' }
         end,
-        prompt_border = "single",
+        prompt_border = 'rounded',
     },
     git = {
         clone_timeout = 300, -- seconds
@@ -25,7 +25,7 @@ packer.init {
         enable = true,
         threshold = 1,
     },
-}
+})
 
 return require('packer').startup(function(use)
     use {

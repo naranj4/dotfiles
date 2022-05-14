@@ -4,6 +4,9 @@
 local create_augroup = require('sanka047.utils.map').create_augroup
 local create_autocmd = require('sanka047.utils.map').create_autocmd
 
+--------------------------------------------------------------------------------
+-- Hop highlighting
+--------------------------------------------------------------------------------
 create_augroup('HopInitHighlight')
 create_autocmd(
     'ColorScheme',
