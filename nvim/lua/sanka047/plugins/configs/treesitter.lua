@@ -16,13 +16,13 @@ function M.setup()
 
     treesitter_configs.setup({
         ensure_installed = {
-            "json",
-            "lua",
-            "python",
-            "ruby",
-            "vim",
-            "yaml",
-            "query",
+            'json',
+            'lua',
+            'python',
+            'ruby',
+            'vim',
+            'yaml',
+            'query',
         },
         sync_install = false,
         ignore_install = {},
