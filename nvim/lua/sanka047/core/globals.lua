@@ -4,7 +4,7 @@
 local log = require('sanka047.utils.log')
 
 P = function(v)
-    print(vim.inspect(v))
+    vim.pretty_print(v)
     return v
 end
 
