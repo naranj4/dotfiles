@@ -6,7 +6,7 @@ local create_autocmd = require('sanka047.utils.map').create_autocmd
 
 local M = {}
 
-local ask_install = { markdown = false }
+local ask_install = { markdown = false, help = false }
 
 local function ensure_treesitter_language_installed()
     local parsers = require 'nvim-treesitter.parsers'
