@@ -150,6 +150,11 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('lualine') end,
     }
     use {
+        'b0o/incline.nvim',
+        after = 'nvim-web-devicons',
+        config = function () LOAD_CONFIG('incline') end,
+    }
+    use {
         'glepnir/dashboard-nvim',
         requires = { {'telescope.nvim'} },
         config = function ()

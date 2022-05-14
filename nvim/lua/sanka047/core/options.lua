@@ -48,7 +48,7 @@ opt.termguicolors = true
 
 opt.cmdheight = 2
 opt.showcmd = true
-opt.laststatus = 2
+opt.laststatus = 3
 
 opt.showmatch = true
 
