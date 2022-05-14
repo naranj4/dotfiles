@@ -19,6 +19,9 @@ end
 --------------------------------------------------------------------------------
 -- Quickfix Functions
 --------------------------------------------------------------------------------
+local create_augroup = require('sanka047.utils.map').create_augroup
+local create_autocmd = require('sanka047.utils.map').create_autocmd
+
 M.is_qf_list_open = false
 M.is_loc_list_open = false
 
@@ -62,11 +65,15 @@ function M.unset_qf_control_var()
     ]])
 end
 
-vim.cmd([[
-    augroup fixlist
-        autocmd!
-        autocmd BufWinEnter quickfix lua require('sanka047.utils.window').set_qf_control_var()
-    augroup END
-]])
+create_augroup('fixlist')
+create_autocmd(
+    'BufWinEnter',
+    'Sets Quickfix control variable',
+    {
+        group = 'fixlist',
+        pattern = 'quickfix',
+        callback = M.set_qf_control_var,
+    }
+)
 
 return M

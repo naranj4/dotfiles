@@ -1,11 +1,12 @@
 --------------------------------------------------------------------------------
 -- Neovim Settings
 --------------------------------------------------------------------------------
+local create_augroup = require('sanka047.utils.map').create_augroup
+local create_autocmd = require('sanka047.utils.map').create_autocmd
 
 --------------------------------------------------------------------------------
 -- Neovim API Aliases
 --------------------------------------------------------------------------------
-local cmd = vim.cmd                 -- execute vim commands
 local g = vim.g                     -- global variables
 local opt = vim.opt                 -- global/buffer/windows-scoped options
 
@@ -55,12 +56,16 @@ opt.list = true
 opt.listchars = {tab = '‒‒▶', trail = '•'}
 
 -- highlight on yank
-cmd([[
-    augroup YankHighlight
-        autocmd!
-        autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
-    augroup end
-]])
+create_augroup('YankHighlight')
+create_autocmd(
+    'TextYankPost',
+    'Highlights yanked text',
+    {
+        group = 'YankHighlight',
+        pattern = '*',
+        callback = function () vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 750 }) end,
+    }
+)
 
 --------------------------------------------------------------------------------
 -- Search and Autocompletion
