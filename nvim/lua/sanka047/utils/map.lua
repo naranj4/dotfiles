@@ -76,4 +76,11 @@ function M.create_command(name, cmd, desc, override_opts)
     vim.api.nvim_create_user_command(name, cmd, opts)
 end
 
+-- create auto command
+function M.create_autocmd(event, desc, override_opts)
+    local opts = merge_opts({ desc = desc }, override_opts)
+
+    vim.api.nvim_create_autocmd(event, opts)
+end
+
 return M

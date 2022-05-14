@@ -2,8 +2,39 @@
 -- Treesitter Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local create_autocmd = require('sanka047.utils.map').create_autocmd
 
 local M = {}
+
+local ask_install = { markdown = false }
+
+local function ensure_treesitter_language_installed()
+    local parsers = require 'nvim-treesitter.parsers'
+    local lang = parsers.get_buf_lang()
+    if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) and ask_install[lang] ~= false then
+        vim.schedule_wrap(function()
+            vim.ui.select(
+                { 'yes', 'no' },
+                { prompt = 'Install tree-sitter parsers for ' .. lang .. '? ' },
+                function(item)
+                    if item == 'yes' then
+                        vim.cmd('TSInstall ' .. lang)
+                    else
+                        log.warn(
+                            (
+                                'Treesitter parser for ' .. lang .. ' is not installed.\n\n'
+                                .. 'If desired, this must be done manually using:\n'
+                                .. '```\n:TSInstall ' .. lang .. '\n```'
+                            ),
+                            'Treesitter'
+                        )
+                        ask_install[lang] = false
+                    end
+                end
+            )
+        end)()
+    end
+end
 
 function M.setup()
     local ok, treesitter_configs = pcall(require, 'nvim-treesitter.configs')
@@ -118,6 +149,15 @@ function M.setup()
         },
     })
     treesitter_install.prefer_git = true
+
+    create_autocmd(
+        'FileType',
+        'Ensure that the TS parser for the filetype is installed',
+        {
+            pattern = '*',
+            callback = ensure_treesitter_language_installed,
+        }
+    )
 end
 
 return M
