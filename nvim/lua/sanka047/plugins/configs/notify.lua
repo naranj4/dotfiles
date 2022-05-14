@@ -13,8 +13,12 @@ function M.setup()
     end
 
     notify.setup({
-        stages = "fade",
+        stages = "slide",
         render = "default",
+        on_open = function (win)
+            local buf = vim.api.nvim_win_get_buf(win)
+            vim.api.nvim_buf_set_option(buf, 'filetype', 'markdown')
+        end
     })
 
     vim.notify = notify
