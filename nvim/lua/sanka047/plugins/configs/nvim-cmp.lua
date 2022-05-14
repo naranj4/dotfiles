@@ -18,7 +18,7 @@ function M.setup()
         return false
     end
 
-    vim.o.completeopt = 'menu,menuone,noselect'
+    vim.opt.completeopt = 'menu,menuone,noselect'
 
     --------------------------------------------------------------------------------
     -- Nvim-Cmp Setup
