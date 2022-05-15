@@ -12,6 +12,7 @@ function M.split_string(input, sep)
     end
 end
 
+-- TODO: transition to using vim.tbl_deep_extend
 function M.merge_opts(opts, override)
     override = override or {}
     for i, v in pairs(override) do
