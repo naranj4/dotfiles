@@ -20,11 +20,11 @@ create_autocmd(
 
             set_hl(
                 'InclineNormal',
-                { bg = colors.crystalBlue, fg = colors.bg_dark, bold = 1 }
+                { bg = colors.fn, fg = colors.bg_dark, bold = 1 }
             )
             set_hl(
                 'InclineNormalNC',
-                { bg = colors.bg_light0, fg = colors.crystalBlue, italic = 1 }
+                { bg = colors.bg_light0, fg = colors.fg_dark }
             )
         end
     }
