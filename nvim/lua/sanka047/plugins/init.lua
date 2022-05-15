@@ -155,6 +155,12 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('incline') end,
     }
     use {
+        'SmiteshP/nvim-gps',
+        after = 'nvim-web-devicons',
+        config = function () LOAD_CONFIG('nvim-gps') end,
+    }
+
+    use {
         'glepnir/dashboard-nvim',
         requires = { {'telescope.nvim'} },
         config = function ()
@@ -162,6 +168,7 @@ return require('packer').startup(function(use)
             LOAD_MAPPING('dashboard')
         end,
     }
+
     use {
         'kyazdani42/nvim-tree.lua',
         requires = { {'kyazdani42/nvim-web-devicons'} },
