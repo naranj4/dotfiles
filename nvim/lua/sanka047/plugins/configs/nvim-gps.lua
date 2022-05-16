@@ -14,7 +14,7 @@ function M.setup()
 
     gps.setup({
         separator = '  ',
-        depth = 4,
+        depth = 3,
         depth_limit_indicator = '',
     })
 end
