@@ -29,6 +29,15 @@ function M.setup()
                 luasnip.lsp_expand(args.body)
             end,
         },
+        window = {
+            completion = cmp.config.window.bordered(
+                {
+                    border = {'', '', '', ' ', '', '', '', ' '},
+                    winhighlight = 'FloatBorder:CmpCompletion,NormalFloat:CmpCompletion',
+                }
+            ),
+            documentation = cmp.config.window.bordered(),
+        },
         mapping = {
             ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
             ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
