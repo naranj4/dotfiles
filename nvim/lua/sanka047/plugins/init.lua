@@ -184,10 +184,7 @@ return require('packer').startup(function(use)
         'lewis6991/gitsigns.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
         event = 'BufRead',
-        config = function ()
-            LOAD_CONFIG('gitsigns')
-            LOAD_MAPPING('gitsigns')
-        end,
+        config = function () LOAD_CONFIG('gitsigns') end,
     }
     use {
         'tpope/vim-fugitive',
