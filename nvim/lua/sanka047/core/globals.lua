@@ -46,7 +46,7 @@ end
 LOAD_MAPPING = function(plugin)
     local load_success, mapping = pcall(require, 'sanka047.plugins.mappings.' .. plugin)
     if not load_success then
-        require('sanka047.utils.log').error(plugin .. ' config failed to load.', 'Config')
+        log.error(plugin .. ' mapping failed to load.', 'Config')
         return false
     end
 
