@@ -14,7 +14,7 @@ function M.setup()
 
     local has_luasnip, luasnip = pcall(require, 'luasnip')
     if not has_luasnip then
-        vim.notify('luasnip not available (cmp)', 'error')
+        log.error('luasnip not available (cmp)', 'Config')
         return false
     end
 
