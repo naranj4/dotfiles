@@ -44,9 +44,9 @@ function M.setup()
     }
 
     local function on_attach(client, bufnr)
-        local buf_map = require('sanka047.utils.map').buf_map
+        local map = function (...) require('sanka047.utils.map').buf_map(bufnr, ...) end
 
-        buf_map(bufnr, 'n', 'K', 'Doc', '<CMD>lua vim.lsp.buf.hover()<CR>')
+        map('n', 'K', 'Doc', vim.lsp.buf.hover)
 
         -- illuminate
         local has_illuminate, illuminate = pcall(require, 'illuminate')
