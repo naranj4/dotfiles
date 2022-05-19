@@ -132,10 +132,7 @@ function M.setup()
             lualine_y = {
                 {
                     search_result,
-                    component_separators = {
-                        left = '╱',
-                        right = '╲',
-                    },
+                    component_separators = ' ',
                     section_separators = {
                         left = '',
                         right = '',
@@ -147,10 +144,7 @@ function M.setup()
                     sections = { 'error', 'warn', 'info', 'hint' },
                     always_visible = true,
                     colored = true,
-                    component_separators = {
-                        left = '╱',
-                        right = '╲',
-                    },
+                    component_separators = ' ',
                     section_separators = {
                         left = '',
                         right = '',
