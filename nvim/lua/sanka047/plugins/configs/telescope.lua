@@ -13,6 +13,20 @@ function M.setup()
     end
 
     local actions = require('telescope.actions')
+
+    local function open_in_qflist(prompt_bufnr)
+        actions.smart_send_to_qflist(prompt_bufnr)
+        actions.open_qflist(prompt_bufnr)
+    end
+
+    local function hop_qflist(prompt_bufnr)
+        local opts = {
+            callback = actions.toggle_selection,
+            loop_callback = open_in_qflist,
+        }
+        require('telescope').extensions.hop._hop_loop(prompt_bufnr, opts)
+    end
+
     telescope.setup({
         defaults = {
             -- Default configuration for telescope goes here:
@@ -29,15 +43,17 @@ function M.setup()
             },
             mappings = {
                 i = {
+                    ['<C-q>'] = open_in_qflist,
                     ['<ESC>'] = actions.close,
-                    ['<C-Space>'] = function(prompt_bufnr)
-                        local opts = {
-                            callback = actions.toggle_selection,
-                            loop_callback = actions.send_selected_to_qflist,
-                        }
-                        require('telescope').extensions.hop._hop_loop(prompt_bufnr, opts)
-                    end,
+
+                    ['<C-Space>'] = hop_qflist,
                 },
+                n = {
+                    ['<C-q>'] = open_in_qflist,
+                    ['<C-u>'] = actions.results_scrolling_up,
+                    ['<C-d>'] = actions.results_scrolling_down,
+                    ['<C-Space>'] = hop_qflist,
+                }
             },
         },
         pickers = {
@@ -73,8 +89,10 @@ function M.setup()
                 keys = {
                     'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',
                     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+                    'z', 'x', 'c', 'v', 'b', 'n', 'm',
                     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':',
                     'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+                    'Z', 'X', 'C', 'V', 'B', 'N', 'M',
                 },
                 sign_hl = { 'Title', 'Title' },
                 line_hl = { 'Normal', 'Normal' },
