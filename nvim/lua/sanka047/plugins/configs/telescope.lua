@@ -29,10 +29,6 @@ function M.setup()
             },
             mappings = {
                 i = {
-                    -- map actions.which_key to <C-h> (default: <C-/>)
-                    -- actions.which_key shows the mappings for your picker,
-                    -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-                    ["<C-h>"] = actions.which_key,
                     ["<ESC>"] = actions.close,
                     ["<C-Space>"] = function(prompt_bufnr)
                         local opts = {
