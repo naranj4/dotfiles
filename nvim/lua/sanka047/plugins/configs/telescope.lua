@@ -51,7 +51,7 @@ function M.setup()
                     ['<C-q>'] = open_in_qflist,
                     ['<ESC>'] = actions.close,
 
-                    ['<C-h>'] = hop_select,
+                    ['<C-j>'] = hop_select,
                     ['<C-Space>'] = hop_qflist,
                 },
                 n = {
@@ -59,7 +59,7 @@ function M.setup()
                     ['<C-u>'] = actions.results_scrolling_up,
                     ['<C-d>'] = actions.results_scrolling_down,
 
-                    ['<C-h>'] = hop_select,
+                    ['<C-j>'] = hop_select,
                     ['<C-Space>'] = hop_qflist,
                 }
             },
