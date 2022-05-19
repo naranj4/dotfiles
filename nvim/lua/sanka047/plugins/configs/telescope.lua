@@ -18,19 +18,19 @@ function M.setup()
             -- Default configuration for telescope goes here:
             -- config_key = value,
             vimgrep_arguments = {
-                "rg",
-                "--color=never",
-                "--no-heading",
-                "--with-filename",
-                "--line-number",
-                "--column",
-                "--smart-case",
-                "--trim",
+                'rg',
+                '--color=never',
+                '--no-heading',
+                '--with-filename',
+                '--line-number',
+                '--column',
+                '--smart-case',
+                '--trim',
             },
             mappings = {
                 i = {
-                    ["<ESC>"] = actions.close,
-                    ["<C-Space>"] = function(prompt_bufnr)
+                    ['<ESC>'] = actions.close,
+                    ['<C-Space>'] = function(prompt_bufnr)
                         local opts = {
                             callback = actions.toggle_selection,
                             loop_callback = actions.send_selected_to_qflist,
@@ -49,8 +49,8 @@ function M.setup()
             -- Now the picker_config_key will be applied every time you call this
             -- builtin picker
             find_files = {
-                -- find_command = {"fd", "--type", "f"},
-                find_command = {"rg", "--ignore", "--hidden", "--files"},
+                -- find_command = {'fd', '--type', 'f'},
+                find_command = {'rg', '--ignore', '--hidden', '--files'},
             },
             git_files = {},
             diagnostics = {
@@ -71,10 +71,10 @@ function M.setup()
             },
             hop = {
                 keys = {
-                    "a", "s", "d", "f", "g", "h", "j", "k", "l", ";",
-                    "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-                    "A", "S", "D", "F", "G", "H", "J", "K", "L", ":",
-                    "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+                    'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',
+                    'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+                    'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':',
+                    'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
                 },
                 sign_hl = { 'Title', 'Title' },
                 line_hl = { 'Normal', 'Normal' },
