@@ -22,7 +22,7 @@ function M.setup()
 
             local has_devicons, devicons = pcall(require, 'nvim-web-devicons')
             if has_devicons then
-                local icon = devicons.get_icon(bufname, vim.bo[props.buf].filetype)
+                local icon = devicons.get_icon_by_filetype(vim.bo[props.buf].filetype)
                 if icon then
                     res = icon .. ' ' .. res
                 end
