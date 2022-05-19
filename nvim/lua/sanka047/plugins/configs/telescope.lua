@@ -27,6 +27,11 @@ function M.setup()
         require('telescope').extensions.hop._hop_loop(prompt_bufnr, opts)
     end
 
+    local function hop_select(prompt_bufnr)
+        opts = { callback = actions.select_default }
+        require('telescope').extensions.hop._hop(prompt_bufnr, opts)
+    end
+
     telescope.setup({
         defaults = {
             -- Default configuration for telescope goes here:
@@ -46,12 +51,15 @@ function M.setup()
                     ['<C-q>'] = open_in_qflist,
                     ['<ESC>'] = actions.close,
 
+                    ['<C-h>'] = hop_select,
                     ['<C-Space>'] = hop_qflist,
                 },
                 n = {
                     ['<C-q>'] = open_in_qflist,
                     ['<C-u>'] = actions.results_scrolling_up,
                     ['<C-d>'] = actions.results_scrolling_down,
+
+                    ['<C-h>'] = hop_select,
                     ['<C-Space>'] = hop_qflist,
                 }
             },
@@ -89,10 +97,10 @@ function M.setup()
                 keys = {
                     'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',
                     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
-                    'z', 'x', 'c', 'v', 'b', 'n', 'm',
+                    'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.',
                     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':',
                     'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
-                    'Z', 'X', 'C', 'V', 'B', 'N', 'M',
+                    'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>',
                 },
                 sign_hl = { 'Title', 'Title' },
                 line_hl = { 'Normal', 'Normal' },
