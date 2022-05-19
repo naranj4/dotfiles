@@ -94,7 +94,7 @@ function M.setup()
                     cond = function() return vim.bo.buftype == 'quickfix' end,
                 },
             },
-            lualine_x = {'encoding', 'filetype'},
+            lualine_x = {'encoding'},
             lualine_y = {'progress'},
             lualine_z = {'location'},
         },
