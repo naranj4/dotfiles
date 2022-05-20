@@ -7,6 +7,11 @@ if firstload then
     return false
 end
 
+local has_impatient, impatient = pcall(require, 'impatient')
+if has_impatient then
+    impatient.enable_profile()
+end
+
 local packer = require('packer')
 
 packer.init({
@@ -38,10 +43,7 @@ map('n', '<leader><leader>ps', 'Packer Sync', require('sanka047.utils.packer').p
 -- Plugin List
 --------------------------------------------------------------------------------
 return require('packer').startup(function(use)
-    use {
-        'lewis6991/impatient.nvim',
-        config = function () require('impatient').enable_profile() end,
-    }
+    use {'lewis6991/impatient.nvim'}
     use {'dstein64/vim-startuptime'}
     use {
         'antoinemadec/FixCursorHold.nvim',
