@@ -132,7 +132,6 @@ return require('packer').startup(function(use)
 
     use {
         'edluffy/specs.nvim',
-        event = 'VimEnter',
         config = function () LOAD_CONFIG('specs') end,
     }
     use {
@@ -142,7 +141,6 @@ return require('packer').startup(function(use)
 
     use {
         'lukas-reineke/indent-blankline.nvim',
-        event = 'BufRead',
         config = function () LOAD_CONFIG('indent-blankline') end,
     }
     use {
@@ -185,7 +183,6 @@ return require('packer').startup(function(use)
     use {
         'lewis6991/gitsigns.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
-        event = 'BufRead',
         config = function () LOAD_CONFIG('gitsigns') end,
     }
     use {
@@ -293,18 +290,9 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         requires = {
-            {
-                'nvim-treesitter/nvim-treesitter-textobjects',
-                event = 'BufRead',
-            },
-            {
-                'RRethy/nvim-treesitter-textsubjects',
-                event = 'BufRead',
-            },
-            {
-                'JoosepAlviste/nvim-ts-context-commentstring',
-                event = 'BufRead',
-            },
+            {'nvim-treesitter/nvim-treesitter-textobjects'},
+            {'RRethy/nvim-treesitter-textsubjects'},
+            {'JoosepAlviste/nvim-ts-context-commentstring'},
             {
                 'RRethy/nvim-treesitter-endwise',
                 event = 'InsertEnter',
@@ -325,7 +313,6 @@ return require('packer').startup(function(use)
     }
     use {
         'romgrk/nvim-treesitter-context',
-        event = 'BufRead',
         requires = {'nvim-treesitter/nvim-treesitter'},
         config = function () LOAD_CONFIG('treesitter-context') end,
     }
@@ -345,10 +332,7 @@ return require('packer').startup(function(use)
         'williamboman/nvim-lsp-installer',
         after = 'nvim-lspconfig',
         requires = {
-            {
-                'neovim/nvim-lspconfig',
-                event = 'BufRead',
-            },
+            {'neovim/nvim-lspconfig'},
             {
                 'ray-x/lsp_signature.nvim',
                 after = 'nvim-lsp-installer',
