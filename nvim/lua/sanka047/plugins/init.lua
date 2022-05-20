@@ -288,14 +288,8 @@ return require('packer').startup(function(use)
             {'nvim-treesitter/nvim-treesitter-textobjects'},
             {'RRethy/nvim-treesitter-textsubjects'},
             {'JoosepAlviste/nvim-ts-context-commentstring'},
-            {
-                'RRethy/nvim-treesitter-endwise',
-                event = 'InsertEnter',
-            },
-            {
-                'windwp/nvim-ts-autotag',
-                event = 'InsertEnter',
-            },
+            {'RRethy/nvim-treesitter-endwise'},
+            {'windwp/nvim-ts-autotag'},
             {
                 'nvim-treesitter/playground',
                 cmd = 'TSPlaygroundToggle',
