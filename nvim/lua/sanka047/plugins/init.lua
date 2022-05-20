@@ -45,6 +45,7 @@ map('n', '<leader><leader>ps', 'Packer Sync', require('sanka047.utils.packer').p
 return require('packer').startup(function(use)
     use {'lewis6991/impatient.nvim'}
     use {'dstein64/vim-startuptime'}
+    use {'nathom/filetype.nvim'}
     use {
         'antoinemadec/FixCursorHold.nvim',
         config = function () vim.g.cursorhold_updatetime = 100 end,
