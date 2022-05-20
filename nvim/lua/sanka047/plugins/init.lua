@@ -289,7 +289,6 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        event = 'VimEnter',
         requires = {
             {
                 'nvim-treesitter/nvim-treesitter-textobjects',
