@@ -232,11 +232,8 @@ return require('packer').startup(function(use)
 
     use {
         'numToStr/Comment.nvim',
-        event = 'BufRead',
-        config = function ()
-            LOAD_CONFIG('comment')
-            LOAD_MAPPING('comment')
-        end,
+        module = 'Comment',
+        config = function () LOAD_CONFIG('comment') end,
     }
     use {
         'ThePrimeagen/refactoring.nvim',
