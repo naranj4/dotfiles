@@ -146,17 +146,14 @@ return require('packer').startup(function(use)
     use {
         'nvim-lualine/lualine.nvim',
         requires = { {'kyazdani42/nvim-web-devicons'} },
-        after = 'nvim-web-devicons',
         config = function () LOAD_CONFIG('lualine') end,
     }
     use {
         'b0o/incline.nvim',
-        after = 'nvim-web-devicons',
         config = function () LOAD_CONFIG('incline') end,
     }
     use {
         'SmiteshP/nvim-gps',
-        after = 'nvim-web-devicons',
         config = function () LOAD_CONFIG('nvim-gps') end,
     }
 
@@ -248,7 +245,6 @@ return require('packer').startup(function(use)
     -- Movement & File Navigation
     use {
         'nacro90/numb.nvim',
-        event = 'CmdlineEnter',
         config = function () LOAD_CONFIG('numb') end,
     }
     use {
@@ -260,7 +256,6 @@ return require('packer').startup(function(use)
     use {'unblevable/quick-scope'}
     use {
         'abecodes/tabout.nvim',
-        after = {'nvim-cmp', 'nvim-treesitter'},
         requires = {'nvim-treesitter/nvim-treesitter'},
         config = function () LOAD_CONFIG('tabout') end,
     }
@@ -330,12 +325,10 @@ return require('packer').startup(function(use)
     -- LSP and Autocompletion
     use {
         'williamboman/nvim-lsp-installer',
-        after = 'nvim-lspconfig',
         requires = {
             {'neovim/nvim-lspconfig'},
             {
                 'ray-x/lsp_signature.nvim',
-                after = 'nvim-lsp-installer',
                 config = function () LOAD_CONFIG('lsp-signature') end,
             },
         },
