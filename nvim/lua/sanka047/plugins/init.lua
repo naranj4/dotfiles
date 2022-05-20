@@ -106,7 +106,6 @@ return require('packer').startup(function(use)
         'kyazdani42/nvim-web-devicons',
         config = function () LOAD_CONFIG('nvim-web-devicons') end,
     }
-
     use {
         'stevearc/dressing.nvim',
         config = function () LOAD_CONFIG('dressing') end,
@@ -344,15 +343,18 @@ return require('packer').startup(function(use)
 
     -- LSP and Autocompletion
     use {
-        'neovim/nvim-lspconfig',
-        event = 'BufRead',
-        -- config = function () LOAD_CONFIG('lspconfig') end,
-    }
-    use {
         'williamboman/nvim-lsp-installer',
         after = 'nvim-lspconfig',
         requires = {
-            {'neovim/nvim-lspconfig'}
+            {
+                'neovim/nvim-lspconfig',
+                event = 'BufRead',
+            },
+            {
+                'ray-x/lsp_signature.nvim',
+                after = 'nvim-lsp-installer',
+                config = function () LOAD_CONFIG('lsp-signature') end,
+            },
         },
         config = function ()
             LOAD_MAPPING('lsp-installer')
