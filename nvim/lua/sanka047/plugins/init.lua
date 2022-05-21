@@ -337,6 +337,7 @@ return require('packer').startup(function(use)
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         requires = {
+            {'onsails/lspkind.nvim'},
             {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'},
             {'hrsh7th/cmp-buffer', after = 'nvim-cmp'},
             {'hrsh7th/cmp-path', after = 'nvim-cmp'},
