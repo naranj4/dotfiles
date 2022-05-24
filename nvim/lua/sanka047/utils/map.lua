@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local M = {}
 
-local wk = require('which-key')
+local has_wk, wk = pcall(require, 'which-key')
 local merge_opts = require('sanka047.utils').merge_opts
 
 -- map keybind for all specified modes
@@ -23,8 +23,10 @@ function M.map(modes, keys, desc, mapping, override_opts, which_key_opts)
         -- Document the keymap using which keys immediately after mapping. wk has seemingly been
         -- pretty buggy with mapping for me, so checking to see if it will still work for
         -- documenting keymaps.
-        w_opts['mode'] = m
-        wk.register({ [keys] = desc }, w_opts)
+    if has_wk then
+            w_opts['mode'] = m
+            wk.register({ [keys] = desc }, w_opts)
+    end
     end
     if mapping ~= nil then
         vim.keymap.set(m_list, keys, mapping, opts)
@@ -33,6 +35,9 @@ end
 
 -- document mapping groups
 function M.map_group(modes, keys, group_name)
+    if not has_wk then
+        return
+    end
     for m in modes:gmatch('.') do
         wk.register({ [keys] = { name = group_name } }, { mode = m })
     end
@@ -58,6 +63,9 @@ end
 
 -- document mapping groups
 function M.buf_map_group(bufnr, modes, keys, group_name)
+    if not has_wk then
+        return
+    end
     for m in modes:gmatch('.') do
         wk.register({ [keys] = { name = group_name } }, { mode = m, buffer = bufnr })
     end
