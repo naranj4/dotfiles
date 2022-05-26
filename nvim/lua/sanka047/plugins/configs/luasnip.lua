@@ -17,6 +17,7 @@ function M.setup()
 
     luasnip.config.setup({
         history = true,
+        update_events = 'TextChanged,TextChangedI',
     })
 
     local snip_loader = require('luasnip.loaders.from_vscode')
