@@ -28,7 +28,7 @@ g.mapleader = ' '  -- use space as leader
 -- Timeout (for terminal keys)
 --------------------------------------------------------------------------------
 opt.ttimeout = true
-opt.ttimeoutlen = 100
+opt.ttimeoutlen = 50
 
 --------------------------------------------------------------------------------
 -- UI
