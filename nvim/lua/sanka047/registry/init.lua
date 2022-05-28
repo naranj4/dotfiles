@@ -314,8 +314,6 @@ end
 --           }
 --       ```
 function M.register(namespace, event, key, opts)
-    log.debug(namespace, event, key, 'Registration options: ' .. vim.inspect(opts))
-
     -- setup sane default opts to get the default autocmd behavior
     local default_opts = {
         condition = function () return true end, -- autocmds always run if the pattern matches
@@ -329,7 +327,6 @@ function M.register(namespace, event, key, opts)
     if not group_id then
         -- there is no existing group, so create one
         group = create_augroup(namespace, event)
-        log.debug(namespace, event, key, 'Created a new augroup: ' .. vim.inspect(group))
         group_id = group.id
 
         -- update the registry with the new group
@@ -340,7 +337,6 @@ function M.register(namespace, event, key, opts)
     local autocmd_id = M.get_registry_autocmd_id(namespace, event, key)
     if autocmd_id then
         -- unregister the existing autocmd and delete it to avoid orphan autocmds
-        log.debug(namespace, event, key, 'Deleting existing autocmd.')
         remove_autocmd(autocmd_id)
     end
 
@@ -355,7 +351,6 @@ function M.register(namespace, event, key, opts)
         condition = opts.condition,
         is_complete = opts.is_complete,
     }
-    log.debug(namespace, event, key, 'Registering new autocmd:\n' .. vim.inspect(entry))
     add_autocmd(namespace, event, key, autocmd)
     update_registry_entry(namespace, event, key, entry)
 end
@@ -377,7 +372,6 @@ function M.unregister(namespace, event, key)
 
     -- if there are no longer any commands registered to the augroup, unregister that as well
     local cmd_count = M.get_registry_namespace_event_command_count(namespace, event)
-    log.debug(namespace, event, key, 'Unregister: There are currently ' .. cmd_count .. ' commands')
     if cmd_count == 0 then
         old_id = M.get_registry_namespace_event_augroup_id(namespace, event)
 
