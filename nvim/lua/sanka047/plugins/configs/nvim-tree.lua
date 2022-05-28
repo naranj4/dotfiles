@@ -117,11 +117,13 @@ function M.setup()
             auto_resize = false,
             mappings = {
                 custom_only = false,
-                list = {}
+                list = {
+                    { key = '?', action = 'toggle_help' },
+                },
             },
             number = false,
             relativenumber = false,
-            signcolumn = "yes"
+            signcolumn = 'yes',
         },
         renderer = {
             indent_markers = {
