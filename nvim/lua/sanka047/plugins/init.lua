@@ -40,6 +40,65 @@ local map = require('sanka047.utils.map').map
 map('n', '<leader><leader>ps', 'Packer Sync', require('sanka047.utils.packer').packer_sync)
 
 --------------------------------------------------------------------------------
+-- Lazy loading helpers
+--------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+local registry = require('sanka047.registry')
+
+local function _lazy_load_condition(metadata)
+    log.debug('Metadata: ' .. vim.inspect(metadata))
+    local ignore_filetypes = { TelescopePrompt = true, DressingInput = true }
+
+    local ft = vim.bo[metadata.buf].filetype
+    if ignore_filetypes[ft] then
+        log.debug('Not lazy loading plugins in filetype `' .. ft .. '`')
+        return false
+    end
+
+    return true
+end
+
+local function _lazy_load_is_complete(metadata)
+    log.debug('Metadata: ' .. vim.inspect(metadata))
+    if metadata.num_successes > 0 then
+        log.debug('Removing lazy load command for ' .. metadata.key)
+        return true
+    end
+
+    return false
+end
+
+local function _lazy_load_plugin(metadata)
+    log.debug('Metadata: ' .. vim.inspect(metadata))
+
+    local ft = vim.bo[metadata.buf].filetype
+    vim.schedule(function ()
+        log.debug('Lazy loading ' .. metadata.key .. ' in filetype: `' .. ft .. '`')
+        packer.loader(metadata.key)
+    end)
+end
+
+--------------------------------------------------------------------------------
+-- Lazy loading
+--------------------------------------------------------------------------------
+local function lazy_load_on_event(event, plugin)
+    registry.register('LazyLoad', event, plugin, {
+        callback = _lazy_load_plugin,
+        condition = _lazy_load_condition,
+        is_complete = _lazy_load_is_complete,
+    })
+end
+
+-- List of plugins lazy loaded on an event
+local lazy_loaded = {
+    ['nvim-autopairs'] = 'InsertEnter',
+    ['nvim-cmp'] = 'InsertEnter',
+}
+for plugin, event in pairs(lazy_loaded) do
+    lazy_load_on_event(event, plugin)
+end
+
+--------------------------------------------------------------------------------
 -- Plugin List
 --------------------------------------------------------------------------------
 return require('packer').startup(function(use)
@@ -213,7 +272,7 @@ return require('packer').startup(function(use)
     -- Editing Magic
     use {
         'windwp/nvim-autopairs',
-        event = 'InsertEnter',
+        opt = true,
         config = function ()
             LOAD_CONFIG('nvim-autopairs')
             LOAD_MAPPING('nvim-autopairs')
@@ -335,21 +394,20 @@ return require('packer').startup(function(use)
     -- Autocompletion (nvim-cmp)
     use {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
-        requires = {
-            {'onsails/lspkind.nvim'},
-            {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'},
-            {'hrsh7th/cmp-buffer', after = 'nvim-cmp'},
-            {'hrsh7th/cmp-path', after = 'nvim-cmp'},
-            {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'},
-            {'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp'},
-            {'saadparwaiz1/cmp_luasnip', after = {'nvim-cmp', 'LuaSnip'}},
-        },
+        opt = true,
         config = function ()
             LOAD_CONFIG('nvim-cmp')
             LOAD_MAPPING('nvim-cmp')
         end,
     }
+
+    use {'onsails/lspkind.nvim', module = 'lspkind'}
+    use {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'}
+    use {'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
+    use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
+    use {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'}
+    use {'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp'}
+    use {'saadparwaiz1/cmp_luasnip', after = {'nvim-cmp', 'LuaSnip'}}
 
     -- Autocompletion (coq_nvim)
     -- TODO: To avoid the problems with mapping, drop the snippets from coq and instead use null-ls to
