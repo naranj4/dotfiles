@@ -4,28 +4,44 @@
 -- This module contains global state for autocmds, augroups, etc
 local M = {}
 
+M.log_level = vim.log.levels.ERROR
+
 --------------------------------------------------------------------------------
 -- Utils
 --------------------------------------------------------------------------------
-local _log = require('sanka047.utils.log')
 local function _create_title(namespace, event, key)
     return '[' .. namespace .. '] ' .. event .. ': ' .. key
 end
 
-local log = {
-    debug = function (namespace, event, key, msg)
-        _log.debug(msg, _create_title(namespace, event, key))
-    end,
-    info = function (namespace, event, key, msg)
-        _log.info(msg, _create_title(namespace, event, key))
-    end,
-    warn = function (namespace, event, key, msg)
-        _log.warn(msg, _create_title(namespace, event, key))
-    end,
-    error = function (namespace, event, key, msg)
-        _log.error(msg, _create_title(namespace, event, key))
-    end,
-}
+local log = {}
+
+log.debug = function (namespace, event, key, msg)
+    if M.log_level > vim.log.levels.DEBUG then
+        return
+    end
+    vim.notify(msg, vim.log.levels.DEBUG, { title = _create_title(namespace, event, key) })
+end
+
+log.info = function (namespace, event, key, msg)
+    if M.log_level > vim.log.levels.INFO then
+        return
+    end
+    vim.notify(msg, vim.log.levels.INFO, { title = _create_title(namespace, event, key) })
+end
+
+log.warn = function (namespace, event, key, msg)
+    if M.log_level > vim.log.levels.WARN then
+        return
+    end
+    vim.notify(msg, vim.log.levels.WARN, { title = _create_title(namespace, event, key) })
+end
+
+log.error = function (namespace, event, key, msg)
+    if M.log_level > vim.log.levels.ERROR then
+        return
+    end
+    vim.notify(msg, vim.log.levels.ERROR, { title = _create_title(namespace, event, key) })
+end
 
 --------------------------------------------------------------------------------
 -- Data
