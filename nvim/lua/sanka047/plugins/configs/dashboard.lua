@@ -13,7 +13,7 @@ function M.setup()
         },
         find_history = {
             description = {'ﭯ Recently Opened Files                <L> f h s'},
-            command = 'Telescope oldfiles',
+            command = 'lua require("telescope.builtin").oldfiles()',
         },
         last_session = {
             description = {' Open Last Session                  <L> <L> s l'},
@@ -21,11 +21,11 @@ function M.setup()
         },
         change_colorscheme = {
             description = {' Change Colorscheme                   <L> f c s'},
-            command = 'Telescope colorscheme',
+            command = 'lua require("telescope.builtin").colorscheme()',
         },
         find_word = {
             description = {' Find Word                              <L> f l'},
-            command = 'Telescope live_grep',
+            command = 'lua require("telescope.builtin").live_grep()',
         },
         new_file = {
             description = {' Create New File                    <L> <L> n f'},
