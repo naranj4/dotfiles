@@ -88,6 +88,7 @@ map('t', '<C-v><ESC>', '<ESC>', '<C-\\><C-n>')
 local plugins = {
     'comment',
     'hop',
+    'neogen',
     'neogit',
     'nvim-tree',
     'refactoring',

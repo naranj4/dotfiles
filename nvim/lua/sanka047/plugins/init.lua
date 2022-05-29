@@ -260,7 +260,12 @@ return require('packer').startup(function(use)
             LOAD_MAPPING('sandwich')
         end,
     }
-
+    use {
+        'danymat/neogen',
+        module = 'neogen',
+        requires = 'nvim-treesitter/nvim-treesitter',
+        config = function () LOAD_CONFIG('neogen') end,
+    }
     use {
         'numToStr/Comment.nvim',
         module = 'Comment',
