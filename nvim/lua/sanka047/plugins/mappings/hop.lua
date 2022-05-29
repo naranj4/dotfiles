@@ -12,6 +12,7 @@ function M.keymap()
         'Hop Down',
         function ()
             require('hop').hint_lines({ direction = require('hop.hint').HintDirection.AFTER_CURSOR })
+            vim.cmd('norm ^')
         end
     )
     map(
@@ -20,6 +21,7 @@ function M.keymap()
         'Hop Up',
         function ()
             require('hop').hint_lines({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR })
+            vim.cmd('norm ^')
         end
     )
 end
