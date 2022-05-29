@@ -34,7 +34,7 @@ function M.keymap()
     map('n', '<leader>fS', 'Find String (Cursor)', function () require("telescope.builtin").grep_string() end)
     map('n', '<leader>fl', 'Live Grep', function () require("telescope.builtin").live_grep() end)
 
-    map('n', '<leader>fht', 'Find Help Tags', function () require("telescope.builtin").help_tags() end)
+    map('n', '<leader>fhh', 'Find Help Tags', function () require("telescope.builtin").help_tags() end)
 
     map('n', '<leader>fm', 'Find Treesitter', function () require("telescope.builtin").treesitter() end)
 
