@@ -297,6 +297,7 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim',
         module = 'telescope',
+        cmd = 'Telescope',
         requires = {
             {'nvim-lua/plenary.nvim'},
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
