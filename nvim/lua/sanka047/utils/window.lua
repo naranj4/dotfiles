@@ -35,7 +35,7 @@ function M.toggle_qf_list(is_qf)
             M.is_qf_list_open = true
         end
     else
-        if vim.bo.filetype == 'qf' or M.is_qf_list_open then
+        if vim.bo.filetype == 'qf' or M.is_loc_list_open then
             vim.cmd('lclose')
             M.is_qf_list_open = false
         else
