@@ -210,6 +210,14 @@ return require('packer').startup(function(use)
             LOAD_MAPPING('nvim-tree')
         end,
     }
+    use {
+        'kevinhwang91/nvim-bqf',
+        requires = {
+            { 'nvim-treesitter/nvim-treesitter' },
+            { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end },
+        },
+        config = function () LOAD_CONFIG('bqf') end,
+    }
 
     -- Git
     use {
