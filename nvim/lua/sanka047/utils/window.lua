@@ -28,7 +28,7 @@ function M.toggle_qf_list(is_qf)
             vim.cmd('cclose')
             M.is_qf_list_open = false
         else
-            vim.cmd('copen')
+            vim.cmd('botright copen')
             M.is_qf_list_open = true
         end
     else
