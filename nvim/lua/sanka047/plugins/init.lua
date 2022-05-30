@@ -224,6 +224,7 @@ return require('packer').startup(function(use)
     use {
         'sindrets/diffview.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
+        commit = '08e4340f690d0b611a393eafb633b2fb62f78601',
         config = function ()
             LOAD_CONFIG('diffview')
             LOAD_MAPPING('diffview')
