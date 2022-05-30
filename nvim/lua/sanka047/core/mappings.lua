@@ -77,6 +77,20 @@ map('n', '<c-q>', 'Toggle QF List', function () window.toggle_qf_list(true) end)
 map('n', '<m-j>', 'QF Next', '<CMD>cnext<CR>')
 map('n', '<m-k>', 'QF Prev', '<CMD>cprev<CR>')
 
+local create_augroup = require('sanka047.utils.map').create_augroup
+local create_autocmd = require('sanka047.utils.map').create_autocmd
+
+create_augroup('fixlist')
+create_autocmd(
+    'BufWinEnter',
+    'Sets Quickfix control variable',
+    {
+        group = 'fixlist',
+        pattern = 'quickfix',
+        callback = window.set_qf_control_var,
+    }
+)
+
 --------------------------------------------------------------------------------
 -- Terminal Mode Mappings
 --------------------------------------------------------------------------------
