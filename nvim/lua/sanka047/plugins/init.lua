@@ -38,6 +38,7 @@ packer.init({
 local map = require('sanka047.utils.map').map
 
 map('n', '<leader><leader>ps', 'Packer Sync', require('sanka047.utils.packer').packer_sync)
+map('n', '<leader><leader>pc', 'Packer Compile', function () packer.compile() end)
 
 --------------------------------------------------------------------------------
 -- Lazy loading helpers
