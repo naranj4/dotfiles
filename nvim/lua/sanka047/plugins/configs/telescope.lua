@@ -28,7 +28,7 @@ function M.setup()
     end
 
     local function hop_select(prompt_bufnr)
-        opts = { callback = actions.select_default }
+        local opts = { callback = actions.select_default }
         require('telescope').extensions.hop._hop(prompt_bufnr, opts)
     end
 
@@ -77,8 +77,30 @@ function M.setup()
                 find_command = {'rg', '--ignore', '--hidden', '--files'},
             },
             git_files = {},
-            diagnostics = {
-                bufnr = 0,
+            diagnostics = { bufnr = 0 },
+            current_buffer_fuzzy_find = {
+                layout_strategy = 'vertical',
+                layout_config = {
+                    prompt_position = 'bottom',
+                    height = 0.9,
+                    width = function (self, max_columns, max_lines)
+                        local width = max_columns * 0.8
+                        if width > 120 then
+                            width = 120
+                        end
+                        return width
+                    end,
+                    preview_height = function (self, max_columns, max_lines)
+                        local height = max_lines * 0.3
+                        if height < 5 then
+                            height = 5
+                        elseif height > 15 then
+                            height = 15
+                        end
+
+                        return height
+                    end
+                },
             },
         },
         extensions = {

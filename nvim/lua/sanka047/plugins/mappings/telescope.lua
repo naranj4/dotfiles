@@ -33,11 +33,7 @@ function M.keymap()
     map('n', '<leader>fs', 'Find String', ':TelescopeRG<space>')
     map('n', '<leader>fS', 'Find String (Cursor)', function () require('telescope.builtin').grep_string() end)
     map('n', '<leader>fl', 'Live Grep', function () require('telescope.builtin').live_grep() end)
-    map('n', '<leader>/', 'Find in Buffer', function ()
-        require('telescope.builtin').current_buffer_fuzzy_find(
-            require('telescope.themes').get_dropdown({})
-        )
-    end)
+    map('n', '<leader>/', 'Find in Buffer', function () require('telescope.builtin').current_buffer_fuzzy_find() end)
 
     map('n', '<leader>fhh', 'Find Help Tags', function () require('telescope.builtin').help_tags() end)
 
