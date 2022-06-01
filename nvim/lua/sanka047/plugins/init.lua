@@ -7,11 +7,6 @@ if firstload then
     return false
 end
 
-local has_impatient, impatient = pcall(require, 'impatient')
-if has_impatient then
-    impatient.enable_profile()
-end
-
 local packer = require('packer')
 
 packer.init({

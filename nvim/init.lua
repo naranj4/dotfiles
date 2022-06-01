@@ -1,6 +1,12 @@
 --------------------------------------------------------------------------------
 -- Neovim Config File
 --------------------------------------------------------------------------------
+-- impatient for loading performance
+local has_impatient, impatient = pcall(require, 'impatient')
+if has_impatient then
+    impatient.enable_profile()
+end
+
 -- Design:
 -- - Plugin mapping will be available prior to the plugin has initialized
 -- - Plugins will load their configs when they are loaded by packer
