@@ -20,10 +20,10 @@ function M.setup()
         update_events = 'TextChanged,TextChangedI',
     })
 
-    local snip_loader = require('luasnip.loaders.from_vscode')
+    local vs_snip_loader = require('luasnip.loaders.from_vscode')
 
-    snip_loader.load({ paths = snip_paths })
-    snip_loader.load()
+    vs_snip_loader.load({ paths = snip_paths })
+    vs_snip_loader.load()
 end
 
 return M
