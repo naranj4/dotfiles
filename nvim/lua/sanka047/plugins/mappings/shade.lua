@@ -7,10 +7,10 @@ local map_group = require('sanka047.utils.map').map_group
 local M = {}
 
 function M.keymap()
-    map_group('n', '<leader><leader>s', 'shade')
-    map('n', '<leader><leader>sbu', 'Shade Brightness Up')
-    map('n', '<leader><leader>sbd', 'Shade Brightness Down')
-    map('n', '<leader><leader>st', 'Shade Toggle')
+    map_group('n', '<leader><leader><leader>sh', 'shade')
+    map('n', '<leader><leader><leader>shu', 'Shade Brightness Up')
+    map('n', '<leader><leader><leader>shd', 'Shade Brightness Down')
+    map('n', '<leader><leader><leader>sht', 'Shade Toggle')
 end
 
 return M
