@@ -315,6 +315,14 @@ return require('packer').startup(function(use)
         },
         config = function () LOAD_CONFIG('telescope') end,
     }
+    use {
+        'ThePrimeagen/harpoon',
+        requires = { {'nvim-lua/plenary.nvim'} },
+        config = function ()
+            LOAD_CONFIG('harpoon')
+            LOAD_MAPPING('harpoon')
+        end,
+    }
 
     -- Text Substitution/Processing
     use {'tpope/vim-abolish'}

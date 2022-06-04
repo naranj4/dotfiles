@@ -39,6 +39,7 @@ function M.keymap()
 
     map('n', '<leader>fm', 'Find Treesitter', function () require('telescope.builtin').treesitter() end)
     map('n', '<leader>fn', 'Find Notifications', function () require('telescope').extensions.notify.notify() end)
+    map('n', '<leader>mf', 'Find Marks (Harpoon)', function () require('telescope').extensions.harpoon.marks() end)
 
     map('n', '<leader><leader>vf', 'Find Neovim Config File', finder.search_dotfiles)
 end
