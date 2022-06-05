@@ -15,8 +15,15 @@ function M.setup()
     neogen.setup({
         enabled = true,
         snippet_engine = 'luasnip',
+        enable_placeholders = false,
+        placeholders_hl = "None", -- weird residue highlighting in Python
         languages = {
-            python = { template = { annotation_convention = 'numpydoc' } },
+            python = {
+                template = {
+                    annotation_convention = 'numpydoc',
+                    numpydoc = require('sanka047.doc_templates.custom_numpydoc'),
+                },
+            },
         },
     })
 end
