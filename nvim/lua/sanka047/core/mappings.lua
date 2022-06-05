@@ -32,8 +32,8 @@ map('nv', ':', 'f/F/t/T Repeat', ';')
 map('', 'H', 'Home', '^')
 map('', 'L', 'End', '$')
 
--- quick escape in insert mode
-map('i', 'kj', '<ESC>', '<ESC>')
+-- quick escape in insert/select mode
+map('is', 'kj', '<ESC>', '<ESC>')
 
 -- set undo breakpoints
 map('i', ',', 'Undo Breakpoint', ',<C-g>u')
