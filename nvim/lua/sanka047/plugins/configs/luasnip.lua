@@ -12,18 +12,22 @@ function M.setup()
         return false
     end
 
-    -- add snippet folders here
-    local snip_paths = {}
-
     luasnip.config.setup({
         history = true,
         update_events = 'TextChanged,TextChangedI',
     })
 
-    local vs_snip_loader = require('luasnip.loaders.from_vscode')
+    -- add snippet folders here
+    local snip_paths = {}
 
+    local vs_snip_loader = require('luasnip.loaders.from_vscode')
     vs_snip_loader.load({ paths = snip_paths })
     vs_snip_loader.load()
+
+    snip_paths = {}
+
+    local snip_loader = require('luasnip.loaders.from_lua')
+    snip_loader.lazy_load({ paths = snip_paths })
 end
 
 return M

@@ -80,10 +80,6 @@ function M.setup()
                 select = false, -- false will not auto-select?
             }), { 'i', 'c' }),
             ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-
-            ['<C-o>'] = cmp.mapping(function (fallback) luasnip.expand() end, { 'i' }),
-            ['<C-j>'] = cmp.mapping(function (fallback) luasnip.jump(1) end, { 'i' }),
-            ['<C-k>'] = cmp.mapping(function (fallback) luasnip.jump(-1) end, { 'i' }),
         },
         sources = {
             { name = 'nvim_lsp' },
