@@ -58,3 +58,13 @@ LOAD_MAPPING = function(plugin)
 
     return true
 end
+
+--------------------------------------------------------------------------------
+-- Global Constants
+--------------------------------------------------------------------------------
+-- Override in a local global file
+_G.luasnip = {
+    vars = {
+        username = 'sanka047',
+    },
+}
