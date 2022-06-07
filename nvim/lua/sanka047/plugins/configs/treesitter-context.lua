@@ -15,7 +15,7 @@ function M.setup()
     treesitter_context.setup({
         enable = true,
         throttle = true,
-        max_lines = 0,
+        max_lines = 1,
         patterns = {
             default = {
                 'class',
