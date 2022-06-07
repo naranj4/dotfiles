@@ -78,8 +78,8 @@ function M.setup()
 
             -- Actions
             map_group('n', '<leader>h', 'git-signs-actions')
-            map('nv', '<leader>hs', 'Stage Hunk', '<CMD>Gitsigns stage_hunk<CR>')
-            map('nv', '<leader>hr', 'Reset Hunk', '<CMD>Gitsigns reset_hunk<CR>')
+            map('nv', '<leader>hs', 'Stage Hunk', ':Gitsigns stage_hunk<CR>')
+            map('nv', '<leader>hr', 'Reset Hunk', ':Gitsigns reset_hunk<CR>')
             map('n', '<leader>hu', 'Undo Stage Hunk', gs.undo_stage_hunk)
             map('n', '<leader>hS', 'Stage Buffer', gs.stage_buffer)
             map('n', '<leader>hR', 'Reset Buffer', gs.reset_buffer)
