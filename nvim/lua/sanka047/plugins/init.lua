@@ -148,6 +148,10 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('notify') end,
     }
     use {
+        'folke/todo-comments.nvim',
+        config = function () LOAD_CONFIG('todo-comments') end,
+    }
+    use {
         'j-hui/fidget.nvim',
         config = function () LOAD_CONFIG('fidget') end,
     }
