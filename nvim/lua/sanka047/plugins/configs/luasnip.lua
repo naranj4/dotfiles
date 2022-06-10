@@ -35,8 +35,8 @@ function M.setup()
     snip_paths = {}
 
     local vs_snip_loader = require('luasnip.loaders.from_vscode')
-    vs_snip_loader.load({ paths = snip_paths })
-    vs_snip_loader.load()
+    vs_snip_loader.lazy_load({ paths = snip_paths })
+    vs_snip_loader.lazy_load()
 end
 
 return M
