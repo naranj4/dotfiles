@@ -192,12 +192,8 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'glepnir/dashboard-nvim',
-        requires = { {'telescope.nvim'} },
-        config = function ()
-            LOAD_CONFIG('dashboard')
-            LOAD_MAPPING('dashboard')
-        end,
+        'goolord/alpha-nvim',
+        config = function () LOAD_CONFIG('alpha') end,
     }
 
     use {

@@ -1,43 +1,19 @@
 --------------------------------------------------------------------------------
--- Dashboard Config
+-- Alpha Config
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+
 local M = {}
 
 function M.setup()
-    vim.g.dashboard_default_executive = 'telescope'
+    local has_alpha, alpha = pcall(require, 'alpha')
+    if not has_alpha then
+        log.error('alpha not available', 'Config')
+        return false
+    end
 
-    vim.g.dashboard_custom_section = {
-        find_file = {
-            description = {' Find Files                             <L> f f'},
-            command = 'lua require("sanka047.utils.finder").project_files()',
-        },
-        find_history = {
-            description = {'ﭯ Recently Opened Files                <L> f h s'},
-            command = 'lua require("telescope.builtin").oldfiles()',
-        },
-        last_session = {
-            description = {' Open Last Session                  <L> <L> s l'},
-            command = 'SessionLoad',
-        },
-        change_colorscheme = {
-            description = {' Change Colorscheme                   <L> f c s'},
-            command = 'lua require("telescope.builtin").colorscheme()',
-        },
-        find_word = {
-            description = {' Find Word                              <L> f l'},
-            command = 'lua require("telescope.builtin").live_grep()',
-        },
-        new_file = {
-            description = {' Create New File                    <L> <L> n f'},
-            command = 'DashboardNewFile',
-        },
-        packer_sync = {
-            description = {' Sync Plugins                                  '},
-            command = 'lua require("sanka047.utils.packer").packer_sync()',
-        },
-    }
-
-    vim.g.dashboard_custom_header = {
+    local dashboard = require('alpha.themes.dashboard')
+    dashboard.section.header.val = {
         [[=================     ===============     ===============   ========  ========]],
         [[\\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //]],
         [[||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .||]],
@@ -58,6 +34,32 @@ function M.setup()
         [[\   _-'                                                                `-_   /]],
         [[ `''                                                                      ``']],
     }
+    dashboard.section.header.opts.hl = 'DashboardHeader'
+
+    dashboard.section.buttons.val = {
+        dashboard.button('<L> f f', ' Find Files', '<CMD>lua require("sanka047.utils.finder").project_files()<CR>'),
+        dashboard.button('<L> f l', ' Find Word', '<CMD>lua require("telescope.builtin").live_grep()<CR>'),
+        dashboard.button('<L> f h s', 'ﭯ Recently Opened Files', '<CMD>lua require("telescope.builtin").oldfiles()<CR>'),
+        dashboard.button('<L> <L> n f', ' Create New File', '<CMD>enew<CR>'),
+        dashboard.button(
+            '<L> <L> p s', ' Sync Plugins', '<CMD>lua require("sanka047.utils.packer").packer_sync()<CR>'
+        ),
+    }
+    dashboard.section.buttons.opts.hl = 'DashboardCenter'
+    dashboard.section.buttons.opts.hl_shortcut = 'DashboardShortCut'
+
+    local function footer()
+        local plugins = #vim.tbl_keys(_G.packer_plugins)
+        local v = vim.version()
+        local platform = vim.fn.has 'mac' == 1 and '' or (vim.fn.has 'win32' == 1 and '' or '')
+        return string.format(' v%d.%d.%d    %s     Loaded %d plugins', v.major, v.minor, v.patch, platform, plugins)
+    end
+    dashboard.section.footer.val = footer()
+    dashboard.section.footer.opts.hl = 'DashboardFooter'
+
+    dashboard.config.opts.noautocmd = true
+
+    alpha.setup(dashboard.config)
 end
 
 return M
