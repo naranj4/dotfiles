@@ -28,7 +28,7 @@ function M.keymap()
     map('n', '<leader>fhs', 'Find History', function () require('telescope.builtin').oldfiles() end)
 
     map('n', '<leader>fbm', 'Find Bookmarks', function () require('telescope.builtin').marks() end)
-    map('n', '<leader>fc', 'Find Colorscheme', ':FindContaining<space>')
+    map('n', '<leader>fc', 'Find Containing', ':FindContaining<space>')
 
     map('n', '<leader>fs', 'Find String', ':TelescopeRG<space>')
     map('n', '<leader>fS', 'Find String (Cursor)', function () require('telescope.builtin').grep_string() end)
