@@ -19,6 +19,11 @@ function M.setup()
     local overrides = {
         InclineNormal = { bg = colors.fn, fg = colors.bg_dark, bold = true },
         InclineNormalNC = { bg = colors.bg_light0, fg = colors.fg_dark },
+        HopNextKey = { fg = colors.fg, bold = true },
+        HopNextKey1 = { link = 'HopNextKey' },
+        HopNextKey2 = { fg = colors.fg },
+        HopUnmatched = { bg = colors.bg, fg = colors.fg_comment },
+        HopCursor = { link = 'Cursor' },
     }
 
     kanagawa.setup({
