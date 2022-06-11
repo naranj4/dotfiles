@@ -5,32 +5,6 @@ local create_augroup = require('sanka047.utils.map').create_augroup
 local create_autocmd = require('sanka047.utils.map').create_autocmd
 
 --------------------------------------------------------------------------------
--- Incline highlighting
---------------------------------------------------------------------------------
-create_augroup('InclineHighlight')
-create_autocmd(
-    'ColorScheme',
-    'Sets Incline highlighting on colorscheme change',
-    {
-        group = 'InclineHighlight',
-        pattern = 'kanagawa',
-        callback = function ()
-            local set_hl = function (...) vim.api.nvim_set_hl(0, ...) end
-            local colors = require('kanagawa.colors').setup()
-
-            set_hl(
-                'InclineNormal',
-                { bg = colors.fn, fg = colors.bg_dark, bold = 1 }
-            )
-            set_hl(
-                'InclineNormalNC',
-                { bg = colors.bg_light0, fg = colors.fg_dark }
-            )
-        end
-    }
-)
-
---------------------------------------------------------------------------------
 -- Hop highlighting
 --------------------------------------------------------------------------------
 create_augroup('HopInitHighlight')

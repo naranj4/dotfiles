@@ -14,6 +14,13 @@ function M.setup()
 
     vim.g.kanagawa_lualine_bold = true
 
+    -- Overrides
+    local colors = require('kanagawa.colors').setup()
+    local overrides = {
+        InclineNormal = { bg = colors.fn, fg = colors.bg_dark, bold = true },
+        InclineNormalNC = { bg = colors.bg_light0, fg = colors.fg_dark },
+    }
+
     kanagawa.setup({
         undercurl = true,
         commentStyle = { italic = true },
@@ -28,7 +35,7 @@ function M.setup()
         dimInactive = false, -- while shade is broken
         globalStatus = true,
         colors = {},
-        overrides = {},
+        overrides = overrides,
     })
 
     vim.cmd('colorscheme kanagawa')
