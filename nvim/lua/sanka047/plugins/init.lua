@@ -265,6 +265,13 @@ return require('packer').startup(function(use)
         end,
     }
     use {
+        'AckslD/nvim-trevJ.lua',
+        config = function ()
+            LOAD_CONFIG('trevj')
+            LOAD_MAPPING('trevj')
+        end,
+    }
+    use {
         'danymat/neogen',
         module = 'neogen',
         requires = 'nvim-treesitter/nvim-treesitter',
