@@ -16,12 +16,12 @@ function M.setup()
 
     kanagawa.setup({
         undercurl = true,
-        commentStyle = 'italic',
-        functionStyle = 'bold',
-        keywordStyle = 'bold',
-        statementStyle = 'bold',
-        typeStyle = 'bold',
-        variablebuiltinStyle = 'bold',
+        commentStyle = { italic = true },
+        functionStyle = { bold = true },
+        keywordStyle = { bold = true },
+        statementStyle = { bold = true },
+        typeStyle = { bold = true },
+        variablebuiltinStyle = { bold = true },
         specialReturn = true,
         specialException = true,
         transparent = false,
