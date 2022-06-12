@@ -27,6 +27,16 @@ MATCH_LOADED_PACKAGES = function (pattern)
     return local_packages
 end
 
+MATCH_PLUGINS = function (pattern)
+    local packages = {}
+    for k, v in pairs(packer_plugins) do
+        if string.find(k, pattern) then
+            packages[k] = v
+        end
+    end
+    return packages
+end
+
 LOAD_CONFIG = function(plugin)
     local load_success, config = pcall(require, 'sanka047.plugins.configs.' .. plugin)
     if not load_success then
