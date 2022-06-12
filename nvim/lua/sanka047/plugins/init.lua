@@ -239,6 +239,7 @@ return require('packer').startup(function(use)
         'TimUntersberger/neogit',
         requires = { {'sindrets/diffview.nvim'} },
         module = 'neogit',
+        disable = true, -- still not properly using this
         config = function () LOAD_CONFIG('neogit') end,
     }
 
