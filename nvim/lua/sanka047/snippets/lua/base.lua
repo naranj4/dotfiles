@@ -32,7 +32,6 @@ end
 -- Requires
 --------------------------------------------------------------------------------
 local function variable_snippet(pos, vtype, tracked_arg)
-    P({ pos = pos, vtype = vtype, tracked_arg = tracked_arg })
     local snip
     if vtype == var_type.FILL then
         snip = i(pos, 'var_name')
