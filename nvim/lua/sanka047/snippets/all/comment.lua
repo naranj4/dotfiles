@@ -46,19 +46,19 @@ local marks = {
     {
         name = 'signature',
         mark = function()
-            return fmt('<{}>', i(1, _G.luasnip.vars.username))
+            return fmt('{}<{}>', { t(' '), i(1, _G.luasnip.vars.username)})
         end,
     },
     {
         name = 'date_signature',
         mark = function()
-            return fmt('<{}{}>', { i(1, os.date('%d-%m-%y')), i(2, ', ' .. _G.luasnip.vars.username) })
+            return fmt('{}<{}{}>', { t(' '), i(1, os.date('%d-%m-%y')), i(2, ', ' .. _G.luasnip.vars.username) })
         end,
     },
     {
         name = 'date',
         mark = function()
-            return fmt('<{}>', i(1, os.date('%d-%m-%y')))
+            return fmt('{}<{}>', { t(' '), i(1, os.date('%d-%m-%y')) })
         end,
     },
 }
@@ -72,7 +72,7 @@ local function todo_snippet_nodes(aliases, opts)
         table.insert(sigmark_nodes, mark.mark())
     end
     -- format them into the actual snippet
-    local comment_node = fmt('{beg_cstr} {alias}: {text} {mark}{end_cstr}', {
+    local comment_node = fmt('{beg_cstr} {alias}: {text}{mark}{end_cstr}', {
         beg_cstr = f(function()
             return get_cstring(opts.ctype)[1] -- get <comment-string[1]>
         end),
