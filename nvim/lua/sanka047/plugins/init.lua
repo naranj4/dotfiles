@@ -356,16 +356,16 @@ return require('packer').startup(function(use)
                 'nvim-treesitter/playground',
                 cmd = 'TSPlaygroundToggle',
             },
+            {
+                'nvim-treesitter/nvim-treesitter-context',
+                requires = {'nvim-treesitter/nvim-treesitter'},
+                config = function () LOAD_CONFIG('treesitter-context') end,
+            },
         },
         config = function ()
             LOAD_CONFIG('treesitter')
             LOAD_MAPPING('treesitter')
         end,
-    }
-    use {
-        'nvim-treesitter/nvim-treesitter-context',
-        requires = {'nvim-treesitter/nvim-treesitter'},
-        config = function () LOAD_CONFIG('treesitter-context') end,
     }
 
     -- Snippets
