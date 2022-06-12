@@ -17,9 +17,23 @@ function M.keymap()
     )
     create_command(
         'TFindFiles', -- just so that command completion makes directory suggestions
-        function (args) finder.project_files(args.args) end,
-        'Find files in a directory',
-        { nargs = 1, complete = 'dir' }
+        function (args)
+            local directory = nil
+            local skip_git = false
+            -- parse args
+            for _, v in ipairs(args.fargs) do
+                if v == '-u' then
+                    skip_git = true
+                else
+                    -- NOTE: this will overwrite the directory with the most recent value
+                    directory = v
+                end
+            end
+
+            finder.project_files(directory, skip_git)
+        end,
+        'Find files in a directory (use -u to unrestrict search and ignore .ignore files)',
+        { nargs = '+' }
     )
     create_command(
         'TFindContaining',

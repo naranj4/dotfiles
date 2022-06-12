@@ -4,13 +4,20 @@
 local M = {}
 
 -- Use git_files until it doesn't work, then run find_files
-function M.project_files(directory)
+function M.project_files(directory, skip_git)
+    -- TODO: eventually let this take in a list of directories
     local opts = {}
     if directory ~= nil and directory ~= '' then
         opts.cwd = directory
     end
-    local ok = pcall(require('telescope.builtin').git_files, opts)
-    if not ok then require('telescope.builtin').find_files(opts) end
+
+    -- first attempt to use git files
+    if not skip_git then
+        pcall(require('telescope.builtin').git_files, opts)
+        return
+    end
+
+    require('telescope.builtin').find_files(opts)
 end
 
 function M.search_dotfiles()
