@@ -300,6 +300,8 @@ end
 -- Creates and registers and autocmd to the registry. An augroup will be created (if one doesn't
 -- exist already) from the namespace and event.
 --
+-- -- TODO: add ability to pass in multiple events that trigger the same autocmd
+--
 -- @param namespace string: arbitrary string used to group autocmds
 -- @param event string: neovim event. See `:h event` for list of possible events
 -- @param key string: arbitrary text that is unique for each autocmd under the namespace and event

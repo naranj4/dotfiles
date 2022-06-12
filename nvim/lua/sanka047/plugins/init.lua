@@ -43,7 +43,13 @@ local registry = require('sanka047.registry')
 
 local function _lazy_load_condition(metadata)
     log.debug('Metadata: ' .. vim.inspect(metadata))
-    local ignore_filetypes = { TelescopePrompt = true, DressingInput = true }
+    local ignore_filetypes = {
+        TelescopePrompt = true,
+        TelescopeResults = true,
+        NvimTree = true,
+        DressingInput = true,
+        alpha = true,
+    }
 
     local ft = vim.bo[metadata.buf].filetype
     if ignore_filetypes[ft] then
@@ -51,6 +57,7 @@ local function _lazy_load_condition(metadata)
         return false
     end
 
+    log.debug('Lazy loading plugins in filetype `' .. ft .. '`')
     return true
 end
 
@@ -88,7 +95,7 @@ end
 -- List of plugins lazy loaded on an event
 local lazy_loaded = {
     ['nvim-autopairs'] = 'InsertEnter',
-    ['nvim-cmp'] = 'InsertEnter',
+    ['nvim-cmp'] = 'BufRead',
 }
 for plugin, event in pairs(lazy_loaded) do
     lazy_load_on_event(event, plugin)
