@@ -19,6 +19,9 @@ local function ensure_treesitter_language_installed()
                 function(item)
                     if item == 'yes' then
                         vim.cmd('TSInstall ' .. lang)
+                        -- NOTE: for whatever reason, it will reprompt to install after the parser
+                        -- has been successfully installed during the session
+                        ask_install[lang] = false
                     else
                         log.warn(
                             (
