@@ -10,13 +10,19 @@ local M = {}
 
 function M.keymap()
     create_command(
-        'TelescopeRG',
+        'TRG',
         function (args) finder.search_string(unpack(args.fargs)) end,
         'Ripgrep for string in directory and pipe results to Telescope',
         { nargs = '+' }
     )
     create_command(
-        'FindContaining',
+        'TFindFiles', -- just so that command completion makes directory suggestions
+        function (args) finder.project_files(args.args) end,
+        'Find files in a directory',
+        { nargs = 1, complete = 'dir' }
+    )
+    create_command(
+        'TFindContaining',
         function (args) finder.find_files_containing(args.args) end,
         'Find files containing string',
         { nargs = 1 }
@@ -24,6 +30,7 @@ function M.keymap()
 
     map_group('n', '<leader>f', 'telescope-find')
     map('n', '<leader>ff', 'Find Files', finder.project_files)
+    map('n', '<leader>fF', 'Find Files (in dir)', ':TFindFiles<space>')
     map('n', '<leader>fbb', 'Find Buffers', function () require('telescope.builtin').buffers() end)
     map('n', '<leader>fhs', 'Find History', function () require('telescope.builtin').oldfiles() end)
 
