@@ -70,22 +70,6 @@ function M.setup()
                     },
                 },
                 {
-                    function (opts)
-                        local has_gps, gps = pcall(require, 'nvim-gps')
-                        if has_gps then
-                            return gps.get_location(opts)
-                        end
-                        return ''
-                    end,
-                    cond = function ()
-                        local has_gps, gps = pcall(require, 'nvim-gps')
-                        if not has_gps then
-                            return false
-                        end
-                        return gps.is_available()
-                    end,
-                },
-                {
                     '%w',
                     cond = function() return vim.wo.previewwindow end,
                 },

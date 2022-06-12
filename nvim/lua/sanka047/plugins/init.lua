@@ -186,10 +186,6 @@ return require('packer').startup(function(use)
         'b0o/incline.nvim',
         config = function () LOAD_CONFIG('incline') end,
     }
-    use {
-        'SmiteshP/nvim-gps',
-        config = function () LOAD_CONFIG('nvim-gps') end,
-    }
 
     use {
         'goolord/alpha-nvim',
