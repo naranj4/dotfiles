@@ -5,34 +5,10 @@ local log = require('sanka047.utils.log')
 
 local M = {}
 
-function M.setup()
-    local ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
-    if not ok then
-        log.error('nvim-lsp-installer not available', 'Config')
-        return false
-    end
-
-    lsp_installer.settings({
-        ui = {
-            icons = {
-                server_installed = "✓",
-                server_pending = "➜",
-                server_uninstalled = "✗",
-            },
-        },
-    })
-
-    --------------------------------------------------------------------------------
-    -- LSP Handlers
-    --------------------------------------------------------------------------------
-    vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-        vim.lsp.handlers.hover,
-        { border = 'rounded' }
-    )
-
-    --------------------------------------------------------------------------------
-    -- LSP Config
-    --------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- LSP Config
+--------------------------------------------------------------------------------
+local function get_client_capabilities()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     -- capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
     capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
@@ -51,7 +27,11 @@ function M.setup()
         },
     }
 
-    local function on_attach(client, bufnr)
+    return capabilities
+end
+
+local function generate_on_attach()
+    return function (client, bufnr)
         local map = function (...) require('sanka047.utils.map').buf_map(bufnr, ...) end
 
         map('n', 'K', 'Doc', vim.lsp.buf.hover)
@@ -62,48 +42,88 @@ function M.setup()
             illuminate.on_attach(client)
         end
     end
+end
+
+local function configure_lsp_servers()
+    local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
+    if not has_lspconfig then
+        log.error('lspconfig not available', 'Config')
+        return false
+    end
+
+    local capabilities = get_client_capabilities()
+    local on_attach = generate_on_attach()
 
     -- LSP installation and config
     local servers = {
-        'pyright', -- pyright
-        'solargraph', -- ruby
-        'yamlls', -- yaml
-        'sumneko_lua', -- lua
-        'tsserver', -- typescript
+        pyright = {}, -- pyright
+        solargraph = {}, -- ruby
+        yamlls = {}, -- yaml
+        tsserver = {}, -- typescript
     }
-    lsp_installer.on_server_ready(function (server)
-        local opts = {
+
+    -- sumneko_lua specific config
+    local runtime_path = vim.split(package.path, ';')
+    table.insert(runtime_path, 'lua/?.lua')
+    table.insert(runtime_path, 'lua/?/init.lua')
+
+    servers['sumneko_lua'] = {
+        settings = {
+            Lua = {
+                runtime = {
+                    version = 'LuaJIT',
+                    path = runtime_path,
+                },
+                diagnostics = {
+                    globals = {'vim'},
+                },
+                workspace = {
+                    library = vim.api.nvim_get_runtime_file('', true),
+                },
+                telemetry = {
+                    enable = false,
+                },
+            },
+        },
+    }
+
+    -- setup all language servers with default configuration
+    for server, server_opts in pairs(servers) do
+        local opts = vim.tbl_deep_extend('force', {
             on_attach = on_attach,
             capabilities = capabilities,
-        }
+        }, server_opts)
 
-        -- sumneko_lua specific config
-        if server.name == 'sumneko_lua' then
-            local runtime_path = vim.split(package.path, ';')
-            table.insert(runtime_path, 'lua/?.lua')
-            table.insert(runtime_path, 'lua/?/init.lua')
+        lspconfig[server].setup(opts)
+    end
+end
 
-            opts.settings = {
-                Lua = {
-                    runtime = {
-                        version = 'LuaJIT',
-                        path = runtime_path,
-                    },
-                    diagnostics = {
-                        globals = {'vim'},
-                    },
-                    workspace = {
-                        library = vim.api.nvim_get_runtime_file('', true),
-                    },
-                    telemetry = {
-                        enable = false,
-                    },
-                },
-            }
-        end
+function M.setup()
+    local has_lsp_installer, lsp_installer = pcall(require, 'nvim-lsp-installer')
+    if not has_lsp_installer then
+        log.error('nvim-lsp-installer not available', 'Config')
+        return false
+    end
 
-        server:setup(opts)
-    end)
+    lsp_installer.setup({
+        ui = {
+            icons = {
+                server_installed = "✓",
+                server_pending = "➜",
+                server_uninstalled = "✗",
+            },
+        },
+    })
+
+    --------------------------------------------------------------------------------
+    -- LSP Handlers
+    --------------------------------------------------------------------------------
+    vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+        vim.lsp.handlers.hover,
+        { border = 'rounded' }
+    )
+
+    configure_lsp_servers()
 end
 
 return M
