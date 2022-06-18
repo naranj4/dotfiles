@@ -75,9 +75,6 @@ function M.setup()
         local opts = {
             on_attach = on_attach,
             capabilities = capabilities,
-            flags = {
-                debounce_text_changes = 150,
-            },
         }
 
         -- sumneko_lua specific config
