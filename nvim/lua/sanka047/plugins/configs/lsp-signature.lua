@@ -16,13 +16,13 @@ function M.setup()
         bind = true,
         handler_opts = { border = 'rounded' },
         doc_lines = 10,
-        floating_window = true,
-        floating_window_above_cur_line = true,
-        floating_window_off_x = 1,
-        floating_window_off_y = 1,
+        -- FIX: turn this back on when #182 is fixed
+        -- Issue: https://github.com/ray-x/lsp_signature.nvim/issues/182
+        floating_window = false,
         fix_pos = false,
         hint_enable = true,
         hint_prefix = ' ',
+        toggle_key = '<C-s>',
     })
 end
 
