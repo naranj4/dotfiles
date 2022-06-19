@@ -44,6 +44,8 @@ local function generate_on_attach()
     end
 end
 
+local function get_lsp_settings(server) return require('sanka047.plugins.lsp.' .. server) end
+
 local function configure_lsp_servers()
     local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
     if not has_lspconfig then
@@ -60,31 +62,7 @@ local function configure_lsp_servers()
         solargraph = {}, -- ruby
         yamlls = {}, -- yaml
         tsserver = {}, -- typescript
-    }
-
-    -- sumneko_lua specific config
-    local runtime_path = vim.split(package.path, ';')
-    table.insert(runtime_path, 'lua/?.lua')
-    table.insert(runtime_path, 'lua/?/init.lua')
-
-    servers['sumneko_lua'] = {
-        settings = {
-            Lua = {
-                runtime = {
-                    version = 'LuaJIT',
-                    path = runtime_path,
-                },
-                diagnostics = {
-                    globals = {'vim'},
-                },
-                workspace = {
-                    library = vim.api.nvim_get_runtime_file('', true),
-                },
-                telemetry = {
-                    enable = false,
-                },
-            },
-        },
+        sumneko_lua = get_lsp_settings('sumneko_lua'),
     }
 
     -- setup all language servers with default configuration
