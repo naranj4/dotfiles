@@ -58,7 +58,9 @@ function M.keymap()
 
     map('n', '<leader>fhh', 'Find Help Tags', function () require('telescope.builtin').help_tags() end)
 
-    map('n', '<leader>fm', 'Find Treesitter', function () require('telescope.builtin').treesitter() end)
+    map('n', '<leader>fa', 'Find Aerial', function ()
+        require('telescope').extensions.aerial.aerial()
+    end)
     map('n', '<leader>fn', 'Find Notifications', function () require('telescope').extensions.notify.notify() end)
     map('n', '<leader>mf', 'Find Marks (Harpoon)', function () require('telescope').extensions.harpoon.marks() end)
 

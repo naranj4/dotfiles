@@ -335,6 +335,15 @@ return require('packer').startup(function(use)
         end,
     }
 
+    use {
+        'stevearc/aerial.nvim',
+        requires = { 'nvim-treesitter/nvim-treesitter' },
+        config = function ()
+            LOAD_CONFIG('aerial')
+            LOAD_MAPPING('aerial')
+        end,
+    }
+
     -- Text Substitution/Processing
     use {'tpope/vim-abolish'}
     use {
