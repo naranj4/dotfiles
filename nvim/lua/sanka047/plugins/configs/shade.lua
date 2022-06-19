@@ -18,7 +18,7 @@ function M.setup()
         keys = {
             brightness_up = '<leader><leader><leader>shu',
             brightness_down = '<leader><leader><leader>shd',
-            toggle = '<leader><leader><leader>sht',
+            toggle = '<leader><leader>tsh',
         },
     })
 end

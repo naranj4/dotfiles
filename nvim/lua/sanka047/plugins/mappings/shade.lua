@@ -10,7 +10,7 @@ function M.keymap()
     map_group('n', '<leader><leader><leader>sh', 'shade')
     map('n', '<leader><leader><leader>shu', 'Shade Brightness Up')
     map('n', '<leader><leader><leader>shd', 'Shade Brightness Down')
-    map('n', '<leader><leader><leader>sht', 'Shade Toggle')
+    map('n', '<leader><leader>tsh', 'Shade Toggle')
 end
 
 return M
