@@ -117,20 +117,26 @@ return require('packer').startup(function(use)
     -- let packer manager itself
     use {'wbthomason/packer.nvim'}
 
+    ----------------------------------------------------------------------------
     -- Document Mapping
+    ----------------------------------------------------------------------------
     use {
         'folke/which-key.nvim',
         config = function () LOAD_CONFIG('which-key') end,
     }
 
+    ----------------------------------------------------------------------------
     -- Color Visualization
+    ----------------------------------------------------------------------------
     use {
         'norcalli/nvim-colorizer.lua',
         cmd = 'ColorizerToggle',
         config = function () LOAD_CONFIG('colorizer') end,
     }
 
+    ----------------------------------------------------------------------------
     -- Colorschemes
+    ----------------------------------------------------------------------------
     use {
         'tomasiser/vim-code-dark',
         config = function () LOAD_CONFIG('colors.code-dark') end,
@@ -141,62 +147,69 @@ return require('packer').startup(function(use)
     } -- nice, nice highlighting, no real complaints off the top of my head, nice completion menu
     use {'savq/melange'}
 
+    ----------------------------------------------------------------------------
     -- Aesthetics & UI
+    ----------------------------------------------------------------------------
     use {
         'kyazdani42/nvim-web-devicons',
-        config = function () LOAD_CONFIG('nvim-web-devicons') end,
+        config = function () LOAD_CONFIG('ui.devicons') end,
     }
     use {
         'stevearc/dressing.nvim',
-        config = function () LOAD_CONFIG('dressing') end,
+        config = function () LOAD_CONFIG('ui.dressing') end,
     }
     use {
         'rcarriga/nvim-notify',
-        config = function () LOAD_CONFIG('notify') end,
+        config = function () LOAD_CONFIG('ui.notify') end,
     }
     use {
         'folke/todo-comments.nvim',
-        config = function () LOAD_CONFIG('todo-comments') end,
+        config = function () LOAD_CONFIG('ui.todo-comments') end,
     }
     use {
         'j-hui/fidget.nvim',
-        config = function () LOAD_CONFIG('fidget') end,
+        config = function () LOAD_CONFIG('ui.fidget') end,
     }
 
     use {
         'sanka047/Shade.nvim',
         config = function ()
-            LOAD_CONFIG('shade')
-            LOAD_MAPPING('shade')
+            LOAD_CONFIG('ui.shade')
+            LOAD_MAPPING('ui.shade')
         end,
     }
 
     use {
         'edluffy/specs.nvim',
-        config = function () LOAD_CONFIG('specs') end,
+        config = function () LOAD_CONFIG('ui.specs') end,
     }
     use {
         'RRethy/vim-illuminate',
-        config = function () LOAD_CONFIG('illuminate') end,
+        config = function () LOAD_CONFIG('ui.illuminate') end,
     }
 
     use {
         'lukas-reineke/indent-blankline.nvim',
-        config = function () LOAD_CONFIG('indent-blankline') end,
+        config = function () LOAD_CONFIG('ui.indentline') end,
+    }
+    use {
+        'nvim-treesitter/nvim-treesitter-context',
+        requires = {'nvim-treesitter/nvim-treesitter'},
+        config = function () LOAD_CONFIG('ui.context') end,
     }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { {'kyazdani42/nvim-web-devicons'} },
-        config = function () LOAD_CONFIG('lualine') end,
+        config = function () LOAD_CONFIG('ui.lualine') end,
     }
     use {
         'b0o/incline.nvim',
-        config = function () LOAD_CONFIG('incline') end,
+        config = function () LOAD_CONFIG('ui.incline') end,
     }
 
     use {
         'goolord/alpha-nvim',
-        config = function () LOAD_CONFIG('alpha') end,
+        config = function () LOAD_CONFIG('ui.alpha') end,
     }
 
     use {
@@ -204,8 +217,8 @@ return require('packer').startup(function(use)
         requires = { {'kyazdani42/nvim-web-devicons'} },
         cmd = {'NvimTreeToggle', 'NvimTreeFindFileToggle'},
         config = function ()
-            LOAD_CONFIG('nvim-tree')
-            LOAD_MAPPING('nvim-tree')
+            LOAD_CONFIG('ui.nvim-tree')
+            LOAD_MAPPING('ui.nvim-tree')
         end,
     }
     use {
@@ -214,25 +227,42 @@ return require('packer').startup(function(use)
             { 'nvim-treesitter/nvim-treesitter' },
             { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end },
         },
-        config = function () LOAD_CONFIG('bqf') end,
+        config = function () LOAD_CONFIG('ui.bqf') end,
+    }
+    use {
+        'nacro90/numb.nvim',
+        config = function () LOAD_CONFIG('ui.numb') end,
     }
 
+    ----------------------------------------------------------------------------
+    -- Floating terminal (for ease of use with git)
+    ----------------------------------------------------------------------------
+    use {
+        'akinsho/toggleterm.nvim',
+        config = function ()
+            LOAD_CONFIG('ui.toggleterm')
+            LOAD_MAPPING('ui.toggleterm')
+        end,
+    }
+
+    ----------------------------------------------------------------------------
     -- Git
+    ----------------------------------------------------------------------------
     use {
         'lewis6991/gitsigns.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
-        config = function () LOAD_CONFIG('gitsigns') end,
+        config = function () LOAD_CONFIG('git.gitsigns') end,
     }
     use {
         'tpope/vim-fugitive',
-        config = function () LOAD_MAPPING('fugitive') end,
+        config = function () LOAD_MAPPING('git.fugitive') end,
     }
     use {
         'sindrets/diffview.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
         config = function ()
-            LOAD_CONFIG('diffview')
-            LOAD_MAPPING('diffview')
+            LOAD_CONFIG('git.diffview')
+            LOAD_MAPPING('git.diffview')
         end,
     }
     use {
@@ -240,51 +270,50 @@ return require('packer').startup(function(use)
         requires = { {'sindrets/diffview.nvim'} },
         module = 'neogit',
         disable = true, -- still not properly using this
-        config = function () LOAD_CONFIG('neogit') end,
+        config = function () LOAD_CONFIG('git.neogit') end,
     }
 
-    -- Floating terminal (for ease of use with git)
-    use {
-        'akinsho/toggleterm.nvim',
-        config = function ()
-            LOAD_CONFIG('toggleterm')
-            LOAD_MAPPING('toggleterm')
-        end,
-    }
-
+    ----------------------------------------------------------------------------
     -- Editing Magic
+    ----------------------------------------------------------------------------
     use {
         'windwp/nvim-autopairs',
         opt = true,
         config = function ()
-            LOAD_CONFIG('nvim-autopairs')
-            LOAD_MAPPING('nvim-autopairs')
+            LOAD_CONFIG('magic.autopairs')
+            LOAD_MAPPING('magic.autopairs')
         end,
     }
     use {
         'machakann/vim-sandwich',
         config = function ()
-            LOAD_CONFIG('sandwich')
-            LOAD_MAPPING('sandwich')
+            LOAD_CONFIG('magic.sandwich')
+            LOAD_MAPPING('magic.sandwich')
         end,
     }
     use {
         'AckslD/nvim-trevJ.lua',
         config = function ()
-            LOAD_CONFIG('trevj')
-            LOAD_MAPPING('trevj')
+            LOAD_CONFIG('magic.trevj')
+            LOAD_MAPPING('magic.trevj')
         end,
     }
     use {
         'danymat/neogen',
         module = 'neogen',
         requires = 'nvim-treesitter/nvim-treesitter',
-        config = function () LOAD_CONFIG('neogen') end,
+        config = function () LOAD_CONFIG('magic.neogen') end,
     }
     use {
         'numToStr/Comment.nvim',
         module = 'Comment',
-        config = function () LOAD_CONFIG('comment') end,
+        config = function () LOAD_CONFIG('magic.comment') end,
+    }
+    use {'tpope/vim-abolish'}
+    use {
+        'gbprod/substitute.nvim',
+        module = 'substitute',
+        config = function () LOAD_CONFIG('magic.substitute') end,
     }
     use {
         'ThePrimeagen/refactoring.nvim',
@@ -293,25 +322,23 @@ return require('packer').startup(function(use)
             {'nvim-lua/plenary.nvim'},
             {'nvim-treesitter/nvim-treesitter'},
         },
-        config = function () LOAD_CONFIG('refactoring') end,
+        config = function () LOAD_CONFIG('magic.refactoring') end,
     }
 
+    ----------------------------------------------------------------------------
     -- Movement & File Navigation
-    use {
-        'nacro90/numb.nvim',
-        config = function () LOAD_CONFIG('numb') end,
-    }
+    ----------------------------------------------------------------------------
     use {
         'phaazon/hop.nvim',
         branch = 'v1',
         module = 'hop',
-        config = function () LOAD_CONFIG('hop') end,
+        config = function () LOAD_CONFIG('nav.hop') end,
     }
     use {'unblevable/quick-scope'}
     use {
         'abecodes/tabout.nvim',
         requires = {'nvim-treesitter/nvim-treesitter'},
-        config = function () LOAD_CONFIG('tabout') end,
+        config = function () LOAD_CONFIG('nav.tabout') end,
     }
 
     use {
@@ -324,14 +351,14 @@ return require('packer').startup(function(use)
             {'nvim-telescope/telescope-hop.nvim'},
             {'kyazdani42/nvim-web-devicons'},
         },
-        config = function () LOAD_CONFIG('telescope') end,
+        config = function () LOAD_CONFIG('nav.telescope') end,
     }
     use {
         'ThePrimeagen/harpoon',
         requires = { {'nvim-lua/plenary.nvim'} },
         config = function ()
-            LOAD_CONFIG('harpoon')
-            LOAD_MAPPING('harpoon')
+            LOAD_CONFIG('nav.harpoon')
+            LOAD_MAPPING('nav.harpoon')
         end,
     }
 
@@ -339,20 +366,14 @@ return require('packer').startup(function(use)
         'stevearc/aerial.nvim',
         requires = { 'nvim-treesitter/nvim-treesitter' },
         config = function ()
-            LOAD_CONFIG('aerial')
-            LOAD_MAPPING('aerial')
+            LOAD_CONFIG('nav.aerial')
+            LOAD_MAPPING('nav.aerial')
         end,
     }
 
-    -- Text Substitution/Processing
-    use {'tpope/vim-abolish'}
-    use {
-        'gbprod/substitute.nvim',
-        module = 'substitute',
-        config = function () LOAD_CONFIG('substitute') end,
-    }
-
+    ----------------------------------------------------------------------------
     -- Text Parsing
+    ----------------------------------------------------------------------------
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -362,15 +383,7 @@ return require('packer').startup(function(use)
             {'JoosepAlviste/nvim-ts-context-commentstring'},
             {'RRethy/nvim-treesitter-endwise'},
             {'windwp/nvim-ts-autotag'},
-            {
-                'nvim-treesitter/playground',
-                cmd = 'TSPlaygroundToggle',
-            },
-            {
-                'nvim-treesitter/nvim-treesitter-context',
-                requires = {'nvim-treesitter/nvim-treesitter'},
-                config = function () LOAD_CONFIG('treesitter-context') end,
-            },
+            { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
         },
         config = function ()
             LOAD_CONFIG('treesitter')
@@ -378,7 +391,9 @@ return require('packer').startup(function(use)
         end,
     }
 
+    ----------------------------------------------------------------------------
     -- Snippets
+    ----------------------------------------------------------------------------
     use {
         'L3MON4D3/LuaSnip',
         module = 'luasnip',
@@ -388,7 +403,9 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('luasnip') end,
     }
 
+    ----------------------------------------------------------------------------
     -- LSP and Autocompletion
+    ----------------------------------------------------------------------------
     use {
         'williamboman/nvim-lsp-installer',
         requires = {
@@ -404,7 +421,9 @@ return require('packer').startup(function(use)
         end,
     }
 
+    ----------------------------------------------------------------------------
     -- Autocompletion (nvim-cmp)
+    ----------------------------------------------------------------------------
     use {
         'hrsh7th/nvim-cmp',
         opt = true,
@@ -423,9 +442,9 @@ return require('packer').startup(function(use)
     use {'saadparwaiz1/cmp_luasnip', after = {'nvim-cmp', 'LuaSnip'}}
 
     -- Autocompletion (coq_nvim)
-    -- TODO: To avoid the problems with mapping, drop the snippets from coq and instead use null-ls to
-    -- inject luasnip as an LSP source. Then use Luasnip for flexible mappings and the rest of coq's
-    -- defaults should work fine.
+    -- TODO: To avoid the problems with mapping, drop the snippets from coq and instead use null-ls
+    -- to inject luasnip as an LSP source. Then use Luasnip for flexible mappings and the rest of
+    -- coq's defaults should work fine.
     -- use {
     --     'ms-jpq/coq_nvim',
     --     branch = 'coq', after = 'nvim-web-devicons',

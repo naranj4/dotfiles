@@ -107,15 +107,15 @@ map('t', '<C-v><ESC>', '<ESC>', '<C-\\><C-n>')
 -- Plugin Specific (mappings that have to be loaded prior to init)
 --------------------------------------------------------------------------------
 local plugins = {
-    'comment',
-    'hop',
+    -- 'git.neogit',
     'luasnip',
-    'neogen',
-    'neogit',
-    'nvim-tree',
-    'refactoring',
-    'substitute',
-    'telescope',
+    'magic.comment',
+    'magic.neogen',
+    'magic.refactoring',
+    'magic.substitute',
+    'nav.hop',
+    'nav.telescope',
+    'ui.nvim-tree',
 }
 
 for _, plugin in pairs(plugins) do

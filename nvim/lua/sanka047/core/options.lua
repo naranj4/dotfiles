@@ -101,7 +101,7 @@ opt.formatoptions:remove('t')
 -- Plugin Specific Config (must be specified at startup)
 --------------------------------------------------------------------------------
 local plugins = {
-    'quick-scope',
+    'nav.quick-scope',
 }
 
 for _, plugin in pairs(plugins) do
