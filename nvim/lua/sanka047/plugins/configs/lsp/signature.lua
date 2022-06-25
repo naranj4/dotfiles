@@ -14,7 +14,7 @@ function M.setup()
 
     lsp_signature.setup({
         bind = true,
-        handler_opts = { border = 'rounded' },
+        handler_opts = { border = require('sanka047.utils.window').border(true) },
         doc_lines = 10,
         -- FIX: turn this back on when #182 is fixed
         -- Issue: https://github.com/ray-x/lsp_signature.nvim/issues/182

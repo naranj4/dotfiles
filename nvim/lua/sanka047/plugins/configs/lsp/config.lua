@@ -88,7 +88,7 @@ function M.setup()
     ----------------------------------------------------------------------------
     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
         vim.lsp.handlers.hover,
-        { border = 'rounded' }
+        { border = require('sanka047.utils.window').border(true) }
     )
 
     configure_lsp_servers()

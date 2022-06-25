@@ -12,9 +12,11 @@ local packer = require('packer')
 packer.init({
     display = {
         open_fn = function()
-            return require('packer.util').float { border = 'rounded' }
+            return require('packer.util').float(
+                { border = require('sanka047.utils.window').border(true) }
+            )
         end,
-        prompt_border = 'rounded',
+        prompt_border = require('sanka047.utils.window').border(true),
     },
     git = {
         clone_timeout = 300, -- seconds

@@ -24,6 +24,8 @@ function M.setup()
         HopNextKey2 = { fg = colors.fg },
         HopUnmatched = { bg = colors.bg, fg = colors.fg_comment },
         HopCursor = { link = 'Cursor' },
+        FloatBorder = { fg = colors.bg_dark, bg = colors.bg },
+        CmpCompletionBorder = { fg = colors.bg_menu, bg = colors.bg },
     }
 
     kanagawa.setup({

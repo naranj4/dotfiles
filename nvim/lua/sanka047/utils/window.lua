@@ -17,6 +17,46 @@ function M.win_move(direction)
 end
 
 --------------------------------------------------------------------------------
+-- Window Border
+--------------------------------------------------------------------------------
+local block_chars = {
+    full = '█',
+    br_quad = '▗',
+    b_half = '▄',
+    bl_quad = '▖',
+    l_half = '▌',
+    tl_quad = '▘',
+    t_half = '▀',
+    tr_quad = '▝',
+    r_half = '▐',
+}
+
+-- Window border
+function M.border(add_margins)
+    local border = {
+        { block_chars.b_half },
+        { block_chars.b_half },
+        { block_chars.b_half },
+        { block_chars.full },
+        { block_chars.t_half },
+        { block_chars.t_half },
+        { block_chars.t_half },
+        { block_chars.full },
+    }
+
+    if not add_margins then
+        border[1] = { '' }
+        border[3] = { '' }
+        border[4] = { '' }
+        border[5] = { '' }
+        border[7] = { '' }
+        border[8] = { '' }
+    end
+
+    return border
+end
+
+--------------------------------------------------------------------------------
 -- Quickfix Functions
 --------------------------------------------------------------------------------
 M.is_qf_list_open = false

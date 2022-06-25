@@ -58,13 +58,14 @@ function M.setup()
             entries = { name = 'custom', selection_order = 'near_cursor' },
         },
         window = {
-            completion = cmp.config.window.bordered(
-                {
-                    border = {'', '', '', ' ', '', '', '', ' '},
-                    winhighlight = 'FloatBorder:CmpCompletion,NormalFloat:CmpCompletion',
-                }
-            ),
-            documentation = cmp.config.window.bordered(),
+            completion = cmp.config.window.bordered({
+                border = require('sanka047.utils.window').border(false),
+                winhighlight = 'FloatBorder:CmpCompletionBorder,NormalFloat:CmpCompletion',
+            }),
+            documentation = cmp.config.window.bordered({
+                border = require('sanka047.utils.window').border(true),
+                winhighlight = 'FloatBorder:CmpDocumentationBorder,NormalFloat:CmpDocumentation',
+            }),
         },
         mapping = {
             ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),

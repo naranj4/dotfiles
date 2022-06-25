@@ -14,6 +14,7 @@ function M.setup()
 
     lsp_installer.setup({
         ui = {
+            border = require('sanka047.utils.window').border(true),
             icons = {
                 server_installed = "✓",
                 server_pending = "➜",
