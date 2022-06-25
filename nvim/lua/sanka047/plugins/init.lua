@@ -233,10 +233,6 @@ return require('packer').startup(function(use)
         'nacro90/numb.nvim',
         config = function () LOAD_CONFIG('ui.numb') end,
     }
-
-    ----------------------------------------------------------------------------
-    -- Floating terminal (for ease of use with git)
-    ----------------------------------------------------------------------------
     use {
         'akinsho/toggleterm.nvim',
         config = function ()
