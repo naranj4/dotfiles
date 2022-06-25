@@ -2,6 +2,7 @@
 -- Aerial Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local map = require('sanka047.utils.map').map
 
 local M = {}
 
@@ -20,6 +21,13 @@ function M.setup()
         show_guides = true,
         highlight_mode = 'last',
     })
+end
+
+--------------------------------------------------------------------------------
+-- Aerial Keymap
+--------------------------------------------------------------------------------
+function M.keymap()
+    map('n', '<leader>a', 'Aerial', '<CMD>AerialToggle<CR>')
 end
 
 return M

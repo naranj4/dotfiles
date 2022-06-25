@@ -2,6 +2,7 @@
 -- Nvim-Cmp Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local map = require('sanka047.utils.map').map
 
 local M = {}
 
@@ -20,9 +21,9 @@ function M.setup()
 
     vim.opt.completeopt = 'menu,menuone,noselect'
 
-    --------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------
     -- Nvim-Cmp Setup
-    --------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------
     local has_lspkind, lspkind = pcall(require, 'lspkind')
     if not has_lspkind then
         log.error('lspkind not available (cmp)', 'Config')
@@ -89,9 +90,9 @@ function M.setup()
         }
     })
 
-    --------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------
     -- Nvim-Cmp Sources
-    --------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------
     cmp.setup.cmdline(':', {
         sources = cmp.config.sources(
             { { name = 'cmdline' }, },
@@ -105,13 +106,33 @@ function M.setup()
         },
     })
 
-    --------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------
     -- Nvim-Autopairs Compatibility
-    --------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------
     local has_autopairs, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
     if has_autopairs then
         cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
     end
+end
+
+--------------------------------------------------------------------------------
+-- Nvim-Cmp Keymap
+--------------------------------------------------------------------------------
+function M.keymap()
+    map('ic', '<C-p>', 'Select Prev')
+    map('ic', '<C-n>', 'Select Next')
+    map('ic', '<S-Tab>', 'Select Prev')
+    map('ic', '<Tab>', 'Select Next')
+
+    map('ic', '<C-d>', 'Scroll Down (Docs)')
+    map('ic', '<C-f>', 'Scroll Up (Docs)')
+
+    map('ic', '<C-e>', 'Close')
+    map('ic', '<CR>', 'Confirm')
+    map('ic', '<C-Space>', 'Trigger Completion')
+
+    map('ic', '<C-j>', 'Snippet Hop Forward')
+    map('ic', '<C-k>', 'Snippet Hop Backward')
 end
 
 return M

@@ -37,7 +37,7 @@ MATCH_PLUGINS = function (pattern)
     return packages
 end
 
-LOAD_CONFIG = function(plugin)
+LOAD_CONFIG = function (plugin)
     local load_success, config = pcall(require, 'sanka047.plugins.configs.' .. plugin)
     if not load_success then
         log.error(plugin .. ' config failed to load.', 'Config')
@@ -53,8 +53,8 @@ LOAD_CONFIG = function(plugin)
     return true
 end
 
-LOAD_MAPPING = function(plugin)
-    local load_success, mapping = pcall(require, 'sanka047.plugins.mappings.' .. plugin)
+LOAD_MAPPING = function (plugin)
+    local load_success, mapping = pcall(require, 'sanka047.plugins.configs.' .. plugin)
     if not load_success then
         log.error(plugin .. ' mapping failed to load.', 'Config')
         return false
