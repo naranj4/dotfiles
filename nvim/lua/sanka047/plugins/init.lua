@@ -105,6 +105,12 @@ end
 -- Plugin List
 --------------------------------------------------------------------------------
 return require('packer').startup(function(use)
+    -- let packer manager itself
+    use {'wbthomason/packer.nvim'}
+
+    ----------------------------------------------------------------------------
+    -- Utility
+    ----------------------------------------------------------------------------
     use {'lewis6991/impatient.nvim'}
     use {'dstein64/vim-startuptime'}
     use {'nathom/filetype.nvim'}
@@ -113,9 +119,6 @@ return require('packer').startup(function(use)
         config = function () vim.g.cursorhold_updatetime = 100 end,
     }
     use {'nvim-lua/plenary.nvim'}
-
-    -- let packer manager itself
-    use {'wbthomason/packer.nvim'}
 
     ----------------------------------------------------------------------------
     -- Document Mapping
@@ -131,7 +134,7 @@ return require('packer').startup(function(use)
     use {
         'norcalli/nvim-colorizer.lua',
         cmd = 'ColorizerToggle',
-        config = function () LOAD_CONFIG('colorizer') end,
+        config = function () LOAD_CONFIG('colors.colorizer') end,
     }
 
     ----------------------------------------------------------------------------
@@ -388,33 +391,26 @@ return require('packer').startup(function(use)
     }
 
     ----------------------------------------------------------------------------
-    -- Snippets
-    ----------------------------------------------------------------------------
-    use {
-        'L3MON4D3/LuaSnip',
-        module = 'luasnip',
-        requires = {
-            {'rafamadriz/friendly-snippets'}
-        },
-        config = function () LOAD_CONFIG('luasnip') end,
-    }
-
-    ----------------------------------------------------------------------------
     -- LSP and Autocompletion
     ----------------------------------------------------------------------------
     use {
         'williamboman/nvim-lsp-installer',
-        requires = {
-            {'neovim/nvim-lspconfig'},
-            {
-                'ray-x/lsp_signature.nvim',
-                config = function () LOAD_CONFIG('lsp-signature') end,
-            },
-        },
+        requires = { {'neovim/nvim-lspconfig'} },
         config = function ()
-            LOAD_MAPPING('lsp-installer')
-            LOAD_CONFIG('lsp-installer')
+            LOAD_CONFIG('lsp.installer')
         end,
+    }
+    use {
+        'neovim/nvim-lspconfig',
+        after = 'nvim-lsp-installer',
+        config = function ()
+            LOAD_CONFIG('lsp.config')
+            LOAD_MAPPING('lsp.config')
+        end,
+    }
+    use {
+        'ray-x/lsp_signature.nvim',
+        config = function () LOAD_CONFIG('lsp.signature') end,
     }
 
     ----------------------------------------------------------------------------
@@ -437,16 +433,15 @@ return require('packer').startup(function(use)
     use {'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp'}
     use {'saadparwaiz1/cmp_luasnip', after = {'nvim-cmp', 'LuaSnip'}}
 
-    -- Autocompletion (coq_nvim)
-    -- TODO: To avoid the problems with mapping, drop the snippets from coq and instead use null-ls
-    -- to inject luasnip as an LSP source. Then use Luasnip for flexible mappings and the rest of
-    -- coq's defaults should work fine.
-    -- use {
-    --     'ms-jpq/coq_nvim',
-    --     branch = 'coq', after = 'nvim-web-devicons',
-    --     requires = {
-    --         {'ms-jpq/coq.artifacts', branch = 'artifacts'},  -- snippets
-    --         {'ms-jpq/coq.thirdparty', branch = '3p'},
-    --     },
-    -- }
+    ----------------------------------------------------------------------------
+    -- Snippets
+    ----------------------------------------------------------------------------
+    use {
+        'L3MON4D3/LuaSnip',
+        module = 'luasnip',
+        requires = {
+            {'rafamadriz/friendly-snippets'}
+        },
+        config = function () LOAD_CONFIG('luasnip') end,
+    }
 end)

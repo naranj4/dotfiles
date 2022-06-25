@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- LSP Installer Config
+-- LSP Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
 local map = require('sanka047.utils.map').map
@@ -7,9 +7,6 @@ local map_group = require('sanka047.utils.map').map_group
 
 local M = {}
 
---------------------------------------------------------------------------------
--- LSP Config
---------------------------------------------------------------------------------
 local function get_client_capabilities()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     -- capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
@@ -34,9 +31,9 @@ end
 
 local function generate_on_attach()
     return function (client, bufnr)
-        local map = function (...) require('sanka047.utils.map').buf_map(bufnr, ...) end
+        local buf_map = function (...) require('sanka047.utils.map').buf_map(bufnr, ...) end
 
-        map('n', 'K', 'Doc', vim.lsp.buf.hover)
+        buf_map('n', 'K', 'Doc', vim.lsp.buf.hover)
 
         -- illuminate
         local has_illuminate, illuminate = pcall(require, 'illuminate')
@@ -51,7 +48,9 @@ local function generate_on_attach()
     end
 end
 
-local function get_lsp_settings(server) return require('sanka047.lsp.' .. server) end
+local function get_lsp_settings(server)
+    return require('sanka047.plugins.configs.lsp.servers.' .. server)
+end
 
 local function configure_lsp_servers()
     local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
@@ -84,25 +83,9 @@ local function configure_lsp_servers()
 end
 
 function M.setup()
-    local has_lsp_installer, lsp_installer = pcall(require, 'nvim-lsp-installer')
-    if not has_lsp_installer then
-        log.error('nvim-lsp-installer not available', 'Config')
-        return false
-    end
-
-    lsp_installer.setup({
-        ui = {
-            icons = {
-                server_installed = "✓",
-                server_pending = "➜",
-                server_uninstalled = "✗",
-            },
-        },
-    })
-
-    --------------------------------------------------------------------------------
-    -- LSP Handlers
-    --------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------
+    -- LSP Handler Overrides
+    ----------------------------------------------------------------------------
     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
         vim.lsp.handlers.hover,
         { border = 'rounded' }
@@ -117,18 +100,30 @@ end
 function M.keymap()
     map_group('n', '<leader>g', 'lsp-get')
 
+    -- refactoring
     map('n', '<leader>rn', 'Rename', vim.lsp.buf.rename)
 
-    map('n', '<leader>gd', 'Get Def.', function () require("telescope.builtin").lsp_definitions() end)
+    -- get code information
+    map('n', '<leader>gd', 'Get Def.', function ()
+        require("telescope.builtin").lsp_definitions()
+    end)
     map('n', '<leader>gD', 'Get Decl.', vim.lsp.buf.declaration)
-    map('n', '<leader>gy', 'Get Type Def.', function () require("telescope.builtin").lsp_type_definitions() end)
-    map('n', '<leader>gi', 'Get Impl.', function () require("telescope.builtin").lsp_implementations() end)
-    map('n', '<leader>gr', 'Get Ref.', function () require("telescope.builtin").lsp_references() end)
+    map('n', '<leader>gy', 'Get Type Def.', function ()
+        require("telescope.builtin").lsp_type_definitions()
+    end)
+    map('n', '<leader>gi', 'Get Impl.', function ()
+        require("telescope.builtin").lsp_implementations()
+    end)
+    map('n', '<leader>gr', 'Get Ref.', function ()
+        require("telescope.builtin").lsp_references()
+    end)
 
     map_group('n', '<leader>l', 'lsp')
 
     -- diagnostic information
-    map('n', '<leader>ld', 'Find Diagnostics', function () require("telescope.builtin").diagnostics() end)
+    map('n', '<leader>ld', 'Find Diagnostics', function ()
+        require("telescope.builtin").diagnostics()
+    end)
     map('n', '[d', 'Prev Diagnostic', vim.diagnostic.goto_prev)
     map('n', ']d', 'Next Diagnostic', vim.diagnostic.goto_next)
     map('n', '<leader>q', 'Diagnostic (Loc)List', vim.diagnostic.setloclist)
@@ -141,8 +136,12 @@ function M.keymap()
 
     map('n', '<leader>lf', 'Format', vim.lsp.buf.formatting)
 
-    map('n', '<leader>lca', 'Code Actions', function () require("telescope.builtin").lsp_code_actions() end)
-    map('v', '<leader>lca', 'Code Actions', function () require("telescope.builtin").lsp_range_code_actions() end)
+    map('n', '<leader>lca', 'Code Actions', function ()
+        require("telescope.builtin").lsp_code_actions()
+    end)
+    map('v', '<leader>lca', 'Code Actions', function ()
+        require("telescope.builtin").lsp_range_code_actions()
+    end)
 end
 
 return M
