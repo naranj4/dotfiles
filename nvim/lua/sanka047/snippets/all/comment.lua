@@ -77,8 +77,8 @@ local function todo_snippet_nodes(aliases, opts)
             return get_cstring(opts.ctype)[1] -- get <comment-string[1]>
         end),
         alias = c(1, aliases_nodes), -- [name-of-comment]
-        text = i(3), -- {comment-text}
-        mark = c(2, sigmark_nodes), -- [comment-mark]
+        text = i(2), -- {comment-text}
+        mark = c(3, sigmark_nodes), -- [comment-mark]
         end_cstr = f(function()
             local end_string = get_cstring(opts.ctype)[2]
             if end_string == nil or end_string == '' then
