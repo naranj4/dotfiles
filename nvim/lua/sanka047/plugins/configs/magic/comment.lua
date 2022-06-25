@@ -74,7 +74,6 @@ function M.setup()
         },
 
         ---Pre-hook, called before commenting the line
-        ---@type fun(ctx: Ctx):string
         pre_hook = function (ctx)
             local utils = require('Comment.utils')
 
@@ -105,7 +104,6 @@ function M.setup()
         end,
 
         ---Post-hook, called after commenting is done
-        ---@type fun(ctx: Ctx)
         post_hook = nil,
     })
 end

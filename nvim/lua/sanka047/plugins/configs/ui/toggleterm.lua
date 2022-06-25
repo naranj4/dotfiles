@@ -53,7 +53,7 @@ end
 -- Toggleterm Keymap
 --------------------------------------------------------------------------------
 function M.keymap()
-    local ok, toggleterm = pcall(require, 'toggleterm')
+    local ok, _ = pcall(require, 'toggleterm')
     if not ok then
         log.error('toggleterm not available', 'Keymap')
         return false
