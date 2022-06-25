@@ -94,6 +94,7 @@ end
 function M.keymap()
     get_module_config('textobjects').keymap()
     get_module_config('textsubjects').keymap()
+    get_module_config('playground').keymap()
 end
 
 return M

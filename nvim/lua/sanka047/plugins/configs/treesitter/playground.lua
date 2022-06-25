@@ -1,6 +1,8 @@
 --------------------------------------------------------------------------------
 -- Playground Config
 --------------------------------------------------------------------------------
+local map = require('sanka047.utils.map').map
+
 local M = {}
 
 function M.config()
@@ -22,6 +24,10 @@ function M.config()
             show_help = '?',
         }
     }
+end
+
+function M.keymap()
+    map('n', '<leader><leader>ttp', 'TSPlayground', '<CMD>TSPlaygroundToggle<CR>')
 end
 
 return M
