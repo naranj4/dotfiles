@@ -182,10 +182,6 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'edluffy/specs.nvim',
-        config = function () LOAD_CONFIG('ui.specs') end,
-    }
-    use {
         'RRethy/vim-illuminate',
         config = function () LOAD_CONFIG('ui.illuminate') end,
     }
