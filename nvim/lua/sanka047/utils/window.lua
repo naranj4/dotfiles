@@ -40,30 +40,30 @@ M.margin = {
 -- Window border
 function M.border(margin)
     local border = {
-        { block_chars.b_half },
-        { block_chars.b_half },
-        { block_chars.b_half },
-        { block_chars.full },
-        { block_chars.t_half },
-        { block_chars.t_half },
-        { block_chars.t_half },
-        { block_chars.full },
+        block_chars.b_half,
+        block_chars.b_half,
+        block_chars.b_half,
+        block_chars.full,
+        block_chars.t_half,
+        block_chars.t_half,
+        block_chars.t_half,
+        block_chars.full,
     }
 
     if margin == M.margin.HALF then
-        border[1] = { block_chars.br_quad }
-        border[3] = { block_chars.bl_quad }
-        border[4] = { block_chars.r_half }
-        border[5] = { block_chars.tr_quad }
-        border[7] = { block_chars.tl_quad }
-        border[8] = { block_chars.l_half }
+        border[1] = block_chars.br_quad
+        border[3] = block_chars.bl_quad
+        border[4] = block_chars.l_half
+        border[5] = block_chars.tl_quad
+        border[7] = block_chars.tr_quad
+        border[8] = block_chars.r_half
     elseif margin == M.margin.NONE then
-        border[1] = { '' }
-        border[3] = { '' }
-        border[4] = { '' }
-        border[5] = { '' }
-        border[7] = { '' }
-        border[8] = { '' }
+        border[1] = ''
+        border[3] = ''
+        border[4] = ''
+        border[5] = ''
+        border[7] = ''
+        border[8] = ''
     end
 
     return border

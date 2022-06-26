@@ -2,11 +2,25 @@
 -- Telescope Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local window = require('sanka047.utils.window')
 
 local M = {}
 
 local function req_telescope(submodule)
     return require('sanka047.plugins.nav.telescope.' .. submodule)
+end
+
+local function translate_borderchars_for_telescope(borderchars)
+    return {
+        borderchars[2],
+        borderchars[4],
+        borderchars[6],
+        borderchars[8],
+        borderchars[1],
+        borderchars[3],
+        borderchars[5],
+        borderchars[7],
+    }
 end
 
 function M.setup()
@@ -33,6 +47,9 @@ function M.setup()
     }
     mappings = vim.tbl_deep_extend('error', mappings, req_telescope('extensions.hop').keymap())
 
+    -- translate borderchars to telescope supported values, because... why?
+    local borderchars = translate_borderchars_for_telescope(window.border(window.margin.HALF))
+
     telescope.setup({
         defaults = {
             -- Default configuration for telescope goes here:
@@ -48,6 +65,11 @@ function M.setup()
                 '--trim',
             },
             mappings = mappings,
+            -- borderchars = {
+            --     prompt = borderchars,
+            --     results = borderchars,
+            --     preview = borderchars,
+            -- },
         },
         pickers = {
             find_files = {
