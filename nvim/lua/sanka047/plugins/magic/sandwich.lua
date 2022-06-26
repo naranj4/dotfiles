@@ -64,39 +64,44 @@ function M.keymap()
     local opts = { noremap = false }
 
     -- add
-    map('', '<leader>sa', 'Sandwich Add', '<Plug>(operator-sandwich-add)', opts)
+    map('n', 'ys', 'surround', '<Plug>(operator-sandwich-add)', opts)
+    map('x', 'S', 'surround', '<Plug>(operator-sandwich-add)', opts)
 
     -- delete
     map(
-        'nx',
-        '<leader>sd',
-        'Sandwich Delete',
+        'n',
+        'ds',
+        'delete surround',
         '<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)',
         opts
     )
     map(
         'n',
-        '<leader>sdb',
-        'Sandwich Delete (Auto)',
+        'dss',
+        'delete surround (auto)',
         '<Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)',
         opts
     )
 
     -- replace
     map(
-        'nx',
-        '<leader>sr',
-        'Sandwich Replace',
+        'n',
+        'cs',
+        'change surround',
         '<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)',
         opts
     )
     map(
         'n',
-        '<leader>srb',
-        'Sandwich Replace (Auto)',
+        'css',
+        'change surround (auto)',
         '<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)',
         opts
     )
+
+    -- textobjects
+    map('xo', 'is', 'in sandwich', '<Plug>(textobj-sandwich-auto-i)')
+    map('xo', 'is', 'around sandwich', '<Plug>(textobj-sandwich-auto-i)')
 end
 
 return M
