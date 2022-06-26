@@ -19,15 +19,21 @@ function M.setup()
     local overrides = {
         InclineNormal = { bg = colors.fn, fg = colors.bg_dark, bold = true },
         InclineNormalNC = { bg = colors.bg_light0, fg = colors.fg_dark },
+
         HopNextKey = { fg = colors.fg, bold = true },
         HopNextKey1 = { link = 'HopNextKey' },
         HopNextKey2 = { fg = colors.fg },
         HopUnmatched = { bg = colors.bg, fg = colors.fg_comment },
         HopCursor = { link = 'Cursor' },
+
         FloatBorder = { fg = colors.bg_dark, bg = colors.bg },
+
         CmpCompletionBorder = { fg = colors.bg_menu, bg = colors.bg },
         CmpDocumentation = { bg = colors.bg_dim },
         CmpDocumentationBorder = { fg = colors.bg_dim, bg = colors.bg },
+
+        QuickScopePrimary = { fg = colors.crystalBlue, underline = true, bold = true },
+        QuickScopeSecondary = { fg = colors.diag.warning, underline = true, bold = true },
     }
 
     kanagawa.setup({
