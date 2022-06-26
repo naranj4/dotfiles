@@ -224,6 +224,14 @@ return require('packer').startup(function(use)
         end,
     }
     use {
+        'elihunter173/dirbuf.nvim',
+        disable = true,
+        config = function ()
+            LOAD_CONFIG('ui.dirbuf')
+            LOAD_MAPPING('ui.dirbuf')
+        end
+    }
+    use {
         'kevinhwang91/nvim-bqf',
         requires = {
             { 'nvim-treesitter/nvim-treesitter' },
