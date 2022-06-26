@@ -16,10 +16,15 @@ function M.setup()
         input = {
             enabled = true,
             insert_only = true,
+            winblend = 0,
+            override = function (conf)
+                conf['border'] = require('sanka047.utils.window').border(true)
+            end
         },
         select = {
             enabled = true,
             backend = { "telescope", "builtin" },
+            winblend = 0,
         },
     })
 end

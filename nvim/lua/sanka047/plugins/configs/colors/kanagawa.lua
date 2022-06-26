@@ -27,6 +27,7 @@ function M.setup()
         HopCursor = { link = 'Cursor' },
 
         FloatBorder = { fg = colors.bg_dark, bg = colors.bg },
+        FloatTitle = { fg = colors.bg_dark, bg = colors.crystalBlue, bold = true },
 
         CmpCompletionBorder = { fg = colors.bg_menu, bg = colors.bg },
         CmpDocumentation = { bg = colors.bg_dim },
