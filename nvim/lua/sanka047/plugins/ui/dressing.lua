@@ -2,6 +2,7 @@
 -- Dressing Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local window = require('sanka047.utils.window')
 
 local M = {}
 
@@ -18,7 +19,7 @@ function M.setup()
             insert_only = true,
             winblend = 0,
             override = function (conf)
-                conf['border'] = require('sanka047.utils.window').border(true)
+                conf['border'] = window.border(window.margin.FULL)
             end
         },
         select = {

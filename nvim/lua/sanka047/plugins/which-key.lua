@@ -2,6 +2,7 @@
 -- Which Key Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local window = require('sanka047.utils.window')
 
 local M = {}
 
@@ -45,7 +46,7 @@ function M.setup()
             scroll_up = '<c-u>', -- binding to scroll up inside the popup
         },
         window = {
-            border = require('sanka047.utils.window').border(true), -- none, single, double, shadow
+            border = window.border(window.margin.FULL), -- none, single, double, shadow
             position = "bottom", -- bottom, top
             margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
             padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]

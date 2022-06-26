@@ -2,6 +2,7 @@
 -- Nvim-Cmp Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local window = require('sanka047.utils.window')
 local map = require('sanka047.utils.map').map
 
 local M = {}
@@ -59,11 +60,11 @@ function M.setup()
         },
         window = {
             completion = cmp.config.window.bordered({
-                border = require('sanka047.utils.window').border(false),
+                border = window.border(window.margin.NONE),
                 winhighlight = 'FloatBorder:CmpCompletionBorder,NormalFloat:CmpCompletion',
             }),
             documentation = cmp.config.window.bordered({
-                border = require('sanka047.utils.window').border(true),
+                border = window.border(window.margin.FULL),
                 winhighlight = 'FloatBorder:CmpDocumentationBorder,NormalFloat:CmpDocumentation',
             }),
         },

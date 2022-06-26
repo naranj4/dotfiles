@@ -8,15 +8,16 @@ if firstload then
 end
 
 local packer = require('packer')
+local window = require('sanka047.utils.window')
 
 packer.init({
     display = {
         open_fn = function()
             return require('packer.util').float(
-                { border = require('sanka047.utils.window').border(true) }
+                { border = window.border(window.margin.FULL) }
             )
         end,
-        prompt_border = require('sanka047.utils.window').border(true),
+        prompt_border = window.border(window.margin.FULL),
     },
     git = {
         clone_timeout = 300, -- seconds

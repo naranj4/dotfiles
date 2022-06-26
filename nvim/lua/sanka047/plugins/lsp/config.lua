@@ -2,6 +2,7 @@
 -- LSP Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local window = require('sanka047.utils.window')
 local map = require('sanka047.utils.map').map
 local map_group = require('sanka047.utils.map').map_group
 
@@ -88,7 +89,7 @@ function M.setup()
     ----------------------------------------------------------------------------
     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
         vim.lsp.handlers.hover,
-        { border = require('sanka047.utils.window').border(true) }
+        { border = window.border(window.margin.FULL) }
     )
 
     configure_lsp_servers()

@@ -2,6 +2,7 @@
 -- LSP Installer Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local window = require('sanka047.utils.window')
 
 local M = {}
 
@@ -14,7 +15,7 @@ function M.setup()
 
     lsp_signature.setup({
         bind = true,
-        handler_opts = { border = require('sanka047.utils.window').border(true) },
+        handler_opts = { border = window.border(window.margin.FULL) },
         doc_lines = 10,
         -- FIX: turn this back on when #182 is fixed
         -- Issue: https://github.com/ray-x/lsp_signature.nvim/issues/182

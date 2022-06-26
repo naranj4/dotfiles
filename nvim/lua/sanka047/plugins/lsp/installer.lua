@@ -2,6 +2,7 @@
 -- LSP Installer Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local window = require('sanka047.utils.window')
 
 local M = {}
 
@@ -14,7 +15,7 @@ function M.setup()
 
     lsp_installer.setup({
         ui = {
-            border = require('sanka047.utils.window').border(true),
+            border = window.border(window.margin.FULL),
             icons = {
                 server_installed = "✓",
                 server_pending = "➜",

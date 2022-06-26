@@ -2,6 +2,7 @@
 -- GitSigns Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local window = require('sanka047.utils.window')
 
 local M = {}
 
@@ -45,7 +46,7 @@ function M.setup()
         max_file_length = 40000,
         preview_config = {
             -- Options passed to nvim_open_win
-            border = require('sanka047.utils.window').border(true),
+            border = window.border(window.margin.FULL),
             style = 'minimal',
             relative = 'cursor',
             row = 0,
