@@ -26,6 +26,8 @@ function M.setup()
         HopCursor = { link = 'Cursor' },
         FloatBorder = { fg = colors.bg_dark, bg = colors.bg },
         CmpCompletionBorder = { fg = colors.bg_menu, bg = colors.bg },
+        CmpDocumentation = { bg = colors.bg_dim },
+        CmpDocumentationBorder = { fg = colors.bg_dim, bg = colors.bg },
     }
 
     kanagawa.setup({
