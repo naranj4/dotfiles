@@ -49,7 +49,7 @@ local function generate_on_attach()
 end
 
 local function get_lsp_settings(server)
-    return require('sanka047.plugins.configs.lsp.servers.' .. server)
+    return require('sanka047.plugins.lsp.servers.' .. server)
 end
 
 local function configure_lsp_servers()

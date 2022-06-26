@@ -6,7 +6,7 @@ local log = require('sanka047.utils.log')
 local M = {}
 
 local function req_telescope(submodule)
-    return require('sanka047.plugins.configs.nav.telescope.' .. submodule)
+    return require('sanka047.plugins.nav.telescope.' .. submodule)
 end
 
 function M.setup()
@@ -17,7 +17,7 @@ function M.setup()
     end
 
     local actions = require('telescope.actions')
-    local custom_actions = require('sanka047.plugins.configs.nav.telescope.actions')
+    local custom_actions = require('sanka047.plugins.nav.telescope.actions')
 
     -- Mappings for all extensions
     local mappings = {

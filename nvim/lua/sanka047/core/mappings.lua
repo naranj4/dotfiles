@@ -108,7 +108,7 @@ map('t', '<C-v><ESC>', '<ESC>', '<C-\\><C-n>')
 --------------------------------------------------------------------------------
 local plugins = {
     -- 'git.neogit',
-    'luasnip',
+    'lsp.luasnip',
     'magic.comment',
     'magic.neogen',
     'magic.refactoring',

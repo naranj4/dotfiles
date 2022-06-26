@@ -47,7 +47,7 @@ end
 function M.keymap()
     map_group('n', '<leader><leader>s', 'snippets')
     map('n', '<leader><leader>sr', 'Reload Luasnip', function ()
-        R('sanka047.plugins.configs.luasnip').setup()
+        R('sanka047.plugins.luasnip').setup()
     end)
     map('n', '<leader><leader>se', 'Edit Snippets', function ()
         require('luasnip.loaders').edit_snippet_files({})

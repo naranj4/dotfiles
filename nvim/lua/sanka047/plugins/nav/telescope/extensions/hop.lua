@@ -2,7 +2,7 @@
 -- Hop Extension
 --------------------------------------------------------------------------------
 local actions = require('telescope.actions')
-local custom_actions = require('sanka047.plugins.configs.nav.telescope.actions')
+local custom_actions = require('sanka047.plugins.nav.telescope.actions')
 
 local M = {}
 

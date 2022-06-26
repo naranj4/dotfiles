@@ -418,8 +418,8 @@ return require('packer').startup(function(use)
         'hrsh7th/nvim-cmp',
         opt = true,
         config = function ()
-            LOAD_CONFIG('nvim-cmp')
-            LOAD_MAPPING('nvim-cmp')
+            LOAD_CONFIG('lsp.cmp')
+            LOAD_MAPPING('lsp.cmp')
         end,
     }
 
@@ -440,6 +440,6 @@ return require('packer').startup(function(use)
         requires = {
             {'rafamadriz/friendly-snippets'}
         },
-        config = function () LOAD_CONFIG('luasnip') end,
+        config = function () LOAD_CONFIG('lsp.luasnip') end,
     }
 end)
