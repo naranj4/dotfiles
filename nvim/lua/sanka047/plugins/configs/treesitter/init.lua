@@ -40,7 +40,7 @@ local function ensure_treesitter_language_installed()
 end
 
 local function get_module_config(treesitter_module)
-    return require('sanka047.plugins.configs.treesitter.' .. treesitter_module)
+    return require('sanka047.plugins.configs.treesitter.modules.' .. treesitter_module)
 end
 
 function M.setup()
