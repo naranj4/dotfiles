@@ -338,6 +338,13 @@ return require('packer').startup(function(use)
     }
     use {'unblevable/quick-scope'}
     use {
+        'ggandor/leap.nvim',
+        config = function ()
+            LOAD_CONFIG('nav.leap')
+            LOAD_MAPPING('nav.leap')
+        end
+    }
+    use {
         'abecodes/tabout.nvim',
         requires = {'nvim-treesitter/nvim-treesitter'},
         config = function () LOAD_CONFIG('nav.tabout') end,

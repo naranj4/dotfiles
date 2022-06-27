@@ -36,6 +36,11 @@ function M.setup()
         QuickScopePrimary = { fg = colors.crystalBlue, underline = true, bold = true },
         QuickScopeSecondary = { fg = colors.diag.warning, underline = true, bold = true },
 
+        LeapMatch = { link = 'QuickScopeSecondary' },
+        LeapLabelPrimary = { fg = colors.fg, bold = true },
+        LeapLabelSecondary = { fg = colors.diag.warning, bold = true },
+        LeapBackdrop = { fg = colors.fg_comment, bg = colors.bg },
+
         -- TelescopeNormal = { fg = colors.fg_dark, bg = colors.winterBlue },
         -- TelescopeBorder = { fg = colors.winterBlue, bg = colors.bg },
         -- TelescopeTitle = { fg = colors.winterBlue, bg = colors.crystalBlue, bold = true },
