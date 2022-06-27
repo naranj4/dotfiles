@@ -16,10 +16,17 @@ function M.setup()
     leap.setup({
         safe_labels = {}, -- autojump is disorienting with scrolloff 999
         labels = {
-            'j', 'f', 'k', 'd', 'l', ';', 'a', 'h', 'g',
-            'u', 'r', 'i', 'e', 'o', 'p', 'q', 'y', 't',
-            'm', 'v', ',', 'c', '.', '/', 'z', 'n', 'b',
-            's', 'w', 'x', -- left ring finger lowest priority
+            -- don't include the following classes:
+            --   * non home row pinky: 'q', 'z', 'p', '/'
+            --   * non home row center col: 't', 'b', 'y', 'n'
+            --   * bottow row ring: 'x', '.'
+            --   * all bottow row shifted: 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?'
+
+            'j', 'f', 'k', 'd', 'l', 's', ';', 'a', 'h', 'g',
+            'u', 'r', 'i', 'e', 'o', 'w',
+            'J', 'F', 'K', 'D', 'L', 'S', 'A',
+            'U', 'R', 'I', 'E', 'O', 'W',
+            'm', 'v', ',', 'c',
         },
     })
 end
