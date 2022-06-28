@@ -32,8 +32,10 @@ function M.setup()
 end
 
 function M.keymap()
-    map('', 's', 'leap forward', '<Plug>(leap-forward)')
-    map('', 'S', 'leap backward', '<Plug>(leap-backward)')
+    map('', 's', 'leap bidirectional', function ()
+        local win_id = vim.api.nvim_get_current_win()
+        require('leap').leap({ ['target-windows'] = { win_id } })
+    end)
 end
 
 return M
