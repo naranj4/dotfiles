@@ -1,10 +1,22 @@
 --------------------------------------------------------------------------------
 -- Plugins
 --------------------------------------------------------------------------------
+local log = require('sanka047.utils.log')
+local registry = require('sanka047.registry')
 local firstload = require('sanka047.plugins.firstload')
 
 if firstload then
-    return false
+    require('sanka047.utils.map').create_autocmd('User', 'Notify user to reload after bootstrap', {
+        pattern = 'PackerComplete',
+        callback = function ()
+            print('-------------------------------------------')
+            print('Packer has finished bootstrapping.')
+            print('Plugins have been installed.')
+            print('Please restart neovim.')
+            print('-------------------------------------------')
+        end,
+        once = true,
+    })
 end
 
 local packer = require('packer')
@@ -41,9 +53,6 @@ map('n', '<leader><leader>pc', 'Packer Compile', function () packer.compile() en
 --------------------------------------------------------------------------------
 -- Lazy loading helpers
 --------------------------------------------------------------------------------
-local log = require('sanka047.utils.log')
-local registry = require('sanka047.registry')
-
 local function _lazy_load_condition(metadata)
     log.debug('Metadata: ' .. vim.inspect(metadata))
     local ignore_filetypes = {
@@ -454,4 +463,9 @@ return require('packer').startup(function(use)
         },
         config = function () LOAD_CONFIG('lsp.luasnip') end,
     }
+
+    -- install all plugins on first load
+    if firstload then
+        require('packer').sync()
+    end
 end)
