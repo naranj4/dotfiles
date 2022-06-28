@@ -65,7 +65,7 @@ function M.keymap()
 
     -- add
     map('n', 'ys', 'surround', '<Plug>(operator-sandwich-add)', opts)
-    map('x', '<leader>S', 'surround', '<Plug>(operator-sandwich-add)', opts)
+    map('x', 'S', 'surround', '<Plug>(operator-sandwich-add)', opts)
 
     -- delete
     map(
