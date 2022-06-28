@@ -35,7 +35,7 @@ map('', 'H', 'Home', '^')
 map('', 'L', 'End', '$')
 
 -- quick escape in insert/select mode
-map('is', 'kj', '<ESC>', '<ESC>')
+map('is', 'kj', 'Switch to Normal', '<ESC>')
 
 -- set undo breakpoints
 map('i', ',', 'Undo Breakpoint', ',<C-g>u')
@@ -101,7 +101,7 @@ create_autocmd(
 --------------------------------------------------------------------------------
 -- Terminal Mode Mappings
 --------------------------------------------------------------------------------
-map('t', '<C-v><ESC>', '<ESC>', '<C-\\><C-n>')
+map('t', 'KJ', 'Switch to Normal', '<C-\\><C-n>')
 
 --------------------------------------------------------------------------------
 -- Plugin Specific (mappings that have to be loaded prior to init)
