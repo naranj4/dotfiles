@@ -41,9 +41,17 @@ function M.setup()
         LeapLabelSecondary = { fg = colors.bg_dark, bg = colors.crystalBlue, bold = true },
         LeapBackdrop = { fg = colors.fg_comment, bg = colors.bg },
 
-        -- TelescopeNormal = { fg = colors.fg_dark, bg = colors.winterBlue },
-        -- TelescopeBorder = { fg = colors.winterBlue, bg = colors.bg },
-        -- TelescopeTitle = { fg = colors.winterBlue, bg = colors.crystalBlue, bold = true },
+        TelescopeNormal = { fg = colors.fg_dark, bg = colors.winterBlue },
+        TelescopeBorder = { fg = colors.winterBlue, bg = colors.winterBlue },
+        TelescopeTitle = { fg = colors.winterBlue, bg = colors.crystalBlue, bold = true },
+
+        TelescopePromptNormal = { fg = colors.fg_dark, bg = colors.bg_menu },
+        TelescopePromptBorder = { fg = colors.bg_menu, bg = colors.bg_menu },
+        TelescopePromptTitle = { fg = colors.bg, bg = colors.autumnYellow, bold = true },
+
+        TelescopeResultsTitle = { fg = colors.winterBlue, bg = colors.winterBlue, bold = true },
+
+        TelescopePreviewTitle = { fg = colors.bg, bg = colors.boatYellow2, bold = true },
     }
 
     kanagawa.setup({

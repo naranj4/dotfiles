@@ -47,9 +47,6 @@ function M.setup()
     }
     mappings = vim.tbl_deep_extend('error', mappings, req_telescope('extensions.hop').keymap())
 
-    -- translate borderchars to telescope supported values, because... why?
-    local borderchars = translate_borderchars_for_telescope(window.border(window.margin.HALF))
-
     telescope.setup({
         defaults = {
             -- Default configuration for telescope goes here:
@@ -65,11 +62,19 @@ function M.setup()
                 '--trim',
             },
             mappings = mappings,
-            -- borderchars = {
-            --     prompt = borderchars,
-            --     results = borderchars,
-            --     preview = borderchars,
-            -- },
+            layout_config = {
+                prompt_position = 'top',
+                width = 0.8,
+                height = 0.8,
+                preview_cutoff = 120,
+            },
+            borderchars = translate_borderchars_for_telescope(window.border(window.margin.HALF)),
+            sorting_strategy = 'ascending',
+            prompt_prefix = '  ',
+            entry_prefix = '   ',
+            selection_caret = '  ',
+            multi_icon = '  ',
+            path_display = { 'truncate' },
         },
         pickers = {
             find_files = {
