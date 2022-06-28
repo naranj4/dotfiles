@@ -43,28 +43,43 @@ function M.keymap()
     )
 
     map_group('n', '<leader>f', 'telescope-find')
+    map_group('n', '<leader>F', 'telescope-find-cmd')
+
+    -- find files
     map('n', '<leader>ff', 'Find Files', finder.project_files)
-    map('n', '<leader>fF', 'Find Files (in dir)', ':TFindFiles<space>')
-    map('n', '<leader>fbb', 'Find Buffers', function () require('telescope.builtin').buffers() end)
+    map('n', '<leader>FF', 'Find Files (in dir)', ':TFindFiles<space>')
+    map('n', '<leader>fb', 'Find Buffers', function () require('telescope.builtin').buffers() end)
     map('n', '<leader>fhs', 'Find History', function () require('telescope.builtin').oldfiles() end)
 
-    map('n', '<leader>fbm', 'Find Bookmarks', function () require('telescope.builtin').marks() end)
-    map('n', '<leader>fc', 'Find Containing', ':FindContaining<space>')
-
-    map('n', '<leader>fs', 'Find String', ':TelescopeRG<space>')
-    map('n', '<leader>fS', 'Find String (Cursor)', function () require('telescope.builtin').grep_string() end)
+    -- find word/string
+    map('n', '<leader>fs', 'Find String (Cursor)', function ()
+        require('telescope.builtin').grep_string()
+    end)
+    map('n', '<leader>FS', 'Find String', ':TelescopeRG<space>')
+    map('n', '<leader>FC', 'Find Containing', ':FindContaining<space>')
     map('n', '<leader>fl', 'Live Grep', function () require('telescope.builtin').live_grep() end)
-    map('n', '<leader>/', 'Find in Buffer', function () require('telescope.builtin').current_buffer_fuzzy_find() end)
+    map('n', '<leader>/', 'Find in Buffer', function ()
+        require('telescope.builtin').current_buffer_fuzzy_find()
+    end)
 
-    map('n', '<leader>fhh', 'Find Help Tags', function () require('telescope.builtin').help_tags() end)
-
+    -- extensions
     map('n', '<leader>fa', 'Find Aerial', function ()
         require('telescope').extensions.aerial.aerial()
     end)
-    map('n', '<leader>fn', 'Find Notifications', function () require('telescope').extensions.notify.notify() end)
-    map('n', '<leader>mf', 'Find Marks (Harpoon)', function () require('telescope').extensions.harpoon.marks() end)
+    map('n', '<leader>fn', 'Find Notifications', function ()
+        require('telescope').extensions.notify.notify()
+    end)
+    map('n', '<leader>mf', 'Find Marks (Harpoon)', function ()
+        require('telescope').extensions.harpoon.marks()
+    end)
 
+    -- search config
     map('n', '<leader><leader>vf', 'Find Neovim Config File', finder.search_dotfiles)
+
+    -- search help
+    map('n', '<leader>fhh', 'Find Help Tags', function ()
+        require('telescope.builtin').help_tags()
+    end)
 end
 
 return M
