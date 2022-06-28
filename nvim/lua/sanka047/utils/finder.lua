@@ -13,8 +13,7 @@ function M.project_files(directory, skip_git)
 
     -- first attempt to use git files
     if not skip_git then
-        pcall(require('telescope.builtin').git_files, opts)
-        return
+        if pcall(require('telescope.builtin').git_files, opts) then return end
     end
 
     require('telescope.builtin').find_files(opts)
