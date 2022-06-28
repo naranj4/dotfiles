@@ -45,6 +45,8 @@ function M.keymap()
     map_group('n', '<leader>f', 'telescope-find')
     map_group('n', '<leader>F', 'telescope-find-cmd')
 
+    map('n', '<leader>FT', 'Telescope', ':Telescope<space>')
+
     -- find files
     map('n', '<leader>ff', 'Find Files', finder.project_files)
     map('n', '<leader>FF', 'Find Files (in dir)', ':TFindFiles<space>')
