@@ -41,6 +41,9 @@ function M.setup()
         LeapLabelSecondary = { fg = colors.bg_dark, bg = colors.crystalBlue, bold = true },
         LeapBackdrop = { fg = colors.fg_comment, bg = colors.bg },
 
+        ToggletermNormal = { fg = colors.fg, bg = colors.bg },
+        ToggletermBorder = { fg = colors.fg_border, bg = colors.bg },
+
         TelescopeNormal = { fg = colors.fg_dark, bg = colors.winterBlue },
         TelescopeBorder = { fg = colors.winterBlue, bg = colors.winterBlue },
         TelescopeTitle = { fg = colors.winterBlue, bg = colors.crystalBlue, bold = true },

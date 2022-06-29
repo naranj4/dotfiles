@@ -23,8 +23,8 @@ function M.setup()
         end,
         hide_numbers = true,
         highlights = {
-            NormalFloat = { link = 'Normal' },
-            FloatBorder = { link = 'TelescopeBorder' },
+            NormalFloat = { link = 'ToggletermNormal' },
+            FloatBorder = { link = 'ToggletermBorder' },
         },
         shade_terminals = true,
         shading_factor = '1',
