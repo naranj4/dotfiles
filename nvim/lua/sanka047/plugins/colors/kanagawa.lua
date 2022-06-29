@@ -27,7 +27,10 @@ function M.setup()
         HopCursor = { link = 'Cursor' },
 
         FloatBorder = { fg = colors.bg_dark, bg = colors.bg },
-        FloatTitle = { fg = colors.bg_dark, bg = colors.crystalBlue, bold = true },
+        FloatTitle = { fg = colors.bg_dark, bg = colors.waveAqua2, bold = true },
+
+        DressingNormal = { fg = colors.fg, bg = colors.winterBlue },
+        DressingBorder = { fg = colors.winterBlue, bg = colors.bg },
 
         CmpCompletionBorder = { fg = colors.bg_menu, bg = colors.bg },
         CmpDocumentation = { bg = colors.bg_dim },

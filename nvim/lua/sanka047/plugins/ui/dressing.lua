@@ -17,7 +17,9 @@ function M.setup()
         input = {
             enabled = true,
             insert_only = true,
+            prompt_align = 'right',
             winblend = 0,
+            winhighlight = 'NormalFloat:DressingNormal,FloatBorder:DressingBorder',
             override = function (conf)
                 conf['border'] = window.border(window.margin.FULL)
             end
@@ -25,6 +27,7 @@ function M.setup()
         select = {
             enabled = true,
             backend = { "telescope", "builtin" },
+            trim_prompt = true,
             winblend = 0,
         },
     })
