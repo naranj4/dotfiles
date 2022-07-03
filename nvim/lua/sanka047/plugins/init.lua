@@ -137,7 +137,7 @@ return require('packer').startup(function(use)
     ----------------------------------------------------------------------------
     use {
         'folke/which-key.nvim',
-        config = function () LOAD_CONFIG('which-key') end,
+        config = function () LOAD_CONFIG('misc.which-key') end,
     }
 
     ----------------------------------------------------------------------------
