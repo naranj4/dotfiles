@@ -13,6 +13,7 @@ end
 -- - Packer will be downloaded on first load
 require('sanka047.core.globals')
 require('sanka047.core.options')
+require('sanka047.core.project')
 require('sanka047.core.plugins')
 require('sanka047.core.colors')
 require('sanka047.core.mappings')
