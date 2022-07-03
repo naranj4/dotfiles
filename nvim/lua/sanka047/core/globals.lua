@@ -72,9 +72,14 @@ end
 --------------------------------------------------------------------------------
 -- Global Constants
 --------------------------------------------------------------------------------
--- Override in a local global file
+-- Override in a local global project configuration file
 _G.luasnip = {
     vars = {
         username = 'sanka047',
     },
+}
+
+_G.neogen = {
+    -- map of filetype to annotation convention
+    languages = {},
 }

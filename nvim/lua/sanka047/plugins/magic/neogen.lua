@@ -33,20 +33,22 @@ end
 --------------------------------------------------------------------------------
 -- Neogen Keymap
 --------------------------------------------------------------------------------
+
+local function generate_documentation(type)
+    return function ()
+        require('neogen').generate({
+            type = type,
+            annotation_convention = _G.neogen.languages,
+        })
+    end
+end
+
 function M.keymap()
     map_group('n', '<leader>d', 'document')
-    map('n', '<leader>dc', 'Document Class', function ()
-        require('neogen').generate({ type = 'class' })
-    end)
-    map('n', '<leader>df', 'Document Function', function ()
-        require('neogen').generate({ type = 'func' })
-    end)
-    map('n', '<leader>dt', 'Document Type', function ()
-        require('neogen').generate({ type = 'type' })
-    end)
-    map('n', '<leader>dm', 'Document File/Module', function ()
-        require('neogen').generate({ type = 'file' })
-    end)
+    map('n', '<leader>dc', 'Document Class', generate_documentation('class'))
+    map('n', '<leader>df', 'Document Function', generate_documentation('func'))
+    map('n', '<leader>dt', 'Document Type', generate_documentation('type'))
+    map('n', '<leader>dm', 'Document File/Module', generate_documentation('file'))
 end
 
 return M
