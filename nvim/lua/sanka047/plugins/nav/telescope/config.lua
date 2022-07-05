@@ -67,6 +67,13 @@ function M.setup()
                 width = 0.8,
                 height = 0.8,
                 preview_cutoff = 120,
+                preview_width = function (_, max_columns, _)
+                    local width = math.ceil(max_columns * 0.5)
+                    if width > 100 then
+                        width = 100
+                    end
+                    return width
+                end,
             },
             borderchars = translate_borderchars_for_telescope(window.border(window.margin.HALF)),
             sorting_strategy = 'ascending',
