@@ -63,7 +63,7 @@ create_autocmd(
     {
         group = 'YankHighlight',
         pattern = '*',
-        callback = function () vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 500 }) end,
+        callback = function () vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 250 }) end,
     }
 )
 
