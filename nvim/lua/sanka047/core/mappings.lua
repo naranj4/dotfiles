@@ -83,6 +83,8 @@ map('n', '<c-l>', 'W-Move/Create Right', function () window.win_move('l') end)
 map('n', '<c-q>', 'Toggle QF List', function () window.toggle_qf_list(true) end)
 map('n', ']q', 'QF Next', '<CMD>cnext<CR>')
 map('n', '[q', 'QF Prev', '<CMD>cprev<CR>')
+map('n', ']Q', 'QF Last', '<CMD>clast<CR>')
+map('n', '[Q', 'QF First', '<CMD>cfirst<CR>')
 
 local create_augroup = require('sanka047.utils.map').create_augroup
 local create_autocmd = require('sanka047.utils.map').create_autocmd
@@ -97,6 +99,31 @@ create_autocmd(
         callback = window.set_qf_control_var,
     }
 )
+
+--------------------------------------------------------------------------------
+-- Pairs
+--------------------------------------------------------------------------------
+map('n', ']a', 'Arg Next', '<CMD>next<CR>')
+map('n', '[a', 'Arg Prev', '<CMD>previous<CR>')
+map('n', ']A', 'Arg Last', '<CMD>last<CR>')
+map('n', '[A', 'Arg First', '<CMD>first<CR>')
+
+-- add empty lines
+local function add_empty_lines(offset)
+    offset = offset or 0
+    local loc = unpack(vim.api.nvim_win_get_cursor(0)) + offset
+
+    local count = math.max(vim.v.count, 1)
+    local empty_lines = {}
+    for _ = 1, count do
+        table.insert(empty_lines, '')
+    end
+
+    vim.api.nvim_buf_set_lines(0, loc, loc, true, empty_lines)
+end
+
+map('n', '[o', 'Empty Line Above', function () add_empty_lines(-1) end)
+map('n', ']o', 'Empty Line Below', function () add_empty_lines(0) end)
 
 --------------------------------------------------------------------------------
 -- Terminal Mode Mappings
