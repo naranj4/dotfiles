@@ -53,6 +53,18 @@ map('v', 'K', 'Move Region Up', ":m '<-2<CR>gv=gv")
 map_group('n', '<leader><leader>t', 'toggle')
 
 --------------------------------------------------------------------------------
+-- Toggle for Copy-Paste View
+--------------------------------------------------------------------------------
+map('n', '<leader><leader>tc', 'Toggle Columns', function ()
+    vim.opt.number = not vim.opt.number._value
+    if vim.opt.signcolumn._value == 'no' then
+        vim.opt.signcolumn = 'yes:1'
+    else
+        vim.opt.signcolumn = 'no'
+    end
+end)
+
+--------------------------------------------------------------------------------
 -- Yank and Visual Selection
 --------------------------------------------------------------------------------
 -- reselect visual selection after indenting
