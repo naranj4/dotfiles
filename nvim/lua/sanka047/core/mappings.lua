@@ -48,7 +48,7 @@ map('v', 'J', 'Move Region Down', ":m '>+1<CR>gv=gv")
 map('v', 'K', 'Move Region Up', ":m '<-2<CR>gv=gv")
 
 --------------------------------------------------------------------------------
--- Yank and Visual Selection
+-- Toggle Group
 --------------------------------------------------------------------------------
 map_group('n', '<leader><leader>t', 'toggle')
 
@@ -81,8 +81,8 @@ map('n', '<c-l>', 'W-Move/Create Right', function () window.win_move('l') end)
 --------------------------------------------------------------------------------
 -- global list
 map('n', '<c-q>', 'Toggle QF List', function () window.toggle_qf_list(true) end)
-map('n', '<m-j>', 'QF Next', '<CMD>cnext<CR>')
-map('n', '<m-k>', 'QF Prev', '<CMD>cprev<CR>')
+map('n', ']q', 'QF Next', '<CMD>cnext<CR>')
+map('n', '[q', 'QF Prev', '<CMD>cprev<CR>')
 
 local create_augroup = require('sanka047.utils.map').create_augroup
 local create_autocmd = require('sanka047.utils.map').create_autocmd
