@@ -30,7 +30,7 @@ then
         echo "Updating homebrew"
         brew update
     fi
-    
+
     # install brew formulae
     brew install git
     brew install python@3.9
@@ -64,8 +64,6 @@ then
 
     echo "Install/upgrading pip"
     pip3 install -U pip
-    echo "Install/upgrading jedi-language-server"
-    pip3 install -U jedi-language-server
 
     echo "======================================"
     echo "Finished development environment setup"
