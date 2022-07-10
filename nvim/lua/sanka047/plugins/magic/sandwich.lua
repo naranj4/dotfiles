@@ -101,7 +101,7 @@ function M.keymap()
 
     -- textobjects
     map('xo', 'is', 'in sandwich', '<Plug>(textobj-sandwich-auto-i)')
-    map('xo', 'is', 'around sandwich', '<Plug>(textobj-sandwich-auto-i)')
+    map('xo', 'as', 'around sandwich', '<Plug>(textobj-sandwich-auto-a)')
 end
 
 return M
