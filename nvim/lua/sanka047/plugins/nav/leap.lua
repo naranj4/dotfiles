@@ -20,12 +20,10 @@ function M.setup()
             --   * non home row pinky: 'q', 'z', 'p', '/'
             --   * non home row center col: 't', 'b', 'y', 'n'
             --   * bottow row ring: 'x', '.'
-            --   * all bottow row shifted: 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?'
+            --   * all capitals
 
             'j', 'f', 'k', 'd', 'l', 's', ';', 'a', 'h', 'g',
             'u', 'r', 'i', 'e', 'o', 'w',
-            'J', 'F', 'K', 'D', 'L', 'S', 'A',
-            'U', 'R', 'I', 'E', 'O', 'W',
             'm', 'v', ',', 'c',
         },
     })
@@ -35,6 +33,16 @@ function M.keymap()
     map('nxo', 's', 'leap bidirectional', function ()
         local win_id = vim.api.nvim_get_current_win()
         require('leap').leap({ target_windows = { win_id } })
+    end)
+
+    local leap_helpers = require('sanka047.utils.leap')
+
+    -- easymotion like mappings
+    map('nxo', '<leader>j', 'Leap Line (fwd)', function ()
+        leap_helpers.leap_line(leap_helpers.direction.FORWARD)
+    end)
+    map('nxo', '<leader>k', 'Leap Line (bwd)', function ()
+        leap_helpers.leap_line(leap_helpers.direction.BACKWARD)
     end)
 end
 

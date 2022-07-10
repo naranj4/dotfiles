@@ -343,6 +343,7 @@ return require('packer').startup(function(use)
         'phaazon/hop.nvim',
         branch = 'v1',
         module = 'hop',
+        disable = true,
         config = function () LOAD_CONFIG('nav.hop') end,
     }
     use {'unblevable/quick-scope'}
