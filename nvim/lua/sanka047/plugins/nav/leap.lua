@@ -34,16 +34,6 @@ function M.keymap()
         local win_id = vim.api.nvim_get_current_win()
         require('leap').leap({ target_windows = { win_id } })
     end)
-
-    local leap_helpers = require('sanka047.utils.leap')
-
-    -- easymotion like mappings
-    map('nxo', '<leader>j', 'Leap Line (fwd)', function ()
-        leap_helpers.leap_line(leap_helpers.direction.FORWARD)
-    end)
-    map('nxo', '<leader>k', 'Leap Line (bwd)', function ()
-        leap_helpers.leap_line(leap_helpers.direction.BACKWARD)
-    end)
 end
 
 return M

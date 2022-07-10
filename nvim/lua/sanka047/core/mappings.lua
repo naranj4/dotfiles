@@ -152,7 +152,7 @@ local plugins = {
     'magic.neogen',
     'magic.refactoring',
     'magic.substitute',
-    -- 'nav.hop',
+    'nav.hop',
     'nav.telescope',
     'ui.nvim-tree',
 }
