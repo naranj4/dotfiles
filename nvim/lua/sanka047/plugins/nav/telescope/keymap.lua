@@ -33,7 +33,7 @@ function M.keymap()
             finder.project_files(directory, skip_git)
         end,
         'Find files in a directory (use -u to unrestrict search and ignore .ignore files)',
-        { nargs = '+' }
+        { nargs = '*' }
     )
     create_command(
         'TFindContaining',
