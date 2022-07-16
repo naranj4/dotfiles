@@ -303,6 +303,10 @@ return require('packer').startup(function(use)
         end,
     }
     use {
+        'junegunn/vim-easy-align',
+        config = function () LOAD_MAPPING('magic.easy-align') end,
+    }
+    use {
         'AckslD/nvim-trevJ.lua',
         config = function ()
             LOAD_CONFIG('magic.trevj')
