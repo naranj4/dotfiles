@@ -68,6 +68,17 @@ create_autocmd(
 )
 
 --------------------------------------------------------------------------------
+-- Neovide settings
+--------------------------------------------------------------------------------
+-- TODO: continue to explore Neovide for pair programming potential
+if vim.fn.exists('g:neovide') then
+    opt.guifont = 'MesloLGS Nerd Font Mono:h18'
+
+    g.neovide_input_macos_alt_is_meta = true
+    g.neovide_cursor_vfx_mode = 'sonicboom'
+end
+
+--------------------------------------------------------------------------------
 -- Search and Autocompletion
 --------------------------------------------------------------------------------
 opt.ignorecase = true
