@@ -2,6 +2,9 @@
 # ZSH Settings
 ################################################################################
 
+# set config home
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Completion
 # 0 -- vanilla completion (abc => abc)
 # 1 -- smart case completion (abc => Abc)
