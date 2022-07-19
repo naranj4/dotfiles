@@ -23,6 +23,14 @@ local function translate_borderchars_for_telescope(borderchars)
     }
 end
 
+local function get_default_preview_width(_, max_columns, _)
+    local width = math.ceil(max_columns * 0.5)
+    if width > 100 then
+        width = 100
+    end
+    return width
+end
+
 function M.setup()
     local ok, telescope = pcall(require, 'telescope')
     if not ok then
@@ -67,13 +75,12 @@ function M.setup()
                 width = 0.8,
                 height = 0.8,
                 preview_cutoff = 120,
-                preview_width = function (_, max_columns, _)
-                    local width = math.ceil(max_columns * 0.5)
-                    if width > 100 then
-                        width = 100
-                    end
-                    return width
-                end,
+
+                -- layout specific
+                center = { preview_cutoff = 40 },
+                bottom_pane = { preview_width = get_default_preview_width },
+                horizontal = { preview_width = get_default_preview_width },
+                vertical = { preview_width = get_default_preview_width },
             },
             borderchars = translate_borderchars_for_telescope(window.border(window.margin.HALF)),
             sorting_strategy = 'ascending',
