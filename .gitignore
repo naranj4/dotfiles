@@ -3,3 +3,7 @@ packer_compiled.lua
 **/.swap/
 *.swp
 nvim/projects/
+emacs/var/
+emacs/etc/
+emacs/lock-files/
+emacs/straight/
