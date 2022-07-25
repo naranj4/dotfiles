@@ -135,6 +135,10 @@ function M.keymap()
     end)
     map('n', '[d', 'Prev Diagnostic', vim.diagnostic.goto_prev)
     map('n', ']d', 'Next Diagnostic', vim.diagnostic.goto_next)
+    map('n', '[e', 'Prev Error', function ()
+        vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.WARN } })
+    end)
+    map('n', ']e', 'Next Error', function () vim.diagnostic.goto_prev() end)
     map('n', '<leader>q', 'Diagnostic (Loc)List', vim.diagnostic.setloclist)
 
     -- workspace operations
