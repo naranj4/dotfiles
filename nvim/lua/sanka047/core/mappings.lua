@@ -28,9 +28,6 @@ map('n', '<leader><leader>nf', 'Open Empty File', '<CMD>enew<CR>')
 
 map('n', '<ESC>', '<ESC>', ':nohlsearch<CR><ESC>') -- remove highlighting
 
-map('nv', ';', '<CMD>', ':')
-map('nv', ':', 'f/F/t/T Repeat', ';')
-
 map('', 'H', 'Home', '^')
 map('', 'L', 'End', '$')
 
