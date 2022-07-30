@@ -16,6 +16,7 @@
 (straight-use-package 'all-the-icons)
 
 (straight-use-package 'helpful)
+(straight-use-package 'which-key)
 (straight-use-package 'no-littering)
 
 (straight-use-package 'evil)
@@ -23,6 +24,7 @@
 (straight-use-package 'evil-visualstar)
 (straight-use-package 'evil-surround)
 (straight-use-package 'evil-nerd-commenter)
+(straight-use-package 'evil-quickscope)
 
 (straight-use-package 'vertico)
 (straight-use-package 'marginalia)
@@ -34,7 +36,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 (setq backup-directory-alist
-      `((".*" ,(no-littering-expand-var-file-name "back-up/") t)))
+      `((".*" . ,(no-littering-expand-var-file-name "back-up/"))))
 (setq lock-file-name-transforms
       `((".*" ,(no-littering-expand-var-file-name "lock-files/") t)))
 
@@ -118,10 +120,10 @@ This command does not push text to `kill-ring'."
       evil-motion-state-cursor 'hbar
       evil-operator-state-cursor 'hbar)
 
-
 (setq evil-undo-system 'undo-redo
       evil-want-C-u-scroll t
-      evil-want-Y-yank-to-eol t)
+      evil-want-Y-yank-to-eol t
+      evil-disable-insert-state-bindings t)
 
 (require 'evil)
 (evil-mode 1)
@@ -147,6 +149,11 @@ This command does not push text to `kill-ring'."
 (evil-define-key '(normal) 'global (kbd "<leader>c") 'evilnc-comment-operator)
 (evil-define-key '(visual) 'global (kbd "<leader>c") 'evilnc-comment-or-uncomment-lines)
 
+; quickscope
+(require 'evil-quickscope)
+(global-evil-quickscope-always-mode 1)
+(set-face-attribute 'evil-quickscope-second-face nil :inherit 'font-lock-type-face :underline t)
+
 (global-evil-visualstar-mode 1)
 
 ; Helpful
@@ -171,6 +178,13 @@ This command does not push text to `kill-ring'."
 ;; don't find this very useful, but it's frequently useful to only
 ;; look at interactive functions.
 (global-set-key (kbd "C-h C") #'helpful-command)
+
+; which-key
+(require 'which-key)
+
+(setq which-key-show-early-on-C-h t)
+
+(which-key-mode 1)
 
 ; Vertico
 (require 'vertico)
