@@ -28,6 +28,8 @@
 
 (straight-use-package 'vertico)
 (straight-use-package 'marginalia)
+(straight-use-package 'corfu)
+(straight-use-package 'corfu-doc)
 
 ; No littering
 (require 'no-littering)
@@ -73,7 +75,8 @@
 
 (set-face-attribute 'default nil :family "MesloLGS Nerd Font Mono" :height 160)
 
-(setq indent-tabs-mode nil) ; convert tabs to spaces
+(setq indent-tabs-mode nil
+      tab-always-indent 'complete)
 
 (setq completion-styles '(basic partial-completion flex))
 
@@ -215,3 +218,23 @@ This command does not push text to `kill-ring'."
 
 ; Marginalia
 (marginalia-mode 1)
+
+; Corfu
+(setq corfu-cycle t
+      corfu-auto t
+      corfu-auto-delay 0
+      corfu-auto-prefix 2)
+(global-corfu-mode 1)
+
+(defun corfu-enable-always-in-minibuffer ()
+  "Enable Corfu in the minibuffer if Vertico/Mct are not active."
+  (unless (or (bound-and-true-p mct--active)
+              (bound-and-true-p vertico--input))
+    (corfu-mode 1)))
+(add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
+
+(add-hook 'corfu-mode-hook #'corfu-doc-mode)
+
+(define-key corfu-map (kbd "M-p") #'corfu-doc-scroll-down)
+(define-key corfu-map (kbd "M-n") #'corfu-doc-scroll-up)
+(define-key corfu-map (kbd "M-d") #'corfu-doc-toggle)
