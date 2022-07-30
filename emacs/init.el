@@ -30,6 +30,18 @@
 (straight-use-package 'marginalia)
 (straight-use-package 'corfu)
 (straight-use-package 'corfu-doc)
+; terminal compatibility
+(unless (display-graphic-p)
+  (straight-use-package
+   '(popon :type git :repo "https://codeberg.org/akib/emacs-popon"))
+  (straight-use-package
+   '(corfu-terminal
+     :type git
+     :repo "https://codeberg.org/akib/emacs-corfu-terminal"))
+  (straight-use-package
+   '(corfu-doc-terminal
+     :type git
+     :repo "https://codeberg.org/akib/emacs-corfu-doc-terminal")))
 
 ; No littering
 (require 'no-littering)
@@ -149,6 +161,7 @@ This command does not push text to `kill-ring'."
 	      evil-surround-pairs-alist (push '(?> . ("<" . ">")) evil-surround-pairs-alist))
 
 ; commenter
+(require 'evil-nerd-commenter)
 (evil-define-key '(normal) 'global (kbd "<leader>c") 'evilnc-comment-operator)
 (evil-define-key '(visual) 'global (kbd "<leader>c") 'evilnc-comment-or-uncomment-lines)
 
@@ -234,6 +247,10 @@ This command does not push text to `kill-ring'."
 (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
 
 (add-hook 'corfu-mode-hook #'corfu-doc-mode)
+
+(unless (display-graphic-p)
+  (corfu-terminal-mode 1)
+  (corfu-doc-terminal-mode 1))
 
 (define-key corfu-map (kbd "M-p") #'corfu-doc-scroll-down)
 (define-key corfu-map (kbd "M-n") #'corfu-doc-scroll-up)
