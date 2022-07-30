@@ -34,6 +34,9 @@ map('', 'L', 'End', '$')
 -- quick escape in insert/select mode
 map('is', 'kj', 'Switch to Normal', '<ESC>')
 
+-- map alt-backspace to delete word
+map('i', '<M-BS>', 'delete word', '<C-w>')
+
 -- set undo breakpoints
 map('i', ',', 'Undo Breakpoint', ',<C-g>u')
 map('i', '.', 'Undo Breakpoint', '.<C-g>u')
