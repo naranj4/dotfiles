@@ -16,3 +16,5 @@ source ~/.config/zsh/init.zsh
 if [ -f ~/.zshrc_local ]; then
     source ~/.zshrc_local
 fi
+
+eval "$(direnv hook zsh)"
