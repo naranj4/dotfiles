@@ -20,7 +20,7 @@ map('n', '<leader><leader>vr', 'Reload Neovim Config', utils.reload_config)
 --------------------------------------------------------------------------------
 -- Quality of Life
 --------------------------------------------------------------------------------
-map('nv', 'Q', 'gq', 'Format')
+map('n', 'Q', 'Close window', '<C-w>c')
 
 map('n', '<leader>Q', 'Delete All Buffers', '<CMD>bufdo bdelete<CR>')
 map('n', 'gf', 'Go To File', '<CMD>edit <cfile><CR>') -- allow gf to open nonexistent files
@@ -80,10 +80,10 @@ map('n', 'Y', 'Yank to EOL', 'y$') -- make Y behave like other capitals
 map('n', '<Right>', 'Next Tab', '<CMD>tabnext<CR>')
 map('n', '<Left>', 'Prev Tab', '<CMD>tabprevious<CR>')
 
-map('n', '<c-h>', 'W-Move/Create Left', function () window.win_move('h') end)
-map('n', '<c-j>', 'W-Move/Create Down', function () window.win_move('j') end)
-map('n', '<c-k>', 'W-Move/Create Up', function () window.win_move('k') end)
-map('n', '<c-l>', 'W-Move/Create Right', function () window.win_move('l') end)
+map('n', '<S-Left>', 'W-Move/Create Left', function () window.win_move('h') end)
+map('n', '<S-Down>', 'W-Move/Create Down', function () window.win_move('j') end)
+map('n', '<S-Up>', 'W-Move/Create Up', function () window.win_move('k') end)
+map('n', '<S-Right>', 'W-Move/Create Right', function () window.win_move('l') end)
 
 --------------------------------------------------------------------------------
 -- Quickfix Shortcuts
