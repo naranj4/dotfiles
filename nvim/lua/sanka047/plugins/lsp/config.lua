@@ -70,7 +70,6 @@ local function configure_lsp_servers()
         yamlls = {}, -- yaml
         tsserver = {}, -- typescript
         sumneko_lua = get_lsp_settings('sumneko_lua'),
-        jdtls = {},
     }
 
     -- setup all language servers with default configuration
