@@ -14,13 +14,17 @@
 (straight-use-package 'doom-themes)
 (straight-use-package 'doom-modeline)
 (straight-use-package 'all-the-icons)
+(straight-use-package 'solaire-mode)
 
 (straight-use-package 'helpful)
 (straight-use-package 'which-key)
 (straight-use-package 'no-littering)
 
+(straight-use-package 'avy)
+
 (straight-use-package 'evil)
 (straight-use-package 'goto-chg)
+(straight-use-package 'better-jumper)
 (straight-use-package 'evil-visualstar)
 (straight-use-package 'evil-surround)
 (straight-use-package 'evil-nerd-commenter)
@@ -30,6 +34,7 @@
 (straight-use-package 'marginalia)
 (straight-use-package 'corfu)
 (straight-use-package 'corfu-doc)
+(straight-use-package 'consult)
 ; terminal compatibility
 (unless (display-graphic-p)
   (straight-use-package
@@ -59,20 +64,20 @@
 (load custom-file 'noerror 'nomessage)
 
 ; General settings
+(setq lexical-binding t)
+
 (blink-cursor-mode 0)
 (setq cursor-type 'box)
 
 (setq visible-bell nil
-      ring-bell-function 'sanka047/flash-mode-line)
-(defun sanka047/flash-mode-line ()
+      ring-bell-function 'my/flash-mode-line)
+(defun my/flash-mode-line ()
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil #'invert-face 'mode-line))
 
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-
-(load-theme 'doom-one t)
 
 (setq windmove-create-window t)
 
@@ -92,6 +97,14 @@
 
 (setq completion-styles '(basic partial-completion flex))
 
+(setq display-buffer-base-action
+      `((display-buffer-reuse-mode-window
+	 display-buffer-in-side-window
+	 display-buffer-same-window)
+	. ((mode . (help-mode helpful-mode apropos-mode))
+	   (side . right)
+	   (window-width . 0.5))))
+
 ; History
 (setq history-length 25)
 (recentf-mode 1)
@@ -104,6 +117,9 @@
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
 
+(load-theme 'doom-one t)
+(solaire-global-mode 1)
+
 ; Modeline
 (require 'all-the-icons)
 (require 'doom-modeline)
@@ -113,22 +129,22 @@
 (doom-modeline-mode 1)
 
 ; Delete word instead of kill word
-(defun sanka047/delete-word (arg)
+(defun my/delete-word (arg)
   "Delete characters forward until encountering the end of a word.
 With argument, do this that many times.
 This command does not push text to `kill-ring'."
   (interactive "p")
   (delete-region (point) (progn (forward-word arg) (point))))
 
-(defun sanka047/backward-delete-word (arg)
+(defun my/backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument, do this that many times.
 This command does not push text to `kill-ring'."
   (interactive "p")
-  (sanka047/delete-word (- arg)))
+  (my/delete-word (- arg)))
 
-(global-set-key (kbd "<M-backspace>") 'sanka047/backward-delete-word)
-(global-set-key (kbd "M-d") 'sanka047/delete-word)
+(global-set-key (kbd "<M-backspace>") 'my/backward-delete-word)
+(global-set-key (kbd "M-d") 'my/delete-word)
 
 ; Evil mode
 (setq evil-insert-state-cursor 'bar
@@ -149,6 +165,13 @@ This command does not push text to `kill-ring'."
 
 (evil-define-key '(normal) 'global (kbd "Q") 'evil-window-delete)
 
+; jump list
+(require 'better-jumper)
+(better-jumper-mode 1)
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd "C-o") 'better-jumper-jump-backward)
+  (define-key evil-motion-state-map (kbd "C-i") 'better-jumper-jump-forward))
+
 ; quick window switching
 (evil-define-key '(normal) 'global (kbd "S-<left>") 'windmove-left)
 (evil-define-key '(normal) 'global (kbd "S-<down>") 'windmove-down)
@@ -168,9 +191,20 @@ This command does not push text to `kill-ring'."
 ; quickscope
 (require 'evil-quickscope)
 (global-evil-quickscope-always-mode 1)
-(set-face-attribute 'evil-quickscope-second-face nil :inherit 'font-lock-type-face :underline t)
+(set-face-attribute 'evil-quickscope-first-face nil :underline t :bold t)
+(set-face-attribute 'evil-quickscope-second-face nil :inherit 'font-lock-type-face :underline t :bold t)
 
 (global-evil-visualstar-mode 1)
+
+; Avy
+(setq avy-all-windows nil
+      avy-keys '(?s ?l ?a ?g ?h ?v ?m ?e ?i ?r ?u ?w ?o ?c ?x ?d ?k ?f ?j)
+      avy-orders-alist '((avy-goto-char-2 . avy-order-closest)
+			 (avy-goto-line . avy-order-closest)))
+
+(evil-define-key '(normal visual operator motion) 'global (kbd "s") 'evil-avy-goto-char-2)
+(evil-define-key '(normal visual operator motion) 'global (kbd "<leader>j") 'evil-avy-goto-line-below)
+(evil-define-key '(normal visual operator motion) 'global (kbd "<leader>k") 'evil-avy-goto-line-above)
 
 ; Helpful
 (global-set-key (kbd "C-h f") #'helpful-callable)
@@ -195,6 +229,8 @@ This command does not push text to `kill-ring'."
 ;; look at interactive functions.
 (global-set-key (kbd "C-h C") #'helpful-command)
 
+(evil-define-key '(normal) helpful-mode-map (kbd "q") 'quit-window)
+
 ; which-key
 (require 'which-key)
 
@@ -207,14 +243,14 @@ This command does not push text to `kill-ring'."
 (vertico-mode 1)
 (setq vertico-cycle t)
 
-(defun sanka047/crm-indicator (args)
+(defun my/crm-indicator (args)
   (cons (format "[CRM%s] %s"
                 (replace-regexp-in-string
                  "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
                  crm-separator)
                 (car args))
         (cdr args)))
-(advice-add #'completing-read-multiple :filter-args #'sanka047/crm-indicator)
+(advice-add #'completing-read-multiple :filter-args #'my/crm-indicator)
 
 ;; Do not allow the cursor in the minibuffer prompt
 (setq minibuffer-prompt-properties
