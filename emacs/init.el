@@ -30,11 +30,16 @@
 (straight-use-package 'evil-nerd-commenter)
 (straight-use-package 'evil-quickscope)
 
+(straight-use-package 'vterm)
+
+(straight-use-package 'diff-hl)
+
 (straight-use-package 'vertico)
+(straight-use-package 'orderless)
 (straight-use-package 'marginalia)
+(straight-use-package 'consult)
 (straight-use-package 'corfu)
 (straight-use-package 'corfu-doc)
-(straight-use-package 'consult)
 ; terminal compatibility
 (unless (display-graphic-p)
   (straight-use-package
@@ -75,6 +80,8 @@
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil #'invert-face 'mode-line))
 
+(fringe-mode 4)
+
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -95,7 +102,8 @@
 (setq indent-tabs-mode nil
       tab-always-indent 'complete)
 
-(setq completion-styles '(basic partial-completion flex))
+(setq completion-styles '(orderless basic))
+(setq completion-category-overrides '((file (styles basic partial-completion))))
 
 (setq display-buffer-base-action
       `((display-buffer-reuse-mode-window
@@ -196,6 +204,13 @@ This command does not push text to `kill-ring'."
 
 (global-evil-visualstar-mode 1)
 
+; Diff-hl
+(global-diff-hl-mode 1)
+(evil-define-key '(normal visual operator motion) 'global (kbd "]c") 'diff-hl-next-hunk)
+(evil-define-key '(normal visual operator motion) 'global (kbd "[c") 'diff-hl-previous-hunk)
+(evil-define-key '(normal visual) 'global (kbd "<leader>hp") 'diff-hl-show-hunk)
+(evil-define-key '(normal visual) 'global (kbd "<leader>hU") 'diff-hl-unstage-file)
+
 ; Avy
 (setq avy-all-windows nil
       avy-keys '(?s ?l ?a ?g ?h ?v ?m ?e ?i ?r ?u ?w ?o ?c ?x ?d ?k ?f ?j)
@@ -265,6 +280,10 @@ This command does not push text to `kill-ring'."
 ;; Enable recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
+; Orderless
+(setq orderless-matching-styles
+      '(orderless-literal orderless-regexp orderless-prefixes orderless-flex))
+
 ; Marginalia
 (marginalia-mode 1)
 
@@ -274,6 +293,7 @@ This command does not push text to `kill-ring'."
       corfu-auto-delay 0
       corfu-auto-prefix 2)
 (global-corfu-mode 1)
+(evil-define-key '(insert) 'corfu-map (kbd "M-S-SPC") 'corfu-insert-separator)
 
 (defun corfu-enable-always-in-minibuffer ()
   "Enable Corfu in the minibuffer if Vertico/Mct are not active."
