@@ -10,7 +10,7 @@ function greload {
 # Simple bat output with fallback to cat
 function simple_bat {
     if ! [ -x "$(command -v bat)" ]; then
-        cat $argv
+        \cat $argv
     else
         bat --style=header-filename,header-filesize,snip,grid $argv
     fi
