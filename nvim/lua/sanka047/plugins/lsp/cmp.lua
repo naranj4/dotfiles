@@ -31,6 +31,26 @@ function M.setup()
         return false
     end
 
+    local select_item_down = function ()
+        if cmp.visible() then
+            if cmp.core.view.custom_entries_view:is_direction_top_down() then
+                cmp.select_next_item()
+            else
+                cmp.select_prev_item()
+            end
+        end
+    end
+
+    local select_item_up = function ()
+        if cmp.visible() then
+            if cmp.core.view.custom_entries_view:is_direction_top_down() then
+                cmp.select_prev_item()
+            else
+                cmp.select_next_item()
+            end
+        end
+    end
+
     cmp.setup({
         snippet = {
             expand = function(args)
@@ -69,16 +89,18 @@ function M.setup()
             }),
         },
         mapping = {
-            ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-            ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+            ['<Up>'] = cmp.mapping(select_item_up, { 'i', 'c' }),
+            ['<Down>'] = cmp.mapping(select_item_down, { 'i', 'c' }),
+            ['<C-p>'] = cmp.mapping(select_item_up, { 'i', 'c' }),
+            ['<C-n>'] = cmp.mapping(select_item_down, { 'i', 'c' }),
 
             ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
             ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-            ['<C-e>'] = cmp.mapping(cmp.mapping.close(), { 'i', 'c' }),
+            ['<C-g>'] = cmp.mapping(cmp.mapping.close(), { 'i', 'c' }),
 
-            ['<CR>'] = cmp.mapping(cmp.mapping.confirm({
+            ['<Tab>'] = cmp.mapping(cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
-                select = false, -- false will not auto-select?
+                select = true,
             }), { 'i', 'c' }),
             ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         },
