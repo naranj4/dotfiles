@@ -88,8 +88,16 @@
 
 (setq windmove-create-window t)
 
-(global-display-line-numbers-mode 1)
-(global-hl-line-mode 1)
+(setq hl-line-sticky-flag nil)
+
+(defun my/set-local-display-settings ()
+  (interactive)
+  (hl-line-mode 1)
+  (display-line-numbers-mode 1))
+
+(add-hook 'prog-mode-hook #'my/set-local-display-settings)
+(add-hook 'text-mode-hook #'my/set-local-display-settings)
+
 (global-auto-revert-mode 1)
 (electric-pair-mode 1)
 
@@ -101,6 +109,11 @@
 
 (setq indent-tabs-mode nil
       tab-always-indent 'complete)
+
+;; System clipboard
+(setq select-enable-clipboard nil)
+(global-set-key (kbd "s-v") 'clipboard-yank)
+(global-set-key (kbd "s-c") 'clipboard-kill-ring-save)
 
 (setq completion-styles '(orderless basic))
 (setq completion-category-overrides '((file (styles basic partial-completion))))
@@ -198,7 +211,8 @@ This command does not push text to `kill-ring'."
 
 ; quickscope
 (require 'evil-quickscope)
-(global-evil-quickscope-always-mode 1)
+(add-hook 'prog-mode-hook 'turn-on-evil-quickscope-always-mode)
+(add-hook 'text-mode-hook 'turn-on-evil-quickscope-always-mode)
 (set-face-attribute 'evil-quickscope-first-face nil :underline t :bold t)
 (set-face-attribute 'evil-quickscope-second-face nil :inherit 'font-lock-type-face :underline t :bold t)
 
@@ -311,3 +325,7 @@ This command does not push text to `kill-ring'."
 (define-key corfu-map (kbd "M-p") #'corfu-doc-scroll-down)
 (define-key corfu-map (kbd "M-n") #'corfu-doc-scroll-up)
 (define-key corfu-map (kbd "M-d") #'corfu-doc-toggle)
+
+; Vterm
+(require 'vterm)
+(setq vterm-always-compile-module t)
