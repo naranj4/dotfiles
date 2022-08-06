@@ -25,3 +25,4 @@ zplug load
 ################################################################################
 source ~/.config/zsh/reload/plugin/config/autosuggest.zsh
 source ~/.config/zsh/reload/plugin/config/vi-mode.zsh
+source ~/.config/zsh/reload/plugin/config/vterm.zsh

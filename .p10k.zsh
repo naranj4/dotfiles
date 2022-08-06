@@ -149,6 +149,7 @@
     # =========================[ Line #2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol
+    my_vterm                # vterm prompt end
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -320,6 +321,7 @@
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=true
   # No line terminator if prompt_char is the last segment.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B8'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_SEGMENT_SEPARATOR='\uE0B8'
   # No line introducer if prompt_char is the first segment.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=
   # No surrounding whitespace.
@@ -1712,6 +1714,19 @@
   typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION=
   # Custom prefix.
   # typeset -g POWERLEVEL9K_TIME_PREFIX='%246Fat '
+
+  #######################################[ vterm: emacs ]#######################################
+  function prompt_my_vterm() {
+    p10k segment -t "$(vterm_prompt_end)"
+  }
+
+  typeset -g POWERLEVEL9K_MY_VTERM_BACKGROUND=$BG
+  typeset -g POWERLEVEL9K_MY_VTERM_FOREGROUND=$BG
+
+  typeset -g POWERLEVEL9K_MY_VTERM_LEFT_SUBSEGMENT_SEPARATOR=''
+  typeset -g POWERLEVEL9K_MY_VTERM_LEFT_{LEFT,RIGHT}_WHITESPACE=''
+  typeset -g POWERLEVEL9K_MY_VTERM_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
+  typeset -g POWERLEVEL9K_MY_VTERM_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
