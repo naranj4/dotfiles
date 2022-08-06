@@ -1717,7 +1717,9 @@
 
   #######################################[ vterm: emacs ]#######################################
   function prompt_my_vterm() {
-    p10k segment -t "$(vterm_prompt_end)"
+    if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+        p10k segment -t "$(vterm_prompt_end)"
+    fi
   }
 
   typeset -g POWERLEVEL9K_MY_VTERM_BACKGROUND=$BG
