@@ -71,14 +71,16 @@
 ; General settings
 (setq lexical-binding t)
 
+; Visual cleanup
 (blink-cursor-mode 0)
 (setq cursor-type 'box)
 
-(setq visible-bell nil
-      ring-bell-function 'my/flash-mode-line)
 (defun my/flash-mode-line ()
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil #'invert-face 'mode-line))
+(setq visible-bell nil
+      ring-bell-function 'my/flash-mode-line
+      inhibit-startup-message t)
 
 (fringe-mode 4)
 
