@@ -31,23 +31,27 @@ function M.setup()
         return false
     end
 
-    local select_item_down = function ()
+    local select_item_down = function (fallback)
         if cmp.visible() then
             if cmp.core.view.custom_entries_view:is_direction_top_down() then
                 cmp.select_next_item()
             else
                 cmp.select_prev_item()
             end
+        else
+            fallback()
         end
     end
 
-    local select_item_up = function ()
+    local select_item_up = function (fallback)
         if cmp.visible() then
             if cmp.core.view.custom_entries_view:is_direction_top_down() then
                 cmp.select_prev_item()
             else
                 cmp.select_next_item()
             end
+        else
+            fallback()
         end
     end
 
