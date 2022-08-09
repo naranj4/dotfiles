@@ -93,8 +93,8 @@ function M.setup()
             }),
         },
         mapping = {
-            ['<Up>'] = cmp.mapping(select_item_up, { 'i', 'c' }),
-            ['<Down>'] = cmp.mapping(select_item_down, { 'i', 'c' }),
+            ['<Up>'] = cmp.mapping(select_item_up, { 'i' }),
+            ['<Down>'] = cmp.mapping(select_item_down, { 'i' }),
             ['<C-p>'] = cmp.mapping(select_item_up, { 'i', 'c' }),
             ['<C-n>'] = cmp.mapping(select_item_down, { 'i', 'c' }),
 
