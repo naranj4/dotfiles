@@ -61,6 +61,7 @@ function M.setup()
             'python',
             'query',
             'ruby',
+            'typescript',
             'vim',
             'yaml',
         },
