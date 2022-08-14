@@ -1,5 +1,17 @@
 (setq lexical-binding t)
 
+(setq gc-cons-threshold (* 50 1000 1000))
+
+;; Display start-up-time
+(defun my/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                     (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'my/display-startup-time)
+
 ;; Bootstrap straight.el during first load
 (defvar bootstrap-version)
 (let ((bootstrap-file
