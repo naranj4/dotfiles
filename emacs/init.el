@@ -1,7 +1,5 @@
 (setq lexical-binding t)
 
-(setq gc-cons-threshold (* 50 1000 1000))
-
 ;; Display start-up-time
 (defun my/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
@@ -49,10 +47,12 @@
   (evil-want-C-u-scroll t)
   (evil-want-Y-yank-to-eol t)
   (evil-disable-insert-state-bindings t)
+
   :init
   (setq evil-insert-state-cursor 'bar
         evil-motion-state-cursor 'hbar
         evil-operator-state-cursor 'hbar)
+
   :config
   (evil-mode 1)
 
@@ -95,14 +95,12 @@ This command does not push text to `kill-ring'."
 
   (tab-always-indent 'complete)
 
-  ;; always open help buffers in new window and don't use an existing window
+  ;; always open help buffers in existing help window
   (display-buffer-base-action
    `((display-buffer-reuse-mode-window
-      display-buffer-in-side-window
+      display-buffer-use-some-window
       display-buffer-same-window)
-     . ((mode . (help-mode helpful-mode apropos-mode))
-        (side . right)
-        (window-width . 0.5))))
+     . ((mode . (help-mode helpful-mode apropos-mode)))))
 
   :init
   ;; default to disabling using tabs for indents
@@ -144,19 +142,9 @@ This command does not push text to `kill-ring'."
   :custom
   (visible-bell nil)
   (ring-bell-function 'my/flash-mode-line)
-  (inhibit-startup-message t)
-  (cursor-type 'box)
-
-  :init
-  (set-face-attribute 'default nil :family "MesloLGS Nerd Font Mono" :height 160)
 
   :config
-  (blink-cursor-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (tool-bar-mode -1)
-
-  (fringe-mode 4))
+  (blink-cursor-mode -1))
 
 ;; cursorline
 (use-package hl-line-mode
