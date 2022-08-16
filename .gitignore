@@ -7,3 +7,4 @@ emacs/var/
 emacs/etc/
 emacs/lock-files/
 emacs/straight/
+emacs/eln-cache/
