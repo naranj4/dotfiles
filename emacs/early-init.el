@@ -5,7 +5,7 @@
 (setq gc-cons-threshold most-positive-fixnum)
 
 (add-hook 'emacs-startup-hook
-      (lambda () (setq gc-cons-threshold (* 50 1000 1000))))
+          (lambda () (setq gc-cons-threshold (* 50 1000 1000))))
 
 ;; Do not resize the frame at this early stage.
 (setq frame-inhibit-implied-resize t)
@@ -13,7 +13,7 @@
 ;; Prevent unwanted runtime builds; packages are compiled ahead-of-time when
 ;; they are installed and site files are compiled when gccemacs is installed.
 (setq comp-deferred-compilation nil
-     native-comp-deferred-compilation nil)
+      native-comp-deferred-compilation nil)
 
 ;; Don't show startup message when Emacs starts
 (setq inhibit-startup-message t)
