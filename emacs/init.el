@@ -133,6 +133,7 @@ This command does not push text to `kill-ring'."
   :config (savehist-mode 1))
 
 (use-package recentf
+  :custom (recentf-max-saved-items 50)
   :config (recentf-mode 1)
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
