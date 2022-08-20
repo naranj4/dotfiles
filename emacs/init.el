@@ -354,13 +354,21 @@ This command does not push text to `kill-ring'."
   :config (marginalia-mode 1))
 
 (use-package consult
+  :custom
+  (consult-ripgrep-args
+   "rg --null --line-buffered --color=never --max-columns=1000 --path-separator /\
+ --smart-case --line-number --column --trim --no-heading .")
+
   :general
   (:states 'normal
            "<leader>fb" 'consult-buffer
            "<leader>/" 'consult-line
 
            "<leader>fsr" 'consult-ripgrep
-           "<leader>fhs" 'consult-recent-file))
+           "<leader>fhs" 'consult-recent-file)
+  :config
+  (autoload 'projectile-project-root "projectile")
+  (setq consult-project-function (lambda (_) (projectile-project-root))))
 
 (use-package corfu
   :defer nil
