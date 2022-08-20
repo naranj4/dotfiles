@@ -266,9 +266,13 @@ This command does not push text to `kill-ring'."
 
 (use-package projectile
   :general
-  ;; TODO: remap this to just the list of commands I use
   (:states 'normal
-           "<leader>f" 'projectile-command-map)
+           "<leader>ff" 'projectile-find-file
+           "<leader>fg" 'projectile-find-file-dwim
+
+           "<leader>fp" 'project-switch-project
+
+           "<leader>FF" 'projectile-find-file-in-directory)
   :config
   (projectile-mode 1))
 
@@ -285,14 +289,16 @@ This command does not push text to `kill-ring'."
 
                                         ; Version Control
 (use-package diff-hl
+  :hook
+  ((prog-mode text-mode vc-dir-mode) . turn-on-diff-hl-mode)
+  (dired-mode . diff-hl-dired-mode)
   :general
   (:states 'motion
            "]c" 'diff-hl-next-hunk
            "[c" 'diff-hl-previous-hunk
            "<leader>hs" 'diff-hl-stage-current-hunk
-           "<leader>hU" 'diff-hl-unstage-file)
-  :config
-  (global-diff-hl-mode 1))
+           "<leader>hU" 'diff-hl-unstage-file
+           "<leader>hr" 'diff-hl-revert-hunk))
 
                                         ; Completion Enhancements
 (use-package vertico
@@ -338,7 +344,14 @@ This command does not push text to `kill-ring'."
   :after vertico
   :config (marginalia-mode 1))
 
-(use-package consult)
+(use-package consult
+  :general
+  (:states 'normal
+           "<leader>fb" 'consult-buffer
+           "<leader>/" 'consult-line
+
+           "<leader>fsr" 'consult-ripgrep
+           "<leader>fhs" 'consult-recent-file))
 
 (use-package corfu
   :defer nil
