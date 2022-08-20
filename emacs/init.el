@@ -23,13 +23,14 @@
         (eval-print-last-sexp)))
       (load bootstrap-file nil 'nomessage))
 
-;; Install use-package/general for rest of configuration
+;; Install use-package for rest of configuration
 (straight-use-package 'use-package)
 
                                         ; Package Management
 (use-package straight
   :custom (straight-use-package-by-default t))
 
+                                        ; Dotfiles Cleanup
 (use-package no-littering
   :init
   (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))
@@ -37,6 +38,11 @@
         lock-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "lock-files/") t))
         custom-file (locate-user-emacs-file "custom-vars.el"))
   (load custom-file 'noerror 'nomessage))
+
+                                        ; Startup Profiling
+(use-package esup
+  :custom
+  (esup-user-init-file (file-truename "~/.config/emacs/init.el")))
 
                                         ; Vi-Emulation
 (use-package goto-chg)
