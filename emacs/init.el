@@ -214,6 +214,7 @@ This command does not push text to `kill-ring'."
             "q" 'quit-window))
 
 (use-package which-key
+  :defer 0.5
   :custom
   (which-key-show-early-on-C-h t)
   :config
@@ -251,6 +252,7 @@ This command does not push text to `kill-ring'."
 
                                         ; Navigation Enhancements
 (use-package better-jumper
+  :defer 0.1
   :general
   (:states 'motion
            "C-o" 'better-jumper-jump-backward
@@ -259,6 +261,7 @@ This command does not push text to `kill-ring'."
   (better-jumper-mode 1))
 
 (use-package evil-visualstar
+  :after evil
   :config (global-evil-visualstar-mode 1))
 
 (use-package avy
@@ -371,8 +374,6 @@ This command does not push text to `kill-ring'."
   (setq consult-project-function (lambda (_) (projectile-project-root))))
 
 (use-package corfu
-  :defer nil
-
   :preface
   (defun my/corfu-enable-in-minibuffer ()
     "Enable Corfu in the minibuffer if Vertico/Mct are not active."
@@ -381,8 +382,13 @@ This command does not push text to `kill-ring'."
       (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook #'my/corfu-enable-in-minibuffer 1)
 
+  :hook
+  (evil-insert-state-entry . corfu-mode)
   ;; Quit Corfu after exiting insert mode
-  :hook (evil-insert-state-exit . corfu-quit)
+  (evil-insert-state-exit . corfu-quit)
+
+  ;; Ensure that this lazy loads in minibuffer if vertico is not active
+  :commands corfu-mode
 
   :custom
   (corfu-cycle t)
@@ -393,14 +399,11 @@ This command does not push text to `kill-ring'."
   :general
   (:keymaps 'corfu-map
             "RET" nil
-            "M-S-SPC" 'corfu-insert-separator)
-
-  :config
-  (global-corfu-mode 1))
+            "M-S-SPC" 'corfu-insert-separator))
 
 (use-package corfu-terminal
   :straight (corfu-terminal :type git :repo "https://codeberg.org/akib/emacs-corfu-terminal")
-  :requires (corfu popon)
+  :after (corfu popon)
   :if (not (display-graphic-p))
   :config (corfu-terminal-mode 1))
 
@@ -415,6 +418,6 @@ This command does not push text to `kill-ring'."
 
 (use-package corfu-doc-terminal
   :straight (corfu-doc-terminal :type git :repo "https://codeberg.org/akib/emacs-corfu-doc-terminal")
-  :requires (corfu-doc popon)
+  :after (corfu-doc popon)
   :if (not (display-graphic-p))
   :config (corfu-doc-terminal-mode 1))
