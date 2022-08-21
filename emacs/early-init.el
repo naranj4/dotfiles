@@ -27,6 +27,8 @@
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars . nil) default-frame-alist)
 
+(blink-cursor-mode -1)
+
 (push '(cursor-type . box) default-frame-alist)
 
 (push '(left-fringe . 4) default-frame-alist)

@@ -158,10 +158,7 @@ This command does not push text to `kill-ring'."
 
   :custom
   (visible-bell nil)
-  (ring-bell-function 'my/flash-mode-line)
-
-  :config
-  (blink-cursor-mode -1))
+  (ring-bell-function 'my/flash-mode-line))
 
 ;; cursorline
 (use-package hl-line-mode
