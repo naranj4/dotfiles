@@ -148,7 +148,6 @@ map('t', 'KJ', 'Switch to Normal', '<C-\\><C-n>')
 local plugins = {
     -- 'git.neogit',
     'lsp.luasnip',
-    'magic.comment',
     'magic.neogen',
     'magic.refactoring',
     'magic.substitute',

@@ -321,7 +321,6 @@ return require('packer').startup(function(use)
     }
     use {
         'numToStr/Comment.nvim',
-        module = 'Comment',
         config = function () LOAD_CONFIG('magic.comment') end,
     }
     use {'tpope/vim-abolish'}

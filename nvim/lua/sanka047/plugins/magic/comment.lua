@@ -64,13 +64,13 @@ function M.setup()
             ---Operator-pending mapping
             ---Includes `gcc`, `gbc`, `gc[count]{motion}` and `gb[count]{motion}`
             ---NOTE: These mappings can be changed individually by `opleader` and `toggler` config
-            basic = false,
+            basic = true,
             ---Extra mapping
             ---Includes `gco`, `gcO`, `gcA`
-            extra = false,
+            extra = true,
             ---Extended mapping
             ---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
-            extended = false,
+            extended = true,
         },
 
         ---Pre-hook, called before commenting the line
@@ -108,70 +108,5 @@ function M.setup()
     })
 end
 
---------------------------------------------------------------------------------
--- Comment Keymap
---------------------------------------------------------------------------------
-function M.keymap()
-    -- Line comments
-    map(
-        'n',
-        '<leader>c',
-        'Line Comment',
-        '<CMD>lua require("Comment.api").call("toggle_linewise_op")<CR>g@'
-    )
-    map(
-        'x',
-        '<leader>c',
-        'Line Comment',
-        '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>'
-    )
-
-    map(
-        'n',
-        '<leader>cc',
-        'Toggle Line Comment',
-        '<CMD>lua require("Comment.api").toggle_current_linewise()<CR>'
-    )
-
-    -- Block comments
-    map(
-        'n',
-        '<leader>b',
-        'Block Comment',
-        '<CMD>lua require("Comment.api").call("toggle_blockwise_op")<CR>g@'
-    )
-    map(
-        'x',
-        '<leader>b',
-        'Block Comment',
-        '<ESC><CMD>lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())<CR>'
-    )
-    map(
-        'n',
-        '<leader>bc',
-        'Toggle Block Comment',
-        '<CMD>lua require("Comment.api").toggle_current_blockwise()<CR>'
-    )
-
-    -- Extra mappings
-    map(
-        'n',
-        '<leader>co',
-        'Add Comment Above',
-        '<CMD>lua require("Comment.api").insert_linewise_below()<CR>'
-    )
-    map(
-        'n',
-        '<leader>cO',
-        'Add Comment Below',
-        '<CMD>lua require("Comment.api").insert_linewise_above()<CR>'
-    )
-    map(
-        'n',
-        '<leader>cA',
-        'Add Comment (EOL)',
-        '<CMD>lua require("Comment.api").insert_linewise_eol()<CR>'
-    )
-end
 
 return M
