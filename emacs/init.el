@@ -46,15 +46,28 @@
   :custom
   (esup-user-init-file (file-truename "~/.config/emacs/init.el")))
 
+                                        ; Mapping Enhancements
+(use-package general)
+
                                         ; Vi-Emulation
 (use-package goto-chg)
 
 (use-package evil
+  :defer 0.1
+
   :custom
   (evil-undo-system 'undo-redo)
   (evil-want-C-u-scroll t)
   (evil-want-Y-yank-to-eol t)
   (evil-disable-insert-state-bindings t)
+
+  :general
+  (:states 'motion
+    "s-<left>" 'back-to-indentation
+    "H" 'back-to-indentation
+    "s-<right>" 'evil-end-of-line
+    "L" 'evil-end-of-line
+    "Q" 'evil-window-delete)
 
   :init
   (setq evil-insert-state-cursor 'bar
@@ -65,16 +78,6 @@
   (evil-mode 1)
 
   (evil-set-leader '(normal visual operator motion) (kbd "SPC")))
-
-                                        ; Mapping Enhancements
-(use-package general
-  :config
-  (general-define-key :states 'motion
-    "s-<left>" 'back-to-indentation
-    "H" 'back-to-indentation
-    "s-<right>" 'evil-end-of-line
-    "L" 'evil-end-of-line
-    "Q" 'evil-window-delete))
 
                                         ; Emacs Configuration
 (use-package emacs
