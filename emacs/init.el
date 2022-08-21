@@ -57,7 +57,7 @@
 (use-package goto-chg)
 
 (use-package evil
-  :defer 0.1
+  :hook (emacs-startup . evil-mode)
 
   :custom
   (evil-undo-system 'undo-redo)
@@ -79,10 +79,7 @@
   :init
   (setq evil-insert-state-cursor 'bar
         evil-motion-state-cursor 'hbar
-        evil-operator-state-cursor 'hbar)
-
-  :config
-  (evil-mode 1))
+        evil-operator-state-cursor 'hbar))
 
                                         ; Emacs Configuration
 (use-package emacs
@@ -185,7 +182,8 @@ This command does not push text to `kill-ring'."
   :config
   (load-theme 'doom-one t))
 
-(use-package all-the-icons)
+(use-package all-the-icons
+  :defer 0.1)
 
 (use-package doom-modeline
   :after all-the-icons
@@ -231,6 +229,7 @@ This command does not push text to `kill-ring'."
 
                                         ; Terminal Replacement
 (use-package vterm
+  :commands vterm
   :custom (vterm-always-compile-module t)
   :general
   (:keymaps 'vterm-mode-map :states 'insert
@@ -253,17 +252,15 @@ This command does not push text to `kill-ring'."
 (use-package electric-pair
   :straight nil
   :no-require
-  :config (electric-pair-mode 1))
+  :hook (evil-insert-state-entry . electric-pair-mode))
 
                                         ; Navigation Enhancements
 (use-package better-jumper
-  :defer 0.1
+  :hook (emacs-startup . better-jumper-mode)
   :general
   (:states 'motion
            "C-o" 'better-jumper-jump-backward
-           "C-i" 'better-jumper-jump-forward)
-  :config
-  (better-jumper-mode 1))
+           "C-i" 'better-jumper-jump-forward))
 
 (use-package evil-visualstar
   :after evil
@@ -320,6 +317,8 @@ This command does not push text to `kill-ring'."
 
                                         ; Completion Enhancements
 (use-package vertico
+  :hook (emacs-startup . vertico-mode)
+
   :preface
   (defun my/crm-indicator (args)
     (cons (format "[CRM%s] %s"
@@ -338,12 +337,11 @@ This command does not push text to `kill-ring'."
   ;; hide commands in M-x which do not work in the current mode.
   (read-extended-command-predicate #'command-completion-default-include-p)
   (enable-recursive-minibuffers t)
-  (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt))
-
-  :config
-  (vertico-mode 1))
+  (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt)))
 
 (use-package orderless
+  :after vertico
+
   :preface
   (defun my/match-components-literally ()
     "Components match literally for the rest of this minibuffer session."
