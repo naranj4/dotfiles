@@ -47,7 +47,11 @@
   (esup-user-init-file (file-truename "~/.config/emacs/init.el")))
 
                                         ; Mapping Enhancements
-(use-package general)
+(use-package general
+  :config
+  (general-create-definer my/leader
+    :keymaps 'override
+    :prefix "SPC"))
 
                                         ; Vi-Emulation
 (use-package goto-chg)
@@ -67,7 +71,10 @@
     "H" 'back-to-indentation
     "s-<right>" 'evil-end-of-line
     "L" 'evil-end-of-line
-    "Q" 'evil-window-delete)
+    "Q" 'evil-window-delete
+
+    ;; SPC must not be bound to ensure that operator mappings work with my/leader
+    "SPC" nil)
 
   :init
   (setq evil-insert-state-cursor 'bar
@@ -75,9 +82,7 @@
         evil-operator-state-cursor 'hbar)
 
   :config
-  (evil-mode 1)
-
-  (evil-set-leader '(normal visual operator motion) (kbd "SPC")))
+  (evil-mode 1))
 
                                         ; Emacs Configuration
 (use-package emacs
@@ -244,8 +249,8 @@ This command does not push text to `kill-ring'."
 
 (use-package evil-nerd-commenter
   :general
-  (:states 'normal "<leader>c" 'evilnc-comment-operator)
-  (:states 'visual "<leader>c" 'evilnc-comment-or-uncomment-lines))
+  (my/leader :states 'normal "c" 'evilnc-comment-operator)
+  (my/leader :states 'visual "c" 'evilnc-comment-or-uncomment-lines))
 
 ;; autopairs
 (use-package electric-pair
@@ -274,20 +279,20 @@ This command does not push text to `kill-ring'."
   (avy-orders-alist '((avy-goto-char-2 . avy-order-closest)
                       (avy-goto-line . avy-order-closest)))
   :general
-  (:states 'motion
-           "<leader>j" 'evil-avy-goto-line-below
-           "<leader>k" 'evil-avy-goto-line-above)
+  (my/leader :states 'motion
+             "j" 'evil-avy-goto-line-below
+             "k" 'evil-avy-goto-line-above)
   (:states '(normal visual operator motion) "s" 'evil-avy-goto-char-2))
 
 (use-package projectile
   :general
-  (:states 'normal
-           "<leader>ff" 'projectile-find-file
-           "<leader>fg" 'projectile-find-file-dwim
+  (my/leader :states 'normal
+           "ff" 'projectile-find-file
+           "fg" 'projectile-find-file-dwim
 
-           "<leader>fp" 'project-switch-project
+           "fp" 'project-switch-project
 
-           "<leader>FF" 'projectile-find-file-in-directory)
+           "FF" 'projectile-find-file-in-directory)
   :config
   (projectile-mode 1))
 
@@ -310,10 +315,11 @@ This command does not push text to `kill-ring'."
   :general
   (:states 'motion
            "]c" 'diff-hl-next-hunk
-           "[c" 'diff-hl-previous-hunk
-           "<leader>hs" 'diff-hl-stage-current-hunk
-           "<leader>hU" 'diff-hl-unstage-file
-           "<leader>hr" 'diff-hl-revert-hunk))
+           "[c" 'diff-hl-previous-hunk)
+  (my/leader :states 'motion
+           "hs" 'diff-hl-stage-current-hunk
+           "hU" 'diff-hl-unstage-file
+           "hr" 'diff-hl-revert-hunk))
 
                                         ; Completion Enhancements
 (use-package vertico
@@ -366,12 +372,13 @@ This command does not push text to `kill-ring'."
  --smart-case --line-number --column --trim --no-heading .")
 
   :general
-  (:states 'normal
-           "<leader>fb" 'consult-buffer
-           "<leader>/" 'consult-line
+  (my/leader :states 'normal
+           "fb" 'consult-buffer
+           "/" 'consult-line
 
-           "<leader>fsr" 'consult-ripgrep
-           "<leader>fhs" 'consult-recent-file)
+           "fsr" 'consult-ripgrep
+           "fhs" 'consult-recent-file)
+
   :config
   (autoload 'projectile-project-root "projectile")
   (setq consult-project-function (lambda (_) (projectile-project-root))))
