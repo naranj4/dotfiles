@@ -400,11 +400,14 @@ This command does not push text to `kill-ring'."
   (corfu-auto t)
   (corfu-auto-delay 0)
   (corfu-auto-prefix 2)
+  (corfu-scroll-margin 2)
 
   :general
   (:keymaps 'corfu-map
             "RET" nil
-            "M-S-SPC" 'corfu-insert-separator))
+            "M-S-SPC" 'corfu-insert-separator)
+
+  :config (global-corfu-mode 1))
 
 (use-package corfu-terminal
   :straight (corfu-terminal :type git :repo "https://codeberg.org/akib/emacs-corfu-terminal")
