@@ -416,7 +416,7 @@ This command does not push text to `kill-ring'."
   :config (corfu-terminal-mode 1))
 
 (use-package corfu-doc
-  :requires corfu
+  :after corfu
   :hook (corfu-mode . corfu-doc-mode)
   :general
   (:keymaps 'corfu-map
