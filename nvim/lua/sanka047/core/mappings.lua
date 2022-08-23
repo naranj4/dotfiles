@@ -153,7 +153,7 @@ local plugins = {
     'magic.substitute',
     'nav.hop',
     'nav.telescope',
-    'ui.nvim-tree',
+    -- 'ui.nvim-tree',
 }
 
 for _, plugin in pairs(plugins) do
