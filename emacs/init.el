@@ -379,6 +379,7 @@ This command does not push text to `kill-ring'."
   (setq consult-project-function (lambda (_) (projectile-project-root))))
 
 (use-package corfu
+  :straight (corfu :files (:defaults "extensions/*"))
   :preface
   (defun my/corfu-enable-in-minibuffer ()
     "Enable Corfu in the minibuffer if Vertico/Mct are not active."
@@ -414,6 +415,12 @@ This command does not push text to `kill-ring'."
   :after (corfu popon)
   :if (not (display-graphic-p))
   :config (corfu-terminal-mode 1))
+
+(use-package corfu-history
+  :straight nil
+  :after corfu
+  :hook (corfu-mode . corfu-history-mode)
+  :custom (corfu-history-length 25))
 
 (use-package corfu-doc
   :after corfu
