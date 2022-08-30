@@ -6,6 +6,8 @@ local window = require('sanka047.utils.window')
 local map = require('sanka047.utils.map').map
 local map_group = require('sanka047.utils.map').map_group
 
+local mappings = {}
+
 --------------------------------------------------------------------------------
 -- Config
 --------------------------------------------------------------------------------
@@ -25,6 +27,8 @@ map('n', 'Q', 'Close window', '<C-w>c')
 map('n', '<leader>Q', 'Delete All Buffers', '<CMD>bufdo bdelete<CR>')
 map('n', 'gf', 'Go To File', '<CMD>edit <cfile><CR>') -- allow gf to open nonexistent files
 map('n', '<leader><leader>nf', 'Open Empty File', '<CMD>enew<CR>')
+
+map('n', '-', 'Open File in Directory', '<CMD>Explore<CR>')
 
 map('n', '<ESC>', '<ESC>', ':nohlsearch<CR><ESC>') -- remove highlighting
 
@@ -83,10 +87,14 @@ map('n', 'Y', 'Yank to EOL', 'y$') -- make Y behave like other capitals
 map('n', '<Right>', 'Next Tab', '<CMD>tabnext<CR>')
 map('n', '<Left>', 'Prev Tab', '<CMD>tabprevious<CR>')
 
-map('n', '<S-Left>', 'W-Move/Create Left', function () window.win_move('h') end)
-map('n', '<S-Down>', 'W-Move/Create Down', function () window.win_move('j') end)
-map('n', '<S-Up>', 'W-Move/Create Up', function () window.win_move('k') end)
-map('n', '<S-Right>', 'W-Move/Create Right', function () window.win_move('l') end)
+function mappings.win_move(opts)
+    map('n', '<S-Left>', 'W-Move/Create Left', function () window.win_move('h') end, opts)
+    map('n', '<S-Down>', 'W-Move/Create Down', function () window.win_move('j') end, opts)
+    map('n', '<S-Up>', 'W-Move/Create Up', function () window.win_move('k') end, opts)
+    map('n', '<S-Right>', 'W-Move/Create Right', function () window.win_move('l') end, opts)
+end
+
+mappings.win_move()
 
 --------------------------------------------------------------------------------
 -- Quickfix Shortcuts
@@ -159,3 +167,5 @@ local plugins = {
 for _, plugin in pairs(plugins) do
     LOAD_MAPPING(plugin)
 end
+
+return mappings

@@ -29,11 +29,13 @@ function M.setup()
     })
 end
 
+function M.bidirectional_leap()
+    local win_id = vim.api.nvim_get_current_win()
+    require('leap').leap({ target_windows = { win_id } })
+end
+
 function M.keymap()
-    map('nxo', 's', 'leap bidirectional', function ()
-        local win_id = vim.api.nvim_get_current_win()
-        require('leap').leap({ target_windows = { win_id } })
-    end)
+    map('nxo', 's', 'leap bidirectional', M.bidirectional_leap)
 end
 
 return M
