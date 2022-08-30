@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- LSP Installer Config
+-- Mason Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
 local window = require('sanka047.utils.window')
@@ -7,13 +7,13 @@ local window = require('sanka047.utils.window')
 local M = {}
 
 function M.setup()
-    local has_lsp_installer, lsp_installer = pcall(require, 'nvim-lsp-installer')
-    if not has_lsp_installer then
-        log.error('nvim-lsp-installer not available', 'Config')
+    local has_mason, mason = pcall(require, 'mason')
+    if not has_mason then
+        log.error('mason not available', 'Config')
         return false
     end
 
-    lsp_installer.setup({
+    mason.setup({
         ui = {
             border = window.border(window.margin.FULL),
             icons = {

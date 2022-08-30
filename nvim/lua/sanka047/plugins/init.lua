@@ -414,18 +414,25 @@ return require('packer').startup(function(use)
     }
 
     ----------------------------------------------------------------------------
-    -- LSP and Autocompletion
+    -- LSP
     ----------------------------------------------------------------------------
     use {
-        'williamboman/nvim-lsp-installer',
-        requires = { {'neovim/nvim-lspconfig'} },
-        config = function ()
-            LOAD_CONFIG('lsp.installer')
-        end,
+        'williamboman/mason.nvim',
+        config = function () LOAD_CONFIG('misc.mason') end,
+    }
+    use {
+        'williamboman/mason-lspconfig.nvim',
+        after = 'mason.nvim',
+        requires = {'williamboman/mason-lspconfig.nvim'},
+        config = function () LOAD_CONFIG('lsp.mason') end,
     }
     use {
         'neovim/nvim-lspconfig',
-        after = 'nvim-lsp-installer',
+        requires = {
+            {'williamboman/mason.nvim'},
+            {'williamboman/mason-lspconfig.nvim'},
+        },
+        after = 'mason-lspconfig.nvim',
         config = function ()
             LOAD_CONFIG('lsp.config')
             LOAD_MAPPING('lsp.config')
