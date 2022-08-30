@@ -343,16 +343,26 @@ This command does not push text to `kill-ring'."
   :after vertico
 
   :preface
+  (defvar my/orderless-fuzzy-styles '(orderless-literal orderless-regexp orderless-prefixes orderless-flex)
+    "Orderless styles to use normally when fuzzy matching is desired in the completion function.")
+  (defvar my/orderless-literal-styles 'orderless-literal
+    "Orderless styles to use when literal matching is desired.")
+
+  (defun my/match-components-fuzzily ()
+    "Components match fuzzily for the rest of this minibuffer session."
+    (interactive)
+    (setq-local orderless-matching-styles my/orderless-fuzzy-styles))
+
   (defun my/match-components-literally ()
     "Components match literally for the rest of this minibuffer session."
     (interactive)
-    (setq-local orderless-matching-styles 'orderless-literal
-                orderless-style-dispatchers nil))
+    (setq-local orderless-matching-styles my/orderless-literal-styles))
 
-  (general-define-key :keymaps 'vertico-map "C-l" 'my/match-components-literally)
+  (general-define-key :keymaps 'vertico-map "M-m" 'my/match-components-fuzzily)
+  (general-define-key :keymaps 'vertico-map "C-m" 'my/match-components-literally)
 
   :custom
-  (orderless-matching-styles '(orderless-literal orderless-regexp orderless-prefixes orderless-flex))
+  (orderless-matching-styles my/orderless-fuzzy-styles)
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion flex)))))
 
