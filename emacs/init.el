@@ -183,7 +183,7 @@ This command does not push text to `kill-ring'."
   (load-theme 'doom-one t))
 
 (use-package all-the-icons
-  :defer 0.1)
+  :hook (emacs-startup . (lambda ())))
 
 (use-package doom-modeline
   :after all-the-icons
@@ -202,6 +202,10 @@ This command does not push text to `kill-ring'."
   :custom-face
   (evil-quickscope-first-face ((t (:inherit 'font-lock-constant-face :underline t :bold t))))
   (evil-quickscope-second-face ((t (:inherit 'font-lock-type-face :underline t :bold t)))))
+
+(use-package evil-terminal-cursor-changer
+  :unless (display-graphic-p)
+  :config (evil-terminal-cursor-changer-activate))
 
                                         ; UI Enhancements
 (use-package helpful
@@ -225,7 +229,7 @@ This command does not push text to `kill-ring'."
 
 (use-package popon
   :straight (popon :type git :repo "https://codeberg.org/akib/emacs-popon")
-  :if (not (display-graphic-p)))
+  :unless (display-graphic-p))
 
                                         ; Terminal Replacement
 (use-package vterm
@@ -423,7 +427,7 @@ This command does not push text to `kill-ring'."
 (use-package corfu-terminal
   :straight (corfu-terminal :type git :repo "https://codeberg.org/akib/emacs-corfu-terminal")
   :after (corfu popon)
-  :if (not (display-graphic-p))
+  :unless (display-graphic-p)
   :config (corfu-terminal-mode 1))
 
 (use-package corfu-history
@@ -444,5 +448,5 @@ This command does not push text to `kill-ring'."
 (use-package corfu-doc-terminal
   :straight (corfu-doc-terminal :type git :repo "https://codeberg.org/akib/emacs-corfu-doc-terminal")
   :after (corfu-doc popon)
-  :if (not (display-graphic-p))
+  :unless (display-graphic-p)
   :config (corfu-doc-terminal-mode 1))

@@ -28,6 +28,7 @@
 (push '(vertical-scroll-bars . nil) default-frame-alist)
 
 (blink-cursor-mode -1)
+(setq visible-cursor nil)
 
 (push '(cursor-type . box) default-frame-alist)
 
