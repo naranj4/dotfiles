@@ -362,8 +362,9 @@ This command does not push text to `kill-ring'."
     (interactive)
     (setq-local orderless-matching-styles my/orderless-literal-styles))
 
-  (general-define-key :keymaps 'vertico-map "M-m" 'my/match-components-fuzzily)
-  (general-define-key :keymaps 'vertico-map "C-m" 'my/match-components-literally)
+  (general-define-key :keymaps 'vertico-map
+                      "M-f" 'my/match-components-fuzzily
+                      "C-f" 'my/match-components-literally)
 
   :custom
   (orderless-matching-styles my/orderless-fuzzy-styles)
