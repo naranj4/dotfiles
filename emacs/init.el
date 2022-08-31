@@ -343,6 +343,18 @@ This command does not push text to `kill-ring'."
   (enable-recursive-minibuffers t)
   (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt)))
 
+(use-package embark
+  :general
+  (:keymaps 'vertico-map "M-;" 'embark-act)
+  (:states 'normal "M-." 'embark-dwim)
+
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
 (use-package orderless
   :after vertico
 
@@ -373,7 +385,9 @@ This command does not push text to `kill-ring'."
 
 (use-package marginalia
   :after vertico
-  :config (marginalia-mode 1))
+  :hook (vertico-mode . marginalia-mode)
+  :config
+  (add-to-list 'marginalia-command-categories '(projectile-find-file . file)))
 
 (use-package consult
   :custom
