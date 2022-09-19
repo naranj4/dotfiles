@@ -6,5 +6,6 @@ local bidirectional_leap = require('sanka047.plugins.nav.leap').bidirectional_le
 -- window switching mappings to override defaults
 mappings.win_move({ buffer = 0 })
 
--- use `<C-s>` for leap
-map('nxo', '<C-s>', 'leap bidirectional', bidirectional_leap)
+-- use `<C-s>` for sorting and `s` for leap
+map('nxo', '<C-s>', 'sort-by', ':call <SNR>57_NetrwSortStyle(1)<CR>')
+map('nxo', 's', 'leap bidirectional', bidirectional_leap)
