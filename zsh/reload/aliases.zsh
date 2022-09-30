@@ -30,3 +30,5 @@ alias gco="git checkout"
 alias glg="git log --oneline"
 alias ggr="git graph"
 alias ghst="git hist"
+
+alias gmt="git mergetool"
