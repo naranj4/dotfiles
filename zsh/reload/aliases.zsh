@@ -26,6 +26,7 @@ alias grf="git rebase --autosquash"
 
 alias gb="git branch"
 alias gco="git checkout"
+alias gcb="git checkout -b"
 
 alias glg="git log --oneline"
 alias ggr="git graph"
