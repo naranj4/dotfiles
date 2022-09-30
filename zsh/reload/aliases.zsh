@@ -11,6 +11,8 @@ alias la="ls -la"
 alias gs="git status"
 alias gd="git diff"
 
+alias stash="git stash"
+
 alias gp="git pull"
 
 alias ga="git add"
@@ -23,6 +25,7 @@ alias gcf="git commit --fixup"
 
 alias gr="git rebase"
 alias grf="git rebase --autosquash -i"
+alias gfm="git branch --set-upstream-to=origin/\`git remote show origin | sed -n '/HEAD branch/s/.*: //p'\`"
 
 alias gb="git branch"
 alias gco="git checkout"
