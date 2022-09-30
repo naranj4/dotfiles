@@ -22,7 +22,7 @@ alias gcan="git commit --amend --no-edit"
 alias gcf="git commit --fixup"
 
 alias gr="git rebase"
-alias grf="git rebase --autosquash"
+alias grf="git rebase --autosquash -i"
 
 alias gb="git branch"
 alias gco="git checkout"
