@@ -84,6 +84,18 @@ function M.setup()
                 ['q']          = actions.close,
             },
 
+            diff3 = {
+                -- Merge conflicts
+                [']x'] = actions.next_conflict,
+                ['[x'] = actions.prev_conflict,
+
+                ['<leader>ch'] = actions.conflict_choose("ours"),
+                ['<leader>cb'] = actions.conflict_choose("base"),
+                ['<leader>cl'] = actions.conflict_choose("theirs"),
+                ['<leader>ca'] = actions.conflict_choose("all"),
+                ['<leader>cx'] = actions.conflict_choose("none"),
+            },
+
             file_panel = {
                 ['j']             = actions.next_entry,           -- Bring the cursor to the next file entry
                 ['k']             = actions.prev_entry,           -- Bring the cursor to the previous file entry.
