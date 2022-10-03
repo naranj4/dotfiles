@@ -46,6 +46,8 @@ opt.signcolumn = 'yes:1'
 
 opt.termguicolors = true
 
+opt.mouse = ''
+
 opt.cmdheight = 2
 opt.showcmd = true
 opt.laststatus = 3
