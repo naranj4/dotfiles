@@ -125,8 +125,8 @@ return require('packer').startup(function(use)
     ----------------------------------------------------------------------------
     use {'lewis6991/impatient.nvim'}
     use {'dstein64/vim-startuptime'}
-    use {'nathom/filetype.nvim'}
-    use {
+    use {'nathom/filetype.nvim'} -- INVESTIGATE
+    use { -- REMOVE
         'antoinemadec/FixCursorHold.nvim',
         config = function () vim.g.cursorhold_updatetime = 100 end,
     }
@@ -154,13 +154,14 @@ return require('packer').startup(function(use)
     ----------------------------------------------------------------------------
     use {
         'tomasiser/vim-code-dark',
+        disable = true,
         config = function () LOAD_CONFIG('colors.code-dark') end,
     } -- pretty nice and visible
     use {
         'rebelot/kanagawa.nvim',
         config = function () LOAD_CONFIG('colors.kanagawa') end,
     } -- nice, nice highlighting, no real complaints off the top of my head, nice completion menu
-    use {'savq/melange'}
+    use {'savq/melange', disable = true}
 
     ----------------------------------------------------------------------------
     -- Aesthetics & UI
@@ -209,7 +210,7 @@ return require('packer').startup(function(use)
         requires = { {'kyazdani42/nvim-web-devicons'} },
         config = function () LOAD_CONFIG('ui.lualine') end,
     }
-    use {
+    use { -- INVESTIGATE
         'b0o/incline.nvim',
         config = function () LOAD_CONFIG('ui.incline') end,
     }
@@ -405,7 +406,7 @@ return require('packer').startup(function(use)
             {'JoosepAlviste/nvim-ts-context-commentstring'},
             {'RRethy/nvim-treesitter-endwise'},
             {'windwp/nvim-ts-autotag'},
-            { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
+            {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'},
         },
         config = function ()
             LOAD_CONFIG('treesitter')
