@@ -126,10 +126,6 @@ return require('packer').startup(function(use)
     use {'lewis6991/impatient.nvim'}
     use {'dstein64/vim-startuptime'}
     use {'nathom/filetype.nvim'} -- INVESTIGATE
-    use { -- REMOVE
-        'antoinemadec/FixCursorHold.nvim',
-        config = function () vim.g.cursorhold_updatetime = 100 end,
-    }
     use {'nvim-lua/plenary.nvim'}
 
     ----------------------------------------------------------------------------
