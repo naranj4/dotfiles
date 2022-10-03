@@ -197,7 +197,7 @@ return require('packer').startup(function(use)
         requires = { {'kyazdani42/nvim-web-devicons'} },
         config = function () LOAD_CONFIG('ui.lualine') end,
     }
-    use { -- INVESTIGATE
+    use {
         'b0o/incline.nvim',
         config = function () LOAD_CONFIG('ui.incline') end,
     }
