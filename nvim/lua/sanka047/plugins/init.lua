@@ -179,15 +179,6 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'sanka047/Shade.nvim',
-        disable = true,
-        config = function ()
-            LOAD_CONFIG('ui.shade')
-            LOAD_MAPPING('ui.shade')
-        end,
-    }
-
-    use {
         'RRethy/vim-illuminate',
         config = function () LOAD_CONFIG('ui.illuminate') end,
     }
