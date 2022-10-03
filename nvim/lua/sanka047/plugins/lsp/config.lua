@@ -148,7 +148,7 @@ function M.keymap()
     map('n', '<leader>wr', 'Remove Folder', vim.lsp.buf.remove_workspace_folder)
     map('n', '<leader>wl', 'List Folders', function () P(vim.lsp.buf.list_workspace_folders()) end)
 
-    map('n', '<leader>lf', 'Format', vim.lsp.buf.formatting)
+    map('n', '<leader>lf', 'Format', vim.lsp.buf.format)
 
     map('n', '<leader>lca', 'Code Actions', function ()
         require("telescope.builtin").lsp_code_actions()
