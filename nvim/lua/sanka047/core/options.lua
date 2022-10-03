@@ -52,6 +52,8 @@ opt.cmdheight = 2
 opt.showcmd = true
 opt.laststatus = 3
 
+opt.inccommand = 'split'
+
 opt.showmatch = true
 
 opt.list = true
