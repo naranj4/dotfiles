@@ -125,7 +125,6 @@ return require('packer').startup(function(use)
     ----------------------------------------------------------------------------
     use {'lewis6991/impatient.nvim'}
     use {'dstein64/vim-startuptime'}
-    use {'nathom/filetype.nvim'} -- INVESTIGATE
     use {'nvim-lua/plenary.nvim'}
 
     ----------------------------------------------------------------------------
