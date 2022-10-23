@@ -366,10 +366,7 @@ return require('packer').startup(function(use)
     use {
         'stevearc/aerial.nvim',
         requires = { 'nvim-treesitter/nvim-treesitter' },
-        config = function ()
-            LOAD_CONFIG('nav.aerial')
-            LOAD_MAPPING('nav.aerial')
-        end,
+        config = function () LOAD_CONFIG('nav.aerial') end,
     }
 
     ----------------------------------------------------------------------------
