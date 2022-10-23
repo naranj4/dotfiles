@@ -20,8 +20,6 @@ function M.setup()
         return false
     end
 
-    vim.opt.completeopt = 'menu,menuone,noselect'
-
     ----------------------------------------------------------------------------
     -- Nvim-Cmp Setup
     ----------------------------------------------------------------------------
@@ -96,8 +94,8 @@ function M.setup()
         mapping = {
             ['<Up>'] = cmp.mapping(select_item_up, { 'i' }),
             ['<Down>'] = cmp.mapping(select_item_down, { 'i' }),
-            ['<C-p>'] = cmp.mapping(select_item_up, { 'i', 'c' }),
-            ['<C-n>'] = cmp.mapping(select_item_down, { 'i', 'c' }),
+            ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+            ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
 
             ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
             ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
