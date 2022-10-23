@@ -423,7 +423,7 @@ return require('packer').startup(function(use)
     -- Autocompletion (nvim-cmp)
     ----------------------------------------------------------------------------
     use {
-        'hrsh7th/nvim-cmp',
+        'sanka047/nvim-cmp',
         opt = true,
         config = function ()
             LOAD_CONFIG('lsp.cmp')
