@@ -61,22 +61,26 @@ function M.setup()
         },
         completion = { completeopt = 'menu,menuone,noinsert' },
         formatting = {
-            format = lspkind.cmp_format({
-                mode = 'symbol_text',
-                menu = ({
-                    buffer = "[Buf]",
-                    nvim_lsp = "[LSP]",
-                    luasnip = "[Snip]",
-                    nvim_lua = "[Lua]",
-                    latex_symbols = "[Latex]",
-                }),
-                maxwidth = 50,
-                -- The function below will be called before any actual modifications from lspkind
-                -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-                before = function (_, vim_item)
-                    return vim_item
-                end,
-            })
+            fields = { 'kind', 'abbr', 'menu' },
+            format = function (entry, vim_item)
+                local kind = lspkind.cmp_format({
+                    mode = 'symbol_text',
+                    menu = {
+                        buffer = '[Buf]',
+                        nvim_lsp = '[LSP]',
+                        luasnip = '[Snp]',
+                        nvim_lua = '[Lua]',
+                        latex_symbols = '[Ltx]',
+                    },
+                    maxwidth = 50,
+                })(entry, vim_item)
+
+                local strings = vim.split(kind.kind, '%s', { trimempty = true })
+                kind.kind = ' ' .. strings[1] .. ' '
+                kind.menu = '    ' .. (kind.menu or '     ') .. ' (' .. strings[2] .. ')'
+
+                return kind
+            end
         },
         view = {
             entries = { name = 'custom', selection_order = 'near_cursor' },
@@ -84,11 +88,13 @@ function M.setup()
         window = {
             completion = cmp.config.window.bordered({
                 border = window.border(window.margin.NONE),
-                winhighlight = 'FloatBorder:CmpCompletionBorder,NormalFloat:CmpCompletion',
+                winhighlight = 'FloatBorder:CmpCompletionBorder,NormalFloat:CmpCompletion,Search:None',
+                col_offset = -3,
+                side_padding = 0,
             }),
             documentation = cmp.config.window.bordered({
                 border = window.border(window.margin.FULL),
-                winhighlight = 'FloatBorder:CmpDocumentationBorder,NormalFloat:CmpDocumentation',
+                winhighlight = 'FloatBorder:CmpDocumentationBorder,NormalFloat:CmpDocumentation,Search:None',
             }),
         },
         mapping = {
