@@ -7,7 +7,10 @@ function M.packer_sync()
     local has_plenary, p_async = pcall(require, 'plenary.async')
     if has_plenary then
         p_async.run(function ()
-            vim.notify.async('Syncing packer. A snapshot will be created.', vim.log.levels.INFO, { title = 'Packer' })
+            local notify = vim.notify
+            if type(notify) == 'table' then
+                notify.async('Syncing packer. A snapshot will be created.', vim.log.levels.INFO, { title = 'Packer' })
+            end
         end)
     end
 
