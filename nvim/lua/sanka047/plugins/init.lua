@@ -174,6 +174,13 @@ return require('packer').startup(function(use)
         config = function () LOAD_CONFIG('ui.notify') end,
     }
     use {
+        'folke/noice.nvim',
+        event = 'VimEnter',
+        disable = true,
+        requires = {'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify'},
+        config = function () LOAD_CONFIG('ui.noice') end,
+    }
+    use {
         'j-hui/fidget.nvim',
         config = function () LOAD_CONFIG('ui.fidget') end,
     }
