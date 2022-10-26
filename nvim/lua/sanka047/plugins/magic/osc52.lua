@@ -13,7 +13,7 @@ function M.setup()
         return false
     end
 
-    osc52.setup({})
+    osc52.setup({ trim = true })
 end
 
 --------------------------------------------------------------------------------
