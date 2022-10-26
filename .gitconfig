@@ -17,4 +17,5 @@
 [pull]
 	rebase = true
 [branch]
+    autoSetupMerge = always
     autoSetupRebase = always
