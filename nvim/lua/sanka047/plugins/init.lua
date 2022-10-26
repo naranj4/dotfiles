@@ -274,6 +274,13 @@ return require('packer').startup(function(use)
     -- Editing Magic
     ----------------------------------------------------------------------------
     use {
+        'ojroques/nvim-osc52',
+        config = function ()
+            LOAD_CONFIG('magic.osc52')
+            LOAD_MAPPING('magic.osc52')
+        end,
+    }
+    use {
         'windwp/nvim-autopairs',
         opt = true,
         config = function ()
