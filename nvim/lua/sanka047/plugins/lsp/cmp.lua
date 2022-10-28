@@ -112,6 +112,7 @@ function M.setup()
                 select = true,
             }), { 'i', 'c' }),
             ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+            ['<C-e>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
         },
         sources = {
             { name = 'nvim_lsp' },
