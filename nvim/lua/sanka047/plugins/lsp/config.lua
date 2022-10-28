@@ -41,11 +41,6 @@ local function generate_on_attach()
         if has_illuminate then
             illuminate.on_attach(client)
         end
-
-        local has_aerial, aerial = pcall(require, 'aerial')
-        if has_aerial then
-            aerial.on_attach(client, bufnr)
-        end
     end
 end
 

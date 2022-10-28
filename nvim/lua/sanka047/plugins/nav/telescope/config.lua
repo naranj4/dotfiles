@@ -106,7 +106,7 @@ function M.setup()
     })
 
     -- load extensions
-    local extensions = { 'fzf', 'hop', 'notify', 'harpoon', 'aerial' }
+    local extensions = { 'fzf', 'hop', 'notify', 'harpoon' }
     for _, extension in ipairs(extensions) do
         telescope.load_extension(extension)
     end

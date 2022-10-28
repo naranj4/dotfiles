@@ -377,12 +377,6 @@ return require('packer').startup(function(use)
         end,
     }
 
-    use {
-        'stevearc/aerial.nvim',
-        requires = { 'nvim-treesitter/nvim-treesitter' },
-        config = function () LOAD_CONFIG('nav.aerial') end,
-    }
-
     ----------------------------------------------------------------------------
     -- Text Parsing
     ----------------------------------------------------------------------------

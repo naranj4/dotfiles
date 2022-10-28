@@ -65,9 +65,6 @@ function M.keymap()
     end)
 
     -- extensions
-    map('n', '<leader>fa', 'Find Aerial', function ()
-        require('telescope').extensions.aerial.aerial()
-    end)
     map('n', '<leader>fn', 'Find Notifications', function ()
         require('telescope').extensions.notify.notify()
     end)
