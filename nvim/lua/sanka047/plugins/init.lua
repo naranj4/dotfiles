@@ -300,6 +300,10 @@ return require('packer').startup(function(use)
         config = function () LOAD_MAPPING('magic.easy-align') end,
     }
     use {
+        'yioneko/nvim-yati',
+        requires = 'nvim-treesitter/nvim-treesitter',
+    }
+    use {
         'AckslD/nvim-trevJ.lua',
         config = function ()
             LOAD_CONFIG('magic.trevj')
