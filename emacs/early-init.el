@@ -20,7 +20,7 @@
 
 ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements
 (push '(font . "MesloLGS Nerd Font Mono-16") default-frame-alist)
-(push '(width . 100) default-frame-alist)
+(push '(width . 130) default-frame-alist)
 (push '(height . 50) default-frame-alist)
 
 (push '(menu-bar-lines . 0) default-frame-alist)

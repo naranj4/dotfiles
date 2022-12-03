@@ -155,7 +155,9 @@ This command does not push text to `kill-ring'."
 
   :custom
   (visible-bell nil)
-  (ring-bell-function 'my/flash-mode-line))
+  (ring-bell-function 'my/flash-mode-line)
+  ;; ensure to auto-wrap text after 100 columns
+  (fill-column 100))
 
 ;; cursorline
 (use-package hl-line-mode
@@ -167,6 +169,14 @@ This command does not push text to `kill-ring'."
 (use-package display-line-numbers-mode
   :straight nil
   :hook (prog-mode text-mode))
+
+;; visual fill (adds margins)
+(use-package visual-fill-column
+  :defer t
+  :custom
+  (visual-fill-column-extra-text-width '(15 . 15))
+  (visual-fill-column-center-text t)
+  :hook (org-mode . visual-fill-column-mode))
 
 ;; show whitespace in prog-mode
 (use-package whitespace-mode
@@ -486,5 +496,16 @@ This command does not push text to `kill-ring'."
   ("C-c p &" 'cape-sgml)
   ("C-c p r" 'cape-rfc1345)
   :init
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file))
+
+                                        ; Org-Mode
+(use-package org
+  :preface
+  (defun my/org-mode-setup ()
+    (org-indent-mode 1)
+    (auto-fill-mode 1)
+    (visual-line-mode 1))
+
+  :hook (org-mode . my/org-mode-setup)
+  :custom
+  (org-ellipsis " ▶"))
