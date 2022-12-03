@@ -238,7 +238,8 @@ This command does not push text to `kill-ring'."
   :general
   (:keymaps 'vterm-mode-map :states 'insert
             "C-u" 'vterm-send-C-u
-            "C-d" 'vterm-send-C-d))
+            "C-d" 'vterm-send-C-d)
+  (:states 'normal "M-i" 'vterm))
 
                                         ; Editing Enhancements
 (use-package evil-surround
@@ -465,3 +466,25 @@ This command does not push text to `kill-ring'."
   :after (corfu-doc popon)
   :unless (display-graphic-p)
   :config (corfu-doc-terminal-mode 1))
+
+(use-package cape
+  :general
+  ("C-c p p" 'completion-at-point) ;; capf
+  ("C-c p t" 'complete-tag)        ;; etags
+  ("C-c p d" 'cape-dabbrev)        ;; or dabbrev-completion
+  ("C-c p h" 'cape-history)
+  ("C-c p f" 'cape-file)
+  ("C-c p k" 'cape-keyword)
+  ("C-c p s" 'cape-symbol)
+  ("C-c p a" 'cape-abbrev)
+  ("C-c p i" 'cape-ispell)
+  ("C-c p l" 'cape-line)
+  ("C-c p w" 'cape-dict)
+  ("C-c p \\" 'cape-tex)
+  ("C-c p _" 'cape-tex)
+  ("C-c p ^" 'cape-tex)
+  ("C-c p &" 'cape-sgml)
+  ("C-c p r" 'cape-rfc1345)
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
