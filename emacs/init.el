@@ -76,6 +76,9 @@
     ;; SPC must not be bound to ensure that operator mappings work with my/leader
     "SPC" nil)
 
+  ;; this keeps changing to evil-execute-last-recorded-macro
+  (:states 'normal "Q" 'evil-window-delete)
+
   :init
   (setq evil-insert-state-cursor 'bar
         evil-motion-state-cursor 'hbar
@@ -442,7 +445,7 @@ This command does not push text to `kill-ring'."
   (corfu-cycle t)
   (corfu-auto t)
   (corfu-auto-delay 0)
-  (corfu-auto-prefix 2)
+  (corfu-auto-prefix 1)
   (corfu-scroll-margin 2)
 
   :general
