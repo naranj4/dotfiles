@@ -425,6 +425,8 @@ This command does not push text to `kill-ring'."
     "Enable Corfu in the minibuffer if Vertico/Mct are not active."
     (unless (or (bound-and-true-p mct--active)
                 (bound-and-true-p vertico--input))
+      (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
+                  corfu-popupinfo-delay nil)
       (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook #'my/corfu-enable-in-minibuffer 1)
 
@@ -462,20 +464,18 @@ This command does not push text to `kill-ring'."
   :hook (corfu-mode . corfu-history-mode)
   :custom (corfu-history-length 25))
 
-(use-package corfu-doc
+(use-package corfu-popupinfo
+  :straight nil
   :after corfu
-  :hook (corfu-mode . corfu-doc-mode)
+  :hook (corfu-mode . corfu-popupinfo-mode)
+  :custom (corfu-popupinfo-delay '(0.5 . 0.5))
   :general
   (:keymaps 'corfu-map
-            "M-d" 'corfu-doc-toggle
-            "M-p" 'corfu-doc-scroll-down
-            "M-n" 'corfu-doc-scroll-up))
-
-(use-package corfu-doc-terminal
-  :straight (corfu-doc-terminal :type git :repo "https://codeberg.org/akib/emacs-corfu-doc-terminal")
-  :after (corfu-doc popon)
-  :unless (display-graphic-p)
-  :config (corfu-doc-terminal-mode 1))
+            "M-d" 'corfu-popupinfo-toggle
+            "M-p" 'corfu-popupinfo-scroll-down
+            "M-n" 'corfu-popupinfo-scroll-up)
+  :config
+  (set-face-attribute 'corfu-popupinfo nil :height 1.0))
 
 (use-package cape
   :general
