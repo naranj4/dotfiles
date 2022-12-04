@@ -536,6 +536,8 @@ This command does not push text to `kill-ring'."
 
   :custom
   (org-roam-directory (file-truename "~/org-roam/"))
+  (org-roam-dailies-directory "journal/")
+
   (org-roam-capture-templates
    `(,(my/create-roam-template "d" "Default" 'plain "%?")
 
@@ -578,11 +580,27 @@ This command does not push text to `kill-ring'."
            "f" 'org-roam-node-find
            "i" 'org-roam-node-insert
            "c" 'org-roam-capture)
-  (my/leader :states 'normal :prefix "SPC o"
+  (my/leader :states 'normal :prefix "M-o"
     "l" 'org-roam-buffer-toggle
     "f" 'org-roam-node-find
     "i" 'org-roam-node-insert
     "c" 'org-roam-capture)
+
+  (my/leader :states 'normal :prefix "M-o j"
+    "n" 'org-roam-dailies-goto-next-note
+    "p" 'org-roam-dailies-goto-previous-note
+
+    "Y" 'org-roam-dailies-capture-yesterday
+    "c" 'org-roam-dailies-capture-today
+    "T" 'org-roam-dailies-capture-tomorrow
+    "Q" 'org-roam-dailies-capture-date ;; query for date
+
+    "y" 'org-roam-dailies-goto-yesterday
+    "d" 'org-roam-dailies-goto-today
+    "t" 'org-roam-dailies-goto-tomorrow
+    "q" 'org-roam-dailies-goto-date ;; query for date
+
+    "." 'org-roam-dailies-find-directory)
 
   ;; The usual org-cycle mapping is override by the jump-list forward mapping
   (:keymaps 'org-mode-map :states 'normal "M-TAB" 'org-cycle)
@@ -594,7 +612,11 @@ This command does not push text to `kill-ring'."
             ")" 'org-forward-sentence)
 
   :config
-  ;; Ensure that the 'org-roam-directory exists
+  ;; load extensions
+  (require 'org-roam-dailies)
+
+  ;; Ensure that the 'org-roam-directory and 'org-roam-dailies-directory exists
   (mkdir (symbol-value 'org-roam-directory) t)
+  (mkdir (expand-file-name org-roam-dailies-directory org-roam-directory) t)
 
   (org-roam-db-autosync-mode))
