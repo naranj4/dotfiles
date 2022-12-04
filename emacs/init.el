@@ -165,13 +165,13 @@ This command does not push text to `kill-ring'."
 ;; cursorline
 (use-package hl-line-mode
   :straight nil
-  :hook (prog-mode text-mode)
+  :hook (prog-mode text-mode fundamental-mode)
   :custom (hl-line-sticky-flag nil))
 
 ;; line numbers
 (use-package display-line-numbers-mode
   :straight nil
-  :hook (prog-mode text-mode))
+  :hook (prog-mode text-mode fundamental-mode))
 
 ;; visual fill (adds margins)
 (use-package visual-fill-column
@@ -211,7 +211,7 @@ This command does not push text to `kill-ring'."
   (solaire-global-mode 1))
 
 (use-package evil-quickscope
-  :hook ((prog-mode text-mode) . turn-on-evil-quickscope-always-mode)
+  :hook ((prog-mode text-mode fundamental-mode) . turn-on-evil-quickscope-always-mode)
   :custom-face
   (evil-quickscope-first-face ((t (:inherit 'font-lock-constant-face :underline t :bold t))))
   (evil-quickscope-second-face ((t (:inherit 'font-lock-type-face :underline t :bold t)))))
@@ -256,7 +256,7 @@ This command does not push text to `kill-ring'."
 
                                         ; Editing Enhancements
 (use-package evil-surround
-  :hook ((prog-mode text-mode) . evil-surround-mode)
+  :hook ((prog-mode text-mode fundamental-mode) . evil-surround-mode)
   :config
   (setq-default evil-surround-pairs-alist (push '(?< . ("< " . " >")) evil-surround-pairs-alist)
                 evil-surround-pairs-alist (push '(?> . ("<" . ">")) evil-surround-pairs-alist)))
@@ -322,7 +322,7 @@ This command does not push text to `kill-ring'."
                                         ; Version Control
 (use-package diff-hl
   :hook
-  ((prog-mode text-mode vc-dir-mode) . turn-on-diff-hl-mode)
+  ((prog-mode text-mode vc-dir-mode fundamental-mode) . turn-on-diff-hl-mode)
   (dired-mode . diff-hl-dired-mode)
   :general
   (:states 'motion
@@ -517,8 +517,61 @@ This command does not push text to `kill-ring'."
   (advice-add 'org-refile :after 'org-save-all-org-buffers))
 
 (use-package org-roam
+  :preface
+  (defun my/create-roam-template (key desc type &optional template &rest overrides)
+    "Helper function to add sane defaults to a roam template"
+    (cond ((not template)
+           (list key desc type))
+          (t
+           ;; add sane defaults for :target and :unnarrowed if they aren't already defined.
+           ;; NOTE: there's probably a better way to handle pushing defaults without needing to stack
+           ;; plist-puts
+           (append
+            (list key desc type template)
+            (plist-put
+             (plist-put overrides :unnarrowed (cl-getf overrides :unnarrowed t))
+             :target (cl-getf
+                      overrides
+                      :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")))))))
+
   :custom
   (org-roam-directory (file-truename "~/org-roam/"))
+  (org-roam-capture-templates
+   `(,(my/create-roam-template "d" "Default" 'plain "%?")
+
+     ("m" "Meetings")
+     ,(my/create-roam-template
+       "md" "Default" 'plain
+       ;; evaluate the filename early
+       `(file ,(file-truename (expand-file-name "templates/meetings/default.org" user-emacs-directory)))
+       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :meeting:\n\n"))
+
+     ("P" "Projects")
+     ,(my/create-roam-template
+       "Pp" "Project" 'plain
+       `(file ,(file-truename (expand-file-name "templates/projects/default.org" user-emacs-directory)))
+       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:\n\n"))
+     ,(my/create-roam-template
+       "PP" "Project Design" 'plain
+       `(file ,(file-truename (expand-file-name "templates/projects/project-design.org" user-emacs-directory)))
+       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:\n\n"))
+     ,(my/create-roam-template
+       "Pf" "Feature" 'plain
+       `(file ,(file-truename (expand-file-name "templates/projects/feature.org" user-emacs-directory)))
+       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:feature:\n\n"))
+     ,(my/create-roam-template
+       "PF" "Feature Design" 'plain
+       `(file ,(file-truename (expand-file-name "templates/projects/feature-design.org" user-emacs-directory)))
+       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:feature:\n\n"))
+
+     ("p" "People")
+     ,(my/create-roam-template
+       "pd" "Default" 'plain
+       ;; evaluate the filename early
+       `(file ,(file-truename (expand-file-name "templates/people/default.org" user-emacs-directory)))
+       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :people:\n\n"))
+     ))
+
   :general
   (:prefix "C-c n"
            "l" 'org-roam-buffer-toggle

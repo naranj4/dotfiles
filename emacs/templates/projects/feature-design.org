@@ -1,0 +1,14 @@
+* Problem Statement
+
+Parent project: %?
+
+* TODO Customers
+
+* TODO Requirements
+
+* TODO Design
+
+* TODO Tasks
+
+* Resources
+

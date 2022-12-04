@@ -1,0 +1,9 @@
+* About
+
+- Parent project: %?
+- Design: TODO
+
+* Notes
+
+* Resources
+
