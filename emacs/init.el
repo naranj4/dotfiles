@@ -511,4 +511,37 @@ This command does not push text to `kill-ring'."
 
   :hook (org-mode . my/org-mode-setup)
   :custom
-  (org-ellipsis " ▶"))
+  (org-ellipsis " ▶")
+  :init
+  ;; Save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers))
+
+(use-package org-roam
+  :custom
+  (org-roam-directory (file-truename "~/org-roam/"))
+  :general
+  (:prefix "C-c n"
+           "l" 'org-roam-buffer-toggle
+           "f" 'org-roam-node-find
+           "i" 'org-roam-node-insert
+           "c" 'org-roam-capture)
+  (my/leader :states 'normal :prefix "SPC o"
+    "l" 'org-roam-buffer-toggle
+    "f" 'org-roam-node-find
+    "i" 'org-roam-node-insert
+    "c" 'org-roam-capture)
+
+  ;; The usual org-cycle mapping is override by the jump-list forward mapping
+  (:keymaps 'org-mode-map :states 'normal "M-TAB" 'org-cycle)
+
+  (:keymaps 'org-mode-map :states 'motion
+            "{" 'org-backward-paragraph
+            "}" 'org-forward-paragraph
+            "(" 'org-backward-sentence
+            ")" 'org-forward-sentence)
+
+  :config
+  ;; Ensure that the 'org-roam-directory exists
+  (mkdir (symbol-value 'org-roam-directory) t)
+
+  (org-roam-db-autosync-mode))
