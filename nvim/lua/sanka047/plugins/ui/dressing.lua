@@ -16,7 +16,7 @@ function M.setup()
     dressing.setup({
         input = {
             enabled = true,
-            insert_only = true,
+            insert_only = false,
             prompt_align = 'right',
             win_options = {
                 winblend = 0,
@@ -24,7 +24,7 @@ function M.setup()
             },
             override = function (conf)
                 conf['border'] = window.border(window.margin.FULL)
-            end
+            end,
         },
         select = {
             enabled = true,
