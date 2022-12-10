@@ -28,6 +28,17 @@
 ;; Install use-package for rest of configuration
 (straight-use-package 'use-package)
 
+                                        ; Util Functions
+(defun my/superset-p (s1 s2)
+  "Checks whether s1 is a superset of s2"
+  (let ((s1 (seq-uniq s1))
+        (s2 (seq-uniq s2)))
+    (seq-set-equal-p (seq-intersection s1 s2) s2)))
+
+(defun my/subset-p (s1 s2)
+  "Checks whether s1 is a subset of s2"
+  (my/superset-p s2 s1))
+
                                         ; Package Management
 (use-package straight
   :custom (straight-use-package-by-default t))
@@ -534,6 +545,82 @@ This command does not push text to `kill-ring'."
                       overrides
                       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")))))))
 
+  (defun my/org-roam-node-insert-immediate (arg &rest args)
+    "Immediately inserts a link to a note. If it doesn't exist, it will automatically be created
+without jumping to it or capturing"
+    (interactive "P")
+    (let ((args (cons arg args))
+          (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                    '(:immediate-finish t)))))
+      (apply #'org-roam-node-insert args)))
+
+  (defun my/org-roam-filter-by-tags (&rest tags)
+    (lambda (node)
+      (let ((node-tags (org-roam-node-tags node)))
+        (my/subset-p tags node-tags))))
+
+  (defun my/org-roam-list-notes-by-tags (&rest tags)
+    (mapcar #'org-roam-node-file
+            (seq-filter
+             (apply #'my/org-roam-filter-by-tags tags)
+             (org-roam-node-list))))
+
+  (defun my/org-roam-find-by-tags (tags)
+    "Takes a comma-delimited list of tags to filter the org-roam node list."
+    (interactive "sTags: ")
+    (let ((tags (split-string tags ",")))
+      (let ((header (format "#+title: ${title}\n#+filetags: :%s:\n\n" (string-join tags ":"))))
+        (format-message "Tag list: %s" tags)
+        (org-roam-node-find
+         nil
+         nil
+         (apply #'my/org-roam-filter-by-tags tags)
+         nil
+         :templates
+         `(,(my/create-roam-template
+             "d" "Default" 'plain
+             "%?"
+             :target `(file+head "%<%Y%m%d%H%M%S>-${slug}.org" ,header)))))))
+
+  :general
+  (:prefix "C-c n"
+           "l" 'org-roam-buffer-toggle
+           "f" 'org-roam-node-find
+           "i" 'my/org-roam-node-insert-immediate
+           "I" 'org-roam-node-insert
+           "c" 'org-roam-capture)
+  (my/leader :states 'normal :prefix "M-o"
+    "l" 'org-roam-buffer-toggle
+    "f" 'org-roam-node-find
+    "i" 'my/org-roam-node-insert-immediate
+    "I" 'org-roam-node-insert
+    "c" 'org-roam-capture)
+
+  (my/leader :states 'normal :prefix "M-o j"
+    "n" 'org-roam-dailies-goto-next-note
+    "p" 'org-roam-dailies-goto-previous-note
+
+    "Y" 'org-roam-dailies-capture-yesterday
+    "c" 'org-roam-dailies-capture-today
+    "T" 'org-roam-dailies-capture-tomorrow
+    "Q" 'org-roam-dailies-capture-date ;; query for date
+
+    "y" 'org-roam-dailies-goto-yesterday
+    "d" 'org-roam-dailies-goto-today
+    "t" 'org-roam-dailies-goto-tomorrow
+    "q" 'org-roam-dailies-goto-date ;; query for date
+
+    "." 'org-roam-dailies-find-directory)
+
+  ;; The usual org-cycle mapping is override by the jump-list forward mapping
+  (:keymaps 'org-mode-map :states 'normal "M-TAB" 'org-cycle)
+
+  (:keymaps 'org-mode-map :states 'motion
+            "{" 'org-backward-paragraph
+            "}" 'org-forward-paragraph
+            "(" 'org-backward-sentence
+            ")" 'org-forward-sentence)
+
   :custom
   (org-roam-directory (file-truename "~/org-roam/"))
   (org-roam-dailies-directory "journal/")
@@ -573,43 +660,6 @@ This command does not push text to `kill-ring'."
        `(file ,(file-truename (expand-file-name "templates/people/default.org" user-emacs-directory)))
        :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :people:\n\n"))
      ))
-
-  :general
-  (:prefix "C-c n"
-           "l" 'org-roam-buffer-toggle
-           "f" 'org-roam-node-find
-           "i" 'org-roam-node-insert
-           "c" 'org-roam-capture)
-  (my/leader :states 'normal :prefix "M-o"
-    "l" 'org-roam-buffer-toggle
-    "f" 'org-roam-node-find
-    "i" 'org-roam-node-insert
-    "c" 'org-roam-capture)
-
-  (my/leader :states 'normal :prefix "M-o j"
-    "n" 'org-roam-dailies-goto-next-note
-    "p" 'org-roam-dailies-goto-previous-note
-
-    "Y" 'org-roam-dailies-capture-yesterday
-    "c" 'org-roam-dailies-capture-today
-    "T" 'org-roam-dailies-capture-tomorrow
-    "Q" 'org-roam-dailies-capture-date ;; query for date
-
-    "y" 'org-roam-dailies-goto-yesterday
-    "d" 'org-roam-dailies-goto-today
-    "t" 'org-roam-dailies-goto-tomorrow
-    "q" 'org-roam-dailies-goto-date ;; query for date
-
-    "." 'org-roam-dailies-find-directory)
-
-  ;; The usual org-cycle mapping is override by the jump-list forward mapping
-  (:keymaps 'org-mode-map :states 'normal "M-TAB" 'org-cycle)
-
-  (:keymaps 'org-mode-map :states 'motion
-            "{" 'org-backward-paragraph
-            "}" 'org-forward-paragraph
-            "(" 'org-backward-sentence
-            ")" 'org-forward-sentence)
 
   :config
   ;; load extensions
