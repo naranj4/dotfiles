@@ -18,8 +18,10 @@ function M.setup()
             enabled = true,
             insert_only = true,
             prompt_align = 'right',
-            winblend = 0,
-            winhighlight = 'NormalFloat:DressingNormal,FloatBorder:DressingBorder',
+            win_options = {
+                winblend = 0,
+                winhighlight = 'NormalFloat:DressingNormal,FloatBorder:DressingBorder',
+            },
             override = function (conf)
                 conf['border'] = window.border(window.margin.FULL)
             end
