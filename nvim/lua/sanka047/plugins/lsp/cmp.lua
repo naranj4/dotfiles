@@ -119,8 +119,6 @@ function M.setup()
             { name = 'luasnip' },
             { name = 'buffer' },
             { name = 'path' },
-            { name = 'cmdline' },
-            { name = 'nvim_lua' },
         }
     })
 
