@@ -114,12 +114,13 @@ function M.setup()
             ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
             ['<C-e>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
         },
-        sources = {
+        sources = cmp.config.sources({
             { name = 'nvim_lsp' },
             { name = 'luasnip' },
-            { name = 'buffer' },
             { name = 'path' },
-        }
+        }, {
+            { name = 'buffer' },
+        }),
     })
 
     ----------------------------------------------------------------------------
