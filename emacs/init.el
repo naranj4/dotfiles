@@ -567,20 +567,24 @@ without jumping to it or capturing"
 
   (defun my/org-roam-find-by-tags (tags)
     "Takes a comma-delimited list of tags to filter the org-roam node list."
-    (interactive "sTags: ")
-    (let ((tags (split-string tags ",")))
-      (let ((header (format "#+title: ${title}\n#+filetags: :%s:\n\n" (string-join tags ":"))))
-        (format-message "Tag list: %s" tags)
-        (org-roam-node-find
-         nil
-         nil
-         (apply #'my/org-roam-filter-by-tags tags)
-         nil
-         :templates
-         `(,(my/create-roam-template
-             "d" "Default" 'plain
-             "%?"
-             :target `(file+head "%<%Y%m%d%H%M%S>-${slug}.org" ,header)))))))
+    (interactive
+     (list (completing-read-multiple "Tag: " (org-roam-tag-completions)))
+     ;; TODO: to make the following work, set and unset crm-separator OR move this to a new
+     ;; file that allows dynamic binding
+     ;; (list (let ((crm-separator "[ 	]*:[ 	]*"))
+     ;;         (completing-read-multiple "Tag: " (org-roam-tag-completions))))
+     )
+    (let ((header (format "#+title: ${title}\n#+filetags: :%s:\n\n" (string-join tags ":"))))
+      (org-roam-node-find
+       nil
+       nil
+       (apply #'my/org-roam-filter-by-tags tags)
+       nil
+       :templates
+       `(,(my/create-roam-template
+           "d" "Default" 'plain
+           "%?"
+           :target `(file+head "%<%Y%m%d%H%M%S>-${slug}.org" ,header))))))
 
   :general
   (:prefix "C-c n"
@@ -591,10 +595,18 @@ without jumping to it or capturing"
            "c" 'org-roam-capture)
   (my/leader :states 'normal :prefix "M-o"
     "l" 'org-roam-buffer-toggle
+
+    "t" 'org-roam-tag-add
+    "T" 'org-roam-tag-remove
+
     "f" 'org-roam-node-find
+    "M-f" 'my/org-roam-find-by-tags
+    "M-o" 'org-roam-capture
+
     "i" 'my/org-roam-node-insert-immediate
-    "I" 'org-roam-node-insert
-    "c" 'org-roam-capture)
+    "I" 'org-roam-node-insert)
+
+  (my/leader :states 'normal :prefix "M-o" "M-j" 'org-roam-dailies-capture-today)
 
   (my/leader :states 'normal :prefix "M-o j"
     "n" 'org-roam-dailies-goto-next-note
@@ -625,6 +637,11 @@ without jumping to it or capturing"
   (org-roam-directory (file-truename "~/org-roam/"))
   (org-roam-dailies-directory "journal/")
 
+  ;; TODO: reconsider all the different templates and default tags here (is it necessary at all?)
+  ;; Should the tags be broad or narrowed down for searchability? Or does org-roam backlinking already
+  ;; cover that usecase?
+  ;;   - Find the main topic node
+  ;;   - Look through the backlinks and references from the main node to find the note
   (org-roam-capture-templates
    `(,(my/create-roam-template "d" "Default" 'plain "%?")
 
@@ -633,32 +650,32 @@ without jumping to it or capturing"
        "md" "Default" 'plain
        ;; evaluate the filename early
        `(file ,(file-truename (expand-file-name "templates/meetings/default.org" user-emacs-directory)))
-       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :meeting:\n\n"))
+       :target '(file+head "work/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :meeting:\n\n"))
 
      ("P" "Projects")
      ,(my/create-roam-template
        "Pp" "Project" 'plain
        `(file ,(file-truename (expand-file-name "templates/projects/default.org" user-emacs-directory)))
-       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:\n\n"))
+       :target '(file+head "work/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:\n\n"))
      ,(my/create-roam-template
        "PP" "Project Design" 'plain
        `(file ,(file-truename (expand-file-name "templates/projects/project-design.org" user-emacs-directory)))
-       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:\n\n"))
+       :target '(file+head "work/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:\n\n"))
      ,(my/create-roam-template
        "Pf" "Feature" 'plain
        `(file ,(file-truename (expand-file-name "templates/projects/feature.org" user-emacs-directory)))
-       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:feature:\n\n"))
+       :target '(file+head "work/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:feature:\n\n"))
      ,(my/create-roam-template
        "PF" "Feature Design" 'plain
        `(file ,(file-truename (expand-file-name "templates/projects/feature-design.org" user-emacs-directory)))
-       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:feature:\n\n"))
+       :target '(file+head "work/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:feature:\n\n"))
 
      ("p" "People")
      ,(my/create-roam-template
        "pd" "Default" 'plain
        ;; evaluate the filename early
        `(file ,(file-truename (expand-file-name "templates/people/default.org" user-emacs-directory)))
-       :target '(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :people:\n\n"))
+       :target '(file+head "work/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :people:\n\n"))
      ))
 
   :config
