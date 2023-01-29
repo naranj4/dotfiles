@@ -157,7 +157,6 @@ local plugins = {
     -- 'git.neogit',
     'lsp.luasnip',
     'magic.neogen',
-    'magic.refactoring',
     'magic.substitute',
     'nav.hop',
     'nav.telescope',

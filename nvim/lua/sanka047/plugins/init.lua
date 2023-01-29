@@ -326,15 +326,6 @@ return require('packer').startup(function(use)
         module = 'substitute',
         config = function () LOAD_CONFIG('magic.substitute') end,
     }
-    use {
-        'ThePrimeagen/refactoring.nvim',
-        module = 'sanka047.utils.refactor',
-        requires = {
-            {'nvim-lua/plenary.nvim'},
-            {'nvim-treesitter/nvim-treesitter'},
-        },
-        config = function () LOAD_CONFIG('magic.refactoring') end,
-    }
 
     ----------------------------------------------------------------------------
     -- Movement & File Navigation
@@ -352,11 +343,6 @@ return require('packer').startup(function(use)
             LOAD_CONFIG('nav.leap')
             LOAD_MAPPING('nav.leap')
         end
-    }
-    use {
-        'abecodes/tabout.nvim',
-        requires = {'nvim-treesitter/nvim-treesitter'},
-        config = function () LOAD_CONFIG('nav.tabout') end,
     }
 
     use {
