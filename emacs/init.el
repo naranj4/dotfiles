@@ -521,6 +521,7 @@ This command does not push text to `kill-ring'."
     (visual-line-mode 1))
 
   :hook (org-mode . my/org-mode-setup)
+  :general (:prefix "C-c" "l" 'org-store-link)
   :custom
   (org-ellipsis " ▶")
   :init
