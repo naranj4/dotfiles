@@ -22,8 +22,8 @@ function M.setup()
         languages = {
             python = {
                 template = {
-                    annotation_convention = 'numpydoc',
-                    numpydoc = require('sanka047.doc_templates.custom_numpydoc'),
+                    annotation_convention = 'custom_numpydoc',
+                    custom_numpydoc = require('sanka047.doc_templates.custom_numpydoc'),
                 },
             },
         },

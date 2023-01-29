@@ -29,8 +29,16 @@ return {
     { i.HasParameter, "", { type = { "func" } } },
     { i.HasParameter, "Parameters", { type = { "func" } } },
     { i.HasParameter, "----------", { type = { "func" } } },
-    { i.Parameter, "%s" .. type_sep .. "$1", { type = { "func" } } },
-    { { i.Parameter, i.Type }, "%s" .. type_sep .. "%s$1", { required = "typed_parameters", type = { "func" } } },
+    {
+        i.Parameter,
+        "%s" .. type_sep .. "$1",
+        { type = { "func" } },
+    },
+    {
+        { i.Parameter, i.Type },
+        "%s" .. type_sep .. "%s$1",
+        { required = i.Tparam, type = { "func" } },
+    },
     {
         i.ArbitraryArgs,
         "%s",
