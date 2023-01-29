@@ -215,11 +215,10 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'elihunter173/dirbuf.nvim',
-        disable = true,
+        'stevearc/oil.nvim',
         config = function ()
-            LOAD_CONFIG('ui.dirbuf')
-            LOAD_MAPPING('ui.dirbuf')
+            LOAD_CONFIG('ui.oil')
+            LOAD_MAPPING('ui.oil')
         end
     }
     use {
