@@ -528,6 +528,9 @@ This command does not push text to `kill-ring'."
   ;; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers))
 
+(use-package ox-pandoc
+  :hook (org-mode . (lambda ())))
+
 (use-package org-roam
   :preface
   (defun my/create-roam-template (key desc type &optional template &rest overrides)
