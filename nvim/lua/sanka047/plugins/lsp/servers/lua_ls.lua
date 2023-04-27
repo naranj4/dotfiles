@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- Sumneko Lua Settings
+-- Lua LS Settings
 --------------------------------------------------------------------------------
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')

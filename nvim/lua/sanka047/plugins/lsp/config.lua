@@ -64,7 +64,7 @@ local function configure_lsp_servers()
         solargraph = {}, -- ruby
         yamlls = {}, -- yaml
         tsserver = {}, -- typescript
-        sumneko_lua = get_lsp_settings('sumneko_lua'),
+        lua_ls = get_lsp_settings('lua_ls'),
     }
 
     -- setup all language servers with default configuration
