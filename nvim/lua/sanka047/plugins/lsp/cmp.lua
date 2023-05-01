@@ -138,14 +138,6 @@ function M.setup()
             { name = 'buffer' },
         },
     })
-
-    ----------------------------------------------------------------------------
-    -- Nvim-Autopairs Compatibility
-    ----------------------------------------------------------------------------
-    local has_autopairs, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
-    if has_autopairs then
-        cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
-    end
 end
 
 --------------------------------------------------------------------------------
