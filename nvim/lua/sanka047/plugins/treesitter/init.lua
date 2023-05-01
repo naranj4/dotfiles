@@ -12,7 +12,6 @@ return {
             {'RRethy/nvim-treesitter-endwise'},
             {'windwp/nvim-ts-autotag'},
             {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'},
-            {'yioneko/nvim-yati'},
         },
         config = function ()
             LOAD_CONFIG('treesitter.core')

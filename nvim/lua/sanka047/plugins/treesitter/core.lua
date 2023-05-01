@@ -70,15 +70,7 @@ function M.setup()
 
         -- Treesitter modules
         highlight = get_module_config('highlight').config(),
-        indent = {
-            enable = false,
-            -- BUG: treesitter indenting doesn't work in python
-            -- Issue: https://github.com/nvim-treesitter/nvim-treesitter/issues/2947
-            disable = { 'python' },
-        },
-        yati = {
-            enable = true,
-        },
+        indent = { enable = true },
         textobjects = get_module_config('textobjects').config(),
         textsubjects = get_module_config('textsubjects').config(),
         playground = get_module_config('playground').config(),
