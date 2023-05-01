@@ -6,7 +6,7 @@ local M = {}
 M.log_level = vim.log.levels.ERROR
 
 function M.log(log_level, msg, title)
-    if M.log_level > log_level then
+    if log_level < M.log_level then
         return
     end
     vim.notify(msg, log_level, { title = title })
