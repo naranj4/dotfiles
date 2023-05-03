@@ -19,14 +19,14 @@ return {
     },
     {
         'machakann/vim-sandwich',
-        config = function ()
+        init = function ()
             LOAD_CONFIG('magic.sandwich')
             LOAD_MAPPING('magic.sandwich')
         end,
     },
     {
         'junegunn/vim-easy-align',
-        config = function () LOAD_MAPPING('magic.easy-align') end,
+        init = function () LOAD_MAPPING('magic.easy-align') end,
     },
     {
         'AckslD/nvim-trevJ.lua',
