@@ -20,13 +20,19 @@ return {
     {
         'machakann/vim-sandwich',
         init = function ()
+            vim.cmd([[
+            let g:sandwich_no_default_key_mappings = 1
+            let g:operator_sandwich_no_default_key_mappings = 1
+            ]])
+        end,
+        config = function ()
             LOAD_CONFIG('magic.sandwich')
             LOAD_MAPPING('magic.sandwich')
         end,
     },
     {
         'junegunn/vim-easy-align',
-        init = function () LOAD_MAPPING('magic.easy-align') end,
+        config = function () LOAD_MAPPING('magic.easy-align') end,
     },
     {
         'AckslD/nvim-trevJ.lua',
