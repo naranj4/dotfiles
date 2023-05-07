@@ -54,6 +54,7 @@ function M.setup()
 
     treesitter_configs.setup({
         ensure_installed = {
+            'bash',
             'json',
             'lua',
             -- 'markdown',
@@ -63,6 +64,15 @@ function M.setup()
             'typescript',
             'vim',
             'yaml',
+            'gitignore',
+            'gitcommit',
+            'gitattributes',
+            'git_rebase',
+            'git_config',
+            'query',
+            'diff',
+            'smithy',
+            'toml',
         },
         sync_install = false,
         auto_install = false,
