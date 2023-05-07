@@ -53,7 +53,7 @@ return {
 
     {
         'goolord/alpha-nvim',
-        enabled = false,
+        enabled = true,
         config = function () LOAD_CONFIG('ui.alpha') end,
     },
 

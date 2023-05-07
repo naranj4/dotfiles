@@ -57,7 +57,7 @@ function M.setup()
     dashboard.section.buttons.opts.hl_shortcut = 'DashboardShortCut'
 
     local function footer()
-        local plugins = #vim.tbl_keys(packer_plugins)
+        local plugins = require('lazy').stats().count
         local v = vim.version()
         local platform = vim.fn.has 'mac' == 1 and '' or (vim.fn.has 'win32' == 1 and '' or '')
         return string.format(' v%d.%d.%d    %s     Loaded %d plugins', v.major, v.minor, v.patch, platform, plugins)
