@@ -14,6 +14,7 @@ end
 require('sanka047.core.globals')
 require('sanka047.core.options')
 require('sanka047.core.plugins')
+require('sanka047.core.filetypes')
 require('sanka047.core.colors')
 require('sanka047.core.mappings')
 require('sanka047.core.project')
