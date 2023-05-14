@@ -1,10 +1,20 @@
 #!/bin/bash
 
+# Allows comments in the package lists.
+function list-packages {
+    cat $* | sed 's/#.*//' | grep "\S"
+}
+
 # Install nvm and NodeJS (for LSPs)
 if [[ ! -f "$HOME/.config/nvm/nvm.sh" ]]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 fi
 nvm install node --reinstall-packages-from=node
+
+# Install rust and cargo
+if ! cargo_loc="$(type -p "$foobar_command_name")" || [[ -z $cargo_loc ]]; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
 
 # TODO: fix this later when reorganizing dotfiles
 # Create symlinks for config files, backing up the old ones.
