@@ -7,12 +7,15 @@ function list-packages {
 
 # Install nvm and NodeJS (for LSPs)
 if [[ ! -f "$HOME/.config/nvm/nvm.sh" ]]; then
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash'
 fi
-nvm install node --reinstall-packages-from=node
 
-# Install rust and cargo
-if ! cargo_loc="$(type -p "$foobar_command_name")" || [[ -z $cargo_loc ]]; then
+bash -c "\\. \"$NVM_DIR/nvm.sh\"; \
+    nvm install node --reinstall-packages-from=default; \
+    nvm alias default node"
+
+# Install cargo packages
+if ! command -v cargo; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
