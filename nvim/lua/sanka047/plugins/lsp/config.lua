@@ -64,6 +64,7 @@ local function configure_lsp_servers()
         solargraph = {}, -- ruby
         yamlls = {}, -- yaml
         tsserver = {}, -- typescript
+        gopls = {}, -- golang
         lua_ls = get_lsp_settings('lua_ls'),
     }
 

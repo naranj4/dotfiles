@@ -57,7 +57,7 @@ opt.inccommand = 'split'
 opt.showmatch = true
 
 opt.list = true
-opt.listchars = {tab = '‒‒▶', trail = '•'}
+opt.listchars = {tab = ' ‒ ', trail = '•'}
 
 -- highlight on yank
 create_augroup('YankHighlight')
