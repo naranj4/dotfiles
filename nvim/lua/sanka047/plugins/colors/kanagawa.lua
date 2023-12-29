@@ -20,23 +20,14 @@ function M.setup()
         local theme = colors.theme
         return {
             InclineNormal = { bg = theme.syn.fun, fg = theme.ui.float.bg, bold = true },
-            InclineNormalNC = { bg = theme.ui.bg_light0, fg = theme.ui.float.fg },
+            InclineNormalNC = { bg = theme.ui.bg_p1, fg = theme.ui.float.fg },
 
-            HopNextKey = { fg = theme.ui.fg, bold = true },
-            HopNextKey1 = { link = 'HopNextKey' },
-            HopNextKey2 = { fg = theme.ui.fg },
-            HopUnmatched = { bg = theme.ui.bg, fg = theme.syn.comment },
-            HopCursor = { link = 'Cursor' },
-
-            FloatBorder = { fg = theme.ui.float.bg, bg = theme.ui.bg },
+            FloatBorder = { fg = theme.ui.bg_dim, bg = theme.ui.bg_dim },
+            NormalFloat = { fg = theme.ui.fg, bg = theme.ui.bg_dim },
             FloatTitle = { fg = theme.ui.float.bg, bg = palette.waveAqua2, bold = true },
 
             DressingNormal = { fg = theme.ui.fg, bg = palette.winterBlue },
             DressingBorder = { fg = palette.winterBlue, bg = theme.ui.bg },
-
-            CmpCompletionBorder = { fg = theme.ui.pmenu.bg, bg = theme.ui.bg },
-            CmpDocumentation = { bg = theme.ui.bg_dim },
-            CmpDocumentationBorder = { fg = theme.ui.bg_dim, bg = theme.ui.bg },
 
             QuickScopePrimary = { fg = palette.crystalBlue, underline = true, bold = true },
             QuickScopeSecondary = { fg = theme.diag.warning, underline = true, bold = true },
@@ -46,20 +37,29 @@ function M.setup()
             LeapLabelSecondary = { fg = theme.ui.float.bg, bg = palette.crystalBlue, bold = true },
             LeapBackdrop = { fg = theme.syn.comment, bg = theme.ui.bg },
 
-            ToggletermNormal = { fg = theme.ui.fg, bg = theme.ui.bg },
-            ToggletermBorder = { fg = theme.ui.float.fg_border, bg = theme.ui.bg },
+            ToggletermNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+            ToggletermBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
 
             TelescopePromptTitle = { fg = theme.ui.fg_reverse, bg = palette.autumnYellow, bold = true },
-            TelescopePromptNormal = { bg = theme.ui.bg_p2 },
-            TelescopePromptBorder = { fg = theme.ui.bg_p2, bg = theme.ui.bg_p2 },
+            TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+            TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
 
-            TelescopeResultsTitle = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
-            TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_p1 },
-            TelescopeResultsBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+            TelescopeResultsTitle = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+            TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+            TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
 
-            TelescopePreviewTitle = { fg = theme.ui.fg_reverse, bg = palette.boatYellow2, bold = true },
-            TelescopePreviewNormal = { bg = theme.ui.bg_p1 },
-            TelescopePreviewBorder = { bg = theme.ui.bg_p1, fg = theme.ui.bg_p1 },
+            TelescopePreviewTitle = { fg = theme.ui.bg_dim, bg = palette.bg_dim },
+            TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+            TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+
+            Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
+            PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+            PmenuSbar = { bg = theme.ui.bg_m1 },
+            PmenuThumb = { bg = theme.ui.bg_p2 },
+
+            CmpCompletionBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg },
+            CmpDocumentation = { bg = theme.ui.bg_m1 },
+            CmpDocumentationBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg },
 
             CmpItemAbbrDeprecated = { fg = palette.katanaGray, bg = "NONE", strikethrough = true },
             CmpItemAbbrMatch = { fg = palette.crystalBlue, bg = "NONE", bold = true },
