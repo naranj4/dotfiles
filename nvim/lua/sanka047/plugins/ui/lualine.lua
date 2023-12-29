@@ -149,7 +149,7 @@ function M.setup()
                 },
             },
         },
-        extensions = {'quickfix', 'nvim-tree', 'toggleterm'},
+        extensions = {'quickfix', 'toggleterm'},
     }
     lualine.setup(config)
 end

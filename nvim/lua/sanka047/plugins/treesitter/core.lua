@@ -63,6 +63,7 @@ function M.setup()
             'ruby',
             'typescript',
             'vim',
+            'vimdoc',
             'yaml',
             'gitignore',
             'gitcommit',
@@ -74,7 +75,7 @@ function M.setup()
             'smithy',
             'toml',
         },
-        sync_install = false,
+        sync_install = true,
         auto_install = false,
         ignore_install = {},
 

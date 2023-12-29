@@ -16,29 +16,7 @@ function M.setup()
     local actions = require('diffview.actions')
 
     diffview.setup({
-        diff_binaries = false,    -- Show diffs for binaries
         enhanced_diff_hl = true,  -- See ':h diffview-config-enhanced_diff_hl'
-        use_icons = true,         -- Requires nvim-web-devicons
-        icons = {                 -- Only applies when use_icons is true.
-            folder_closed = '',
-            folder_open = '',
-        },
-        signs = {
-            fold_closed = '',
-            fold_open = '',
-        },
-        file_panel = {
-            win_config = {
-                position = 'left',                  -- One of 'left', 'right', 'top', 'bottom'
-                width = 40,                         -- Only applies when position is 'left' or 'right'
-                height = 10,                        -- Only applies when position is 'top' or 'bottom'
-            },
-            listing_style = 'tree',             -- One of 'list' or 'tree'
-            tree_options = {                    -- Only applies when listing_style is 'tree'
-                flatten_dirs = true,              -- Flatten dirs that only contain one single dir
-                folder_statuses = 'only_folded',  -- One of 'never', 'only_folded' or 'always'.
-            },
-        },
         file_history_panel = {
             win_config = {
                 position = 'bottom',
@@ -49,7 +27,7 @@ function M.setup()
                 git = {
                     single_file = {
                         max_count = 512,      -- Limit the number of commits
-                        follow = true,       -- Follow renames (only for single file)
+                        follow = true,        -- Follow renames (only for single file)
                         all = false,          -- Include all refs under 'refs/' including HEAD
                         merges = false,       -- List only merge commits
                         no_merges = false,    -- List no merge commits

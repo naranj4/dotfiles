@@ -15,6 +15,7 @@ function M.setup()
     end
 
     oil.setup({
+        skip_confirm_for_simple_edits = true,
         columns = { 'icon', 'permissions', 'size', 'mtime' },
         float = {
             border = window.border(window.margin.FULL),

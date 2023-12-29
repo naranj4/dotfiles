@@ -12,10 +12,7 @@ return {
     {
         'windwp/nvim-autopairs',
         lazy = true,
-        config = function ()
-            LOAD_CONFIG('magic.autopairs')
-            LOAD_MAPPING('magic.autopairs')
-        end,
+        config = function () LOAD_CONFIG('magic.autopairs') end,
     },
     {
         'machakann/vim-sandwich',

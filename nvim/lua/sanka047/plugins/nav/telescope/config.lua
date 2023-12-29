@@ -53,7 +53,6 @@ function M.setup()
             ['<C-d>'] = actions.results_scrolling_down,
         },
     }
-    mappings = vim.tbl_deep_extend('error', mappings, req_telescope('extensions.hop').keymap())
 
     telescope.setup({
         defaults = {
@@ -101,12 +100,11 @@ function M.setup()
         },
         extensions = {
             fzf = req_telescope('extensions.fzf').config(),
-            hop = req_telescope('extensions.hop').config(),
         },
     })
 
     -- load extensions
-    local extensions = { 'fzf', 'hop', 'notify', 'harpoon' }
+    local extensions = { 'fzf', 'harpoon' }
     for _, extension in ipairs(extensions) do
         telescope.load_extension(extension)
     end

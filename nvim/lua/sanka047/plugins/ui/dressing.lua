@@ -15,7 +15,6 @@ function M.setup()
 
     dressing.setup({
         input = {
-            enabled = true,
             insert_only = false,
             prompt_align = 'right',
             win_options = {
@@ -27,10 +26,8 @@ function M.setup()
             end,
         },
         select = {
-            enabled = true,
             backend = { "telescope", "builtin" },
             trim_prompt = true,
-            winblend = 0,
         },
     })
 end

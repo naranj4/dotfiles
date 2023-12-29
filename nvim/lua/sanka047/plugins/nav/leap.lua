@@ -30,8 +30,7 @@ function M.setup()
 end
 
 function M.bidirectional_leap()
-    local win_id = vim.api.nvim_get_current_win()
-    require('leap').leap({ target_windows = { win_id } })
+    require('leap').leap({ target_windows = { vim.fn.win_getid() } })
 end
 
 function M.keymap()

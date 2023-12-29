@@ -12,9 +12,7 @@ function M.setup()
         return false
     end
 
-    web_devicons.setup({
-        default = true;
-    })
+    web_devicons.setup({ default = true })
 end
 
 return M

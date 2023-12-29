@@ -2,6 +2,7 @@
 -- Toggleterm Config
 --------------------------------------------------------------------------------
 local log = require('sanka047.utils.log')
+local window = require('sanka047.utils.window')
 local map = require('sanka047.utils.map').map
 
 local M = {}
@@ -26,8 +27,7 @@ function M.setup()
             NormalFloat = { link = 'ToggletermNormal' },
             FloatBorder = { link = 'ToggletermBorder' },
         },
-        shade_terminals = true,
-        shading_factor = '1',
+        shade_terminals = false,
         start_in_insert = true,
         insert_mappings = false, -- whether or not the open mapping applies in insert mode
         terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
@@ -41,7 +41,7 @@ function M.setup()
             -- see :h nvim_open_win for details on borders however
             -- the 'curved' border is a custom border type
             -- not natively supported but implemented in this plugin.
-            border = 'curved',
+            border = window.border(window.margin.FULL),
             width = function () return math.ceil(0.8 * vim.o.columns) end,
             height = function () return math.ceil(0.8 * vim.o.lines) end,
             winblend = 0,

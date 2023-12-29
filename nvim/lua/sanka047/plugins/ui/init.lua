@@ -12,17 +12,6 @@ return {
         config = function () LOAD_CONFIG('ui.dressing') end,
     },
     {
-        'rcarriga/nvim-notify',
-        config = function () LOAD_CONFIG('ui.notify') end,
-    },
-    {
-        'folke/noice.nvim',
-        event = 'VimEnter',
-        enabled = false,
-        dependencies = {'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify'},
-        config = function () LOAD_CONFIG('ui.noice') end,
-    },
-    {
         'j-hui/fidget.nvim',
         config = function () LOAD_CONFIG('ui.fidget') end,
     },

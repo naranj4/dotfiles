@@ -42,6 +42,7 @@ opt.cursorline = true
 opt.cursorcolumn = true
 opt.colorcolumn = '100'
 opt.number = true
+opt.relativenumber = true
 opt.signcolumn = 'yes:1'
 
 opt.termguicolors = true
