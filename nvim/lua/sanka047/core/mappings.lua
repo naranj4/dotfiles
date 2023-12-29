@@ -157,7 +157,6 @@ local plugins = {
     'lsp.luasnip',
     'magic.neogen',
     'magic.substitute',
-    'nav.hop',
     'nav.telescope',
     -- 'ui.nvim-tree',
 }
