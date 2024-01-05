@@ -6,7 +6,7 @@ local M = {}
 -- Use git_files until it doesn't work, then run find_files
 function M.project_files(directory, skip_git)
     -- TODO: eventually let this take in a list of directories
-    local opts = {}
+    local opts = { show_untracked = true }
     if directory ~= nil and directory ~= '' then
         opts.cwd = directory
     end
