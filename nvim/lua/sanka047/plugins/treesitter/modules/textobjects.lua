@@ -16,6 +16,10 @@ function M.config()
                 ['ac'] = '@class.outer',
                 ['ic'] = '@class.inner',
             },
+            selection_modes = {
+                ['@function.outer'] = 'V',
+                ['@class.outer'] = 'V'
+            }
         },
         move = {
             enable = true,
