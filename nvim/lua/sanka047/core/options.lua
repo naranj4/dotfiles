@@ -58,7 +58,7 @@ opt.inccommand = 'split'
 opt.showmatch = true
 
 opt.list = true
-opt.listchars = {tab = ' ‒ ', trail = '•'}
+opt.listchars = { tab = ' ‒ ', trail = '•' }
 
 -- highlight on yank
 create_augroup('YankHighlight')
@@ -95,7 +95,7 @@ opt.ignorecase = true
 opt.smartcase = true
 
 opt.wildmenu = true
-opt.wildmode = {'longest:full', 'full'}
+opt.wildmode = { 'longest:full', 'full' }
 
 opt.hlsearch = true
 opt.incsearch = true
@@ -103,7 +103,7 @@ opt.incsearch = true
 --------------------------------------------------------------------------------
 -- Backspace, Tab and Space
 --------------------------------------------------------------------------------
-opt.backspace = {'indent', 'eol', 'start'}
+opt.backspace = { 'indent', 'eol', 'start' }
 
 opt.tabstop = 4
 opt.softtabstop = 4
