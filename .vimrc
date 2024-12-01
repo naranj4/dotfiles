@@ -3,26 +3,16 @@
 let plugin_folder = '~/.vim'
 let vim_config = '~/.vimrc'
 
-" set neovim path
-if has('nvim')
-    let plugin_folder = '~/.config/nvim'
-    let vim_config = '~/.config/nvim/init.vim'
-endif
-
 if empty(glob(plugin_folder . '/autoload/plug.vim'))
     let path = plugin_folder . '/autoload/plug.vim'
     silent execute '!curl -fLo ' . path . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync
-    autocmd VimEnter * CocInstall coc-json
-    autocmd VimEnter * CocInstall coc-jedi | silent execute 'source ' . vim_config
 endif
 
 " manage all vim plugins here
 call plug#begin(plugin_folder . '/dev-plug')
 
 " color schemes and aesthetics
-Plug 'altercation/vim-colors-solarized'
-Plug 'cocopon/iceberg.vim'
 Plug 'whatyouhide/vim-gotham'
 
 Plug 'itchyny/lightline.vim'
@@ -31,8 +21,6 @@ Plug 'itchyny/lightline.vim'
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mileszs/ack.vim'
 
 " Comment blocks of code with ease
@@ -42,17 +30,14 @@ Plug 'preservim/nerdcommenter'
 Plug 'machakann/vim-sandwich'
 Plug 'jiangmiao/auto-pairs'
 
-" Moving around the screen
-Plug 'easymotion/vim-easymotion'
-
 " Git help
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" Conquer of Completion
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-
 call plug#end()
+
+" Leader Key
+let mapleader = " "
 
 " Comments in Vimscript start with a `"`.
 
@@ -68,24 +53,11 @@ call plug#end()
 set nocompatible
 
 " Setting background to dark
-" let g:solarized_termcolors=256
-" set background=dark
-" colorscheme solarized
 set termguicolors
-colorscheme gotham
+colorscheme gotham256
 
 " ESC alternative in insert mode
 inoremap kj <esc>
-if has('nvim')
-    " ESC switches back to normal mode for nvim :terminal
-    tnoremap kj <C-\><C-n>
-endif
-
-" Switching ; and :
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
 
 " Window switching/creating magic
 function! WinMove(key)
@@ -106,9 +78,6 @@ nnoremap <silent> <C-K> :call WinMove('k')<CR>
 nnoremap <silent> <C-L> :call WinMove('l')<CR>
 nnoremap <silent> <C-H> :call WinMove('h')<CR>
 
-" move to preview window
-nnoremap gp :wincmd<Space>P<CR>
-
 " Show matching braces when cursor is over them
 set showmatch
 
@@ -127,12 +96,10 @@ set wildmenu
 
 " Highlight current line
 set cursorline
+set cursorcolumn
 
 " Show command in bottom bar
 set showcmd
-
-" Lines wrap instead of continuing off screen
-set linebreak
 
 " Set scroll off to always leave lines at the bottom
 set scrolloff=999
@@ -148,18 +115,15 @@ set shortmess+=I
 
 " Show line numbers.
 set number
+set relativenumber
 
 " Lightline status bar
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction
-
 let g:lightline = {
     \ 'colorscheme': 'gotham',
     \ 'active': {
     \   'left': [
     \       [ 'mode', 'paste' ],
-    \       [ 'gitbranch', 'cocstatus', 'currentfunc', 'readonly', 'filename', 'modified' ]
+    \       [ 'gitbranch', 'readonly', 'filename', 'modified' ]
     \   ],
     \   'right': [
     \       [ 'lineinfo' ],
@@ -168,19 +132,9 @@ let g:lightline = {
     \   ]
     \ },
     \ 'component_function': {
-    \   'cocstatus': 'coc#status',
-    \   'currentfunc': 'CocCurrentFunction',
     \   'gitbranch': 'FugitiveHead'
     \ },
     \ }
-
-" This enables relative line numbering mode. With both number and
-" relativenumber enabled, the current line shows the true line number, while
-" all other lines (above and below) are numbered relative to the current line.
-" This is useful because you can tell, at a glance, what count is needed to
-" jump up or down to a particular line, by {count}k to go up or {count}j to go
-" down.
-" set relativenumber
 
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
@@ -207,8 +161,8 @@ set smartcase
 " Enable searching as you type, rather than waiting till you press enter.
 set incsearch
 
-" Unbind some useless/annoying default key bindings.
-nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
+" Close window
+nmap Q <C-w>c
 
 " Disable audible bell because it's annoying.
 set noerrorbells visualbell t_vb=
@@ -217,28 +171,12 @@ set noerrorbells visualbell t_vb=
 " sometimes be convenient.
 " set mouse+=a
 
-" Try to prevent bad habits like using the arrow keys for movement. This is
-" not the only possible bad habit. For example, holding down the h/j/k/l keys
-" for movement, rather than using more efficient movement commands, is also a
-" bad habit. The former is enforceable through a .vimrc, while we don't know
-" how to prevent the latter.
-" Do this in normal mode...
-" nnoremap <Left>  :echoe "Use h"<CR>
-" nnoremap <Right> :echoe "Use l"<CR>
-" nnoremap <Up>    :echoe "Use k"<CR>
-" nnoremap <Down>  :echoe "Use j"<CR>
-" ...and in insert mode
-" inoremap <Left>  <ESC>:echoe "Use h"<CR>
-" inoremap <Right> <ESC>:echoe "Use l"<CR>
-" inoremap <Up>    <ESC>:echoe "Use k"<CR>
-" inoremap <Down>  <ESC>:echoe "Use j"<CR>
-
 " Fzf settings
 " Opens a floating buffer to fuzzy search active directory for files
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'ag --hidden --ignore .git -g ""'}), <bang>0)
 " nnoremap <silent> <c-f> :call fzf#run(fzf#wrap({'source': 'ag --hidden --ignore .git -g ""'}))<CR>
-nnoremap <silent> <c-f> :Files<CR>
+nnoremap <silent> <leader>ff :Files<CR>
 
 " Space and Tab configuration
 set tabstop=4
@@ -249,31 +187,6 @@ set expandtab
 " Jump to start and end of line using the home row keys
 map H ^
 map L $
-
-" (Shift)Tab (de)indents code
-" vnoremap <Tab> >
-" vnoremap <S-Tab> <
-
-
-" Leader Key
-let mapleader = " "
-
-
-" Open NERDTree automatically on startup
-" autocmd vimenter * NERDTree
-" nnoremap <C-a> :NERDTreeToggle<CR>
-function! NERDTreeToggleFind()
-    if exists("g:NERDTree") && g:NERDTree.IsOpen()
-        NERDTreeClose
-    elseif filereadable(expand('%'))
-        NERDTreeFind
-    else
-        NERDTree
-    endif
-endfunction
-nnoremap <C-a> :call NERDTreeToggleFind()<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 
 " vim-sandwich settings
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
@@ -322,25 +235,12 @@ let g:sandwich#recipes += [
     \   },
     \ ]
 
-" Easymotion settings
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
-" Jump to anywhere with 2 chars?
-nmap <Leader>s <Plug>(easymotion-s2)
-
 " Ack / Ag
 " Search for something within a file in the directory
 cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
-nnoremap <Leader>A :Ack!<CR>
-xnoremap <Leader>a y:Ack! <C-r>=fnameescape(@")<CR><CR>
+nnoremap <leader>FS :Ack!<Space>
+nnoremap <leader>fs :Ack!<CR>
+xnoremap <leader>fs y:Ack! <C-r>=fnameescape(@")<CR><CR>
 command! -nargs=+ Gag Gcd | Ack! <args>
 if executable('ag')
     " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
@@ -350,9 +250,6 @@ endif
 let g:ack_mappings = {
               \  'v':  '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
               \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J' }
-
-" Fugitive key bindings
-nnoremap <Leader>g :G<Space>
 
 " GitGutter key bindings
 set signcolumn=yes
@@ -385,119 +282,3 @@ set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-else
-    inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f <Plug>(coc-format-selected)
-nmap <leader>f <Plug>(coc-format-selected)
-
-augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder.
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" COMMENTED OUT: because I have no clue what this does
-" " Applying codeAction to the selected region.
-" " Example: `<leader>aap` for current paragraph
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
-"
-" " Remap keys for applying codeAction to the current buffer.
-" nmap <leader>ac  <Plug>(coc-codeaction)
-
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Manage extensions.
-nnoremap <silent><nowait> <space>e :<C-u>CocList extensions<cr>
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
-
-" Prevent linters from triggering on EasyMotion
-autocmd User EasyMotionPromptBegin silent! CocDisable
-autocmd User EasyMotionPromptEnd silent! CocEnable
