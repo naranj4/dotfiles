@@ -189,6 +189,7 @@ map H ^
 map L $
 
 " vim-sandwich settings
+runtime macros/sandwich/keymap/surround.vim
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 let g:sandwich#recipes += [
     \   {
