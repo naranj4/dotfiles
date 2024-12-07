@@ -2,7 +2,7 @@
 	editor = nvim
 [user]
 	email = niranjan.msankar@gmail.com
-	name = sanka047
+	name = naranj4
 [merge]
     tool = nvim  #vimdiff
     conflictstyle = diff3
